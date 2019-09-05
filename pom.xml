@@ -6,9 +6,9 @@
 
 
     <groupId>MysteryInc</groupId>
-
+	<version>0.0.1-SNAPSHOT</version>
     <artifactId>ChalmersForce</artifactId>
-
+	<name>hello-liti-maven</name>
     <version>1.0.0</version>
 	
 	<dependency>
