@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gameinfo>
+    <name>ChalmersForce</name>
+    <subTitle></subTitle>
+    <description>A simple 2D-game project</description>
+    <website>https://github.com/emmouto/MysteryVan</website>
+    <version>v0.1</version>
+    <company>MysteryInc.</company>
+    <developer>Jonathan Carbol</developer>
+    <developer>Jennifer Krogh</developer>
+    <developer>Emma Pettersson</developer>
+    <developer>Adam Rohdell</developer>
+    <developer>Antonia Welzel</developer>
+</gameinfo>

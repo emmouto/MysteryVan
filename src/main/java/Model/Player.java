@@ -1,5 +1,4 @@
-package main.java.Model;
+package Model;
 
 public class Player {
-
 }
