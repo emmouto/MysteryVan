@@ -31,7 +31,7 @@ public class GameRunner {
 
         Game.screens().add(new GameScreen());
 
-        Game.world().loadEnvironment(new Environment("src/main/resources/map2.tmx"));
+        Game.world().loadEnvironment(new Environment("C:\\Users\\jonat\\Documents\\IT\\TDA367 - Objektorienterat programmeringsprojekt\\Projekt\\src\\main\\resources\\map2.tmx"));
 
 =======
 >>>>>>> Stashed changes
