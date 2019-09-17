@@ -1,13 +1,7 @@
 Render Loop threw an exception:
 java.lang.NullPointerException
-	at de.gurkenlabs.litiengine.environment.tilemap.xml.Tile.getImage(Tile.java:105)
-	at de.gurkenlabs.litiengine.environment.tilemap.MapRenderer.drawTile(MapRenderer.java:83)
-	at de.gurkenlabs.litiengine.environment.tilemap.MapRenderer.drawRow(MapRenderer.java:73)
-	at de.gurkenlabs.litiengine.environment.tilemap.MapRenderer.renderTileLayer(MapRenderer.java:61)
-	at de.gurkenlabs.litiengine.environment.tilemap.MapRenderer.renderLayers(MapRenderer.java:35)
-	at de.gurkenlabs.litiengine.environment.tilemap.MapRenderer.render(MapRenderer.java:23)
 	at de.gurkenlabs.litiengine.environment.Environment.render(Environment.java:1224)
-	at de.gurkenlabs.litiengine.environment.Environment.render(Environment.java:1061)
+	at de.gurkenlabs.litiengine.environment.Environment.render(Environment.java:1062)
 	at de.gurkenlabs.litiengine.gui.screens.GameScreen.render(GameScreen.java:19)
 	at de.gurkenlabs.litiengine.graphics.RenderComponent.render(RenderComponent.java:157)
 	at de.gurkenlabs.litiengine.RenderLoop.process(RenderLoop.java:25)
