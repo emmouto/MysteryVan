@@ -1,12 +1,6 @@
 Render Loop threw an exception:
-java.lang.IllegalArgumentException: The image for the spritesheet '../../../../../../../Downloads/Sunny-land-woods-files/bg-clouds.png' is null!
-	at de.gurkenlabs.litiengine.graphics.Spritesheet.checkImage(Spritesheet.java:203)
-	at de.gurkenlabs.litiengine.graphics.Spritesheet.<init>(Spritesheet.java:31)
-	at de.gurkenlabs.litiengine.resources.Spritesheets.load(Spritesheets.java:110)
-	at de.gurkenlabs.litiengine.environment.tilemap.xml.Tileset.getSpritesheet(Tileset.java:161)
-	at de.gurkenlabs.litiengine.environment.tilemap.xml.TilesetEntry.getBasicImage(TilesetEntry.java:83)
-	at de.gurkenlabs.litiengine.environment.tilemap.xml.TilesetEntry.getImage(TilesetEntry.java:73)
-	at de.gurkenlabs.litiengine.environment.tilemap.xml.Tile.getImage(Tile.java:97)
+java.lang.NullPointerException
+	at de.gurkenlabs.litiengine.environment.tilemap.xml.Tile.getImage(Tile.java:105)
 	at de.gurkenlabs.litiengine.environment.tilemap.MapRenderer.drawTile(MapRenderer.java:83)
 	at de.gurkenlabs.litiengine.environment.tilemap.MapRenderer.drawRow(MapRenderer.java:73)
 	at de.gurkenlabs.litiengine.environment.tilemap.MapRenderer.renderTileLayer(MapRenderer.java:61)
