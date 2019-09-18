@@ -1,4 +1,4 @@
 package Model;
 
-public class Item {
+public class Item implements ICollidable{
 }

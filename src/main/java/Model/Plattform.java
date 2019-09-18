@@ -1,4 +1,4 @@
 package Model;
 
-public class Plattform {
+public class Plattform implements ICollidable{
 }
