@@ -13,7 +13,7 @@ public class Boost {
         this.strength = strength;
         this.armour = armour;
     }
-    
+
 
     public String getName() {
         return name;
