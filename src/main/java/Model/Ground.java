@@ -1,4 +1,4 @@
 package Model;
 
-public class Ground {
+public class Ground implements ICollidable{
 }
