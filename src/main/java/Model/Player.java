@@ -19,6 +19,9 @@ public class Player extends Creature implements IUpdateable, ICollidable, IMovab
     private Hat hat;
     private Boost boost1;
     private Boost boost2;
+    private int posX;
+    private int posY;
+
 
     public int getHP() {
         return HP;
@@ -75,5 +78,21 @@ public class Player extends Creature implements IUpdateable, ICollidable, IMovab
 
     public void setBoost2(Boost boost2) {
         this.boost2 = boost2;
+    }
+
+    public int getPosX() {
+        return posX;
+    }
+
+    public void setPosX(int posX) {
+        this.posX = posX;
+    }
+
+    public int getPosY() {
+        return posY;
+    }
+
+    public void setPosY(int posY) {
+        this.posY = posY;
     }
 }
