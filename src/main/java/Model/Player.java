@@ -1,6 +1,16 @@
 package Model;
 
-public class Player {
+import de.gurkenlabs.litiengine.IUpdateable;
+import de.gurkenlabs.litiengine.entities.Creature;
+
+public class Player extends Creature implements IUpdateable, ICollidable, IMovable{
+
+    public Player(String name){
+        super(name);
+    }
+
+    @Override
+    public void update() {}
 
     private int HP;
     private int strength;
@@ -9,6 +19,9 @@ public class Player {
     private Hat hat;
     private Boost boost1;
     private Boost boost2;
+    private int posX;
+    private int posY;
+
 
     public int getHP() {
         return HP;
@@ -65,5 +78,21 @@ public class Player {
 
     public void setBoost2(Boost boost2) {
         this.boost2 = boost2;
+    }
+
+    public int getPosX() {
+        return posX;
+    }
+
+    public void setPosX(int posX) {
+        this.posX = posX;
+    }
+
+    public int getPosY() {
+        return posY;
+    }
+
+    public void setPosY(int posY) {
+        this.posY = posY;
     }
 }

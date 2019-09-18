@@ -1,5 +1,6 @@
 package Model;
 
+<<<<<<< HEAD
 public abstract class Item {
 
     // either abstract class or interface
@@ -21,4 +22,7 @@ public abstract class Item {
     }
 
 
+=======
+public class Item implements ICollidable{
+>>>>>>> master
 }

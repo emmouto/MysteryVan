@@ -1,16 +1,17 @@
 package Model;
 
+
 public class Enemies {
 
     private int HP;
-    private Equipment weapon;
+    private Equipment equipment; //Enemies can have a weapon, armor etc that will make them harder to defeat.
 
     public int getHP() {
         return HP;
     }
 
     public Equipment getWeapon() {
-        return weapon;
+        return equipment;
     }
 
     public void setHP(int HP) {
@@ -18,6 +19,6 @@ public class Enemies {
     }
 
     public void setWeapon(Equipment weapon) {
-        this.weapon = weapon;
+        this.equipment = weapon;
     }
 }
