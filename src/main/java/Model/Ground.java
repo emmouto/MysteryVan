@@ -1,6 +1,6 @@
 package Model;
 
-<<<<<<< HEAD
+
 public class Ground {
 
     private String type;
@@ -18,7 +18,4 @@ public class Ground {
     public boolean getInstantDeath() {
         return instantDeath;
     }
-=======
-public class Ground implements ICollidable{
->>>>>>> master
 }

@@ -1,7 +1,6 @@
 package Model;
 
-<<<<<<< HEAD
-public abstract class Item {
+public abstract class Item implements ICollidable {
 
     // either abstract class or interface
 
@@ -21,8 +20,7 @@ public abstract class Item {
         return defence;
     }
 
-
-=======
-public class Item implements ICollidable{
->>>>>>> master
+    
 }
+
+

@@ -6,16 +6,16 @@ public class Map {
 
 
     private Ground groundType;
-    private List<Plattform> platforms;
+    private List<Platform> platforms;
     private List<Item> items;
-    private List<Enemies> enemies;
+    private List<Enemy> enemies;
 
 
     public Ground getGroundType() {
         return groundType;
     }
 
-    public List<Enemies> getEnemies() {
+    public List<Enemy> getEnemies() {
         return enemies;
     }
 
@@ -23,7 +23,7 @@ public class Map {
         return items;
     }
 
-    public List<Plattform> getPlatforms() {
+    public List<Platform> getPlatforms() {
         return platforms;
     }
 }

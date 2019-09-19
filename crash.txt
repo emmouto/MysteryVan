@@ -1,8 +1,6 @@
-Render Loop threw an exception:
+main threw an exception:
 java.lang.NullPointerException
-	at de.gurkenlabs.litiengine.environment.Environment.render(Environment.java:1224)
-	at de.gurkenlabs.litiengine.environment.Environment.render(Environment.java:1062)
-	at de.gurkenlabs.litiengine.gui.screens.GameScreen.render(GameScreen.java:19)
-	at de.gurkenlabs.litiengine.graphics.RenderComponent.render(RenderComponent.java:157)
-	at de.gurkenlabs.litiengine.RenderLoop.process(RenderLoop.java:25)
-	at de.gurkenlabs.litiengine.UpdateLoop.run(UpdateLoop.java:46)
+	at java.util.Objects.requireNonNull(Objects.java:203)
+	at de.gurkenlabs.litiengine.sound.LoopedTrack.<init>(LoopedTrack.java:12)
+	at de.gurkenlabs.litiengine.sound.SoundEngine.playMusic(SoundEngine.java:83)
+	at GameRunner.main(GameRunner.java:38)
