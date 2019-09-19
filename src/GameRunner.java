@@ -1,5 +1,7 @@
 import Controller.MapController;
+import Controller.PlayerController;
 import de.gurkenlabs.litiengine.Game;
+import de.gurkenlabs.litiengine.entities.Spawnpoint;
 import de.gurkenlabs.litiengine.environment.Environment;
 import de.gurkenlabs.litiengine.gui.screens.GameScreen;
 import de.gurkenlabs.litiengine.gui.screens.Resolution;
@@ -13,6 +15,7 @@ public class GameRunner {
 
     public static void main(String[] args) {
         MapController mc = new MapController();
+        PlayerController pc = new PlayerController();
 
         Game.config().graphics().setResolutionHeight(720);
         Game.config().graphics().setFullscreen(true);
@@ -30,6 +33,15 @@ public class GameRunner {
         Game.audio().playMusic(Resources.sounds().get("src/main/resources/sounds/title_theme.mp3"));
 
         mc.initCamera();
+
+        // add default game logic for when a level was loaded
+        Game.world().addLoadedListener(e -> {
+            // spawn the player instance on the spawn point with the name "enter"
+            Spawnpoint enter = e.getSpawnpoint("enter");
+            if (enter != null) {
+                enter.spawn(pc.getPlayer1());
+            }
+        });
 
         Game.start();
     }
