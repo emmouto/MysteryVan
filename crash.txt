@@ -3,4 +3,4 @@ java.lang.NullPointerException
 	at java.util.Objects.requireNonNull(Objects.java:203)
 	at de.gurkenlabs.litiengine.sound.LoopedTrack.<init>(LoopedTrack.java:12)
 	at de.gurkenlabs.litiengine.sound.SoundEngine.playMusic(SoundEngine.java:83)
-	at GameRunner.main(GameRunner.java:38)
+	at GameRunner.main(GameRunner.java:33)

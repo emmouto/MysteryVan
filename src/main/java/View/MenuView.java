@@ -11,11 +11,10 @@ public class MenuView extends Screen {
         super(screenName);
     }
 
-
     @Override
     public void render(final Graphics2D g) {
         super.render(g);
-        g.setFont(Resources.fonts().get("customfont.ttf",32f));
+        g.setFont(Resources.fonts().get("src/main/resources/fonts/Pixeled.ttf",32f));
         g.setColor(Color.RED);
         TextRenderer.render(g, "Test text", 100, 100);
     }
