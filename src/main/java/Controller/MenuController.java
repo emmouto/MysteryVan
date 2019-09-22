@@ -1,7 +1,6 @@
 package Controller;
 
 import java.awt.Color;
-import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -13,19 +12,27 @@ import de.gurkenlabs.litiengine.input.Input;
 import de.gurkenlabs.litiengine.resources.Resources;
 import de.gurkenlabs.litiengine.sound.Sound;
 
-public class KeyboardMenu extends Menu {
-    public static final Color ROMAN_RED = new Color(140, 16, 16);
-    public static final Color BUTTON_RED = new Color(140, 16, 16, 200);
-    public static final Color BUTTON_BLACK = new Color(0, 0, 0, 200);
-    public static final Sound SETTING_CHANGE_SOUND = Resources.sounds().get("src/main/resources/sounds/sfx/sfx_sounds_interaction16.wav"); // TODO change this sound oh god it's awful
-    public static final int MENU_DELAY = 180;
+/**
+ *
+ */
+public class MenuController extends Menu {
+    private static final Sound SETTING_CHANGE_SOUND = Resources.sounds().get("src/main/resources/audio/sfx/menu_sound.wav");
+    private static final int MENU_DELAY = 180;
 
     private final List<Consumer<Integer>> confirmConsumer;
-    protected int currentFocus = -1;
+    private int currentFocus = -1;
 
-    public static long lastMenuInput;
+    private static long lastMenuInput;
 
-    public KeyboardMenu(double x, double y, double width, double height, String... items) {
+    /**
+     *
+     * @param x
+     * @param y
+     * @param width
+     * @param height
+     * @param items
+     */
+    public MenuController(double x, double y, double width, double height, String... items) {
         super(x, y, width, height, items);
         this.confirmConsumer = new CopyOnWriteArrayList<>();
 
@@ -40,7 +47,7 @@ public class KeyboardMenu extends Menu {
             }
         });
 
-        Input.keyboard().onKeyPressed(KeyEvent.VK_UP, e -> {
+        Input.keyboard().onKeyPressed(KeyEvent.VK_LEFT, e -> {
             if (this.menuInputIsLocked()) {
                 return;
             }
@@ -48,7 +55,7 @@ public class KeyboardMenu extends Menu {
             decFocus();
         });
 
-        Input.keyboard().onKeyPressed(KeyEvent.VK_DOWN, e -> {
+        Input.keyboard().onKeyPressed(KeyEvent.VK_RIGHT, e -> {
             if (this.menuInputIsLocked()) {
                 return;
             }
@@ -67,6 +74,9 @@ public class KeyboardMenu extends Menu {
         return Game.time().since(lastMenuInput) < MENU_DELAY;
     }
 
+    /**
+     *
+     */
     @Override
     public void prepare() {
         super.prepare();
@@ -79,16 +89,26 @@ public class KeyboardMenu extends Menu {
         }
 
         this.getCellComponents().forEach(comp -> {
+            comp.setFont(Resources.fonts().get("src/main/resources/fonts/Pixeled.ttf",24f));
             comp.getAppearance().setForeColor(Color.WHITE);
-            comp.getAppearance().setBackgroundColor1(BUTTON_BLACK);
-            comp.getAppearanceHovered().setBackgroundColor1(BUTTON_RED);
-            comp.getAppearance().setTransparentBackground(false);
-            comp.getAppearanceHovered().setTransparentBackground(false);
-            comp.getAppearance().setTextAntialiasing(RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-            comp.getAppearanceHovered().setTextAntialiasing(RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+            comp.getAppearance().setTransparentBackground(true);
+            comp.getAppearanceHovered().setTransparentBackground(true);
+            comp.getAppearanceHovered().setForeColor(Color.BLACK);
         });
+
+        // TODO maybe make this code not awful..?
+        this.getCellComponents().get(0).setX(210);
+        this.getCellComponents().get(0).setY(460);
+        this.getCellComponents().get(1).setX(550);
+        this.getCellComponents().get(1).setY(460);
+        this.getCellComponents().get(2).setX(880);
+        this.getCellComponents().get(2).setY(460);
     }
 
+    /**
+     *
+     * @param cons
+     */
     public void onConfirm(Consumer<Integer> cons) {
         this.confirmConsumer.add(cons);
     }
@@ -99,7 +119,7 @@ public class KeyboardMenu extends Menu {
         }
     }
 
-    protected void decFocus() {
+    private void decFocus() {
         this.currentFocus = Math.floorMod(--this.currentFocus, this.getCellComponents().size());
         this.updateFocus();
     }
@@ -109,7 +129,7 @@ public class KeyboardMenu extends Menu {
         this.updateFocus();
     }
 
-    protected void updateFocus() {
+    private void updateFocus() {
         this.setCurrentSelection(this.currentFocus);
         for (int i = 0; i < this.getCellComponents().size(); i++) {
             this.getCellComponents().get(i).setHovered(i == this.currentFocus);
