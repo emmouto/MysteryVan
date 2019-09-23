@@ -1,6 +1,8 @@
 import Controller.MapController;
+import View.DefeatView;
 import View.HighscoreView;
 import View.MenuView;
+import View.PauseView;
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.environment.Environment;
 import de.gurkenlabs.litiengine.gui.screens.GameScreen;
@@ -10,7 +12,6 @@ import de.gurkenlabs.litiengine.resources.Resources;
 
 /** Runs the game.
  *
- * @param args  The command line arguments.
  */
 public class GameRunner {
 
@@ -30,6 +31,8 @@ public class GameRunner {
         Game.screens().add(new GameScreen());
         Game.screens().add(new HighscoreView("Highscore"));
         Game.screens().add(new MenuView("Menu"));
+        Game.screens().add(new DefeatView("Defeat"));
+        Game.screens().add(new PauseView("Pause"));
         Game.screens().display("Menu");
 
         Game.audio().playMusic(Resources.sounds().get("src/main/resources/audio/music/title_theme.mp3"));
