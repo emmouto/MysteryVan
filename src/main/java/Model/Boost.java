@@ -3,17 +3,21 @@ package Model;
 public class Boost {
 
 
-    public String name;
-    public int HP;
-    public int strength;
-    public int armour;
+    //TODO change class to interface or similar? -----#####------
 
 
-    public Boost(String name, int HP, int strength, int armour) {
+    //changed to private
+    private String name;
+    private int HP;
+    private int strength;
+    private int defence; // used to be armour
+
+
+    public Boost(String name, int HP, int strength, int defence) {
         this.name = name;
         this.HP = HP;
         this.strength = strength;
-        this.armour = armour;
+        this.defence = defence;
     }
     
 
@@ -41,12 +45,12 @@ public class Boost {
         this.strength = strength;
     }
 
-    public int getArmour() {
-        return armour;
+    public int getDefence() {
+        return defence;
     }
 
-    public void setArmour(int armour) {
-        this.armour = armour;
+    public void setDefence(int armour) {
+        this.defence = armour;
     }
 
 }

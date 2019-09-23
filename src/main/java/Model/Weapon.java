@@ -2,12 +2,12 @@ package Model;
 
 public class Weapon {
     private String name;
-    private int DMG;
+    private int damage;
     private int range;
 
-    public Weapon(String name, int DMG, int range) {
+    public Weapon(String name, int damage, int range) {
         this.name = name;
-        this.DMG = DMG;
+        this.damage = damage;
         this.range = range;
     }
 
@@ -19,12 +19,12 @@ public class Weapon {
         this.name = name;
     }
 
-    public int getDMG() {
-        return DMG;
+    public int getDamage() {
+        return damage;
     }
 
-    public void setDMG(int DMG) {
-        this.DMG = DMG;
+    public void setDamage(int damage) {
+        this.damage = damage;
     }
 
     public int getRange() {
