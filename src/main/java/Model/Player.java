@@ -1,11 +1,18 @@
 package Model;
 
+import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.IUpdateable;
 import de.gurkenlabs.litiengine.annotation.CollisionInfo;
 import de.gurkenlabs.litiengine.annotation.EntityInfo;
 import de.gurkenlabs.litiengine.annotation.MovementInfo;
 import de.gurkenlabs.litiengine.entities.Creature;
+import de.gurkenlabs.litiengine.graphics.Spritesheet;
+import de.gurkenlabs.litiengine.gui.screens.GameScreen;
+import de.gurkenlabs.litiengine.gui.screens.Screen;
 import de.gurkenlabs.litiengine.input.PlatformingMovementController;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
 
 
 @EntityInfo(width = 18, height = 18)
@@ -22,9 +29,13 @@ public class Player extends Creature implements IUpdateable, ICollidable, IMovab
     private Boost boost2;
     private int posX;
     private int posY;
+    private Screen gameScreen;
+    private Spritesheet playerSprite;
 
     public Player(String name){
         super(name);
+        gameScreen = Game.screens().get("Game");
+        playerSprite = new Spritesheet(new BufferedImage(700,500,BufferedImage.TYPE_INT_RGB),"textures/Golden Knight walking/spritesheet.png",700,500);
     }
 
     @Override
@@ -101,5 +112,9 @@ public class Player extends Creature implements IUpdateable, ICollidable, IMovab
 
     public void setPosY(int posY) {
         this.posY = posY;
+    }
+
+    public Spritesheet getPlayerSprite() {
+        return playerSprite;
     }
 }

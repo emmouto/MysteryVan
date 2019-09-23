@@ -1,11 +1,15 @@
 import Controller.MapController;
 import Controller.PlayerController;
+import Model.Player;
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.entities.Spawnpoint;
 import de.gurkenlabs.litiengine.environment.Environment;
 import de.gurkenlabs.litiengine.gui.screens.GameScreen;
 import de.gurkenlabs.litiengine.gui.screens.Resolution;
+import de.gurkenlabs.litiengine.input.Input;
 import de.gurkenlabs.litiengine.resources.Resources;
+
+import java.awt.event.KeyEvent;
 
 
 /** Runs the game.
@@ -14,8 +18,6 @@ import de.gurkenlabs.litiengine.resources.Resources;
 public class GameRunner {
 
     public static void main(String[] args) {
-        MapController mc = new MapController();
-        PlayerController pc = new PlayerController();
 
         Game.config().graphics().setResolutionHeight(720);
         Game.config().graphics().setFullscreen(true);
@@ -24,9 +26,15 @@ public class GameRunner {
         Game.setInfo("gameinfo.xml");
 
         Game.init(args);
+        MapController mc = new MapController();
+        PlayerController pc = new PlayerController(new Player("Player 1"));
+        pc.playerInit();
+
         Game.window().setResolution(Resolution.custom(1280, 720, "720p"));
 
-        Game.screens().add(new GameScreen());
+        GameScreen g = new GameScreen();
+        g.setName("Game");
+        Game.screens().add(g);
 
         Game.world().loadEnvironment(new Environment("src/main/resources/new_map.tmx"));
 
