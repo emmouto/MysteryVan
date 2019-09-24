@@ -33,7 +33,7 @@ public class GameRunner {
         Game.screens().add(new MenuView("Menu"));
         Game.screens().add(new DefeatView("Defeat"));
         Game.screens().add(new PauseView("Pause"));
-        Game.screens().display("Menu");
+        Game.screens().display("Defeat");
 
         Game.audio().playMusic(Resources.sounds().get("src/main/resources/audio/music/title_theme.mp3"));
 
