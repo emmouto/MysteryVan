@@ -1,7 +1,4 @@
 main threw an exception:
-java.lang.IllegalArgumentException: Invalid sprite dimensions! Sprite height(500) cannot be greater than the image height(16).
-	at de.gurkenlabs.litiengine.graphics.Spritesheet.checkDimension(Spritesheet.java:197)
-	at de.gurkenlabs.litiengine.graphics.Spritesheet.checkHeight(Spritesheet.java:188)
-	at de.gurkenlabs.litiengine.graphics.Spritesheet.<init>(Spritesheet.java:33)
-	at Model.Player.<init>(Player.java:38)
-	at GameRunner.main(GameRunner.java:30)
+java.lang.ClassCastException: de.gurkenlabs.litiengine.graphics.animation.CreatureAnimationController cannot be cast to de.gurkenlabs.litiengine.entities.IEntity
+	at Controller.PlayerController.playerInit(PlayerController.java:42)
+	at GameRunner.main(GameRunner.java:44)

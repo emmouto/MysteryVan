@@ -3,6 +3,7 @@ import Controller.PlayerController;
 import Model.Player;
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.entities.Spawnpoint;
+import de.gurkenlabs.litiengine.environment.CreatureMapObjectLoader;
 import de.gurkenlabs.litiengine.environment.Environment;
 import de.gurkenlabs.litiengine.gui.screens.GameScreen;
 import de.gurkenlabs.litiengine.gui.screens.Resolution;
@@ -28,7 +29,7 @@ public class GameRunner {
         Game.init(args);
         MapController mc = new MapController();
         PlayerController pc = new PlayerController(new Player("Player 1"));
-        pc.playerInit();
+
 
         Game.window().setResolution(Resolution.custom(1280, 720, "720p"));
 
@@ -40,16 +41,26 @@ public class GameRunner {
 
         Game.audio().playMusic(Resources.sounds().get("src/main/resources/sounds/title_theme.mp3"));
 
+        pc.playerInit();
         mc.initCamera();
 
         // add default game logic for when a level was loaded
         Game.world().addLoadedListener(e -> {
+
+            if (e.getMap().getName().equals("title")) {
+                return;
+            }
+
+            Game.loop().perform(500, () -> Game.window().getRenderComponent().fadeIn(500));
+
+
             // spawn the player instance on the spawn point with the name "enter"
             Spawnpoint enter = e.getSpawnpoint("enter");
             if (enter != null) {
-                enter.spawn(pc.getPlayer1());
+                enter.spawn(Player.instance());
             }
         });
+
 
         Game.start();
     }

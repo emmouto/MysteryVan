@@ -9,9 +9,13 @@ import de.gurkenlabs.litiengine.entities.Creature;
 import de.gurkenlabs.litiengine.graphics.Spritesheet;
 import de.gurkenlabs.litiengine.gui.screens.GameScreen;
 import de.gurkenlabs.litiengine.gui.screens.Screen;
+import de.gurkenlabs.litiengine.input.Keyboard;
+import de.gurkenlabs.litiengine.input.KeyboardEntityController;
 import de.gurkenlabs.litiengine.input.PlatformingMovementController;
+import de.gurkenlabs.litiengine.physics.IMovementController;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
 
@@ -20,6 +24,12 @@ import java.awt.image.BufferedImage;
 @CollisionInfo(collisionBoxWidth = 8, collisionBoxHeight = 16, collision = true)
 public class Player extends Creature implements IUpdateable, ICollidable, IMovable{
 
+    public enum PlayerState {
+        CONTROLLABLE,
+        LOCKED
+    }
+
+    private static Player instance;
     private int HP;
     private int strength;
     private int defence;
@@ -32,14 +42,41 @@ public class Player extends Creature implements IUpdateable, ICollidable, IMovab
     private Screen gameScreen;
     private Spritesheet playerSprite;
 
+    private PlayerState state = PlayerState.LOCKED;
+
     public Player(String name){
         super(name);
-        gameScreen = Game.screens().get("Game");
-        playerSprite = new Spritesheet(new BufferedImage(700,500,BufferedImage.TYPE_INT_RGB),"textures/Golden Knight walking/spritesheet.png",700,500);
+        KeyboardEntityController<Player> movementController = new KeyboardEntityController<>(this);
+        movementController.addUpKey(KeyEvent.VK_UP);
+        movementController.addDownKey(KeyEvent.VK_DOWN);
+        movementController.addLeftKey(KeyEvent.VK_LEFT);
+        movementController.addRightKey(KeyEvent.VK_RIGHT);
+
+        this.setController(IMovementController.class, movementController);
+        this.getMovementController().onMovementCheck(e -> {
+            return this.getState() == PlayerState.CONTROLLABLE;
+        });
+
+        this.setMapId(100000);
+        //gameScreen = Game.screens().get("Game");
+        //playerSprite = new Spritesheet(new BufferedImage(700,500,BufferedImage.TYPE_INT_RGB),"textures/Golden Knight walking/spritesheet.png",18,16);
     }
 
     @Override
     public void update() {}
+
+
+    public static Player instance() {
+        if (instance == null) {
+            instance = new Player("p1");
+        }
+
+        return instance;
+    }
+
+    public PlayerState getState() {
+        return state;
+    }
 
     public int getHP() {
         return HP;
