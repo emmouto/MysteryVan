@@ -1,11 +1,13 @@
 package Model;
 
+import javazoom.spi.mpeg.sampled.file.tag.StringableTag;
+
 public class Boost {
 
-    public String name;
-    public int HP;
-    public int strength;
-    public int armour;
+    private String name;
+    private int HP;
+    private int strength;
+    private int armour;
 
     public Boost(String name, int HP, int strength, int armour) {
         this.name = name;

@@ -63,6 +63,7 @@ public class MenuController extends Menu {
             incFocus();
         });
 
+
     }
 
     private boolean menuInputIsLocked() {
