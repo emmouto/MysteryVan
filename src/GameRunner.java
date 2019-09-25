@@ -1,5 +1,6 @@
 import Controller.MapController;
 import de.gurkenlabs.litiengine.Game;
+import de.gurkenlabs.litiengine.entities.EntityControllers;
 import de.gurkenlabs.litiengine.environment.Environment;
 import de.gurkenlabs.litiengine.gui.screens.GameScreen;
 import de.gurkenlabs.litiengine.gui.screens.Resolution;
@@ -28,6 +29,8 @@ public class GameRunner {
         Game.world().loadEnvironment(new Environment("src/main/resources/new_map.tmx"));
 
         Game.audio().playMusic(Resources.sounds().get("src/main/resources/sounds/title_theme.mp3"));
+
+
 
         mc.initCamera();
 
