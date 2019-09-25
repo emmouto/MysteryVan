@@ -28,12 +28,13 @@ public class GameRunner {
         Game.window().setResolution(Resolution.custom(1280, 720, "720p"));
         //Game.window().setIconImage(Resources.images().get("src/main/resources/...")); // TODO fix icon
 
-        Game.screens().add(new GameScreen());
-        Game.screens().add(new HighscoreView("Highscore"));
+        //Game.screens().add(new GameScreen());
         Game.screens().add(new MenuView("Menu"));
+        Game.screens().add(new HighscoreView("Highscore"));
+
         Game.screens().add(new DefeatView("Defeat"));
-        Game.screens().add(new PauseView("Pause"));
-        Game.screens().display("Defeat");
+        //Game.screens().add(new PauseView("Pause"));
+        //Game.screens().display("Defeat");
 
         Game.audio().playMusic(Resources.sounds().get("src/main/resources/audio/music/title_theme.mp3"));
 
