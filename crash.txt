@@ -1,6 +1,9 @@
 main threw an exception:
-java.lang.NullPointerException
-	at java.util.Objects.requireNonNull(Objects.java:203)
-	at de.gurkenlabs.litiengine.sound.LoopedTrack.<init>(LoopedTrack.java:12)
-	at de.gurkenlabs.litiengine.sound.SoundEngine.playMusic(SoundEngine.java:83)
+java.lang.ArrayIndexOutOfBoundsException: 1
+	at java.util.concurrent.CopyOnWriteArrayList.get(CopyOnWriteArrayList.java:388)
+	at java.util.concurrent.CopyOnWriteArrayList.get(CopyOnWriteArrayList.java:397)
+	at Controller.MenuController.prepare(MenuController.java:103)
+	at de.gurkenlabs.litiengine.gui.GuiComponent.prepare(GuiComponent.java:679)
+	at de.gurkenlabs.litiengine.gui.screens.ScreenManager.display(ScreenManager.java:67)
+	at de.gurkenlabs.litiengine.gui.screens.ScreenManager.display(ScreenManager.java:89)
 	at GameRunner.main(GameRunner.java:35)

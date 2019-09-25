@@ -90,6 +90,8 @@ public class MenuView extends Screen implements IUpdateable {
         g.setColor(Color.BLACK);
         TextRenderer.renderWithOutline(g, "CHALMERSFORCE", 224, 200, Color.WHITE);
 
+        Game.audio().playMusic(Resources.sounds().get("src/main/resources/audio/music/title_theme.mp3"));
+
         super.render(g);
     }
 

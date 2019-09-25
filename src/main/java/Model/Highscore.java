@@ -10,8 +10,8 @@ import java.util.LinkedList;
  */
 public class Highscore {
 
-    int highscore;
-    String player;
+    private int highscore;
+    private String player;
 
     //in the end of the game, create new Highscore with the current score of the player
     //and the player's name which will then be used in the list of high scores.
