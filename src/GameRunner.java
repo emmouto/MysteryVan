@@ -44,6 +44,7 @@ public class GameRunner {
         pc.playerInit();
         mc.initCamera();
 
+
         // add default game logic for when a level was loaded
         Game.world().addLoadedListener(e -> {
 
@@ -64,4 +65,6 @@ public class GameRunner {
 
         Game.start();
     }
+
+
 }

@@ -59,7 +59,7 @@ public class Player extends Creature implements IUpdateable, ICollidable, IMovab
 
         this.setMapId(100000);
         //gameScreen = Game.screens().get("Game");
-        //playerSprite = new Spritesheet(new BufferedImage(700,500,BufferedImage.TYPE_INT_RGB),"textures/Golden Knight walking/spritesheet.png",18,16);
+        playerSprite = new Spritesheet(new BufferedImage(700,500,BufferedImage.TYPE_INT_RGB),"textures/Golden Knight walking/spritesheet.png",18,16);
     }
 
     @Override
@@ -76,6 +76,10 @@ public class Player extends Creature implements IUpdateable, ICollidable, IMovab
 
     public PlayerState getState() {
         return state;
+    }
+
+    public void setState(PlayerState state) {
+        this.state = state;
     }
 
     public int getHP() {

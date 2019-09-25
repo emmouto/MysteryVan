@@ -1,4 +1,5 @@
 main threw an exception:
-java.lang.ClassCastException: de.gurkenlabs.litiengine.graphics.animation.CreatureAnimationController cannot be cast to de.gurkenlabs.litiengine.entities.IEntity
-	at Controller.PlayerController.playerInit(PlayerController.java:42)
+java.lang.NullPointerException
+	at de.gurkenlabs.litiengine.graphics.animation.Animation.<init>(Animation.java:39)
+	at Controller.PlayerController.playerInit(PlayerController.java:36)
 	at GameRunner.main(GameRunner.java:44)
