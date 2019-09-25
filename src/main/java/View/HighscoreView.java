@@ -90,7 +90,7 @@ public class HighscoreView extends Screen implements IUpdateable {
 
         Game.screens().display("Menu");
 
-        //TODO bli konstig när musiken spelas efter man kommer tillbaks till menz från highscores
+        //TODO bli konstig när musiken spelas efter man kommer tillbaks till meny från highscores
         //Game.audio().playSound(Resources.sounds().get("src/main/resources/audio/music/title_theme.mp3"));
 
     }
