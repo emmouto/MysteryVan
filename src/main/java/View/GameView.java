@@ -4,8 +4,11 @@ import Model.Player;
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.IUpdateable;
 import de.gurkenlabs.litiengine.environment.tilemap.MapProperty;
+import de.gurkenlabs.litiengine.graphics.ImageRenderer;
 import de.gurkenlabs.litiengine.gui.screens.GameScreen;
+import de.gurkenlabs.litiengine.resources.Resources;
 import de.gurkenlabs.litiengine.util.MathUtilities;
+import sun.security.util.Resources_de;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
@@ -48,6 +51,7 @@ public class GameView extends GameScreen implements IUpdateable {
         if (Game.world().environment() != null) {
             Game.world().environment().render(g);
         }
+        ImageRenderer.render(g, Resources.images().get("textures/Golden Knight walking/Golden Knight walk/golden knight animation walk right edit_00004.png"),0,0);
 
 
         super.render(g);

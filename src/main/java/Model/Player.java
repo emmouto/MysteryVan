@@ -13,6 +13,7 @@ import de.gurkenlabs.litiengine.input.Keyboard;
 import de.gurkenlabs.litiengine.input.KeyboardEntityController;
 import de.gurkenlabs.litiengine.input.PlatformingMovementController;
 import de.gurkenlabs.litiengine.physics.IMovementController;
+import de.gurkenlabs.litiengine.resources.Resources;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -59,7 +60,7 @@ public class Player extends Creature implements IUpdateable, ICollidable, IMovab
 
         this.setMapId(100000);
         //gameScreen = Game.screens().get("Game");
-        playerSprite = new Spritesheet(new BufferedImage(700,500,BufferedImage.TYPE_INT_RGB),"textures/Golden Knight walking/spritesheet.png",18,16);
+        //playerSprite = new Spritesheet(Resources.images().get("textures/Golden Knight walking/spritesheet.png"),"textures/Golden Knight walking/spritesheet.png",18,16);
     }
 
     @Override

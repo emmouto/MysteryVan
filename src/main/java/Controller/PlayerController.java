@@ -13,6 +13,7 @@ import de.gurkenlabs.litiengine.graphics.animation.CreatureAnimationController;
 import de.gurkenlabs.litiengine.graphics.animation.EntityAnimationController;
 import de.gurkenlabs.litiengine.input.Input;
 import de.gurkenlabs.litiengine.input.PlatformingMovementController;
+import de.gurkenlabs.litiengine.resources.Resources;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -33,7 +34,7 @@ public class PlayerController extends PlatformingMovementController {
 
     public void playerInit(){
         Input.keyboard().onKeyPressed(KeyEvent.VK_ESCAPE,e->System.exit(0));
-        p1.getAnimationController().add(new Animation(p1.getPlayerSprite(),true));
+        p1.getAnimationController().add(new Animation(new Spritesheet(Resources.images().get("textures/Golden Knight walking/spritesheet.png"),"textures/Golden Knight walking/spritesheet.png",18,16),true));
 
         CreatureMapObjectLoader.registerCustomCreatureType(Player.class);
 
