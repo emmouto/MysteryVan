@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage;
 
 public class DefeatView extends Screen {
 
-    private static final BufferedImage defeatBG = Resources.images().get("src/main/resources/menu/DefeatBG.png");
+    private static final BufferedImage defeatBG = Resources.images().get("src/main/resources/DefeatView/DefeatBG.png");
 
     public DefeatView(String screenName) {
         super(screenName);

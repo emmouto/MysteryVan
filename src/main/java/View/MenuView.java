@@ -3,7 +3,6 @@ package View;
 import Controller.MenuController;
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.IUpdateable;
-import de.gurkenlabs.litiengine.environment.Environment;
 import de.gurkenlabs.litiengine.graphics.ImageRenderer;
 import de.gurkenlabs.litiengine.graphics.TextRenderer;
 import de.gurkenlabs.litiengine.gui.screens.Screen;
@@ -21,21 +20,18 @@ import java.awt.image.BufferedImage;
 public class MenuView extends Screen implements IUpdateable {
     private static final BufferedImage BG = Resources.images().get("src/main/resources/menu/bg.png");
     private static final BufferedImage CLOUDS = Resources.images().get("src/main/resources/menu/clouds.png");
+    private final int cloudOffset = 1279;
+    private final double cloudSpeed = 0.3;
     private static final Sound SELECT = Resources.sounds().get("src/main/resources/audio/sfx/menu_selection.wav");
 
     private MenuController mainMenu;
 
     /**
-     *
-     * @param screenName    Name of the screen.
+     * @param screenName
+     *      Name of the screen.
      */
     public MenuView(String screenName) {
         super(screenName);
-    }
-
-    private void exit() {
-        Game.audio().playSound(SELECT);
-        System.exit(0);
     }
 
     @Override
@@ -43,13 +39,12 @@ public class MenuView extends Screen implements IUpdateable {
         final double centerX = Game.window().getResolution().getWidth() / 2.0;
         final double centerY = Game.window().getResolution().getHeight() * 1 / 2;
         final double buttonWidth = 250;
-        // TODO make the menu horizontal
+
         this.mainMenu = new MenuController(centerX - buttonWidth / 2, centerY * 1.3, buttonWidth, centerY / 2, "HIGHSCORE", "PLAY", "EXIT");
-        //this.mainMenu.setFont(Resources.fonts().get("src/main/resources/fonts/Pixeled.ttf",24f)); // TODO make the font change work
         this.getComponents().add(this.mainMenu);
 
         this.mainMenu.onConfirm(c -> {
-            switch (c.intValue()) {
+            switch (c) {
                 case 0:
                     this.showHighscore();
                     break;
@@ -70,21 +65,25 @@ public class MenuView extends Screen implements IUpdateable {
      */
     @Override
     public void prepare() {
+        Game.audio().playMusic(Resources.sounds().get("src/main/resources/audio/music/title_theme.mp3"));
+
         this.mainMenu.setEnabled(true);
         super.prepare();
+
         Game.loop().attach(this);
         Game.graphics().setBaseRenderScale(6f * Game.window().getResolutionScale());
+
         this.mainMenu.incFocus();
     }
 
     /**
      *
      * @param g
+     *      The graphics object to render on.
      */
     @Override
     public void render(final Graphics2D g) {
-        //renderClouds(g); // TODO animate the clouds
-        ImageRenderer.render(g, CLOUDS, 0, 0);
+        renderClouds(g);
         ImageRenderer.render(g, BG, 0, 0);
 
         g.setFont(Resources.fonts().get("src/main/resources/fonts/Pixeled.ttf",64f));
@@ -104,14 +103,18 @@ public class MenuView extends Screen implements IUpdateable {
     private void startGame() {
         this.mainMenu.setEnabled(false);
         Game.audio().playSound(SELECT);
-        Game.window().getRenderComponent().fadeOut(2500);
+        //Game.window().getRenderComponent().fadeOut(2500); // TODO the fading doesn't work properly, gives black screen
+        Game.audio().fadeMusic(250);
 
-        /*Game.loop().perform(3500, () -> {
-            Game.screens().display("INGAME-SCREEN");
-            Game.world().loadEnvironment(GameManager.START_LEVEL);
-            GameManager.setState(GameState.INGAME);
+        // Stage & Character Selection Screen // TODO implement lol
+        Game.loop().perform(3500, () -> {
+            Game.screens().display("Selection");
         });
-         */
+    }
+
+    private void exit() {
+        Game.audio().playSound(SELECT);
+        System.exit(0);
     }
 
     /**
@@ -121,7 +124,7 @@ public class MenuView extends Screen implements IUpdateable {
     public void suspend() {
         super.suspend();
         Game.loop().detach(this);
-        Game.audio().stopMusic();
+        //Game.audio().stopMusic();
     }
 
     /**
@@ -132,7 +135,11 @@ public class MenuView extends Screen implements IUpdateable {
 
     }
 
+    // This is kind of ugly and only works for like, a few minutes, but at least it works. Kind of.
     private void renderClouds(Graphics2D g) {
-
+        ImageRenderer.render(g, CLOUDS, Game.time().now() * cloudSpeed % (CLOUDS.getWidth() + Game.window().getResolution().getWidth()), 0);
+        ImageRenderer.render(g, CLOUDS, Game.time().now() * cloudSpeed % (CLOUDS.getWidth() + Game.window().getResolution().getWidth()) - cloudOffset, 0);
+        ImageRenderer.render(g, CLOUDS, Game.time().now() * cloudSpeed % (CLOUDS.getWidth() + Game.window().getResolution().getWidth()) - cloudOffset * 2, 0);
+        ImageRenderer.render(g, CLOUDS, Game.time().now() * cloudSpeed % (CLOUDS.getWidth() + Game.window().getResolution().getWidth()) - cloudOffset * 3, 0);
     }
 }

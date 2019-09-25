@@ -13,7 +13,7 @@ import de.gurkenlabs.litiengine.resources.Resources;
 import de.gurkenlabs.litiengine.sound.Sound;
 
 /**
- *
+ * Controls for the Menu view.
  */
 public class MenuController extends Menu {
     private static final Sound SETTING_CHANGE_SOUND = Resources.sounds().get("src/main/resources/audio/sfx/menu_sound.wav");
@@ -137,7 +137,7 @@ public class MenuController extends Menu {
 
         lastMenuInput = Game.time().now();
 
-        if (this.isVisible()) {
+        if (this.isVisible() && Game.time().now() > 10){
             Game.audio().playSound(SETTING_CHANGE_SOUND);
         }
     }

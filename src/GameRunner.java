@@ -1,8 +1,5 @@
 import Controller.MapController;
-import View.DefeatView;
-import View.HighscoreView;
-import View.MenuView;
-import View.PauseView;
+import View.*;
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.environment.Environment;
 import de.gurkenlabs.litiengine.gui.screens.GameScreen;
@@ -10,8 +7,8 @@ import de.gurkenlabs.litiengine.gui.screens.Resolution;
 import de.gurkenlabs.litiengine.resources.Resources;
 
 
-/** Runs the game.
- *
+/**
+ * Sets up all the screens and runs the game.
  */
 public class GameRunner {
 
@@ -26,16 +23,16 @@ public class GameRunner {
 
         Game.init(args);
         Game.window().setResolution(Resolution.custom(1280, 720, "720p"));
-        //Game.window().setIconImage(Resources.images().get("src/main/resources/...")); // TODO fix icon
+        Game.window().setIconImage(Resources.images().get("src/main/resources/icon.png"));
 
-        Game.screens().add(new GameScreen());
-        Game.screens().add(new HighscoreView("Highscore"));
+        // Adds all the screens, and displays the title screen ("Menu").
         Game.screens().add(new MenuView("Menu"));
+        Game.screens().add(new SelectionView("Selection"));
+        Game.screens().add(new HighscoreView("Highscore"));
+        Game.screens().add(new GameScreen());
         Game.screens().add(new DefeatView("Defeat"));
         Game.screens().add(new PauseView("Pause"));
-        Game.screens().display("Defeat");
-
-        Game.audio().playMusic(Resources.sounds().get("src/main/resources/audio/music/title_theme.mp3"));
+        Game.screens().display("Menu");
 
         // TODO move this to GameView..?
         Game.world().loadEnvironment(new Environment("src/main/resources/new_map.tmx"));
