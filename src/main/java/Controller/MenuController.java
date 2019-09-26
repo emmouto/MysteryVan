@@ -94,16 +94,25 @@ public class MenuController extends Menu {
             comp.getAppearance().setForeColor(Color.WHITE);
             comp.getAppearance().setTransparentBackground(true);
             comp.getAppearanceHovered().setTransparentBackground(true);
-            comp.getAppearanceHovered().setForeColor(Color.BLACK);
+
+            if (this.getCellComponents().size() == 1){
+                comp.getAppearanceHovered().setForeColor(Color.WHITE);
+            } else {
+                comp.getAppearanceHovered().setForeColor(Color.BLACK);
+            }
         });
 
         // TODO maybe make this code not awful..?
-        this.getCellComponents().get(0).setX(210);
-        this.getCellComponents().get(0).setY(460);
-        this.getCellComponents().get(1).setX(550);
-        this.getCellComponents().get(1).setY(460);
-        this.getCellComponents().get(2).setX(880);
-        this.getCellComponents().get(2).setY(460);
+
+        if (this.getCellComponents().size() > 1) {
+
+            this.getCellComponents().get(0).setX(210);
+            this.getCellComponents().get(0).setY(460);
+            this.getCellComponents().get(1).setX(550);
+            this.getCellComponents().get(1).setY(460);
+            this.getCellComponents().get(2).setX(880);
+            this.getCellComponents().get(2).setY(460);
+        }
     }
 
     /**

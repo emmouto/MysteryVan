@@ -34,8 +34,6 @@ public class DefeatView extends Screen {
     private static final BufferedImage defeatBlood3 = Resources.images().get("src/main/resources/DefeatView/DefeatBGB3.png");
     private static final Sound SELECT = Resources.sounds().get("src/main/resources/audio/sfx/menu_selection.wav");
     private static final Sound gun = Resources.sounds().get("src/main/resources/DefeatView/pistol.wav");
-    //private JFormattedTextField inputName = new JFormattedTextField(12);
-   // private final static String newline = "\n";
     private int timer1 = 100;
     private int timer2 = 5;
     private int timer3 = 5;
@@ -53,7 +51,7 @@ public class DefeatView extends Screen {
     public DefeatView(String screenName) {
         super(screenName);
     }
-/*
+
     @Override
     protected void initializeComponents() {
         final double centerX = Game.window().getResolution().getWidth() / 2.0;
@@ -63,8 +61,16 @@ public class DefeatView extends Screen {
         this.defeatMenu = new MenuController(centerX - buttonWidth / 2, centerY * 1.3, buttonWidth, centerY / 2, "HIGHSCORE");
         this.getComponents().add(this.defeatMenu);
 
-        //this.defeatMenu.onConfirm(showHighscore());
-    }*/
+        this.defeatMenu.onConfirm(c -> {
+            switch (c) {
+                case 0:
+                    this.showHighscore();
+                    break;
+                default:
+                    break;
+            }
+        });
+    }
 
     /**
      * Renders out the components.
@@ -86,12 +92,12 @@ public class DefeatView extends Screen {
 
         g.setFont(Resources.fonts().get("src/main/resources/fonts/Pixeled.ttf", 64f));
         g.setColor(Color.RED);
-        TextRenderer.render(g, "DEFEATED!", 330, 200);
+        TextRenderer.render(g, "DEFEATED!", 370, 200);
 
         Font smallFont = new Font("arial", 1, 50);
         g.setFont(smallFont);
         g.setColor(Color.WHITE);
-        TextRenderer.render(g, "Your score: " + hsOutput, 410, 300);
+        TextRenderer.render(g, "Your score: " + hsOutput, 430, 300);
 
         Game.audio().playMusic(Resources.sounds().get("src/main/resources/DefeatView/DefeatMusic.ogg"));
 
@@ -115,11 +121,4 @@ public class DefeatView extends Screen {
 
         Game.screens().display("Highscore");
     }
-/*
-    public void actionPerformed(ActionEvent evt) {
-        String text = inputName.getText();
-       // textArea.append(text + newline);
-        inputName.selectAll();
-    }
-*/
 }
