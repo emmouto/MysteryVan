@@ -16,6 +16,7 @@ import de.gurkenlabs.litiengine.sound.Sound;
  * The screen that shows when the player has lost the game.
  *
  * @author Jennifer Krogh
+ * @author Emma Pettersson
  */
 
 public class DefeatView extends Screen {
