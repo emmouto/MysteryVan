@@ -1,6 +1,6 @@
 package Controller;
 
-import java.awt.Color;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -19,8 +19,11 @@ import de.gurkenlabs.litiengine.sound.Sound;
  * @author Jennifer Krogh
  */
 public class MenuController extends Menu {
+    public static final Font PIXELED_BIG = Resources.fonts().get("src/main/resources/fonts/Pixeled.ttf",64f);
+    public static final Font PIXELED_MEDIUM = Resources.fonts().get("src/main/resources/fonts/Pixeled.ttf",40f);
+    public static final Font PIXELED_SMALL = Resources.fonts().get("src/main/resources/fonts/Pixeled.ttf",24f);
     private static final Sound SETTING_CHANGE_SOUND = Resources.sounds().get("src/main/resources/audio/sfx/menu_sound.wav");
-    private static final int MENU_DELAY = 180;
+    private static final int DELAY = 180;
 
     private final List<Consumer<Integer>> confirmConsumer;
     private int currentFocus = -1;
@@ -81,7 +84,7 @@ public class MenuController extends Menu {
             return true;
         }
 
-        return Game.time().since(lastMenuInput) < MENU_DELAY;
+        return Game.time().since(lastMenuInput) < DELAY;
     }
 
     /**
@@ -99,7 +102,7 @@ public class MenuController extends Menu {
         }
 
         this.getCellComponents().forEach(comp -> {
-            comp.setFont(Resources.fonts().get("src/main/resources/fonts/Pixeled.ttf",24f));
+            comp.setFont(PIXELED_SMALL);
             comp.getAppearance().setForeColor(Color.WHITE);
             comp.getAppearance().setTransparentBackground(true);
             comp.getAppearanceHovered().setTransparentBackground(true);
