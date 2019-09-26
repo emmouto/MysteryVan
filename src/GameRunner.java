@@ -30,11 +30,12 @@ public class GameRunner {
         // Adds all the screens, and displays the title screen ("Menu").
         Game.screens().add(new MenuView("Menu"));
         Game.screens().add(new SelectionView("Selection"));
+        Game.screens().add(new HelpView("Help"));
         Game.screens().add(new HighscoreView("Highscore"));
         Game.screens().add(new GameScreen());
         Game.screens().add(new DefeatView("Defeat"));
         Game.screens().add(new PauseView("Pause"));
-        Game.screens().display("Menu");
+        Game.screens().display("Defeat");
 
         // TODO move this to GameView..?
         Game.world().loadEnvironment(new Environment("src/main/resources/new_map.tmx"));
