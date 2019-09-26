@@ -11,6 +11,7 @@ import de.gurkenlabs.litiengine.pathfinding.astar.AStarPathFinder;
 import de.gurkenlabs.litiengine.physics.MovementController;
 
 import java.awt.*;
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,13 +20,14 @@ import java.util.Map;
 public class EnemyController implements IUpdateable {
 
     private List<Player> players;
-    private List<Enemy> enemies;
+    private List<Enemy> enemies = new ArrayList<Enemy>();
     private AStarPathFinder pathFinder;
-    private Map<Enemy, Path> enemyPaths = new HashMap<Enemy, Path>();
+    private Long lastPathUpdate;
 
     public EnemyController(ArrayList<Player> players){
         this.players = players;
-        initiatePathfinding();
+        //initiatePathfinding();
+        lastPathUpdate = Game.time().now();
     }
 
     public void changeTarget(Enemy e){
@@ -35,6 +37,9 @@ public class EnemyController implements IUpdateable {
 
     }
 
+    public void spawnEnemy(){
+        enemies.add(new Enemy());
+    }
 
 
     private void updateEnemyTarget(){
@@ -48,7 +53,10 @@ public class EnemyController implements IUpdateable {
     @Override
     public void update() {
         updateEnemyTarget();
-        updatePath();
+        if (Game.time().since(lastPathUpdate) >= 5) {
+            updatePath();
+            lastPathUpdate = Game.time().now();
+        }
     }
 
     public List<Enemy> getEnemies() {
@@ -80,9 +88,7 @@ public class EnemyController implements IUpdateable {
 
     private void updatePath(){
         for (Enemy e: enemies){
-            enemyPaths.put(e, pathFinder.findPath(e, new Point(players.get(0).getPosX(), players.get(0).getPosY())));
-            MovementController<Enemy> mv = (MovementController<Enemy>)e.getMovementController();
-            mv.handleMovement();
+            e.updatePath(pathFinder.findPath(e, new Point(players.get(0).getPosX(), players.get(0).getPosY())));
         }
     }
 }
