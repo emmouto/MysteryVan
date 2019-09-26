@@ -1,6 +1,6 @@
 package View;
 
-import Controller.MenuController;
+import Controller.ScreenController;
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.IUpdateable;
 import de.gurkenlabs.litiengine.graphics.ImageRenderer;
@@ -20,7 +20,7 @@ import java.awt.image.BufferedImage;
 public class MenuView extends Screen implements IUpdateable {
     private static final Sound SELECT = Resources.sounds().get("src/main/resources/audio/sfx/menu_selection.wav");
 
-    private MenuController mainMenu;
+    private ScreenController mainMenu;
 
     /**
      * @param screenName
@@ -36,7 +36,7 @@ public class MenuView extends Screen implements IUpdateable {
         final double centerY = Game.window().getResolution().getHeight() * 1 / 2;
         final double buttonWidth = 250;
 
-        this.mainMenu = new MenuController(centerX - buttonWidth / 2, centerY * 1.3, buttonWidth, centerY / 2, "HIGHSCORE", "PLAY", "EXIT");
+        this.mainMenu = new ScreenController(centerX - buttonWidth / 2, centerY * 1.3, buttonWidth, centerY / 2, "HIGHSCORE", "PLAY", "EXIT");
         this.getComponents().add(this.mainMenu);
 
         this.mainMenu.onConfirm(c -> {
@@ -107,7 +107,8 @@ public class MenuView extends Screen implements IUpdateable {
         Game.audio().fadeMusic(250);
 
         // Stage & Character Selection Screen // TODO implement lol
-        Game.loop().perform(3500, () -> {
+        Game.loop().perform(2500, () -> {
+            Game.audio().stopMusic();
             Game.screens().display("Help");
         });
     }
@@ -139,7 +140,7 @@ public class MenuView extends Screen implements IUpdateable {
     private void renderClouds(Graphics2D g) {
         final BufferedImage CLOUDS = Resources.images().get("src/main/resources/menu/clouds.png");
         final int cloudOffset = 1279;
-        final double cloudSpeed = 0.3;
+        final double cloudSpeed = 2;
 
         ImageRenderer.render(g, CLOUDS, Game.time().now() * cloudSpeed % (CLOUDS.getWidth() + Game.window().getResolution().getWidth()), 0);
         ImageRenderer.render(g, CLOUDS, Game.time().now() * cloudSpeed % (CLOUDS.getWidth() + Game.window().getResolution().getWidth()) - cloudOffset, 0);
