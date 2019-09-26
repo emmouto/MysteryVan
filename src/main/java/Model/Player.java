@@ -6,6 +6,7 @@ import de.gurkenlabs.litiengine.annotation.CollisionInfo;
 import de.gurkenlabs.litiengine.annotation.EntityInfo;
 import de.gurkenlabs.litiengine.annotation.MovementInfo;
 import de.gurkenlabs.litiengine.entities.Creature;
+import de.gurkenlabs.litiengine.graphics.IRenderable;
 import de.gurkenlabs.litiengine.graphics.Spritesheet;
 import de.gurkenlabs.litiengine.gui.screens.GameScreen;
 import de.gurkenlabs.litiengine.gui.screens.Screen;
@@ -23,7 +24,12 @@ import java.awt.image.BufferedImage;
 @EntityInfo(width = 18, height = 18)
 @MovementInfo(velocity = 70)
 @CollisionInfo(collisionBoxWidth = 8, collisionBoxHeight = 16, collision = true)
-public class Player extends Creature implements IUpdateable, ICollidable, IMovable{
+public class Player extends Creature implements IUpdateable, ICollidable, IMovable, IRenderable {
+
+    @Override
+    public void render(Graphics2D graphics2D) {
+
+    }
 
     public enum PlayerState {
         CONTROLLABLE,

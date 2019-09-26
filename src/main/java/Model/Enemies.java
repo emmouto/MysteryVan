@@ -1,7 +1,9 @@
 package Model;
 
 
-public class Enemies {
+import de.gurkenlabs.litiengine.entities.Creature;
+
+public class Enemies extends Creature {
 
     private int HP;
     private Equipment equipment; //Enemies can have a weapon, armor etc that will make them harder to defeat.

@@ -51,10 +51,10 @@ public class GameView extends GameScreen implements IUpdateable {
         if (Game.world().environment() != null) {
             Game.world().environment().render(g);
         }
-        ImageRenderer.render(g, Resources.images().get("textures/Golden Knight walking/Golden Knight walk/golden knight animation walk right edit_00004.png"),0,0);
-
 
         super.render(g);
+
+        ImageRenderer.render(g, Resources.images().get("textures/Golden Knight walking/Golden Knight walk/golden knight animation walk right edit_00004.png"),20,20);
 
         // render level name
         if (Game.world().environment() != null && levelNameTick != 0 && Game.screens().current().getName() == "Game") {
