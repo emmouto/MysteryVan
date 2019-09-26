@@ -1,6 +1,9 @@
 package View;
 
+import Controller.HighscoreController;
 import Controller.MenuController;
+import Controller.PlayerController;
+import Model.Highscore;
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.graphics.ImageRenderer;
 import de.gurkenlabs.litiengine.graphics.TextRenderer;
@@ -40,13 +43,10 @@ public class DefeatView extends Screen {
 
     private MenuController defeatMenu;
 
-    /* Change to this later?
-     private Highscore hs;
-     String hsOutput = Integer.toString(hs.getHighscore());
-    */
+    // TODO Change this so it takes in the player's achieved score
     private int hs = 100;
     private String hsOutput = Integer.toString(hs);
-    // Above is temporary
+    // Above is temporary.
 
     public DefeatView(String screenName) {
         super(screenName);
@@ -100,8 +100,6 @@ public class DefeatView extends Screen {
         TextRenderer.render(g, "Your score: " + hsOutput, 430, 300);
 
         Game.audio().playMusic(Resources.sounds().get("src/main/resources/DefeatView/DefeatMusic.ogg"));
-
-        //inputName.addActionListener((ActionListener) this);
 
         super.render(g);
 

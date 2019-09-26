@@ -4,7 +4,7 @@ import Model.Player;
 
 public class PlayerController {
 
-    Player p1 = new Player("player1");
+    public Player p1 = new Player("player1");
 
     public void walkLeft(){
         while(true){
@@ -17,5 +17,6 @@ public class PlayerController {
             p1.setPosX(p1.getPosX()+1);
         }
     }
+
 
 }

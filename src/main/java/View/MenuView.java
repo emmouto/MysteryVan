@@ -108,7 +108,7 @@ public class MenuView extends Screen implements IUpdateable {
 
         // Stage & Character Selection Screen // TODO implement lol
         Game.loop().perform(3500, () -> {
-            Game.screens().display("Selection");
+            Game.screens().display("Help");
         });
     }
 
