@@ -36,7 +36,6 @@ public class HighscoreView extends Screen implements IUpdateable {
     @Override
     public void render(final Graphics2D g) {
 
-        // Example how it can look with a bg!
         ImageRenderer.render(g, brickBG, 0, 0);
         g.setColor(Color.BLACK);
         g.fillRect(240,130,700,580);

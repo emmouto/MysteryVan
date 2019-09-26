@@ -28,7 +28,7 @@ public class HelpView extends Screen implements IUpdateable {
     private static final BufferedImage GoToGame = Resources.images().get("src/main/resources/HelpView/GoToGame.png");
     private static final Sound SELECT = Resources.sounds().get("src/main/resources/audio/sfx/menu_selection.wav");
 
-    private ScreenController helpMenu;
+    private ScreenController screenController;
 
     /**
      * @param screenName
@@ -39,26 +39,14 @@ public class HelpView extends Screen implements IUpdateable {
     }
 
     /**
-     * Creates button that takes you to the next screen.
+     * When enter is pressed, method calls on the change-screen method.
      */
     protected void initializeComponents() {
 
-        //Input.keyboard().onKeyReleased(KeyEvent.VK_ENTER){
+        this.screenController = new ScreenController(0, 0, 0, 0, "");
+        this.getComponents().add(this.screenController);
 
-        }
-        /*
-        this.helpMenu = new ScreenController(800, 800, 0, 0, "Continue");
-        this.getComponents().add(this.helpMenu);
-
-        this.helpMenu.onConfirm(c -> {
-            switch (c) {
-                case 0:
-                    this.goToSelect();
-                    break;
-                default:
-                    break;
-            }
-        });*/
+        this.screenController.onConfirm(c -> this.goToSelect());
     }
 
     /**
@@ -114,8 +102,11 @@ public class HelpView extends Screen implements IUpdateable {
         super.render(g);
     }
 
+    /**
+     * Method which changes current screen to selection.
+     */
     private void goToSelect() {
-        this.helpMenu.setEnabled(false);
+        this.screenController.setEnabled(false);
         Game.audio().playSound(SELECT);
 
         Game.screens().display("Selection");
