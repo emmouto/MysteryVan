@@ -13,7 +13,7 @@ import de.gurkenlabs.litiengine.resources.Resources;
 import de.gurkenlabs.litiengine.sound.Sound;
 
 /**
- * Controls for the Menu view.
+ * Controls for the Menu (and Defeat) view.
  *
  * @author Emma Pettersson
  * @author Jennifer Krogh
@@ -28,12 +28,18 @@ public class MenuController extends Menu {
     private static long lastMenuInput;
 
     /**
+     * Constructor for the MenuController.
      *
      * @param x
+     *      ....
      * @param y
+     *      ...
      * @param width
+     *      ...
      * @param height
+     *      ...
      * @param items
+     *      ...
      */
     public MenuController(double x, double y, double width, double height, String... items) {
         super(x, y, width, height, items);
@@ -98,15 +104,14 @@ public class MenuController extends Menu {
             comp.getAppearance().setTransparentBackground(true);
             comp.getAppearanceHovered().setTransparentBackground(true);
 
-            if (this.getCellComponents().size() == 1){
+            if (this.getCellComponents().size() == 1){  // Defeat View
                 comp.getAppearanceHovered().setForeColor(Color.WHITE);
-            } else {
+            } else { // Menu View
                 comp.getAppearanceHovered().setForeColor(Color.BLACK);
             }
         });
 
-
-        // TODO maybe make this code not awful..?
+        // Only for Menu View
         if (this.getCellComponents().size() > 1) {
             this.getCellComponents().get(0).setX(210);
             this.getCellComponents().get(0).setY(460);
@@ -118,8 +123,10 @@ public class MenuController extends Menu {
     }
 
     /**
+     * ...
      *
      * @param cons
+     *      ...
      */
     public void onConfirm(Consumer<Integer> cons) {
         this.confirmConsumer.add(cons);

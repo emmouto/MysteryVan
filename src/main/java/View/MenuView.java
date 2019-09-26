@@ -18,10 +18,6 @@ import java.awt.image.BufferedImage;
  * @author Emma Pettersson
  */
 public class MenuView extends Screen implements IUpdateable {
-    private static final BufferedImage BG = Resources.images().get("src/main/resources/menu/bg.png");
-    private static final BufferedImage CLOUDS = Resources.images().get("src/main/resources/menu/clouds.png");
-    private final int cloudOffset = 1279;
-    private final double cloudSpeed = 0.3;
     private static final Sound SELECT = Resources.sounds().get("src/main/resources/audio/sfx/menu_selection.wav");
 
     private MenuController mainMenu;
@@ -83,6 +79,8 @@ public class MenuView extends Screen implements IUpdateable {
      */
     @Override
     public void render(final Graphics2D g) {
+        final BufferedImage BG = Resources.images().get("src/main/resources/menu/bg.png");
+
         renderClouds(g);
         ImageRenderer.render(g, BG, 0, 0);
 
@@ -139,6 +137,10 @@ public class MenuView extends Screen implements IUpdateable {
 
     // This is kind of ugly and only works for like, a few minutes, but at least it works. Kind of.
     private void renderClouds(Graphics2D g) {
+        final BufferedImage CLOUDS = Resources.images().get("src/main/resources/menu/clouds.png");
+        final int cloudOffset = 1279;
+        final double cloudSpeed = 0.3;
+
         ImageRenderer.render(g, CLOUDS, Game.time().now() * cloudSpeed % (CLOUDS.getWidth() + Game.window().getResolution().getWidth()), 0);
         ImageRenderer.render(g, CLOUDS, Game.time().now() * cloudSpeed % (CLOUDS.getWidth() + Game.window().getResolution().getWidth()) - cloudOffset, 0);
         ImageRenderer.render(g, CLOUDS, Game.time().now() * cloudSpeed % (CLOUDS.getWidth() + Game.window().getResolution().getWidth()) - cloudOffset * 2, 0);

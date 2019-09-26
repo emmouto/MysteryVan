@@ -16,10 +16,13 @@ public class HighscoreController {
 
 
     /**
-     * Mehtod to add a new Highscore to the array, that is used
+     * Method to add a new Highscore to the array, that is used
      * to displaying the highscores in the HighscoreView.
-     * @param hs the new Highscore to be added to the array
-     * @param hArr the array to which the Highscore is added
+     *
+     * @param hs
+     *      The new Highscore to be added to the array
+     * @param hArr
+     *      The array to which the Highscore is added
      */
     public void addToScoreArray(Highscore hs, Highscore[] hArr) {     // ---this method needs to be used somewhere else, as for now highscore data is hardcoded
 
@@ -39,8 +42,11 @@ public class HighscoreController {
     /**
      * Method to sort the array in order of size,
      * where the highest score is listed first using bubble sort.
-     * @param hArr array that needs to be sorted, usually after a new Highscore was added
-     * @return returns the new sorted array, which can be displayed in the HighscoreView
+     *
+     * @param hArr
+     *      Array that needs to be sorted, usually after a new Highscore was added
+     * @return
+     *      Returns the new sorted array, which can be displayed in the HighscoreView
      */
     public Highscore[] organizeArr(Highscore[] hArr) {
 
