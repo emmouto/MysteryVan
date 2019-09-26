@@ -1,22 +1,10 @@
 package Controller;
 
 import Model.Highscore;
-import de.gurkenlabs.litiengine.Game;
-import de.gurkenlabs.litiengine.gui.GuiComponent;
-import de.gurkenlabs.litiengine.gui.Menu;
-import de.gurkenlabs.litiengine.gui.screens.Screen;
-import de.gurkenlabs.litiengine.input.Input;
-import de.gurkenlabs.litiengine.resources.Resources;
 
-import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.function.Consumer;
 
 /**
- * Lets the user perform actions in the HighscoreView.
+ * Creates and sorts a list of highscores that is displayed in the HighscoreView.
  *
  * @author Antonia Welzel
  */
@@ -33,7 +21,7 @@ public class HighscoreController {
      * @param hs the new Highscore to be added to the array
      * @param hArr the array to which the Highscore is added
      */
-    public void addToScoreArray(Highscore hs, Highscore[] hArr) {
+    public void addToScoreArray(Highscore hs, Highscore[] hArr) {     // ---this method needs to be used somewhere else, as for now highscore data is hardcoded
 
         for (int i = 0; i < 10; i++) {
             if(hArr[i] == null) {
@@ -76,7 +64,7 @@ public class HighscoreController {
     }
 
 
-    //Player names
+    //Player names -- hardcoded
     String player1 = "hello";
     String player2 = "a";
     String player3 = "v";
@@ -88,7 +76,7 @@ public class HighscoreController {
     String player9 = "t";
     String player10 = "z";
 
-    //Player scores
+    //Player scores -- hardcoded
     int p1 = 0;
     int p2 = 4;
     int p3 = 2;
@@ -100,7 +88,7 @@ public class HighscoreController {
     int p9 = 1;
     int p10 = 5;
 
-    //Highscores
+    //Highscores -- hardcoded
     Highscore h1 = new Highscore(p1, player1);
     Highscore h2 = new Highscore(p2, player2);
     Highscore h3 = new Highscore(p3, player3);

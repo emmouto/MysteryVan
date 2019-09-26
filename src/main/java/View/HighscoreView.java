@@ -9,23 +9,12 @@ import de.gurkenlabs.litiengine.graphics.ImageRenderer;
 import de.gurkenlabs.litiengine.graphics.ShapeRenderer;
 import de.gurkenlabs.litiengine.graphics.TextRenderer;
 import de.gurkenlabs.litiengine.gui.ImageComponent;
+import de.gurkenlabs.litiengine.gui.TextFieldComponent;
 import de.gurkenlabs.litiengine.gui.screens.Screen;
 import de.gurkenlabs.litiengine.gui.screens.ScreenManager;
 import de.gurkenlabs.litiengine.resources.Resources;
-import de.gurkenlabs.litiengine.util.ArrayUtilities;
-
-import javax.swing.*;
 import java.awt.*;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.geom.Rectangle2D;
-import java.util.LinkedList;
+
 
 
 /**
@@ -70,38 +59,71 @@ public class HighscoreView extends Screen implements IUpdateable {
             y += 50;
         }
 
+
         g.setColor(Color.PINK);
         g.setFont(Resources.fonts().get("src/main/resources/fonts/Pixeled.ttf", 32f));
         TextRenderer.render(g, "Menu", 100, 100);
-        this.onClicked(componentMouseEvent -> this.showMenu());
 
+        this.onHovered(componentMouseEvent -> {g.setColor(Color.orange);
+        TextRenderer.render(g, "Menu", 100, 100); });
+
+
+
+        this.onClicked(componentMouseEvent -> this.showMenu());
+/*
         //TODO need change of colour when mouse hovers
-        this.onHovered(componentMouseEvent -> {
+        this.onMouseLeave(e -> {
+            g.setColor(Color.orange);
+            TextRenderer.render(g, "Menuuu", 100, 150);
+        });
+
+        this.onMouseEnter(e -> {
+            g.setColor(Color.yellow);
+            TextRenderer.render(g, "Menuuu", 100, 150);
+        });
+
+*/
+
+        /*this.onHovered(componentMouseEvent -> {
+
             this.currentFocus = this.getComponents().indexOf(this);
             this.updateFocus();
-            this.getAppearance().setBackgroundColor1(Color.white);
+            //this.getAppearance().setBackgroundColor1(Color.white);
         });
+        */
 
 
         super.render(g);
     }
 
 
+
+
+
     /**
      * Method to call when current screen is changed to menu screen.
      */
     private void showMenu() {
-
         Game.screens().display("Menu");
-
-        //TODO bli konstig när musiken spelas efter man kommer tillbaks till meny från highscores
-        //Game.audio().playSound(Resources.sounds().get("src/main/resources/audio/music/title_theme.mp3"));
-
     }
+
+
+    //all below not used
 
 
     public void update() {
 
+    }
+
+
+    private void decFocus() {
+        this.currentFocus = Math.floorMod(--this.currentFocus, this.getComponents().size());
+        this.updateFocus();
+    }
+
+    private void incFocus() {
+        this.currentFocus = ++this.currentFocus % this.getComponents().size();
+        this.updateFocus();
     }
 
     protected void updateFocus() {
@@ -115,11 +137,11 @@ public class HighscoreView extends Screen implements IUpdateable {
 
         lastMenuInput = Game.inputLoop().getTicks();
 
-        if (this.isVisible()) {
+        //if (this.isVisible()) {
             //Game.audio().playSound(ArrayUtilities.getRandom(SETTING_HOVER_SOUNDS));
-        }
+        //}
     }
-}
+
 
     /*
     public void initializeComponents() {
@@ -152,16 +174,24 @@ public class HighscoreView extends Screen implements IUpdateable {
     }
      */
 
-/*
+
     public void prepare() {
         //this.hcontrol.setEnabled(true);
         super.prepare();
-        Game.loop().attach(this);
-        Game.graphics().setBaseRenderScale(6f * Game.window().getResolutionScale());
+        //Game.loop().attach(this);
+        //Game.graphics().setBaseRenderScale(6f * Game.window().getResolutionScale());
         //this.hcontrol.incFocus();
+        if (!this.getComponents().isEmpty()) {
+            this.currentFocus = 0;
+            this.getComponents().get(0).setHovered(true);
+        }
 
     }
-*/
+
+
+    }
+
+
 
 
 /*
