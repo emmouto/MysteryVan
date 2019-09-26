@@ -56,6 +56,6 @@ public class Enemy extends Creature implements IUpdateable, ICollidable, IMovabl
 
     @Override
     public void update() {
-        
+
     }
 }
