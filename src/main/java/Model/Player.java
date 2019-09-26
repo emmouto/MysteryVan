@@ -5,8 +5,8 @@ import de.gurkenlabs.litiengine.entities.Creature;
 
 public class Player extends Creature implements IUpdateable, ICollidable, IMovable{
 
-    public Player(String name){
-        super(name);
+    public Player(){
+
     }
 
     @Override

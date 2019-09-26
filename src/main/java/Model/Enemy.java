@@ -20,7 +20,7 @@ import java.awt.image.BufferedImage;
 
 @MovementInfo(velocity = 30)
 @AnimationInfo(spritePrefix = "enemy")
-public class Enemy extends Creature implements IUpdateable, ICollidable, IMovable, IRenderable{
+public class Enemy extends Creature implements IUpdateable, ICollidable, IMovable{
 
     private int HP;
     private Equipment equipment; //Enemy can have a weapon, armor etc that will make them harder to defeat.
@@ -76,8 +76,4 @@ public class Enemy extends Creature implements IUpdateable, ICollidable, IMovabl
        // followPath();
     }
 
-    @Override
-    public void render(Graphics2D graphics2D) {
-        graphics2D.drawImage(sprite, 640, 360, sprite.getWidth(),sprite.getHeight(), null);
-    }
 }

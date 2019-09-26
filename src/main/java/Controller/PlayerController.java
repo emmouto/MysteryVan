@@ -4,7 +4,7 @@ import Model.Player;
 
 public class PlayerController {
 
-    Player p1 = new Player("player1");
+    Player p1 = new Player();
 
     public void walkLeft(){
         while(true){

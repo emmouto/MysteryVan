@@ -16,6 +16,7 @@ import de.gurkenlabs.litiengine.graphics.RenderEngine;
 import de.gurkenlabs.litiengine.gui.screens.GameScreen;
 import de.gurkenlabs.litiengine.gui.screens.Resolution;
 import de.gurkenlabs.litiengine.input.Input;
+import de.gurkenlabs.litiengine.resources.Resource;
 import de.gurkenlabs.litiengine.resources.Resources;
 
 import javax.imageio.ImageIO;
@@ -51,35 +52,23 @@ public class GameRunner {
 
         Game.screens().add(new GameScreen());
 
-
+        Resources.load("game.litidata");
 
         Game.audio().playMusic(Resources.sounds().get("src/main/resources/sounds/title_theme.mp3"));
 
-
-        BufferedImage img = null;
-        try {
-            img = ImageIO.read(new File("C:\\Users\\adam_\\OneDrive\\Dokument\\TDA367\\MysteryVan\\src\\main\\resources\\textures\\Enemy\\enemy-walk-right.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-        BufferedImage img2 = null;
-        try {
-            img2 = ImageIO.read(new File("C:\\Users\\adam_\\OneDrive\\Dokument\\TDA367\\MysteryVan\\src\\main\\resources\\textures\\Enemy\\enemy-idle-left.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Resources.images().add("enemy-walk-left", img);
-        Resources.images().add("enemy_idle", img2);
         EnemyController ec = new EnemyController(new ArrayList<Player>());
         mc.initCamera();
 
         CreatureMapObjectLoader.registerCustomCreatureType(Enemy.class);
+        CreatureMapObjectLoader.registerCustomCreatureType(Player.class);
 
 
 
-        Game.world().loadEnvironment(new Environment("src/main/resources/new_map.tmx"));
+        Game.world().loadEnvironment("new_map");
+        Game.world().environment().add(new Enemy());
+        Player p = new Player();
+        p.setLocation(Game.screens().current().getWidth()/4,Game.screens().current().getHeight()/4);
+        Game.world().environment().add(p);
         Game.start();
 
     }
