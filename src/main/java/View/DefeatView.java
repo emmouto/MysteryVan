@@ -1,27 +1,16 @@
 package View;
 
-import Controller.HighscoreController;
 import Controller.MenuController;
-import Controller.PlayerController;
-import Model.Highscore;
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.graphics.ImageRenderer;
 import de.gurkenlabs.litiengine.graphics.TextRenderer;
 import de.gurkenlabs.litiengine.gui.screens.Screen;
-import de.gurkenlabs.litiengine.input.Input;
-import de.gurkenlabs.litiengine.input.Keyboard;
 import de.gurkenlabs.litiengine.resources.Resources;
 import de.gurkenlabs.litiengine.sound.Sound;
 
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
-import java.util.concurrent.TimeUnit;
-import java.util.function.Consumer;
+
 
 /**
  * The screen that shows when the player has lost the game.

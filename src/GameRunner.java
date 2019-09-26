@@ -35,7 +35,7 @@ public class GameRunner {
         Game.screens().add(new GameScreen());
         Game.screens().add(new DefeatView("Defeat"));
         Game.screens().add(new PauseView("Pause"));
-        Game.screens().display("Defeat");
+        Game.screens().display("Menu");
 
         // TODO move this to GameView..?
         Game.world().loadEnvironment(new Environment("src/main/resources/new_map.tmx"));

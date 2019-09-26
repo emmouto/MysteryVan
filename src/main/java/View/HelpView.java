@@ -9,6 +9,12 @@ import de.gurkenlabs.litiengine.resources.Resources;
 
 import java.awt.*;
 
+/**
+ * The screen that shows when the player starts the game, shows the controls used for the game.
+ *
+ * @author Jennifer Krogh
+ */
+
 public class HelpView extends Screen implements IUpdateable {
 
     public HelpView(String screenName) {

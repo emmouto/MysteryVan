@@ -59,6 +59,8 @@ public class HighscoreView extends Screen implements IUpdateable {
             y += 50;
         }
 
+        g.drawRect(240,130,700,580);
+
 
         g.setColor(Color.PINK);
         g.setFont(Resources.fonts().get("src/main/resources/fonts/Pixeled.ttf", 32f));
