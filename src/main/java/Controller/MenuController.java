@@ -14,6 +14,9 @@ import de.gurkenlabs.litiengine.sound.Sound;
 
 /**
  * Controls for the Menu view.
+ *
+ * @author Emma Pettersson
+ * @author Jennifer Krogh
  */
 public class MenuController extends Menu {
     private static final Sound SETTING_CHANGE_SOUND = Resources.sounds().get("src/main/resources/audio/sfx/menu_sound.wav");
@@ -102,10 +105,9 @@ public class MenuController extends Menu {
             }
         });
 
+
         // TODO maybe make this code not awful..?
-
         if (this.getCellComponents().size() > 1) {
-
             this.getCellComponents().get(0).setX(210);
             this.getCellComponents().get(0).setY(460);
             this.getCellComponents().get(1).setX(550);

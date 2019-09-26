@@ -27,6 +27,10 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
 import java.util.LinkedList;
 
+
+/**
+ * @author Antonia Welzel
+ */
 public class HighscoreView extends Screen implements IUpdateable {
 
 

@@ -17,6 +17,8 @@ import java.util.function.Consumer;
 
 /**
  * Lets the user perform actions in the HighscoreView.
+ *
+ * @author Antonia Welzel
  */
 public class HighscoreController {
 

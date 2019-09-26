@@ -7,6 +7,9 @@ import java.util.LinkedList;
  * Highscore Class saves and adds the points the player collects during the game,
  * which can later be shown in the Highscore screen.
  * A player receives points when killing enemies.
+ *
+ * @author Antonia Welzel
+ * @author Jennifer Krogh
  */
 public class Highscore {
 
