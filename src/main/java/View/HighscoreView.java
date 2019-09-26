@@ -1,6 +1,7 @@
 package View;
 
 import Controller.HighscoreController;
+import Controller.ScreenController;
 import Model.Highscore;
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.IUpdateable;
@@ -19,19 +20,27 @@ public class HighscoreView extends Screen implements IUpdateable {
 
     private static final BufferedImage brickBG = Resources.images().get("src/main/resources/HelpView/BrickBG.png");
 
+    private int currentFocus = -1;
+    private int previousFocus = 0;
+    public static long lastMenuInput;
+
+    Highscore h[] = new Highscore[10]; //{h1, h2, h3, h4, h5, h6, h7, h8, h9, h10};
+
+    private ScreenController screenController;
+    private HighscoreController hc = new HighscoreController(h);
+
     public HighscoreView(String screenName) {
 
         super(screenName);
     }
 
-    Highscore h[] = new Highscore[10]; //{h1, h2, h3, h4, h5, h6, h7, h8, h9, h10};
+    protected void initializeComponents() {
 
-    private HighscoreController hc = new HighscoreController(h);
+        this.screenController = new ScreenController(0, 0, 0, 0, "");
+        this.getComponents().add(this.screenController);
 
-    private int currentFocus = -1;
-    private int previousFocus = 0;
-    public static long lastMenuInput;
-
+        this.screenController.onConfirm(c -> this.showMenu());
+    }
 
     @Override
     public void render(final Graphics2D g) {
