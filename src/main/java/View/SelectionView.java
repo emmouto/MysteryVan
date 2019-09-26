@@ -10,6 +10,8 @@ import java.awt.*;
 
 /**
  * Lets the player choose a character and a difficulty level.
+ *
+ * @author Emma Pettersson
  */
 public class SelectionView extends Screen implements IUpdateable {
     public SelectionView(String screenName) {
