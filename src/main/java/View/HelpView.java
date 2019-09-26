@@ -26,7 +26,7 @@ public class HelpView extends Screen implements IUpdateable {
     public void render(final Graphics2D g) {
         g.setFont(Resources.fonts().get("src/main/resources/fonts/Pixeled.ttf",64f));
         g.setColor(Color.WHITE);
-        TextRenderer.render(g, "HELP", 300, 200);
+        TextRenderer.render(g, "HELP", 330, 200);
 
         super.render(g);
     }
