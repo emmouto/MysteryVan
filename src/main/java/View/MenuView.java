@@ -19,7 +19,6 @@ import de.gurkenlabs.litiengine.sound.Sound;
  * @author Emma Pettersson
  */
 public class MenuView extends Screen implements IUpdateable {
-    private static final Sound SELECT = Resources.sounds().get("src/main/resources/audio/sfx/menu_selection.wav");
     private static final Sound TITLE_THEME = Resources.sounds().get("src/main/resources/audio/music/title_theme.mp3");
 
     private ScreenController screenController;
@@ -85,37 +84,43 @@ public class MenuView extends Screen implements IUpdateable {
         renderClouds(g);
         ImageRenderer.render(g, BG, 0, 0);
 
-        g.setFont(Resources.fonts().get("src/main/resources/fonts/Pixeled.ttf",64f));
+        g.setFont(ScreenController.PIXELED_BIG);
         g.setColor(Color.BLACK);
         TextRenderer.renderWithOutline(g, "CHALMERSFORCE", ScreenController.centerX - (13 * 64) / 2.0, 200, Color.WHITE);
+        g.setFont(ScreenController.RAINY_MEDIUM);
+        TextRenderer.renderWithOutline(g, "© 2019 by Mystery Inc.", ScreenController.centerX - (13 * 64) / 2.0, 250, Color.WHITE);
 
-        Game.audio().playMusic(Resources.sounds().get("src/main/resources/audio/music/title_theme.mp3"));
+        //Game.audio().playMusic(TITLE_THEME);
 
         super.render(g);
     }
 
     private void showHighscore() {
         this.screenController.setEnabled(false);
-        Game.audio().playSound(SELECT);
+        Game.audio().playSound(ScreenController.SELECT_SOUND);
+        Game.window().getRenderComponent().fadeOut(500);
 
-        Game.screens().display("Highscore");
+        Game.loop().perform(500, () -> {
+            Game.window().getRenderComponent().fadeIn(500);
+            Game.screens().display("Highscore");
+        });
     }
 
     private void startGame() {
         this.screenController.setEnabled(false);
-        Game.audio().playSound(SELECT);
-        //Game.window().getRenderComponent().fadeOut(2500); // TODO the fading doesn't work properly, gives black screen
+        Game.audio().playSound(ScreenController.SELECT_SOUND);
+        Game.window().getRenderComponent().fadeOut(2500);
         Game.audio().fadeMusic(250);
 
-        // Stage & Character Selection Screen // TODO implement lol
-        Game.loop().perform(2500, () -> {
-            Game.audio().stopMusic();
+        // Display Help Screen
+        Game.loop().perform(3500, () -> {
+            Game.window().getRenderComponent().fadeIn(1000);
             Game.screens().display("Help");
         });
     }
 
     private void exit() {
-        Game.audio().playSound(SELECT);
+        Game.audio().playSound(ScreenController.SELECT_SOUND);
         System.exit(0);
     }
 

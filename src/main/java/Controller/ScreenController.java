@@ -25,6 +25,8 @@ public class ScreenController extends Menu {
     public static final Font PIXELED_MEDIUM = Resources.fonts().get("src/main/resources/fonts/Pixeled.ttf",40f);
     public static final Font PIXELED_SMALL = Resources.fonts().get("src/main/resources/fonts/Pixeled.ttf",24f);
     public static final Font PIXELED_XSMALL = Resources.fonts().get("src/main/resources/fonts/Pixeled.ttf",12f);
+    public static final Font RAINY_MEDIUM = Resources.fonts().get("src/main/resources/fonts/rainyhearts.ttf",50f);
+    public static final Font RAINY_SMALL = Resources.fonts().get("src/main/resources/fonts/rainyhearts.ttf",24f);
     public static final Sound SELECT_SOUND = Resources.sounds().get("src/main/resources/audio/sfx/menu_sound.wav");
     private static final int DELAY = 180;
 
@@ -155,6 +157,7 @@ public class ScreenController extends Menu {
     }
 
     public void fixMenuView() {
+        // Places the MenuView buttons in their correct places.
         this.getCellComponents().get(0).setX(210);
         this.getCellComponents().get(0).setY(460);
         this.getCellComponents().get(1).setX(550);

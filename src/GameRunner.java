@@ -4,6 +4,7 @@ import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.environment.Environment;
 import de.gurkenlabs.litiengine.gui.screens.GameScreen;
 import de.gurkenlabs.litiengine.gui.screens.Resolution;
+import de.gurkenlabs.litiengine.input.Input;
 import de.gurkenlabs.litiengine.resources.Resources;
 
 
@@ -13,9 +14,12 @@ import de.gurkenlabs.litiengine.resources.Resources;
  * @author Mystery Inc.
  */
 public class GameRunner {
-
+    /**
+     * @param args
+     *      The command line arguments.
+     */
     public static void main(String[] args) {
-        MapController mc = new MapController();
+        //MapController mc = new MapController();
 
         Game.config().graphics().setResolutionHeight(720);
         Game.config().graphics().setResolutionWidth(1280);
@@ -35,11 +39,11 @@ public class GameRunner {
         Game.screens().add(new GameScreen());
         Game.screens().add(new DefeatView("Defeat"));
         Game.screens().add(new PauseView("Pause"));
-        Game.screens().display("Defeat");
+        Game.screens().display("Menu");
 
         // TODO move this to GameView..?
-        Game.world().loadEnvironment(new Environment("src/main/resources/new_map.tmx"));
-        mc.initCamera();
+        //Game.world().loadEnvironment(new Environment("src/main/resources/new_map.tmx"));
+        //mc.initCamera();
         Game.start();
     }
 }

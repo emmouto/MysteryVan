@@ -29,7 +29,6 @@ public class SelectionView extends Screen implements IUpdateable {
 
     @Override
     public void prepare() {
-
         super.prepare();
 
         Game.loop().attach(this);

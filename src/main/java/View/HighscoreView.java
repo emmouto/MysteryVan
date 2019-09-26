@@ -75,7 +75,12 @@ public class HighscoreView extends Screen implements IUpdateable {
      * Method to call when current screen is changed to menu screen.
      */
     private void showMenu() {
-        Game.screens().display("Menu");
+        Game.window().getRenderComponent().fadeOut(500);
+
+        Game.loop().perform(500, () -> {
+            Game.window().getRenderComponent().fadeIn(500);
+            Game.screens().display("Menu");
+        });
     }
 
     @Override
