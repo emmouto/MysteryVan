@@ -6,14 +6,16 @@ import de.gurkenlabs.litiengine.gui.screens.GameScreen;
 import de.gurkenlabs.litiengine.gui.screens.Resolution;
 import de.gurkenlabs.litiengine.resources.Resources;
 
-
 /**
  * Sets up all the screens and runs the game.
  *
- * @author Mystery Inc.
+ * @author Jonathan Carbol
+ * @author Jennifer Krogh
+ * @author Emma Pettersson
+ * @author Adam Rohdell
+ * @author Antonia Welzel
  */
 public class GameRunner {
-
     public static void main(String[] args) {
         MapController mc = new MapController();
 
@@ -27,13 +29,15 @@ public class GameRunner {
         Game.window().setResolution(Resolution.custom(1280, 720, "720p"));
         Game.window().setIconImage(Resources.images().get("src/main/resources/icon.png"));
 
-        // Adds all the screens, and displays the title screen ("Menu").
+        // Adds all the screens.
         Game.screens().add(new MenuView("Menu"));
         Game.screens().add(new SelectionView("Selection"));
         Game.screens().add(new HighscoreView("Highscore"));
         Game.screens().add(new GameScreen());
         Game.screens().add(new DefeatView("Defeat"));
         Game.screens().add(new PauseView("Pause"));
+
+        //  Displays the title screen ("Menu").
         Game.screens().display("Menu");
 
         // TODO move this to GameView..?
