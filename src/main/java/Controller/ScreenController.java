@@ -13,12 +13,12 @@ import de.gurkenlabs.litiengine.resources.Resources;
 import de.gurkenlabs.litiengine.sound.Sound;
 
 /**
- * Controls for the Menu (and Defeat) view.
+ * Controls for the (non-ingame) Screens.
  *
  * @author Emma Pettersson
  * @author Jennifer Krogh
  */
-public class MenuController extends Menu {
+public class ScreenController extends Menu {
     private static final Sound SETTING_CHANGE_SOUND = Resources.sounds().get("src/main/resources/audio/sfx/menu_sound.wav");
     private static final int MENU_DELAY = 180;
 
@@ -28,7 +28,7 @@ public class MenuController extends Menu {
     private static long lastMenuInput;
 
     /**
-     * Constructor for the MenuController.
+     * Constructor for the ScreenController.
      *
      * @param x
      *      ....
@@ -41,7 +41,7 @@ public class MenuController extends Menu {
      * @param items
      *      ...
      */
-    public MenuController(double x, double y, double width, double height, String... items) {
+    public ScreenController(double x, double y, double width, double height, String... items) {
         super(x, y, width, height, items);
         this.confirmConsumer = new CopyOnWriteArrayList<>();
 
@@ -56,20 +56,24 @@ public class MenuController extends Menu {
             }
         });
 
-        Input.keyboard().onKeyPressed(KeyEvent.VK_LEFT, e -> {
-            if (this.menuInputIsLocked()) {
-                return;
-            }
+        Input.keyboard().onKeyPressed(e -> {
+            if (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A) {
+                if (this.menuInputIsLocked()) {
+                    return;
+                }
 
-            decFocus();
+                decFocus();
+            }
         });
 
-        Input.keyboard().onKeyPressed(KeyEvent.VK_RIGHT, e -> {
-            if (this.menuInputIsLocked()) {
-                return;
-            }
+        Input.keyboard().onKeyPressed(e -> {
+            if (e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_D) {
+                if (this.menuInputIsLocked()) {
+                    return;
+                }
 
-            incFocus();
+                incFocus();
+            }
         });
 
 

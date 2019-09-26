@@ -1,6 +1,6 @@
 package View;
 
-import Controller.MenuController;
+import Controller.ScreenController;
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.graphics.ImageRenderer;
 import de.gurkenlabs.litiengine.graphics.TextRenderer;
@@ -8,9 +8,15 @@ import de.gurkenlabs.litiengine.gui.screens.Screen;
 import de.gurkenlabs.litiengine.resources.Resources;
 import de.gurkenlabs.litiengine.sound.Sound;
 
+import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
-
+import java.util.concurrent.TimeUnit;
+import java.util.function.Consumer;
 
 /**
  * The screen that shows when the player has lost the game.
@@ -30,7 +36,7 @@ public class DefeatView extends Screen {
     private int timer2 = 5;
     private int timer3 = 5;
 
-    private MenuController defeatMenu;
+    private ScreenController defeatMenu;
 
     // TODO Change this so it takes in the player's achieved score
     private int hs = 100;
@@ -47,7 +53,7 @@ public class DefeatView extends Screen {
         final double centerY = Game.window().getResolution().getHeight() * 1 / 2;
         final double buttonWidth = 250;
 
-        this.defeatMenu = new MenuController(centerX - buttonWidth / 2, centerY * 1.3, buttonWidth, centerY / 2, "HIGHSCORE");
+        this.defeatMenu = new ScreenController(centerX - buttonWidth / 2, centerY * 1.3, buttonWidth, centerY / 2, "HIGHSCORE");
         this.getComponents().add(this.defeatMenu);
 
         this.defeatMenu.onConfirm(c -> {
