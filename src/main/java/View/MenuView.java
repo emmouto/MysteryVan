@@ -1,6 +1,10 @@
 package View;
 
 import Controller.ScreenController;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
+
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.IUpdateable;
 import de.gurkenlabs.litiengine.graphics.ImageRenderer;
@@ -9,9 +13,6 @@ import de.gurkenlabs.litiengine.gui.screens.Screen;
 import de.gurkenlabs.litiengine.resources.Resources;
 import de.gurkenlabs.litiengine.sound.Sound;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
-
 /**
  * The game's title screen.
  *
@@ -19,8 +20,9 @@ import java.awt.image.BufferedImage;
  */
 public class MenuView extends Screen implements IUpdateable {
     private static final Sound SELECT = Resources.sounds().get("src/main/resources/audio/sfx/menu_selection.wav");
+    private static final Sound TITLE_THEME = Resources.sounds().get("src/main/resources/audio/music/title_theme.mp3");
 
-    private ScreenController mainMenu;
+    private ScreenController screenController;
 
     /**
      * @param screenName
@@ -32,14 +34,12 @@ public class MenuView extends Screen implements IUpdateable {
 
     @Override
     protected void initializeComponents() {
-        final double centerX = Game.window().getResolution().getWidth() / 2.0;
-        final double centerY = Game.window().getResolution().getHeight() * 1 / 2;
         final double buttonWidth = 250;
 
-        this.mainMenu = new ScreenController(centerX - buttonWidth / 2, centerY * 1.3, buttonWidth, centerY / 2, "HIGHSCORE", "PLAY", "EXIT");
-        this.getComponents().add(this.mainMenu);
+        this.screenController = new ScreenController(ScreenController.centerX - buttonWidth / 2, ScreenController.centerY * 1.3, buttonWidth, ScreenController.centerY / 2, "HIGHSCORE", "PLAY", "EXIT");
+        this.getComponents().add(this.screenController);
 
-        this.mainMenu.onConfirm(c -> {
+        this.screenController.onConfirm(c -> {
             switch (c) {
                 case 0:
                     this.showHighscore();
@@ -61,15 +61,16 @@ public class MenuView extends Screen implements IUpdateable {
      */
     @Override
     public void prepare() {
-        Game.audio().playMusic(Resources.sounds().get("src/main/resources/audio/music/title_theme.mp3"));
+        Game.audio().playMusic(TITLE_THEME);
 
-        this.mainMenu.setEnabled(true);
+        this.screenController.setEnabled(true);
         super.prepare();
+        this.screenController.fixMenuView();
 
         Game.loop().attach(this);
         Game.graphics().setBaseRenderScale(6f * Game.window().getResolutionScale());
 
-        this.mainMenu.incFocus();
+        this.screenController.incFocus();
     }
 
     /**
@@ -86,7 +87,7 @@ public class MenuView extends Screen implements IUpdateable {
 
         g.setFont(Resources.fonts().get("src/main/resources/fonts/Pixeled.ttf",64f));
         g.setColor(Color.BLACK);
-        TextRenderer.renderWithOutline(g, "CHALMERSFORCE", 224, 200, Color.WHITE);
+        TextRenderer.renderWithOutline(g, "CHALMERSFORCE", ScreenController.centerX - (13 * 64) / 2.0, 200, Color.WHITE);
 
         Game.audio().playMusic(Resources.sounds().get("src/main/resources/audio/music/title_theme.mp3"));
 
@@ -94,14 +95,14 @@ public class MenuView extends Screen implements IUpdateable {
     }
 
     private void showHighscore() {
-        this.mainMenu.setEnabled(false);
+        this.screenController.setEnabled(false);
         Game.audio().playSound(SELECT);
 
         Game.screens().display("Highscore");
     }
 
     private void startGame() {
-        this.mainMenu.setEnabled(false);
+        this.screenController.setEnabled(false);
         Game.audio().playSound(SELECT);
         //Game.window().getRenderComponent().fadeOut(2500); // TODO the fading doesn't work properly, gives black screen
         Game.audio().fadeMusic(250);
@@ -140,7 +141,7 @@ public class MenuView extends Screen implements IUpdateable {
     private void renderClouds(Graphics2D g) {
         final BufferedImage CLOUDS = Resources.images().get("src/main/resources/menu/clouds.png");
         final int cloudOffset = 1279;
-        final double cloudSpeed = 2;
+        final double cloudSpeed = 0.3;
 
         ImageRenderer.render(g, CLOUDS, Game.time().now() * cloudSpeed % (CLOUDS.getWidth() + Game.window().getResolution().getWidth()), 0);
         ImageRenderer.render(g, CLOUDS, Game.time().now() * cloudSpeed % (CLOUDS.getWidth() + Game.window().getResolution().getWidth()) - cloudOffset, 0);

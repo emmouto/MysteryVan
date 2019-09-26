@@ -14,6 +14,10 @@ import java.awt.*;
  * @author Emma Pettersson
  */
 public class SelectionView extends Screen implements IUpdateable {
+    /**
+     * @param screenName
+     *      Name of the screen.
+     */
     public SelectionView(String screenName) {
         super(screenName);
     }

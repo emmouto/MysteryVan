@@ -19,16 +19,19 @@ import de.gurkenlabs.litiengine.sound.Sound;
  * @author Jennifer Krogh
  */
 public class ScreenController extends Menu {
+    public static final double centerX = Game.window().getResolution().getWidth() / 2.0;
+    public static final double centerY = Game.window().getResolution().getHeight() * 1 / 2;
     public static final Font PIXELED_BIG = Resources.fonts().get("src/main/resources/fonts/Pixeled.ttf",64f);
     public static final Font PIXELED_MEDIUM = Resources.fonts().get("src/main/resources/fonts/Pixeled.ttf",40f);
     public static final Font PIXELED_SMALL = Resources.fonts().get("src/main/resources/fonts/Pixeled.ttf",24f);
-    private static final Sound SETTING_CHANGE_SOUND = Resources.sounds().get("src/main/resources/audio/sfx/menu_sound.wav");
+    public static final Font PIXELED_XSMALL = Resources.fonts().get("src/main/resources/fonts/Pixeled.ttf",12f);
+    public static final Sound SELECT_SOUND = Resources.sounds().get("src/main/resources/audio/sfx/menu_sound.wav");
     private static final int DELAY = 180;
 
     private final List<Consumer<Integer>> confirmConsumer;
     private int currentFocus = -1;
 
-    private static long lastMenuInput;
+    private static long lastInput;
 
     /**
      * Constructor for the ScreenController.
@@ -50,18 +53,18 @@ public class ScreenController extends Menu {
 
         Input.keyboard().onKeyReleased(e -> {
             if (e.getKeyCode() == KeyEvent.VK_ENTER || e.getKeyCode() == KeyEvent.VK_SPACE || e.getKeyCode() == KeyEvent.VK_E) {
-                if (this.menuInputIsLocked()) {
+                if (this.inputIsLocked()) {
                     return;
                 }
 
                 this.confirm();
-                lastMenuInput = Game.time().now();
+                lastInput = Game.time().now();
             }
         });
 
         Input.keyboard().onKeyPressed(e -> {
             if (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A) {
-                if (this.menuInputIsLocked()) {
+                if (this.inputIsLocked()) {
                     return;
                 }
 
@@ -71,24 +74,22 @@ public class ScreenController extends Menu {
 
         Input.keyboard().onKeyPressed(e -> {
             if (e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_D) {
-                if (this.menuInputIsLocked()) {
+                if (this.inputIsLocked()) {
                     return;
                 }
 
                 incFocus();
             }
         });
-
-
     }
 
-    private boolean menuInputIsLocked() {
-        // disable menu if the game has started
+    private boolean inputIsLocked() {
+        // Disable Screen controls if view has changed.
         if (this.isSuspended() || !this.isVisible() || !this.isEnabled()) {
             return true;
         }
 
-        return Game.time().since(lastMenuInput) < DELAY;
+        return Game.time().since(lastInput) < DELAY;
     }
 
     /**
@@ -110,23 +111,8 @@ public class ScreenController extends Menu {
             comp.getAppearance().setForeColor(Color.WHITE);
             comp.getAppearance().setTransparentBackground(true);
             comp.getAppearanceHovered().setTransparentBackground(true);
-
-            if (this.getCellComponents().size() == 1){  // Defeat View
-                comp.getAppearanceHovered().setForeColor(Color.WHITE);
-            } else { // Menu View
-                comp.getAppearanceHovered().setForeColor(Color.BLACK);
-            }
+            comp.getAppearanceHovered().setForeColor(Color.BLACK);
         });
-
-        // Only for Menu View
-        if (this.getCellComponents().size() > 1) {
-            this.getCellComponents().get(0).setX(210);
-            this.getCellComponents().get(0).setY(460);
-            this.getCellComponents().get(1).setX(550);
-            this.getCellComponents().get(1).setY(460);
-            this.getCellComponents().get(2).setX(880);
-            this.getCellComponents().get(2).setY(460);
-        }
     }
 
     /**
@@ -161,10 +147,19 @@ public class ScreenController extends Menu {
             this.getCellComponents().get(i).setHovered(i == this.currentFocus);
         }
 
-        lastMenuInput = Game.time().now();
+        lastInput = Game.time().now();
 
         if (this.isVisible() && Game.time().now() > 10){
-            Game.audio().playSound(SETTING_CHANGE_SOUND);
+            Game.audio().playSound(SELECT_SOUND);
         }
+    }
+
+    public void fixMenuView() {
+        this.getCellComponents().get(0).setX(210);
+        this.getCellComponents().get(0).setY(460);
+        this.getCellComponents().get(1).setX(550);
+        this.getCellComponents().get(1).setY(460);
+        this.getCellComponents().get(2).setX(880);
+        this.getCellComponents().get(2).setY(460);
     }
 }
