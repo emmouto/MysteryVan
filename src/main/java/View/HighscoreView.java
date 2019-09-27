@@ -19,6 +19,7 @@ import de.gurkenlabs.litiengine.resources.Resources;
 /**
  * @author Antonia Welzel
  * @author Emma Pettersson
+ * @author Jennifer Krogh
  */
 public class HighscoreView extends Screen implements IUpdateable {
     private static final BufferedImage brickBG = Resources.images().get("src/main/resources/HelpView/BrickBG.png");
