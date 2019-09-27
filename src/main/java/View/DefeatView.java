@@ -64,7 +64,7 @@ public class DefeatView extends Screen {
         if (timer1 > 0) {
             ImageRenderer.render(g, defeatBG, 0, 0);
         } else if (timer2 > 0) {
-            if (timer2 == 4){
+            if (timer2 == 4) {
                 Game.audio().playSound(GUN);
             }
 
@@ -79,8 +79,7 @@ public class DefeatView extends Screen {
         g.setColor(Color.RED);
         TextRenderer.render(g, "DEFEATED!", 370, 200);
 
-        Font smallFont = new Font("arial", Font.PLAIN, 50);
-        g.setFont(smallFont);
+        g.setFont(ScreenController.RAINY_MEDIUM);
         g.setColor(Color.WHITE);
         TextRenderer.render(g, "Your score: " + hsOutput, 430, 300);
 
@@ -97,13 +96,16 @@ public class DefeatView extends Screen {
         } if (timer2 <= 0) {
             timer3--;
         }
-
     }
 
     private void showHighscore() {
         this.screenController.setEnabled(false);
         Game.audio().playSound(ScreenController.SELECT_SOUND);
+        Game.window().getRenderComponent().fadeOut(500);
 
-        Game.screens().display("Highscore");
+        Game.loop().perform(500, () -> {
+            Game.window().getRenderComponent().fadeIn(500);
+            Game.screens().display("Highscore");
+        });
     }
 }
