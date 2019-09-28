@@ -29,6 +29,9 @@ public class Enemy extends Creature implements IUpdateable, ICollidable, IMovabl
     private MovementController<Enemy> mv;
     private BufferedImage sprite;
     private Point2D spawn;
+    private Collider collider;
+    private int x;
+    private int y;
 
     public Enemy(){
     }
@@ -49,6 +52,11 @@ public class Enemy extends Creature implements IUpdateable, ICollidable, IMovabl
             currentDestinationIndex++;
             this.setMoveDestination(path.getPoints().get(currentDestinationIndex));
         }
+    }
+
+    public boolean checkCollision(ICollidable c){
+        //if (c.getCollider())
+        return true; //TODO
     }
 
     private void move(){
@@ -76,4 +84,16 @@ public class Enemy extends Creature implements IUpdateable, ICollidable, IMovabl
        // followPath();
     }
 
+    @Override
+    public Collider getCollider() {
+        return this.collider;
+    }
+
+    public int getX(){
+        return this.x;
+    }
+
+    public int getY(){
+        return this.y;
+    }
 }
