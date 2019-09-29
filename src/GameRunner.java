@@ -10,7 +10,11 @@ import de.gurkenlabs.litiengine.resources.Resources;
 /**
  * Sets up all the screens and runs the game.
  *
- * @author Mystery Inc.
+ * @author Jonathan Carbol
+ * @author Jennifer Krogh
+ * @author Emma Pettersson
+ * @author Adam Rohdell
+ * @author Antonia Welzel
  */
 public class GameRunner {
     /**
@@ -40,7 +44,7 @@ public class GameRunner {
         Game.screens().add(new PauseView("Pause"));
 
         // Displays the title screen ("Menu").
-        Game.screens().display("Defeat");
+        Game.screens().display("Selection");
 
         // TODO move this to GameView..?
         //Game.world().loadEnvironment(new Environment("src/main/resources/new_map.tmx"));

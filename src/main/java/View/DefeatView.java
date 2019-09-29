@@ -20,12 +20,12 @@ import de.gurkenlabs.litiengine.sound.Sound;
  */
 
 public class DefeatView extends Screen {
-    private final BufferedImage defeatBG = Resources.images().get("src/main/resources/DefeatView/DefeatBG.png");
-    private final BufferedImage defeatBlood1 = Resources.images().get("src/main/resources/DefeatView/DefeatBG1.png");
-    private final BufferedImage defeatBlood2 = Resources.images().get("src/main/resources/DefeatView/DefeatBGB2.png");
-    private final BufferedImage defeatBlood3 = Resources.images().get("src/main/resources/DefeatView/DefeatBGB3.png");
-    private final Sound GUN = Resources.sounds().get("src/main/resources/DefeatView/pistol.wav");
-    private final Sound DEFEAT_THEME = Resources.sounds().get("src/main/resources/DefeatView/DefeatMusic.ogg");
+    private final static BufferedImage DEFEAT_BG = Resources.images().get("src/main/resources/DefeatView/DefeatBG.png");
+    private final static BufferedImage DEFEAT_BLOOD_1 = Resources.images().get("src/main/resources/DefeatView/DefeatBG1.png");
+    private final static BufferedImage DEFEAT_BLOOD_2 = Resources.images().get("src/main/resources/DefeatView/DefeatBGB2.png");
+    private final static BufferedImage DEFEAT_BLOOD_3 = Resources.images().get("src/main/resources/DefeatView/DefeatBGB3.png");
+    private final static Sound GUN = Resources.sounds().get("src/main/resources/DefeatView/pistol.wav");
+    private final static Sound DEFEAT_THEME = Resources.sounds().get("src/main/resources/DefeatView/DefeatMusic.ogg");
 
     private int timer1 = 100;
     private int timer2 = 5;
@@ -62,17 +62,17 @@ public class DefeatView extends Screen {
      */
     public void render(final Graphics2D g) {
         if (timer1 > 0) {
-            ImageRenderer.render(g, defeatBG, 0, 0);
+            ImageRenderer.render(g, DEFEAT_BG, 0, 0);
         } else if (timer2 > 0) {
             if (timer2 == 4) {
                 Game.audio().playSound(GUN);
             }
 
-            ImageRenderer.render(g, defeatBlood1, 0, 0);
+            ImageRenderer.render(g, DEFEAT_BLOOD_1, 0, 0);
         } else if (timer3 > 0) {
-            ImageRenderer.render(g, defeatBlood2, 0, 0);
+            ImageRenderer.render(g, DEFEAT_BLOOD_2, 0, 0);
         } else {
-            ImageRenderer.render(g, defeatBlood3, 0, 0);
+            ImageRenderer.render(g, DEFEAT_BLOOD_3, 0, 0);
         }
 
         g.setFont(ScreenController.PIXELED_BIG);
@@ -99,7 +99,7 @@ public class DefeatView extends Screen {
     }
 
     private void showHighscore() {
-        this.screenController.setEnabled(false);
+        screenController.disableController();
         Game.audio().playSound(ScreenController.SELECT_SOUND);
         Game.window().getRenderComponent().fadeOut(500);
 

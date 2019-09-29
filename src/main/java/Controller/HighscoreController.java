@@ -6,6 +6,7 @@ import Model.Highscore;
  * Creates and sorts a list of highscores that is displayed in the HighscoreView.
  *
  * @author Antonia Welzel
+ * @author Emma Pettersson
  */
 public class HighscoreController {
     //Player names -- hardcoded

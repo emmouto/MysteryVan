@@ -73,7 +73,6 @@ public class MenuView extends Screen implements IUpdateable {
     }
 
     /**
-     *
      * @param g
      *      The graphics object to render on.
      */
@@ -90,13 +89,11 @@ public class MenuView extends Screen implements IUpdateable {
         g.setFont(ScreenController.RAINY_MEDIUM);
         TextRenderer.renderWithOutline(g, "© 2019 by Mystery Inc.", ScreenController.centerX - (13 * 64) / 2.0, 250, Color.WHITE);
 
-        //Game.audio().playMusic(TITLE_THEME);
-
         super.render(g);
     }
 
     private void showHighscore() {
-        this.screenController.setEnabled(false);
+        screenController.disableController();
         Game.audio().playSound(ScreenController.SELECT_SOUND);
         Game.window().getRenderComponent().fadeOut(500);
 
@@ -107,7 +104,7 @@ public class MenuView extends Screen implements IUpdateable {
     }
 
     private void startGame() {
-        this.screenController.setEnabled(false);
+        screenController.disableController();
         Game.audio().playSound(ScreenController.SELECT_SOUND);
         Game.window().getRenderComponent().fadeOut(2500);
         Game.audio().fadeMusic(250);

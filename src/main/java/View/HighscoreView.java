@@ -14,8 +14,6 @@ import de.gurkenlabs.litiengine.graphics.TextRenderer;
 import de.gurkenlabs.litiengine.gui.screens.Screen;
 import de.gurkenlabs.litiengine.resources.Resources;
 
-
-
 /**
  * @author Antonia Welzel
  * @author Emma Pettersson
@@ -70,16 +68,15 @@ public class HighscoreView extends Screen implements IUpdateable {
         g.setColor(Color.ORANGE);
         TextRenderer.render(g, "SCORE", 720, 190);
 
-
         g.setColor(Color.WHITE);
         g.setFont(ScreenController.PIXELED_SMALL);
+
         int y = 190;
         for (Highscore hs : h) {
             TextRenderer.render(g, hs.getPlayer(), 320, (y + 50));
             TextRenderer.render(g, Integer.toString(hs.getHighscore()), 720, (y + 50));
             y += 50;
         }
-
 
         super.render(g);
     }
@@ -88,6 +85,7 @@ public class HighscoreView extends Screen implements IUpdateable {
      * Method to call when current screen is changed to menu screen.
      */
     private void showMenu() {
+        screenController.disableController();
         Game.window().getRenderComponent().fadeOut(500);
 
         Game.loop().perform(500, () -> {

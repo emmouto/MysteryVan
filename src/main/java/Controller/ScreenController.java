@@ -165,4 +165,8 @@ public class ScreenController extends Menu {
         this.getCellComponents().get(2).setX(880);
         this.getCellComponents().get(2).setY(460);
     }
+
+    public void disableController() {
+        this.setEnabled(false);
+    }
 }
