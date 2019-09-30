@@ -2,6 +2,6 @@ package Model;
 
 public interface IMovable {
 
-    public int getX();
-    public int getY();
+    public double getX();
+    public double getY();
 }

@@ -6,17 +6,13 @@ import de.gurkenlabs.litiengine.IUpdateable;
 import de.gurkenlabs.litiengine.annotation.AnimationInfo;
 import de.gurkenlabs.litiengine.annotation.MovementInfo;
 import de.gurkenlabs.litiengine.entities.Creature;
-import de.gurkenlabs.litiengine.graphics.IRenderable;
-import de.gurkenlabs.litiengine.graphics.ImageRenderer;
-import de.gurkenlabs.litiengine.graphics.RenderEngine;
-import de.gurkenlabs.litiengine.graphics.RenderType;
 import de.gurkenlabs.litiengine.pathfinding.Path;
 import de.gurkenlabs.litiengine.physics.MovementController;
-import de.gurkenlabs.litiengine.resources.Resources;
 
-import java.awt.*;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
+
+
 
 @MovementInfo(velocity = 30)
 @AnimationInfo(spritePrefix = "enemy")
@@ -89,11 +85,11 @@ public class Enemy extends Creature implements IUpdateable, ICollidable, IMovabl
         return this.collider;
     }
 
-    public int getX(){
+    public double getX(){
         return this.x;
     }
 
-    public int getY(){
+    public double getY(){
         return this.y;
     }
 }
