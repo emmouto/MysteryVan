@@ -62,13 +62,13 @@ public class GameRunner {
         EnemyController ec = new EnemyController(pc.getCreatures());
         mc.initCamera();
 
-        CreatureMapObjectLoader.registerCustomCreatureType(Enemy.class);
+        CreatureMapObjectLoader.registerCustomCreatureType(ec.getCreatures().get(0).getClass());
         CreatureMapObjectLoader.registerCustomCreatureType(pc.getCreatures().get(0).getClass());
 
 
 
         Game.world().loadEnvironment("new_map");
-        Game.world().environment().add(new Enemy());
+        Game.world().environment().add(ec.getCreatures().get(0));
         pc.getCreatures().get(0).setLocation(Game.screens().current().getWidth()/4,Game.screens().current().getHeight()/4);
         Game.world().environment().add(pc.getCreatures().get(0));
         Game.start();

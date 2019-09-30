@@ -22,42 +22,34 @@ public class EnemyController implements IUpdateable {
 
     private List<Creature> players;
     private List<Enemy> enemies = new ArrayList<Enemy>();
+    private List<Creature> creatureList = new ArrayList<>();
     private AStarPathFinder pathFinder;
     private Long lastPathUpdate;
 
     public EnemyController(List<Creature> players){
         this.players = players;
+        spawnEnemy();
         //initiatePathfinding();
         lastPathUpdate = Game.time().now();
     }
 
-    public void changeTarget(Enemy e){
-
-        //välj närmasta player TODO
-        e.setTarget(players.get(0));
-
-    }
 
     public void spawnEnemy(){
-        enemies.add(new Enemy());
+        enemies.add(new Enemy("enemy"));
+        Creature c = new Creature();
+        creatureList.add(c);
+        creatureList.get(creatureList.size()-1).setSpritePrefix(enemies.get(enemies.size()-1).getSprite());
+        creatureList.get(creatureList.size()-1).getHitPoints().setMaxValue(10);
+        creatureList.get(creatureList.size()-1).getHitPoints().setToMaxValue();
+        creatureList.get(creatureList.size()-1).getHitBox().getBounds().height=enemies.get(enemies.size()-1).getHeight();
+        creatureList.get(creatureList.size()-1).getHitBox().getBounds().width=enemies.get(enemies.size()-1).getWidth();
+        creatureList.get(creatureList.size()-1).setAcceleration(50);
     }
 
-
-    private void updateEnemyTarget(){
-        for (Enemy e : enemies){
-            if (e.getTarget() == null){
-                changeTarget(e);
-            }
-        }
-    }
 
     @Override
     public void update() {
-        updateEnemyTarget();
-        if (Game.time().since(lastPathUpdate) >= 5) {
-            updatePath();
-            lastPathUpdate = Game.time().now();
-        }
+
     }
 
     public List<Enemy> getEnemies() {
@@ -77,19 +69,16 @@ public class EnemyController implements IUpdateable {
 
     private void initiatePathfinding(){
         pathFinder = new AStarPathFinder(Game.world().environment().getMap());
-        updatePath();
     }
 
     private void initiateEnemies(){
-        for (Enemy e: enemies){
-            e.addController(new MovementController<Enemy>(e));
+        for (Creature e: creatureList){
+            e.addController(new MovementController<Creature>(e));
 
         }
     }
 
-    private void updatePath(){
-        for (Enemy e: enemies){
-            e.updatePath(pathFinder.findPath(e, new Point((int) players.get(0).getX(), (int) players.get(0).getY())));
-        }
+    public List<Creature> getCreatures() {
+        return creatureList;
     }
 }
