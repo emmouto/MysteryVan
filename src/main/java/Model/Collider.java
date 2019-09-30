@@ -8,11 +8,37 @@ public class Collider {
     private int x;
     private int y;
 
-    private IMovable body;
+    private ICollidable body;
 
 
-    public Collider(IMovable body){
+    public Collider(ICollidable body){
         this.body = body;
+
+    }
+
+    public void updatePosition(){
+        //TODO
+    }
+
+
+
+    public boolean isColliding(ICollidable c, String direction){
+        switch (direction){
+            case "DOWN":
+                if ((c.getCollider().getX() - this.getWidth() <= this.getX()) && (c.getCollider().getX() + c.getCollider().getWidth() >= this.getX()) && (this.getY() + this.getHeight() == c.getCollider().getY())){
+                    return true;
+                }
+            case "UP":
+                if ((c.getCollider().getX() - this.getWidth() <= this.getX()) && (c.getCollider().getX() + c.getCollider().getWidth() >= this.getX()) && (this.getY() == c.getCollider().getY() + c.getCollider().getHeight())){
+                    return true;
+                }
+            case "LEFT":
+                if ((this.getX() <= c.getCollider().getX() + c.getCollider().getWidth() && this.getX() >= c.getCollider().getX()) && (c.getCollider().getY() - this.getHeight() >= this.getY()) && (c.getCollider().getY() <= this.getY())){
+                    return true;
+                }
+            case "RIGHT":
+                if (//TODO)
+        }
 
     }
 
@@ -23,4 +49,8 @@ public class Collider {
     public int getY(){
         return this.y;
     }
+
+    public int getWidth() {return this.width; }
+
+    public int getHeight() {return this.height; }
 }
