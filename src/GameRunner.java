@@ -74,8 +74,6 @@ public class GameRunner {
         pc.getCreatures().get(0).setLocation(0,100);//Game.screens().current().getWidth()/4,Game.screens().current().getHeight()/4);
         Game.world().environment().add(pc.getCreatures().get(0));
         Game.start();
-
-
-
+        
     }
 }

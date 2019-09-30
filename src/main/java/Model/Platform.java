@@ -1,6 +1,6 @@
 package Model;
 
-public class Plattform implements ICollidable{
+public class Platform implements ICollidable{
 
 
     @Override

@@ -122,4 +122,8 @@ public class Player implements IMovable, ICollidable{
     public double getY() {
         return 0;
     }
+
+    public void update(){
+
+    }
 }
