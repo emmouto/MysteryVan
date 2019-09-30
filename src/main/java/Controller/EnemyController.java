@@ -4,6 +4,7 @@ import Model.Enemy;
 import Model.Player;
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.IUpdateable;
+import de.gurkenlabs.litiengine.entities.Creature;
 import de.gurkenlabs.litiengine.environment.Environment;
 import de.gurkenlabs.litiengine.pathfinding.Path;
 import de.gurkenlabs.litiengine.pathfinding.PathFinder;
@@ -19,12 +20,12 @@ import java.util.Map;
 
 public class EnemyController implements IUpdateable {
 
-    private List<Player> players;
+    private List<Creature> players;
     private List<Enemy> enemies = new ArrayList<Enemy>();
     private AStarPathFinder pathFinder;
     private Long lastPathUpdate;
 
-    public EnemyController(ArrayList<Player> players){
+    public EnemyController(List<Creature> players){
         this.players = players;
         //initiatePathfinding();
         lastPathUpdate = Game.time().now();
@@ -62,14 +63,14 @@ public class EnemyController implements IUpdateable {
     public List<Enemy> getEnemies() {
         return this.enemies;
     }
-    public List<Player> getPlayers() {
+    public List<Creature> getPlayers() {
         return this.players;
     }
 
     public void setEnemies(List<Enemy> enemies) {
         this.enemies = enemies;
     }
-    public void setPlayers(List<Player> players) {
+    public void setPlayers(List<Creature> players) {
         this.players = players;
     }
 
@@ -88,7 +89,7 @@ public class EnemyController implements IUpdateable {
 
     private void updatePath(){
         for (Enemy e: enemies){
-            e.updatePath(pathFinder.findPath(e, new Point(players.get(0).getPosX(), players.get(0).getPosY())));
+            e.updatePath(pathFinder.findPath(e, new Point((int) players.get(0).getX(), (int) players.get(0).getY())));
         }
     }
 }

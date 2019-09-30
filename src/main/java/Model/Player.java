@@ -3,14 +3,7 @@ package Model;
 import de.gurkenlabs.litiengine.IUpdateable;
 import de.gurkenlabs.litiengine.entities.Creature;
 
-public class Player extends Creature implements IUpdateable, ICollidable, IMovable{
-
-    public Player(){
-
-    }
-
-    @Override
-    public void update() {}
+public class Player {
 
     private int HP;
     private int strength;
@@ -21,7 +14,14 @@ public class Player extends Creature implements IUpdateable, ICollidable, IMovab
     private Boost boost2;
     private int posX;
     private int posY;
+    private int height;
+    private int width;
+    private String sprite;
 
+
+    public Player(String sprite) {
+        this.sprite = sprite;
+    }
 
     public int getHP() {
         return HP;
@@ -94,5 +94,17 @@ public class Player extends Creature implements IUpdateable, ICollidable, IMovab
 
     public void setPosY(int posY) {
         this.posY = posY;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public String getSprite() {
+        return sprite;
     }
 }

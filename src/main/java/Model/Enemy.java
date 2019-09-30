@@ -1,6 +1,5 @@
 package Model;
 
-
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.IUpdateable;
 import de.gurkenlabs.litiengine.annotation.AnimationInfo;
@@ -20,7 +19,7 @@ import java.awt.image.BufferedImage;
 
 @MovementInfo(velocity = 30)
 @AnimationInfo(spritePrefix = "enemy")
-public class Enemy extends Creature implements IUpdateable, ICollidable, IMovable{
+public class Enemy extends Creature implements IUpdateable, ICollidable, IMovable {
 
     private int HP;
     private Equipment equipment; //Enemy can have a weapon, armor etc that will make them harder to defeat.
@@ -32,6 +31,7 @@ public class Enemy extends Creature implements IUpdateable, ICollidable, IMovabl
     private Collider collider;
     private int x;
     private int y;
+
 
     public Enemy(){
     }
@@ -89,11 +89,12 @@ public class Enemy extends Creature implements IUpdateable, ICollidable, IMovabl
         return this.collider;
     }
 
-    public int getX(){
+
+    public double getX(){
         return this.x;
     }
 
-    public int getY(){
+    public double getY(){
         return this.y;
     }
 }
