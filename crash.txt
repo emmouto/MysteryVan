@@ -1,5 +1,6 @@
 main threw an exception:
-java.lang.IndexOutOfBoundsException: Index: 0, Size: 0
+java.lang.IndexOutOfBoundsException: Index: 1, Size: 1
 	at java.util.ArrayList.rangeCheck(ArrayList.java:657)
 	at java.util.ArrayList.get(ArrayList.java:433)
-	at GameRunner.main(GameRunner.java:65)
+	at Controller.EnemyController.<init>(EnemyController.java:35)
+	at GameRunner.main(GameRunner.java:62)

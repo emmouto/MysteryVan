@@ -16,7 +16,7 @@ public class PlayerController {
     public PlayerController(Player p1) {
         super();
         playerList.add(p1);
-        for (int i = 0; i <= playerList.size(); i++){
+        for (int i = 0; i < playerList.size(); i++){
             Creature c = new Creature();
             creatureList.add(c);
             creatureList.get(i).getHitPoints().setMaxValue(10);

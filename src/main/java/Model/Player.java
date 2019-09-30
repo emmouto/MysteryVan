@@ -3,7 +3,7 @@ package Model;
 import de.gurkenlabs.litiengine.IUpdateable;
 import de.gurkenlabs.litiengine.entities.Creature;
 
-public class Player {
+public class Player implements IMovable, ICollidable{
 
     private int HP;
     private int strength;
@@ -106,5 +106,20 @@ public class Player {
 
     public String getSprite() {
         return sprite;
+    }
+
+    @Override
+    public Collider getCollider() {
+        return null;
+    }
+
+    @Override
+    public double getX() {
+        return 0;
+    }
+
+    @Override
+    public double getY() {
+        return 0;
     }
 }

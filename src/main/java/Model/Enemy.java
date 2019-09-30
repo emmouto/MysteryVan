@@ -15,48 +15,26 @@ import java.awt.image.BufferedImage;
 
 @MovementInfo(velocity = 30)
 @AnimationInfo(spritePrefix = "enemy")
-public class Enemy extends Creature implements IUpdateable, ICollidable, IMovable {
+public class Enemy implements ICollidable, IMovable {
 
     private int HP;
     private Equipment equipment; //Enemy can have a weapon, armor etc that will make them harder to defeat.
-    private Path path;
-    private int currentDestinationIndex = 0;
-    private MovementController<Enemy> mv;
-    private BufferedImage sprite;
-    private Point2D spawn;
     private Collider collider;
+    private int height;
+    private int width;
     private int x;
     private int y;
+    private String sprite;
 
 
-    public Enemy(){
+    public Enemy(String sprite){
+        this.sprite = sprite;
     }
 
-    public void updatePath (Path p){
-        this.path = p;
-        this.setMoveDestination(null);
-        currentDestinationIndex = 0;
-    }
-
-    private void followPath(){
-        if (this.getMoveDestination() == null){
-            this.setMoveDestination(path.getStart());
-        }
-        if(this.getLocation().distance(this.getMoveDestination()) >= 10){
-            move();
-        } else {
-            currentDestinationIndex++;
-            this.setMoveDestination(path.getPoints().get(currentDestinationIndex));
-        }
-    }
 
     public boolean checkCollision(ICollidable c){
         //if (c.getCollider())
         return true; //TODO
-    }
-
-    private void move(){
-        Game.physics().move(this, this.getMoveDestination());
     }
 
     public int getHP() {
@@ -75,10 +53,6 @@ public class Enemy extends Creature implements IUpdateable, ICollidable, IMovabl
         this.equipment = weapon;
     }
 
-    @Override
-    public void update() {
-       // followPath();
-    }
 
     @Override
     public Collider getCollider() {
@@ -91,5 +65,17 @@ public class Enemy extends Creature implements IUpdateable, ICollidable, IMovabl
 
     public double getY(){
         return this.y;
+    }
+
+    public String getSprite(){
+        return this.sprite;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public int getWidth() {
+        return width;
     }
 }
