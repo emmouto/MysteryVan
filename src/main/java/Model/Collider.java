@@ -37,8 +37,12 @@ public class Collider {
                     return true;
                 }
             case "RIGHT":
-                if (//TODO)
+                if ((this.getX() + this.getWidth()>= c.getCollider().getX()) && (this.getX()+this.getWidth() <= c.getCollider().getX() + c.getCollider().getWidth()) && (c.getCollider().getY() - this.getHeight() >= this.getY()) && (c.getCollider().getY() <= this.getY())){
+                    return true;
+                }
         }
+
+        return false;
 
     }
 

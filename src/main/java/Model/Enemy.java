@@ -1,20 +1,7 @@
 package Model;
-
-import de.gurkenlabs.litiengine.Game;
-import de.gurkenlabs.litiengine.IUpdateable;
-import de.gurkenlabs.litiengine.annotation.AnimationInfo;
-import de.gurkenlabs.litiengine.annotation.MovementInfo;
-import de.gurkenlabs.litiengine.entities.Creature;
-import de.gurkenlabs.litiengine.pathfinding.Path;
-import de.gurkenlabs.litiengine.physics.MovementController;
-
-import java.awt.geom.Point2D;
-import java.awt.image.BufferedImage;
+import java.util.List;
 
 
-
-@MovementInfo(velocity = 30)
-@AnimationInfo(spritePrefix = "enemy")
 public class Enemy implements ICollidable, IMovable {
 
     private int HP;
@@ -25,6 +12,9 @@ public class Enemy implements ICollidable, IMovable {
     private int x;
     private int y;
     private String sprite;
+    private boolean isGrounded = false;
+
+
 
 
     public Enemy(String sprite){
@@ -32,9 +22,24 @@ public class Enemy implements ICollidable, IMovable {
     }
 
 
-    public boolean checkCollision(ICollidable c){
-        //if (c.getCollider())
-        return true; //TODO
+    public void checkGrounded(List<ICollidable> collidables){
+        for (ICollidable platform : collidables){
+            isGrounded = collider.isColliding(platform, "DOWN");
+        }
+    }
+
+    private void doGravity(){
+        if (!isGrounded){
+            setY((int)getX()+10);
+        }
+    }
+
+    public void update(){
+        doGravity();
+    }
+
+    private void move(){
+        setX((int)getX() + 1);
     }
 
     public int getHP() {
@@ -65,6 +70,13 @@ public class Enemy implements ICollidable, IMovable {
 
     public double getY(){
         return this.y;
+    }
+
+    public void setX(int x){
+        this.x = x;
+    }
+    public void setY(int y){
+        this.y = y;
     }
 
     public String getSprite(){

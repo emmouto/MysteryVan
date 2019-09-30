@@ -1,6 +1,6 @@
 package Model;
 
-public interface IMovable {
+public interface IMovable extends IUpdateable {
 
     public double getX();
     public double getY();
