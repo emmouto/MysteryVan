@@ -50,8 +50,8 @@ public class EnemyController implements IUpdateable {
     @Override
     public void update() {
         for(int i = 0; i < this.getEnemies().size(); i++){
-            creatureList.get(i).setLocation(enemies.get(i).getX(),enemies.get(i).getY());
             this.getEnemies().get(i).update();
+            creatureList.get(i).setLocation(enemies.get(i).getX(),enemies.get(i).getY());
         }
 
     }

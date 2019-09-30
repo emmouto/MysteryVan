@@ -53,6 +53,7 @@ public class GameRunner {
         Input.mouse().setGrabMouse(false);
         Game.window().setResolution(Resolution.custom(1280, 720, "720p"));
 
+        Game.graphics().setBaseRenderScale(2.000f);
         Game.screens().add(new GameScreen());
 
         Resources.load("game.litidata");
@@ -74,6 +75,7 @@ public class GameRunner {
         pc.getCreatures().get(0).setLocation(0,100);//Game.screens().current().getWidth()/4,Game.screens().current().getHeight()/4);
         Game.world().environment().add(pc.getCreatures().get(0));
         Game.start();
-        
+
+
     }
 }
