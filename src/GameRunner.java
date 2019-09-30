@@ -54,6 +54,7 @@ public class GameRunner {
         Input.mouse().setGrabMouse(false);
         Game.window().setResolution(Resolution.custom(1280, 720, "720p"));
 
+        Game.graphics().setBaseRenderScale(2.000f);
         Game.screens().add(new GameScreen());
 
         Resources.load("game.litidata");
@@ -67,6 +68,8 @@ public class GameRunner {
         CreatureMapObjectLoader.registerCustomCreatureType(ec.getCreatures().get(0).getClass());
         CreatureMapObjectLoader.registerCustomCreatureType(pc.getCreatures().get(0).getClass());
 
+        Game.loop().attach(ec);
+        Game.loop().attach(pc);
 
         Game.world().loadEnvironment("new_map");
         Game.world().environment().add(ec.getCreatures().get(0));

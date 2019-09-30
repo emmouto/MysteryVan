@@ -1,0 +1,5 @@
+main threw an exception:
+java.lang.IllegalThreadStateException
+	at java.lang.Thread.start(Thread.java:708)
+	at de.gurkenlabs.litiengine.Game.start(Game.java:553)
+	at GameRunner.main(GameRunner.java:78)
