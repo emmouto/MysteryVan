@@ -19,6 +19,7 @@ import de.gurkenlabs.litiengine.graphics.RenderEngine;
 import de.gurkenlabs.litiengine.gui.screens.GameScreen;
 import de.gurkenlabs.litiengine.gui.screens.Resolution;
 import de.gurkenlabs.litiengine.input.Input;
+import de.gurkenlabs.litiengine.input.PlatformingMovementController;
 import de.gurkenlabs.litiengine.resources.Resource;
 import de.gurkenlabs.litiengine.resources.Resources;
 
@@ -66,13 +67,12 @@ public class GameRunner {
         CreatureMapObjectLoader.registerCustomCreatureType(ec.getCreatures().get(0).getClass());
         CreatureMapObjectLoader.registerCustomCreatureType(pc.getCreatures().get(0).getClass());
 
-        
+
         Game.world().loadEnvironment("new_map");
         Game.world().environment().add(ec.getCreatures().get(0));
         pc.getCreatures().get(0).setLocation(0,100);//Game.screens().current().getWidth()/4,Game.screens().current().getHeight()/4);
         Game.world().environment().add(pc.getCreatures().get(0));
         Game.start();
-
 
     }
 }

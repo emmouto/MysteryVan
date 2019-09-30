@@ -30,7 +30,7 @@ public class Enemy implements ICollidable, IMovable {
 
     private void doGravity(){
         if (!isGrounded){
-            setY((int)getX()+10);
+            setY((int)getY()+10);
         }
     }
 
