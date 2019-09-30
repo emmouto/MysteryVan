@@ -1,11 +1,13 @@
 import Controller.EnemyController;
 import Controller.MapController;
+import Controller.PlayerController;
 import Model.Enemy;
 import Model.Player;
 import com.sun.javafx.iio.png.PNGImageLoader2;
 import de.gurkenlabs.litiengine.Direction;
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.RenderLoop;
+import de.gurkenlabs.litiengine.entities.Creature;
 import de.gurkenlabs.litiengine.entities.EntityControllers;
 import de.gurkenlabs.litiengine.entities.Spawnpoint;
 import de.gurkenlabs.litiengine.environment.CreatureMapObjectLoader;
@@ -57,19 +59,19 @@ public class GameRunner {
 
         Game.audio().playMusic(Resources.sounds().get("src/main/resources/sounds/title_theme.mp3"));
 
-        EnemyController ec = new EnemyController(new ArrayList<Player>());
+        PlayerController pc = new PlayerController(new Player("player"));
+        EnemyController ec = new EnemyController(pc.getCreatures());
         mc.initCamera();
 
         CreatureMapObjectLoader.registerCustomCreatureType(Enemy.class);
-        CreatureMapObjectLoader.registerCustomCreatureType(Player.class);
+        CreatureMapObjectLoader.registerCustomCreatureType(pc.getCreatures().get(0).getClass());
 
 
 
         Game.world().loadEnvironment("new_map");
         Game.world().environment().add(new Enemy());
-        Player p = new Player();
-        p.setLocation(Game.screens().current().getWidth()/4,Game.screens().current().getHeight()/4);
-        Game.world().environment().add(p);
+        pc.getCreatures().get(0).setLocation(Game.screens().current().getWidth()/4,Game.screens().current().getHeight()/4);
+        Game.world().environment().add(pc.getCreatures().get(0));
         Game.start();
 
     }
