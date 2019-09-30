@@ -1,13 +1,14 @@
 package Controller;
 
 import Model.Player;
+import de.gurkenlabs.litiengine.IUpdateable;
 import de.gurkenlabs.litiengine.entities.Creature;
 import de.gurkenlabs.litiengine.physics.MovementController;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlayerController {
+public class PlayerController implements IUpdateable {
 
     List<Player> playerList = new ArrayList<>();
     List<Creature> creatureList = new ArrayList<>();
@@ -47,5 +48,13 @@ public class PlayerController {
 
     public List<Creature> getCreatures() {
         return creatureList;
+    }
+
+    @Override
+    public void update() {
+        for(int i = 0; i < playerList.size(); i++){
+            creatureList.get(i).setLocation(playerList.get(i).getX(),playerList.get(i).getY());
+        }
+
     }
 }
