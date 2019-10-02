@@ -1,5 +1,8 @@
 package Controller;
 
+import Model.GameManager;
+import View.MenuView;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.List;
@@ -19,15 +22,6 @@ import de.gurkenlabs.litiengine.sound.Sound;
  * @author Jennifer Krogh
  */
 public class ScreenController extends Menu {
-    public static final double centerX = Game.window().getResolution().getWidth() / 2.0;
-    public static final double centerY = Game.window().getResolution().getHeight() * 1 / 2;
-    public static final Font PIXELED_BIG = Resources.fonts().get("src/main/resources/fonts/Pixeled.ttf",64f);
-    public static final Font PIXELED_MEDIUM = Resources.fonts().get("src/main/resources/fonts/Pixeled.ttf",40f);
-    public static final Font PIXELED_SMALL = Resources.fonts().get("src/main/resources/fonts/Pixeled.ttf",24f);
-    public static final Font PIXELED_XSMALL = Resources.fonts().get("src/main/resources/fonts/Pixeled.ttf",12f);
-    public static final Font RAINY_MEDIUM = Resources.fonts().get("src/main/resources/fonts/rainyhearts.ttf",50f);
-    public static final Font RAINY_SMALL = Resources.fonts().get("src/main/resources/fonts/rainyhearts.ttf",24f);
-    public static final Sound SELECT_SOUND = Resources.sounds().get("src/main/resources/audio/sfx/menu_sound.wav");
     private static final int DELAY = 180;
 
     private final List<Consumer<Integer>> confirmConsumer;
@@ -83,6 +77,24 @@ public class ScreenController extends Menu {
                 incFocus();
             }
         });
+
+        this.onConfirm(c -> {
+            disableController();
+
+            switch (c) {
+                case 0:
+                     MenuView.showHighscore();
+                    break;
+                case 1:
+                    MenuView.startGame();
+                    break;
+                case 2:
+                    MenuView.exit();
+                    break;
+                default:
+                    break;
+            }
+        });
     }
 
     private boolean inputIsLocked() {
@@ -109,7 +121,7 @@ public class ScreenController extends Menu {
         }
 
         this.getCellComponents().forEach(comp -> {
-            comp.setFont(PIXELED_SMALL);
+            comp.setFont(GameManager.PIXELED_SMALL);
             comp.getAppearance().setForeColor(Color.WHITE);
             comp.getAppearance().setTransparentBackground(true);
             comp.getAppearanceHovered().setTransparentBackground(true);
@@ -152,7 +164,7 @@ public class ScreenController extends Menu {
         lastInput = Game.time().now();
 
         if (this.isVisible() && Game.time().now() > 10){
-            Game.audio().playSound(SELECT_SOUND);
+            Game.audio().playSound(GameManager.SELECT_SOUND);
         }
     }
 

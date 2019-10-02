@@ -2,6 +2,7 @@ package View;
 
 import Controller.HighscoreController;
 import Controller.ScreenController;
+import Model.GameManager;
 import Model.Highscore;
 
 import java.awt.*;
@@ -55,21 +56,21 @@ public class HighscoreView extends Screen implements IUpdateable {
         g.setColor(Color.WHITE);
         g.drawRect(300, 130, 630, 580);
 
-        g.setFont(ScreenController.PIXELED_BIG);
+        g.setFont(GameManager.PIXELED_BIG);
         g.setColor(Color.MAGENTA);
-        TextRenderer.render(g, "HIGHSCORES", ScreenController.centerX - 320, 100);
+        TextRenderer.render(g, "HIGHSCORES", GameManager.centerX - 320, 100);
 
-        g.setFont(ScreenController.PIXELED_XSMALL);
-        TextRenderer.render(g, "PRESS ENTER TO RETURN TO MAIN MENU", ScreenController.centerX - (34 * 12) / 2.0, 125);
+        g.setFont(GameManager.PIXELED_XSMALL);
+        TextRenderer.render(g, "PRESS ENTER TO RETURN TO MAIN MENU", GameManager.centerX - (34 * 12) / 2.0, 125);
 
-        g.setFont(ScreenController.PIXELED_MEDIUM);
+        g.setFont(GameManager.PIXELED_MEDIUM);
         g.setColor(Color.CYAN);
         TextRenderer.render(g, "PLAYER", 320, 190);
         g.setColor(Color.ORANGE);
         TextRenderer.render(g, "SCORE", 720, 190);
 
         g.setColor(Color.WHITE);
-        g.setFont(ScreenController.PIXELED_SMALL);
+        g.setFont(GameManager.PIXELED_SMALL);
 
         int y = 190;
         for (Highscore hs : h) {

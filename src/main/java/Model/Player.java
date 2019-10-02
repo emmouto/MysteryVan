@@ -4,14 +4,6 @@ import de.gurkenlabs.litiengine.IUpdateable;
 import de.gurkenlabs.litiengine.entities.Creature;
 
 public class Player extends Creature implements IUpdateable, ICollidable, IMovable{
-
-    public Player(String name){
-        super(name);
-    }
-
-    @Override
-    public void update() {}
-
     private int HP;
     private int strength;
     private int defence;
@@ -23,6 +15,12 @@ public class Player extends Creature implements IUpdateable, ICollidable, IMovab
     private int posY;
     private int score = 0;
 
+    public Player(String name){
+        super(name);
+    }
+
+    @Override
+    public void update() {}
 
     public int getHP() {
         return HP;

@@ -2,6 +2,7 @@ package View;
 
 
 import Controller.ScreenController;
+import Model.GameManager;
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.IUpdateable;
 import de.gurkenlabs.litiengine.graphics.ImageRenderer;
@@ -22,11 +23,9 @@ import java.awt.image.BufferedImage;
  */
 
 public class HelpView extends Screen implements IUpdateable {
-
     private static final BufferedImage brickBG = Resources.images().get("src/main/resources/HelpView/BrickBG.png");
     private static final BufferedImage controlPic = Resources.images().get("src/main/resources/HelpView/controlPic.png");
     private static final BufferedImage GoToGame = Resources.images().get("src/main/resources/HelpView/GoToGame.png");
-    private static final Sound SELECT = Resources.sounds().get("src/main/resources/audio/sfx/menu_selection.wav");
 
     private ScreenController screenController;
 
@@ -107,7 +106,7 @@ public class HelpView extends Screen implements IUpdateable {
      */
     private void goToSelect() {
         this.screenController.setEnabled(false);
-        Game.audio().playSound(SELECT);
+        Game.audio().playSound(GameManager.SELECT_SOUND);
 
         Game.screens().display("Selection");
     }

@@ -5,6 +5,7 @@ import Controller.ScreenController;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+import Model.GameManager;
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.IUpdateable;
 import de.gurkenlabs.litiengine.graphics.ImageRenderer;
@@ -35,24 +36,10 @@ public class MenuView extends Screen implements IUpdateable {
     protected void initializeComponents() {
         final double buttonWidth = 250;
 
-        this.screenController = new ScreenController(ScreenController.centerX - buttonWidth / 2, ScreenController.centerY * 1.3, buttonWidth, ScreenController.centerY / 2, "HIGHSCORE", "PLAY", "EXIT");
+        this.screenController = new ScreenController(GameManager.centerX - buttonWidth / 2,
+                GameManager.centerY * 1.3, buttonWidth, GameManager.centerY / 2,
+                "HIGHSCORE", "PLAY", "EXIT");
         this.getComponents().add(this.screenController);
-
-        this.screenController.onConfirm(c -> {
-            switch (c) {
-                case 0:
-                    this.showHighscore();
-                    break;
-                case 1:
-                    this.startGame();
-                    break;
-                case 2:
-                    this.exit();
-                    break;
-                default:
-                    break;
-            }
-        });
     }
 
     /**
@@ -78,23 +65,24 @@ public class MenuView extends Screen implements IUpdateable {
      */
     @Override
     public void render(final Graphics2D g) {
-        final BufferedImage BG = Resources.images().get("src/main/resources/menu/bg.png");
+        final BufferedImage BG = Resources.images().get("src/main/resources/MenuView/bg.png");
 
         renderClouds(g);
         ImageRenderer.render(g, BG, 0, 0);
 
-        g.setFont(ScreenController.PIXELED_BIG);
+        g.setFont(GameManager.PIXELED_BIG);
         g.setColor(Color.BLACK);
-        TextRenderer.renderWithOutline(g, "CHALMERSFORCE", ScreenController.centerX - (13 * 64) / 2.0, 200, Color.WHITE);
-        g.setFont(ScreenController.RAINY_MEDIUM);
-        TextRenderer.renderWithOutline(g, "© 2019 by Mystery Inc.", ScreenController.centerX - (13 * 64) / 2.0, 250, Color.WHITE);
+        TextRenderer.renderWithOutline(g, "CHALMERSFORCE",
+                GameManager.centerX - (13 * 64) / 2.0, 200, Color.WHITE);
+        g.setFont(GameManager.RAINY_MEDIUM);
+        TextRenderer.renderWithOutline(g, "© 2019 by Mystery Inc.",
+                GameManager.centerX - (13 * 64) / 2.0, 250, Color.WHITE);
 
         super.render(g);
     }
 
-    private void showHighscore() {
-        screenController.disableController();
-        Game.audio().playSound(ScreenController.SELECT_SOUND);
+    public static void showHighscore() {
+        Game.audio().playSound(GameManager.SELECT_SOUND);
         Game.window().getRenderComponent().fadeOut(500);
 
         Game.loop().perform(500, () -> {
@@ -103,9 +91,8 @@ public class MenuView extends Screen implements IUpdateable {
         });
     }
 
-    private void startGame() {
-        screenController.disableController();
-        Game.audio().playSound(ScreenController.SELECT_SOUND);
+    public static void startGame() {
+        Game.audio().playSound(GameManager.SELECT_SOUND);
         Game.window().getRenderComponent().fadeOut(2500);
         Game.audio().fadeMusic(250);
 
@@ -116,8 +103,8 @@ public class MenuView extends Screen implements IUpdateable {
         });
     }
 
-    private void exit() {
-        Game.audio().playSound(ScreenController.SELECT_SOUND);
+    public static void exit() {
+        Game.audio().playSound(GameManager.SELECT_SOUND);
         System.exit(0);
     }
 
@@ -141,13 +128,11 @@ public class MenuView extends Screen implements IUpdateable {
 
     // This is kind of ugly and only works for like, a few minutes, but at least it works. Kind of.
     private void renderClouds(Graphics2D g) {
-        final BufferedImage CLOUDS = Resources.images().get("src/main/resources/menu/clouds.png");
-        final int cloudOffset = 1279;
+        final BufferedImage CLOUDS = Resources.images().get("src/main/resources/MenuView/clouds.png");
         final double cloudSpeed = 0.3;
 
-        ImageRenderer.render(g, CLOUDS, Game.time().now() * cloudSpeed % (CLOUDS.getWidth() + Game.window().getResolution().getWidth()), 0);
-        ImageRenderer.render(g, CLOUDS, Game.time().now() * cloudSpeed % (CLOUDS.getWidth() + Game.window().getResolution().getWidth()) - cloudOffset, 0);
-        ImageRenderer.render(g, CLOUDS, Game.time().now() * cloudSpeed % (CLOUDS.getWidth() + Game.window().getResolution().getWidth()) - cloudOffset * 2, 0);
-        ImageRenderer.render(g, CLOUDS, Game.time().now() * cloudSpeed % (CLOUDS.getWidth() + Game.window().getResolution().getWidth()) - cloudOffset * 3, 0);
+        for (int offset = 0; offset < 10000; offset += 1279) {
+            ImageRenderer.render(g, CLOUDS, Game.time().now() * cloudSpeed % (CLOUDS.getWidth() + Game.window().getResolution().getWidth()) - offset, 0);
+        }
     }
 }

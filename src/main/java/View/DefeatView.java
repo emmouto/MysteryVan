@@ -5,6 +5,7 @@ import Controller.ScreenController;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+import Model.GameManager;
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.graphics.ImageRenderer;
 import de.gurkenlabs.litiengine.graphics.TextRenderer;
@@ -75,16 +76,16 @@ public class DefeatView extends Screen {
             ImageRenderer.render(g, DEFEAT_BLOOD_3, 0, 0);
         }
 
-        g.setFont(ScreenController.PIXELED_BIG);
+        g.setFont(GameManager.PIXELED_BIG);
         g.setColor(Color.RED);
         TextRenderer.render(g, "DEFEATED!", 370, 200);
 
-        g.setFont(ScreenController.RAINY_MEDIUM);
+        g.setFont(GameManager.RAINY_MEDIUM);
         g.setColor(Color.WHITE);
         TextRenderer.render(g, "Your score: " + hsOutput, 430, 300);
 
-        g.setFont(ScreenController.PIXELED_SMALL);
-        TextRenderer.render(g, "PRESS ENTER TO SEE HIGHSCORES", ScreenController.centerX - (29 * 24) / 2.0, ScreenController.centerY * 1.3);
+        g.setFont(GameManager.PIXELED_SMALL);
+        TextRenderer.render(g, "PRESS ENTER TO SEE HIGHSCORES", GameManager.centerX - (29 * 24) / 2.0, GameManager.centerY * 1.3);
 
         Game.audio().playMusic(DEFEAT_THEME);
 
@@ -100,7 +101,7 @@ public class DefeatView extends Screen {
 
     private void showHighscore() {
         screenController.disableController();
-        Game.audio().playSound(ScreenController.SELECT_SOUND);
+        Game.audio().playSound(GameManager.SELECT_SOUND);
         Game.window().getRenderComponent().fadeOut(500);
 
         Game.loop().perform(500, () -> {

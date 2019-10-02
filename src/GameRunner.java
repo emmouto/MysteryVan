@@ -1,11 +1,13 @@
+package ChalmersForce;
+
 import Controller.MapController;
 import View.*;
+
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.environment.Environment;
 import de.gurkenlabs.litiengine.gui.screens.GameScreen;
 import de.gurkenlabs.litiengine.gui.screens.Resolution;
 import de.gurkenlabs.litiengine.resources.Resources;
-
 
 /**
  * Sets up all the screens and runs the game.
