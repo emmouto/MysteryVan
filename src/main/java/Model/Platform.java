@@ -17,7 +17,7 @@ public class Platform implements ICollidable{
         this.y = y;
         this.width = width;
         this.height = height;
-        collider = new Collider(this);
+        collider = new Collider();
         collider.updatePosition(x, y);
     }
 

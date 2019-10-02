@@ -42,7 +42,9 @@ public class EnemyController implements IUpdateable {
     public void update() {
         for(int i = 0; i < this.getEnemies().size(); i++){
             this.getEnemies().get(i).update();
-            this.getEnemies().get(i).checkPlayerCollision(getPlayers().get(0));
+            if (this.getEnemies().get(i).checkPlayerCollision(getPlayers().get(0))){
+                System.out.println("haha");
+            }
             creatureList.get(i).setLocation(enemies.get(i).getX(),enemies.get(i).getY());
         }
 
