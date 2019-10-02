@@ -19,6 +19,8 @@ public class Enemy implements ICollidable, IMovable {
 
     public Enemy(String sprite){
         this.sprite = sprite;
+        this.collider = new Collider(this);
+        this.collider.updatePosition(getX(), getY());
     }
 
 
@@ -28,18 +30,38 @@ public class Enemy implements ICollidable, IMovable {
         }
     }
 
+    public boolean checkPlayerCollision(ICollidable player){
+        if (collider.isColliding(player, "UP")){
+            return true;
+        } else if (collider.isColliding(player, "RIGHT")){
+            return true;
+        } else if(collider.isColliding(player, "DOWN")){
+            return true;
+        } else if (collider.isColliding(player, "LEFT")){
+            return true;
+        }
+
+        return false;
+    }
+
     private void doGravity(){
         if (!isGrounded){
-            setY((int)getY()+10);
+            setY(getY()+8);
         }
+    }
+
+    private void updateCollider(){
+        this.collider.updatePosition(getX(),getY());
     }
 
     public void update(){
         doGravity();
+        updateCollider();
+        move();
     }
 
-    private void move(){
-        setX((int)getX() + 1);
+    public void move(){
+        setX(getX() + 1);
     }
 
     public int getHP() {
@@ -64,11 +86,11 @@ public class Enemy implements ICollidable, IMovable {
         return this.collider;
     }
 
-    public double getX(){
+    public int getX(){
         return this.x;
     }
 
-    public double getY(){
+    public int getY(){
         return this.y;
     }
 

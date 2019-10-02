@@ -3,6 +3,8 @@ package Model;
 import de.gurkenlabs.litiengine.IUpdateable;
 import de.gurkenlabs.litiengine.entities.Creature;
 
+import java.util.List;
+
 public class Player implements IMovable, ICollidable{
 
     private int HP;
@@ -17,10 +19,14 @@ public class Player implements IMovable, ICollidable{
     private int height;
     private int width;
     private String sprite;
+    private Collider collider;
+    private boolean isGrounded = false;
 
 
     public Player(String sprite) {
         this.sprite = sprite;
+        this.collider = new Collider(this);
+        this.collider.updatePosition(getPosX(), getPosY());
     }
 
     public int getHP() {
@@ -113,17 +119,31 @@ public class Player implements IMovable, ICollidable{
         return null;
     }
 
-    @Override
-    public double getX() {
+    public int getX() {
         return 0;
     }
 
-    @Override
-    public double getY() {
+    public int getY() {
         return 0;
     }
 
     public void update(){
+        doGravity();
+    }
 
+    public void move(){
+
+    }
+
+    public void checkGrounded(List<ICollidable> collidables){
+        for (ICollidable platform : collidables){
+            isGrounded = collider.isColliding(platform, "DOWN");
+        }
+    }
+
+    private void doGravity(){
+        if (!isGrounded){
+            setPosY((getY()+8));
+        }
     }
 }

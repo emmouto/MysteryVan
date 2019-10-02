@@ -16,8 +16,9 @@ public class Collider {
 
     }
 
-    public void updatePosition(){
-        //TODO
+    public void updatePosition(int x, int y){
+        this.x = x;
+        this.y = y;
     }
 
 

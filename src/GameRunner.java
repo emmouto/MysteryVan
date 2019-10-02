@@ -62,7 +62,7 @@ public class GameRunner {
         Game.audio().playMusic(Resources.sounds().get("src/main/resources/sounds/title_theme.mp3"));
 
         PlayerController pc = new PlayerController(new Player("player"));
-        EnemyController ec = new EnemyController(pc.getCreatures());
+        EnemyController ec = new EnemyController(pc.getPlayers());
         mc.initCamera();
 
         CreatureMapObjectLoader.registerCustomCreatureType(ec.getCreatures().get(0).getClass());
@@ -73,7 +73,7 @@ public class GameRunner {
 
         Game.world().loadEnvironment("new_map");
         Game.world().environment().add(ec.getCreatures().get(0));
-        pc.getCreatures().get(0).setLocation(0,100);//Game.screens().current().getWidth()/4,Game.screens().current().getHeight()/4);
+        pc.getCreatures().get(0).setLocation(0,100);
         Game.world().environment().add(pc.getCreatures().get(0));
         Game.start();
 
