@@ -120,11 +120,11 @@ public class Player implements IMovable, ICollidable{
     }
 
     public int getX() {
-        return 0;
+        return posX;
     }
 
     public int getY() {
-        return 0;
+        return posY;
     }
 
     public void update(){
