@@ -1,8 +1,6 @@
 package Controller;
 
-import Model.Hat;
-import Model.Player;
-import Model.Weapon;
+import Model.*;
 import de.gurkenlabs.litiengine.IUpdateable;
 import de.gurkenlabs.litiengine.entities.Creature;
 import de.gurkenlabs.litiengine.physics.MovementController;
@@ -14,10 +12,12 @@ public class PlayerController implements IUpdateable {
 
     List<Player> playerList = new ArrayList<>();
     List<Creature> creatureList = new ArrayList<>();
+    private Map map;
 
 
     public PlayerController() {
         super();
+        spawnPlayer("player", 100, 100, 0,new Hat("ugly", new Boost("boost", 0, 0, 0)), new Weapon("xd", 0, 0));
         updatePlayerController();
     }
 
@@ -46,7 +46,11 @@ public class PlayerController implements IUpdateable {
     }
 
     public void spawnPlayer(String name, int hp, int defense, int strength, Hat hat, Weapon weapon){
+<<<<<<< HEAD
         Player p = new Player(name,0,0,16,16);
+=======
+        Player p = new Player(name, 0, 0, 18, 35);
+>>>>>>> 532e70b2ce524c2081f80755eee6543b97388a8f
         p.setHP(hp);
         p.setDefence(defense);
         p.setHat(hat);
@@ -73,8 +77,14 @@ public class PlayerController implements IUpdateable {
     @Override
     public void update() {
         for(int i = 0; i < playerList.size(); i++){
+            getPlayers().get(i).update();
+            getPlayers().get(i).checkGrounded(this.map.getPlatforms());
             creatureList.get(i).setLocation(playerList.get(i).getX(),playerList.get(i).getY());
         }
 
+    }
+
+    public void loadMap(Map map){
+        this.map = map;
     }
 }
