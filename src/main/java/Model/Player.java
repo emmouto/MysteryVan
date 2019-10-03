@@ -23,10 +23,15 @@ public class Player implements IMovable, ICollidable{
     private boolean isGrounded = false;
 
 
-    public Player(String sprite) {
+    public Player(String sprite, int posX, int posY, int width, int height) {
         this.sprite = sprite;
+        this.posX = posX;
+        this.posY = posY;
+        this.width = width;
+        this.height = height;
         this.collider = new Collider();
-        this.collider.updatePosition(getPosX(), getPosY());
+        this.collider.updatePosition(posX, posY);
+        this.collider.updateSize(width, height);
     }
 
     public int getHP() {
