@@ -7,6 +7,8 @@ import Model.Highscore;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
 
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.IUpdateable;
@@ -23,10 +25,10 @@ import de.gurkenlabs.litiengine.resources.Resources;
 public class HighscoreView extends Screen implements IUpdateable {
     private static final BufferedImage brickBG = Resources.images().get("src/main/resources/HelpView/BrickBG.png");
 
-    private Highscore[] h = new Highscore[10]; //{h1, h2, h3, h4, h5, h6, h7, h8, h9, h10};
+    private List<Highscore> highscoreList = new ArrayList<>(); //{h1, h2, h3, h4, h5, h6, h7, h8, h9, h10};
 
     private ScreenController screenController;
-    private HighscoreController hc = new HighscoreController(h);
+    private HighscoreController hc = new HighscoreController(highscoreList);
 
     /**
      * @param screenName
@@ -73,7 +75,7 @@ public class HighscoreView extends Screen implements IUpdateable {
         g.setFont(GameManager.PIXELED_SMALL);
 
         int y = 190;
-        for (Highscore hs : h) {
+        for (Highscore hs : highscoreList) {
             TextRenderer.render(g, hs.getPlayer(), 320, (y + 50));
             TextRenderer.render(g, Integer.toString(hs.getHighscore()), 720, (y + 50));
             y += 50;

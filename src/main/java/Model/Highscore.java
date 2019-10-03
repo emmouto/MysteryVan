@@ -26,9 +26,12 @@ public class Highscore {
 
 
     public int getHighscore() {
+
         return highscore;
     }
+
     public void setHighscore(int highscore) {
+
         this.highscore = highscore;
     }
 
@@ -38,11 +41,5 @@ public class Highscore {
     public void setPlayer(String player) {
         this.player = player;
     }
-
-    public void setScore(int highscore, String player) {
-        this.highscore = highscore;
-        this.player = player;
-    }
-
 
 }

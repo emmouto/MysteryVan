@@ -46,7 +46,7 @@ public class GameRunner {
         Game.screens().add(new PauseView("Pause"));
 
         // Displays the title screen ("Menu").
-        Game.screens().display("Selection");
+        Game.screens().display("Main");
 
         // TODO move this to GameView..?
         //Game.world().loadEnvironment(new Environment("src/main/resources/new_map.tmx"));

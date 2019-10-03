@@ -2,9 +2,13 @@ package Controller;
 
 import Model.Highscore;
 
+import java.io.*;
+import java.util.*;
+
 /**
  * Creates and sorts a list of highscores that is displayed in the HighscoreView.
  *
+ * @author Jennifer Krogh
  * @author Antonia Welzel
  * @author Emma Pettersson
  */
@@ -45,84 +49,167 @@ public class HighscoreController {
     private Highscore h9 = new Highscore(p9, player9);
     private Highscore h10 = new Highscore(p10, player10);
 
-    private Highscore[] hh = new Highscore[10];
-
-    // need this?, thought was to have one same array everywhere in the game
-    private Highscore[] hsArr;
+    private List<Highscore> highscoreList = new ArrayList<Highscore>();
+    private String highscoreDataPath;
+    private String filename = "HighscoreData";
 
     /**
      * Class constructor.
      *
-     * @param hsArr
-     *      Array containing highscores.
+     * @param highscoreList
+     *      List containing highscores.
      */
-    public HighscoreController(Highscore[] hsArr) {
-        this.hsArr = hsArr;
-        setH(hsArr);
-        organizeArr(hsArr);
+    public HighscoreController(List<Highscore> highscoreList) {
+        this.highscoreList = highscoreList;
+        setH(this.highscoreList); // Change later? this is used for testing with hardcoded values.
+        sortList(this.highscoreList); // Change later? this is used for testing with hardcoded values.
+
+        try{
+            highscoreDataPath = HighscoreController.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        setHighscoreData();
+        loadHighscore();
     }
 
     /**
-     * Method to add a new Highscore to the array, that is used
-     * to displaying the highscores in the HighscoreView.
-     *
-     * @param hs
-     *      The new Highscore to be added to the array
-     * @param hArr
-     *      The array to which the Highscore is added
+     * Creates a file were highscores are saved.
      */
-    public void addToScoreArray(Highscore hs, Highscore[] hArr) {     // ---this method needs to be used somewhere else, as for now highscore data is hardcoded
-        for (int i = 0; i < 10; i++) {
-            if (hArr[i] == null) {
-                //if the index has no value, then place new highscore in it
-                hArr[i] = hs;
-            } else {
-                //else replace the last value since it is the smallest
-                // and only the ten highest scores are listed
-                hArr[9] = hs;
+    private void createDataFile(){
+
+        try{
+            File file = new File(highscoreDataPath, filename);
+            FileWriter output = new FileWriter(file);
+            BufferedWriter writer = new BufferedWriter(output);
+
+            writer.write("No highscore:0");
+            writer.close();
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+
+    /**
+     * Loads the highscores from the file.
+     */
+    private void loadHighscore (){
+
+        String line;
+        int playerScore;
+        String [] storeSplit;
+        String playerName;
+        Highscore newHigh;
+
+        highscoreList.clear();
+
+        try{
+            File file = new File(highscoreDataPath, filename);
+
+            if (!file.isFile()){
+                createDataFile();
+            }
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+
+            if (!reader.ready()){
+                throw new IOException();
+            }
+
+           while ((line = reader.readLine()) != null){
+
+               storeSplit = line.split(":");
+               playerScore = Integer.parseInt(storeSplit[1]);
+               playerName = storeSplit[0];
+               newHigh = new Highscore(playerScore, playerName);
+               highscoreList.add(newHigh);
+           }
+           reader.close();
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+    /**
+     * Writes the highscore list to the file.
+     */
+    private void setHighscoreData (){
+
+        FileWriter output = null;
+
+        try{
+            File file = new File(highscoreDataPath, filename);
+            output = new FileWriter(file);
+            BufferedWriter writer = new BufferedWriter(output);
+
+            for (Highscore highscore : highscoreList) {
+                writer.write(highscore.getPlayer() + ":" + highscore.getHighscore() + "\n");
+            }
+            writer.close();
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+    /**
+     * Method to add a new Highscore to the list, if the score is greater than all other values on the list.
+     *
+     * @param newScore
+     *      The score that possibly will be added to the list.
+     * @param highscoreList
+     *      The list to which the Highscore is added.
+     */
+
+    // This method should be called when a gamerun has ended!!
+    public void addToScoreList(Highscore newScore, List<Highscore> highscoreList) {
+
+        if(highscoreList.size() < 10){
+            highscoreList.add(newScore);
+        }else {
+
+            for (Highscore oldScores : highscoreList) {
+
+                if (newScore.getHighscore() > oldScores.getHighscore()){
+                    highscoreList.remove(oldScores);
+                    highscoreList.add(newScore);
+                    break;
+                }
             }
         }
     }
 
     /**
-     * Method to sort the array in order of size,
-     * where the highest score is listed first using bubble sort.
+     * Method to sort the list in order of size, where the highest score is listed first.
      *
-     * @param hArr
-     *      Array that needs to be sorted, usually after a new Highscore was added
-     * @return
-     *      Returns the new sorted array, which can be displayed in the HighscoreView
+     * @param highscoreList
+     *      List that needs to be sorted, usually after a new Highscore was added
      */
-    private Highscore[] organizeArr(Highscore[] hArr) {
-        //maybe change sortingAlg if it is very slow
-        boolean swapped;
-        do {
-            swapped = false;
-            for (int i = 0; i < hArr.length; i++) {
-                for (int j = 1; j < (hArr.length - i); j++) {
-                    if (hArr[j - 1].getHighscore() < hArr[j].getHighscore()) {
-                        swapped = true;
-                        Highscore temp = hArr[j];
-                        hArr[j] = hArr[j - 1];
-                        hArr[j - 1] = temp;
-                    }
-                }
-            }
-        } while (swapped);
+    private void sortList(List<Highscore> highscoreList) {
 
-        return hArr;
+        Comparator<Highscore> highscoreComparator = Comparator.comparingInt(Highscore::getHighscore);
+        Comparator<Highscore> comparatorReversed = highscoreComparator.reversed();
+
+        highscoreList.sort(comparatorReversed);
+
     }
 
-    private void setH(Highscore[] highhigh) {
-        highhigh[0] = h1;
-        highhigh[1] = h2;
-        highhigh[2] = h3;
-        highhigh[3] = h4;
-        highhigh[4] = h5;
-        highhigh[5] = h6;
-        highhigh[6] = h7;
-        highhigh[7] = h8;
-        highhigh[8] = h9;
-        highhigh[9] = h10;
+    private void setH(List<Highscore> hList) {
+        hList.add(h1);
+        hList.add(h2);
+        hList.add(h3);
+        hList.add(h4);
+        hList.add(h5);
+        hList.add(h6);
+        hList.add(h7);
+        hList.add(h8);
+        hList.add(h9);
+        hList.add(h10);
     }
 }
