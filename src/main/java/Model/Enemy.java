@@ -17,17 +17,27 @@ public class Enemy implements ICollidable, IMovable {
 
 
 
-    public Enemy(String sprite){
+    public Enemy(String sprite, int posX, int posY, int width, int height){
         this.sprite = sprite;
+        this.x = posX;
+        this.y = posY;
+        this.width = width;
+        this.height = height;
         this.collider = new Collider();
-        this.collider.updatePosition(getX(), getY());
+        this.collider.updatePosition(posX, posY);
+        this.collider.updateSize(width, height);
     }
 
 
-    public void checkGrounded(List<ICollidable> collidables){
-        for (ICollidable platform : collidables){
-            isGrounded = collider.isColliding(platform, "DOWN");
+    public void checkGrounded(List<Platform> platforms){
+        if(!isGrounded){
+            for (ICollidable platform : platforms){
+                if (!isGrounded){
+                    isGrounded = collider.isColliding(platform, "DOWN");
+                }
+            }
         }
+
     }
 
     public boolean checkPlayerCollision(ICollidable player){
@@ -46,7 +56,7 @@ public class Enemy implements ICollidable, IMovable {
 
     private void doGravity(){
         if (!isGrounded){
-            setY(getY()+8);
+            setY(getY()+3);
         }
     }
 
@@ -62,6 +72,7 @@ public class Enemy implements ICollidable, IMovable {
 
     public void move(){
         setX(getX() + 1);
+        isGrounded = false;
     }
 
     public int getHP() {

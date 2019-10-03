@@ -1,6 +1,8 @@
 package Controller;
 
 import Model.Enemy;
+import Model.ICollidable;
+import Model.Map;
 import Model.Player;
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.IUpdateable;
@@ -16,6 +18,7 @@ public class EnemyController implements IUpdateable {
     private List<Enemy> enemies = new ArrayList<Enemy>();
     private List<Creature> creatureList = new ArrayList<>();
     private Long lastPathUpdate;
+    private Map map;
 
     public EnemyController(List<Player> players){
         this.players = players;
@@ -26,7 +29,7 @@ public class EnemyController implements IUpdateable {
 
 
     public void spawnEnemy(){
-        enemies.add(new Enemy("enemy"));
+        enemies.add(new Enemy("enemy", 0, 0, 32, 50));
         Creature c = new Creature();
         creatureList.add(c);
         creatureList.get(creatureList.size()-1).setSpritePrefix(enemies.get(enemies.size()-1).getSprite());
@@ -45,6 +48,7 @@ public class EnemyController implements IUpdateable {
             if (this.getEnemies().get(i).checkPlayerCollision(getPlayers().get(0))){
                 System.out.println("haha");
             }
+            this.getEnemies().get(i).checkGrounded(this.map.getPlatforms());
             creatureList.get(i).setLocation(enemies.get(i).getX(),enemies.get(i).getY());
         }
 
@@ -75,5 +79,9 @@ public class EnemyController implements IUpdateable {
 
     public List<Creature> getCreatures() {
         return creatureList;
+    }
+
+    public void loadMap(Map map){
+        this.map = map;
     }
 }
