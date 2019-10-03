@@ -139,6 +139,7 @@ public class Player implements IMovable, ICollidable{
 
     public void update(){
         doGravity();
+        updateCollider();
     }
 
     public void move(){
@@ -146,14 +147,23 @@ public class Player implements IMovable, ICollidable{
     }
 
     public void checkGrounded(List<Platform> platforms){
-        for (ICollidable platform : platforms){
-            isGrounded = collider.isColliding(platform, "DOWN");
+        if(!isGrounded){
+            for (ICollidable platform : platforms){
+                if (!isGrounded){
+                    isGrounded = collider.isColliding(platform, "DOWN");
+                }
+            }
         }
+
+    }
+
+    private void updateCollider(){
+        this.collider.updatePosition(getX(),getY());
     }
 
     private void doGravity(){
         if (!isGrounded){
-            setPosY((getY()+8));
+            setPosY((getY()+3));
         }
     }
 }

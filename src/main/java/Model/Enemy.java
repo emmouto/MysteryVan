@@ -67,7 +67,7 @@ public class Enemy implements ICollidable, IMovable {
     public void update(){
         doGravity();
         updateCollider();
-        move();
+       // move();
     }
 
     public void move(){
