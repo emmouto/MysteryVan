@@ -46,7 +46,7 @@ public class PlayerController implements IUpdateable {
     }
 
     public void spawnPlayer(String name, int hp, int defense, int strength, Hat hat, Weapon weapon){
-        Player p = new Player(name);
+        Player p = new Player(name,0,0,16,16);
         p.setHP(hp);
         p.setDefence(defense);
         p.setHat(hat);

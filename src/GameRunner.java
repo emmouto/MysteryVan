@@ -65,6 +65,7 @@ public class GameRunner {
         EnemyController ec = new EnemyController(pc.getPlayers());
         mc.initCamera();
         ec.loadMap(mc.getMap());
+        
 
         CreatureMapObjectLoader.registerCustomCreatureType(ec.getCreatures().get(0).getClass());
         CreatureMapObjectLoader.registerCustomCreatureType(pc.getCreatures().get(0).getClass());
