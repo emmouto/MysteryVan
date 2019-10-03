@@ -1,29 +1,31 @@
 package Model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Map {
 
+    private String name;
+    private List<Platform> platforms= new ArrayList<>();
 
-    private Ground groundType;
-    private List<Platform> platforms;
-    private List<Item> items;
-    private List<Enemy> enemies;
-
-
-    public Ground getGroundType() {
-        return groundType;
+    public Map(String name) {
+        this.name = name;
+        init(name);
     }
 
-    public List<Enemy> getEnemies() {
-        return enemies;
+    public void init(String name){
+
+        switch (name){
+            case "map1" :   platforms.add(new Platform(0,112,48,160));
+                            platforms.add(new Platform(480,112,48,160));
+                            platforms.add(new Platform(120,336,48,160));
+                            platforms.add(new Platform(480,336,48,160));
+                            platforms.add(new Platform(192,208,16,288));
+        }
     }
 
-    public List<Item> getItems() {
-        return items;
+    public List<Platform> getPlatforms(){
+        return this.platforms;
     }
 
-    public List<Platform> getPlatforms() {
-        return platforms;
-    }
 }

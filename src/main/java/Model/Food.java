@@ -1,53 +1,45 @@
 package Model;
 
-public class Food {
+import java.util.Random;
+
+public class Food implements ICollidable{
 
     private String name;
-    private Boost boost;
-    private int strength; // some food can increase player's strength
-    private int HP; // some food can increase player's health
-    private int defence; // some food can increase player's defence
+    private int HP;
+    private int defense;
+    private int armour;
 
-    public String getName() {
-        return name;
+    public Food() {
+        this.HP = 0;
+        this.defense = 0;
+        this.armour = 0;
+        determineFood();
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void determineFood(){
+        Random rand = new Random();
+        int x =  rand.nextInt(5)+1;
+        switch (x){
+            case 1 :    this.HP = 2;
+                        this.name = "apple";
+            case 2 :    this.defense = 2;
+                        this.name = "orange";
+            case 3 :    this.armour = 2;
+                        this.name = "cheese";
+            case 4 :    this.HP = 2;
+                        this.defense = 2;
+                        this.armour = 2;
+                        this.name = "starfruit";
+            case 5 :    this.HP = -1;
+                        this.defense = -1;
+                        this.armour = -1;
+                        this.name = "rottenfruit";
+        }
+
     }
 
-    public int getDefence() {
-        return defence;
+    @Override
+    public Collider getCollider() {
+        return null;
     }
-
-    public void setDefence(int defence) {
-        this.defence = defence;
-    }
-
-    public int getHP() {
-        return HP;
-    }
-
-    public void setHP(int HP) {
-        this.HP = HP;
-    }
-
-    public int getStrength() {
-        return strength;
-    }
-
-    public void setStrength(int strength) {
-        this.strength = strength;
-    }
-
-
-    public Boost getBoost() {
-        return boost;
-    }
-
-    public void setBoost(Boost boost) {
-        this.boost = boost;
-    }
-
-
 }

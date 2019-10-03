@@ -1,7 +1,6 @@
 package Model;
 
-
-public class Ground {
+public class Ground implements ICollidable{
 
     private String type;
     private boolean dealDamage; // damage when falling into ground, ex. lava but not immediate death
@@ -17,5 +16,11 @@ public class Ground {
 
     public boolean getInstantDeath() {
         return instantDeath;
+    }
+
+
+    @Override
+    public Collider getCollider() {
+        return null;
     }
 }

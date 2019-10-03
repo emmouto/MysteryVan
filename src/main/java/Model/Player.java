@@ -1,16 +1,12 @@
 package Model;
 
-import de.gurkenlabs.litiengine.IUpdateable;
-import de.gurkenlabs.litiengine.entities.Creature;
+import java.util.List;
 
-public class Player extends Creature implements IUpdateable, ICollidable, IMovable{
 
-    public Player(String name){
-        super(name);
-    }
-
-    @Override
-    public void update() {}
+/**
+ *
+ */
+public class Player implements IMovable, ICollidable{
 
     private int HP;
     private int strength;
@@ -21,7 +17,23 @@ public class Player extends Creature implements IUpdateable, ICollidable, IMovab
     private Boost boost2;
     private int posX;
     private int posY;
+    private int height;
+    private int width;
+    private String sprite;
+    private Collider collider;
+    private boolean isGrounded = false;
 
+
+    public Player(String sprite, int posX, int posY, int width, int height) {
+        this.sprite = sprite;
+        this.posX = posX;
+        this.posY = posY;
+        this.width = width;
+        this.height = height;
+        this.collider = new Collider();
+        this.collider.updatePosition(posX, posY);
+        this.collider.updateSize(width, height);
+    }
 
     public int getHP() {
         return HP;
@@ -94,5 +106,64 @@ public class Player extends Creature implements IUpdateable, ICollidable, IMovab
 
     public void setPosY(int posY) {
         this.posY = posY;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public String getSprite() {
+        return sprite;
+    }
+
+    public void setSprite(String name){
+        this.sprite = name;
+    }
+
+    @Override
+    public Collider getCollider() {
+        return this.collider;
+    }
+
+    public int getX() {
+        return posX;
+    }
+
+    public int getY() {
+        return posY;
+    }
+
+    public void update(){
+        doGravity();
+        updateCollider();
+    }
+
+    public void move(){
+
+    }
+
+    public void checkGrounded(List<Platform> platforms){
+        if(!isGrounded){
+            for (ICollidable platform : platforms){
+                if (!isGrounded){
+                    isGrounded = collider.isColliding(platform, "DOWN");
+                }
+            }
+        }
+
+    }
+
+    private void updateCollider(){
+        this.collider.updatePosition(getX(),getY());
+    }
+
+    private void doGravity(){
+        if (!isGrounded){
+            setPosY((getY()+3));
+        }
     }
 }

@@ -1,4 +1,9 @@
 package Model;
 
-public interface IMovable {
+public interface IMovable extends IUpdateable {
+
+    int getX();
+    int getY();
+
+    void move();
 }
