@@ -19,7 +19,7 @@ public class Enemy implements ICollidable, IMovable {
 
     public Enemy(String sprite){
         this.sprite = sprite;
-        this.collider = new Collider(this);
+        this.collider = new Collider();
         this.collider.updatePosition(getX(), getY());
     }
 

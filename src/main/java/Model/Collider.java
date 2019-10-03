@@ -11,8 +11,7 @@ public class Collider {
     private ICollidable body;
 
 
-    public Collider(ICollidable body){
-        this.body = body;
+    public Collider(){
 
     }
 

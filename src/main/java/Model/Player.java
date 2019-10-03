@@ -25,7 +25,7 @@ public class Player implements IMovable, ICollidable{
 
     public Player(String sprite) {
         this.sprite = sprite;
-        this.collider = new Collider(this);
+        this.collider = new Collider();
         this.collider.updatePosition(getPosX(), getPosY());
     }
 
@@ -116,7 +116,7 @@ public class Player implements IMovable, ICollidable{
 
     @Override
     public Collider getCollider() {
-        return null;
+        return this.collider;
     }
 
     public int getX() {
