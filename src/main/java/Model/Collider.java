@@ -20,12 +20,18 @@ public class Collider {
         this.y = y;
     }
 
+    public void updateSize(int width, int height){
+        this.width = width;
+        this.height = height;
+    }
+
 
 
     public boolean isColliding(ICollidable c, String direction){
         switch (direction){
             case "DOWN":
-                if ((c.getCollider().getX() - this.getWidth() <= this.getX()) && (c.getCollider().getX() + c.getCollider().getWidth() >= this.getX()) && (this.getY() + this.getHeight() == c.getCollider().getY())){
+                if ((c.getCollider().getX() - this.getWidth() <= this.getX()) && (c.getCollider().getX() + c.getCollider().getWidth() >= this.getX()) && (this.getY() + this.getHeight() >= c.getCollider().getY()) && (this.getY() + this.getHeight() <= c.getCollider().getY() + c.getCollider().getHeight())){
+                    System.out.println("memes");
                     return true;
                 }
             case "UP":

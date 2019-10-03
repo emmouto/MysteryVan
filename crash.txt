@@ -1,5 +1,6 @@
 Render Loop threw an exception:
 java.lang.NullPointerException
+	at java.awt.geom.RectangularShape.intersects(RectangularShape.java:320)
 	at de.gurkenlabs.litiengine.graphics.RenderEngine.lambda$renderEntities$2(RenderEngine.java:217)
 	at java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:174)
 	at java.util.concurrent.ConcurrentHashMap$ValueSpliterator.forEachRemaining(ConcurrentHashMap.java:3566)

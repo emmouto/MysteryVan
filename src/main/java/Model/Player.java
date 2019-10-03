@@ -135,8 +135,8 @@ public class Player implements IMovable, ICollidable{
 
     }
 
-    public void checkGrounded(List<ICollidable> collidables){
-        for (ICollidable platform : collidables){
+    public void checkGrounded(List<Platform> platforms){
+        for (ICollidable platform : platforms){
             isGrounded = collider.isColliding(platform, "DOWN");
         }
     }

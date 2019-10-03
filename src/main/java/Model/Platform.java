@@ -19,6 +19,7 @@ public class Platform implements ICollidable{
         this.height = height;
         collider = new Collider();
         collider.updatePosition(x, y);
+        collider.updateSize(width, height);
     }
 
     @Override

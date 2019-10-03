@@ -16,4 +16,8 @@ public class MapController {
         camera.setClampToMap(true);
         Game.world().setCamera(camera);
     }
+
+    public Map getMap(){
+        return this.map;
+    }
 }

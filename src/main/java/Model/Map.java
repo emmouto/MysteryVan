@@ -10,10 +10,10 @@ public class Map {
 
     public Map(String name) {
         this.name = name;
-        innit(name);
+        init(name);
     }
 
-    public void innit(String name){
+    public void init(String name){
 
         switch (name){
             case "map1" :   platforms.add(new Platform(0,112,48,160));
@@ -22,6 +22,10 @@ public class Map {
                             platforms.add(new Platform(480,336,48,160));
                             platforms.add(new Platform(192,208,16,288));
         }
+    }
+
+    public List<Platform> getPlatforms(){
+        return this.platforms;
     }
 
 
