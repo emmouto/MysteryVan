@@ -14,9 +14,7 @@ public class Enemy implements ICollidable, IMovable {
     private String sprite;
     private boolean isGrounded = false;
 
-
-
-
+    
     public Enemy(String sprite, int posX, int posY, int width, int height){
         this.sprite = sprite;
         this.x = posX;
