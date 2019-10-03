@@ -1,10 +1,11 @@
 package Model;
 
-import de.gurkenlabs.litiengine.IUpdateable;
-import de.gurkenlabs.litiengine.entities.Creature;
-
 import java.util.List;
 
+
+/**
+ *
+ */
 public class Player implements IMovable, ICollidable{
 
     private int HP;
@@ -112,6 +113,10 @@ public class Player implements IMovable, ICollidable{
 
     public String getSprite() {
         return sprite;
+    }
+
+    public void setSprite(String name){
+        this.sprite = name;
     }
 
     @Override

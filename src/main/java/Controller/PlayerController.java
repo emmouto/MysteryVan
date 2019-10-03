@@ -1,6 +1,8 @@
 package Controller;
 
+import Model.Hat;
 import Model.Player;
+import Model.Weapon;
 import de.gurkenlabs.litiengine.IUpdateable;
 import de.gurkenlabs.litiengine.entities.Creature;
 import de.gurkenlabs.litiengine.physics.MovementController;
@@ -14,20 +16,9 @@ public class PlayerController implements IUpdateable {
     List<Creature> creatureList = new ArrayList<>();
 
 
-    public PlayerController(Player p1) {
+    public PlayerController() {
         super();
-        playerList.add(p1);
-        for (int i = 0; i < playerList.size(); i++){
-            Creature c = new Creature();
-            creatureList.add(c);
-            creatureList.get(i).getHitPoints().setMaxValue(10);
-            creatureList.get(i).getHitPoints().setToMaxValue();
-            creatureList.get(i).getHitBox().getBounds().height=p1.getHeight();
-            creatureList.get(i).getHitBox().getBounds().width=p1.getWidth();
-            creatureList.get(i).setAcceleration(50);
-            creatureList.get(i).setSpritePrefix(p1.getSprite());
-
-        }
+        updatePlayerController();
     }
 
     public void walkLeft(){
@@ -48,6 +39,35 @@ public class PlayerController implements IUpdateable {
 
     public List<Creature> getCreatures() {
         return creatureList;
+    }
+
+    public Creature getPlayer1(){
+        return creatureList.get(0);
+    }
+
+    public void spawnPlayer(String name, int hp, int defense, int strength, Hat hat, Weapon weapon){
+        Player p = new Player(name);
+        p.setHP(hp);
+        p.setDefence(defense);
+        p.setHat(hat);
+        p.setStrength(strength);
+        p.setWeapon(weapon);
+        playerList.add(p);
+    }
+
+    public void updatePlayerController(){
+        if(!playerList.isEmpty()) {
+            for (int i = 0; i < playerList.size(); i++) {
+                Creature c = new Creature();
+                creatureList.add(c);
+                creatureList.get(i).getHitPoints().setMaxValue(10);
+                creatureList.get(i).getHitPoints().setToMaxValue();
+                creatureList.get(i).getHitBox().getBounds().height = playerList.get(i).getHeight();
+                creatureList.get(i).getHitBox().getBounds().width = playerList.get(i).getWidth();
+                creatureList.get(i).setAcceleration(50);
+                creatureList.get(i).setSpritePrefix(playerList.get(i).getSprite());
+            }
+        }
     }
 
     @Override

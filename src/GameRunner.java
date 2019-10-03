@@ -61,7 +61,7 @@ public class GameRunner {
 
         Game.audio().playMusic(Resources.sounds().get("src/main/resources/sounds/title_theme.mp3"));
 
-        PlayerController pc = new PlayerController(new Player("player"));
+        PlayerController pc = new PlayerController();
         EnemyController ec = new EnemyController(pc.getPlayers());
         mc.initCamera();
 
