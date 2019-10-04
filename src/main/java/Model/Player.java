@@ -2,12 +2,12 @@ package Model;
 
 import java.util.List;
 
-
 /**
+ * TODO description
  *
+ * @author
  */
 public class Player implements IMovable, ICollidable{
-
     private int HP;
     private int strength;
     private int defence;
@@ -23,7 +23,20 @@ public class Player implements IMovable, ICollidable{
     private Collider collider;
     private boolean isGrounded = false;
 
-
+    /**
+     * TODO description
+     *
+     * @param sprite
+     *      TODO description
+     * @param posX
+     *      TODO description
+     * @param posY
+     *      TODO description
+     * @param width
+     *      TODO description
+     * @param height
+     *      TODO description
+     */
     public Player(String sprite, int posX, int posY, int width, int height) {
         this.sprite = sprite;
         this.posX = posX;
@@ -137,15 +150,27 @@ public class Player implements IMovable, ICollidable{
         return posY;
     }
 
+    /**
+     * TODO description
+     */
     public void update(){
         doGravity();
         updateCollider();
     }
 
+    /**
+     * TODO description
+     */
     public void move(){
 
     }
 
+    /**
+     * TODO description
+     *
+     * @param platforms
+     *      TODO description
+     */
     public void checkGrounded(List<Platform> platforms){
         if(!isGrounded){
             for (ICollidable platform : platforms){

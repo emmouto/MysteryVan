@@ -1,10 +1,12 @@
 package Model;
 
+/**
+ * TODO description
+ *
+ * @author
+ */
 public class Boost {
-
-
     //TODO change class to interface or similar? -----#####------
-
 
     //changed to private
     private String name;
@@ -12,15 +14,26 @@ public class Boost {
     private int strength;
     private int defence; // used to be armour
 
-
+    /**
+     * TODO description
+     *
+     * @param name
+     *      TODO description
+     * @param HP
+     *      TODO description
+     * @param strength
+     *      TODO description
+     * @param defence
+     *      TODO description
+     */
     public Boost(String name, int HP, int strength, int defence) {
         this.name = name;
         this.HP = HP;
         this.strength = strength;
         this.defence = defence;
     }
-    
 
+    // Getters and setters - JavaDoc not needed
     public String getName() {
         return name;
     }
@@ -52,5 +65,4 @@ public class Boost {
     public void setDefence(int armour) {
         this.defence = armour;
     }
-
 }

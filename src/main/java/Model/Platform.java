@@ -1,5 +1,10 @@
 package Model;
 
+/**
+ * TODO description
+ *
+ * @author
+ */
 public class Platform implements ICollidable{
     // Side platforms are 160px wide and 48px high
     // Middle platform is 288px wide and 16px high
@@ -9,8 +14,18 @@ public class Platform implements ICollidable{
     private int width;
     private int height;
 
-
-
+    /**
+     * TODO description
+     *
+     * @param x
+     *      TODO description
+     * @param y
+     *      TODO description
+     * @param height
+     *      TODO description
+     * @param width
+     *      TODO description
+     */
     public Platform(int x, int y, int height, int width){
         this.x = x;
         this.y = y;

@@ -1,9 +1,9 @@
 package Controller;
 
 import Model.Enemy;
-import Model.ICollidable;
 import Model.Map;
 import Model.Player;
+
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.IUpdateable;
 import de.gurkenlabs.litiengine.entities.Creature;
@@ -12,14 +12,25 @@ import de.gurkenlabs.litiengine.physics.MovementController;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * TODO description
+ *
+ * @author
+ */
 public class EnemyController implements IUpdateable {
-
     private List<Player> players;
     private List<Enemy> enemies = new ArrayList<Enemy>();
     private List<Creature> creatureList = new ArrayList<>();
     private Long lastPathUpdate;
     private Map map;
 
+    /**
+     * Constructor.
+     * TODO better description
+     *
+     * @param players
+     *      List containing the players for the game.
+     */
     public EnemyController(List<Player> players){
         this.players = players;
         spawnEnemy();
@@ -27,7 +38,9 @@ public class EnemyController implements IUpdateable {
         lastPathUpdate = Game.time().now();
     }
 
-
+    /**
+     * TODO description
+     */
     public void spawnEnemy(){
         enemies.add(new Enemy("enemy", 0, 0, 32, 50));
         Creature c = new Creature();
@@ -40,7 +53,9 @@ public class EnemyController implements IUpdateable {
         creatureList.get(creatureList.size()-1).setAcceleration(50);
     }
 
-
+    /**
+     * TODO description
+     */
     @Override
     public void update() {
         for(int i = 0; i < this.getEnemies().size(); i++){
@@ -54,18 +69,6 @@ public class EnemyController implements IUpdateable {
 
     }
 
-    public List<Enemy> getEnemies() {
-        return this.enemies;
-    }
-    public List<Player> getPlayers() {
-        return this.players;
-    }
-
-    public void setEnemies(List<Enemy> enemies) {
-        this.enemies = enemies;
-    }
-
-
     private void initiatePathfinding(){
 
     }
@@ -77,11 +80,36 @@ public class EnemyController implements IUpdateable {
         }
     }
 
+    /**
+     * TODO description
+     *
+     * @return
+     *      TODO description
+     */
     public List<Creature> getCreatures() {
         return creatureList;
     }
 
+    /**
+     * TODO description
+     *
+     * @param map
+     *      TODO description
+     */
     public void loadMap(Map map){
         this.map = map;
+    }
+
+    // Getters and setters - javaDoc not needed
+    public List<Enemy> getEnemies() {
+        return this.enemies;
+    }
+
+    public List<Player> getPlayers() {
+        return this.players;
+    }
+
+    public void setEnemies(List<Enemy> enemies) {
+        this.enemies = enemies;
     }
 }

@@ -2,13 +2,20 @@ package Model;
 
 import java.util.Random;
 
+/**
+ * TODO description
+ *
+ * @author
+ */
 public class Food implements ICollidable{
-
     private String name;
     private int HP;
     private int defense;
     private int armour;
 
+    /**
+     * TODO description
+     */
     public Food() {
         this.HP = 0;
         this.defense = 0;
@@ -16,9 +23,13 @@ public class Food implements ICollidable{
         determineFood();
     }
 
+    /**
+     * TODO description
+     */
     public void determineFood(){
         Random rand = new Random();
-        int x =  rand.nextInt(5)+1;
+        int x =  rand.nextInt(5) + 1;
+
         switch (x){
             case 1 :    this.HP = 2;
                         this.name = "apple";
@@ -38,6 +49,12 @@ public class Food implements ICollidable{
 
     }
 
+    /**
+     * TODO description
+     *
+     * @return
+     *      TODO description
+     */
     @Override
     public Collider getCollider() {
         return null;

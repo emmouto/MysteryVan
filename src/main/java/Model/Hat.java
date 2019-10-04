@@ -1,10 +1,22 @@
 package Model;
 
+/**
+ * TODO description
+ *
+ * @author
+ */
 public class Hat {
-
     private String name;
     private Boost boost;
 
+    /**
+     * TODO description
+     *
+     * @param name
+     *      TODO description
+     * @param boost
+     *      TODO description
+     */
     public Hat(String name, Boost boost) {
         this.name = name;
         this.boost = boost;

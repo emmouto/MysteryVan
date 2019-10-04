@@ -3,18 +3,33 @@ package Model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * TODO description
+ *
+ * @author
+ */
 public class Map {
-
     private String name;
     private List<Platform> platforms= new ArrayList<>();
 
+    /**
+     * TODO description
+     *
+     * @param name
+     *      TODO description
+     */
     public Map(String name) {
         this.name = name;
         init(name);
     }
 
+    /**
+     * TODO description
+     *
+     * @param name
+     *      TODO description
+     */
     public void init(String name){
-
         switch (name){
             case "map1" :   platforms.add(new Platform(0,112,48,160));
                             platforms.add(new Platform(480,112,48,160));

@@ -12,32 +12,36 @@ import java.util.LinkedList;
  * @author Jennifer Krogh
  */
 public class Highscore {
-
     private int highscore;
     private String player;
 
-    //in the end of the game, create new Highscore with the current score of the player
-    //and the player's name which will then be used in the list of high scores.
+    /**
+     * At the end of the game, create new Highscore with the current score of the player
+     * and the player's name which will then be used in the list of high scores.
+     *
+     * @param highscore
+     *      TODO description
+     * @param player
+     *      TODO description
+     */
     public Highscore(int highscore, String player) {
         this.highscore = highscore;
         this.player = player;
 
     }
 
-
     public int getHighscore() {
-
         return highscore;
     }
 
     public void setHighscore(int highscore) {
-
         this.highscore = highscore;
     }
 
     public String getPlayer() {
         return player;
     }
+
     public void setPlayer(String player) {
         this.player = player;
     }

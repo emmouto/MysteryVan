@@ -23,7 +23,7 @@ import de.gurkenlabs.litiengine.resources.Resources;
  * @author Jennifer Krogh
  */
 public class HighscoreView extends Screen implements IUpdateable {
-    private static final BufferedImage brickBG = Resources.images().get("src/main/resources/HelpView/BrickBG.png");
+    private static final BufferedImage BRICK_BG = Resources.images().get("src/main/resources/HelpView/BrickBG.png");
 
     private List<Highscore> highscoreList = new ArrayList<>(); //{h1, h2, h3, h4, h5, h6, h7, h8, h9, h10};
 
@@ -51,7 +51,7 @@ public class HighscoreView extends Screen implements IUpdateable {
      */
     @Override
     public void render(final Graphics2D g) {
-        ImageRenderer.render(g, brickBG, 0, 0);
+        ImageRenderer.render(g, BRICK_BG, 0, 0);
 
         g.setColor(Color.BLACK);
         g.fillRect(300, 130, 630, 580);

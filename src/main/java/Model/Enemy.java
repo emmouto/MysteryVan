@@ -1,11 +1,10 @@
 package Model;
+
 import java.util.List;
 
-
 public class Enemy implements ICollidable, IMovable {
-
     private int HP;
-    private Equipment equipment; //Enemy can have a weapon, armor etc that will make them harder to defeat.
+    private Equipment equipment = new Equipment(); //Enemy can have a weapon, armor etc that will make them harder to defeat.
     private Collider collider;
     private int height;
     private int width;
@@ -13,9 +12,6 @@ public class Enemy implements ICollidable, IMovable {
     private int y;
     private String sprite;
     private boolean isGrounded = false;
-
-
-
 
     public Enemy(String sprite, int posX, int posY, int width, int height){
         this.sprite = sprite;
@@ -28,7 +24,6 @@ public class Enemy implements ICollidable, IMovable {
         this.collider.updateSize(width, height);
     }
 
-
     public void checkGrounded(List<Platform> platforms){
         if(!isGrounded){
             for (ICollidable platform : platforms){
@@ -37,7 +32,6 @@ public class Enemy implements ICollidable, IMovable {
                 }
             }
         }
-
     }
 
     public boolean checkPlayerCollision(ICollidable player){
@@ -47,11 +41,8 @@ public class Enemy implements ICollidable, IMovable {
             return true;
         } else if(collider.isColliding(player, "DOWN")){
             return true;
-        } else if (collider.isColliding(player, "LEFT")){
-            return true;
-        }
+        } else return collider.isColliding(player, "LEFT");
 
-        return false;
     }
 
     private void doGravity(){
@@ -61,7 +52,7 @@ public class Enemy implements ICollidable, IMovable {
     }
 
     private void updateCollider(){
-        this.collider.updatePosition(getX(),getY());
+        this.collider.updatePosition(getX(), getY());
     }
 
     public void update(){
@@ -91,7 +82,6 @@ public class Enemy implements ICollidable, IMovable {
         this.equipment = weapon;
     }
 
-
     @Override
     public Collider getCollider() {
         return this.collider;
@@ -108,6 +98,7 @@ public class Enemy implements ICollidable, IMovable {
     public void setX(int x){
         this.x = x;
     }
+
     public void setY(int y){
         this.y = y;
     }

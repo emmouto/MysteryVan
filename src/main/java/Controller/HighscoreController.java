@@ -77,17 +77,15 @@ public class HighscoreController {
     /**
      * Creates a file were highscores are saved.
      */
-    private void createDataFile(){
-
-        try{
+    private void createDataFile() {
+        try {
             File file = new File(highscoreDataPath, filename);
             FileWriter output = new FileWriter(file);
             BufferedWriter writer = new BufferedWriter(output);
 
             writer.write("No highscore:0");
             writer.close();
-
-        }catch(Exception e){
+        } catch(Exception e) {
             e.printStackTrace();
         }
     }
@@ -96,8 +94,7 @@ public class HighscoreController {
     /**
      * Loads the highscores from the file.
      */
-    private void loadHighscore (){
-
+    private void loadHighscore() {
         String line;
         int playerScore;
         String [] storeSplit;
@@ -106,43 +103,40 @@ public class HighscoreController {
 
         highscoreList.clear();
 
-        try{
+        try {
             File file = new File(highscoreDataPath, filename);
 
-            if (!file.isFile()){
+            if (!file.isFile()) {
                 createDataFile();
             }
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
 
-            if (!reader.ready()){
+            if (!reader.ready()) {
                 throw new IOException();
             }
 
-           while ((line = reader.readLine()) != null){
-
+           while ((line = reader.readLine()) != null) {
                storeSplit = line.split(":");
                playerScore = Integer.parseInt(storeSplit[1]);
                playerName = storeSplit[0];
                newHigh = new Highscore(playerScore, playerName);
                highscoreList.add(newHigh);
            }
-           reader.close();
 
-        }catch(Exception e){
+           reader.close();
+        } catch(Exception e) {
             e.printStackTrace();
         }
-
     }
 
     /**
      * Writes the highscore list to the file.
      */
     private void setHighscoreData (){
-
         FileWriter output = null;
 
-        try{
+        try {
             File file = new File(highscoreDataPath, filename);
             output = new FileWriter(file);
             BufferedWriter writer = new BufferedWriter(output);
@@ -150,12 +144,11 @@ public class HighscoreController {
             for (Highscore highscore : highscoreList) {
                 writer.write(highscore.getPlayer() + ":" + highscore.getHighscore() + "\n");
             }
-            writer.close();
 
-        }catch(Exception e){
+            writer.close();
+        } catch(Exception e) {
             e.printStackTrace();
         }
-
     }
 
     /**
@@ -166,17 +159,13 @@ public class HighscoreController {
      * @param highscoreList
      *      The list to which the Highscore is added.
      */
-
     // This method should be called when a gamerun has ended!!
     public void addToScoreList(Highscore newScore, List<Highscore> highscoreList) {
-
-        if(highscoreList.size() < 10){
+        if (highscoreList.size() < 10) {
             highscoreList.add(newScore);
-        }else {
-
+        } else {
             for (Highscore oldScores : highscoreList) {
-
-                if (newScore.getHighscore() > oldScores.getHighscore()){
+                if (newScore.getHighscore() > oldScores.getHighscore()) {
                     highscoreList.remove(oldScores);
                     highscoreList.add(newScore);
                     break;
@@ -192,12 +181,10 @@ public class HighscoreController {
      *      List that needs to be sorted, usually after a new Highscore was added
      */
     private void sortList(List<Highscore> highscoreList) {
-
         Comparator<Highscore> highscoreComparator = Comparator.comparingInt(Highscore::getHighscore);
         Comparator<Highscore> comparatorReversed = highscoreComparator.reversed();
 
         highscoreList.sort(comparatorReversed);
-
     }
 
     private void setH(List<Highscore> hList) {

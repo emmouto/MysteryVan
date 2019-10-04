@@ -12,8 +12,6 @@ import java.util.function.Consumer;
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.gui.Menu;
 import de.gurkenlabs.litiengine.input.Input;
-import de.gurkenlabs.litiengine.resources.Resources;
-import de.gurkenlabs.litiengine.sound.Sound;
 
 /**
  * Controls for the (non-ingame) Screens.
@@ -33,15 +31,15 @@ public class ScreenController extends Menu {
      * Constructor for the ScreenController.
      *
      * @param x
-     *      ....
+     *      TODO description
      * @param y
-     *      ...
+     *      TODO description
      * @param width
-     *      ...
+     *      TODO description
      * @param height
-     *      ...
+     *      TODO description
      * @param items
-     *      ...
+     *      TODO description
      */
     public ScreenController(double x, double y, double width, double height, String... items) {
         super(x, y, width, height, items);
@@ -107,7 +105,7 @@ public class ScreenController extends Menu {
     }
 
     /**
-     *
+     * TODO description
      */
     @Override
     public void prepare() {
@@ -130,10 +128,10 @@ public class ScreenController extends Menu {
     }
 
     /**
-     * ...
+     * TODO description
      *
      * @param cons
-     *      ...
+     *      TODO description
      */
     public void onConfirm(Consumer<Integer> cons) {
         this.confirmConsumer.add(cons);
@@ -168,6 +166,9 @@ public class ScreenController extends Menu {
         }
     }
 
+    /**
+     * TODO description
+     */
     public void fixMenuView() {
         // Places the MenuView buttons in their correct places.
         this.getCellComponents().get(0).setX(210);
@@ -178,6 +179,9 @@ public class ScreenController extends Menu {
         this.getCellComponents().get(2).setY(460);
     }
 
+    /**
+     * TODO description
+     */
     public void disableController() {
         this.setEnabled(false);
     }

@@ -1,7 +1,11 @@
 package Model;
 
+/**
+ * TODO description
+ *
+ * @author
+ */
 public class Collider {
-
     private int radius;
     private int width;
     private int height;
@@ -10,23 +14,50 @@ public class Collider {
 
     private ICollidable body;
 
-
+    /**
+     * TODO description
+     */
     public Collider(){
 
     }
 
+    /**
+     * TODO description
+     *
+     * @param x
+     *      TODO description
+     * @param y
+     *      TODO description
+     */
     public void updatePosition(int x, int y){
         this.x = x;
         this.y = y;
     }
 
+    /**
+     * TODO description
+     *
+     * @param width
+     *      TODO description
+     * @param height
+     *      TODO description
+     */
     public void updateSize(int width, int height){
         this.width = width;
         this.height = height;
     }
 
-
-
+    /**
+     * TODO description
+     *
+     * @param c
+     *      TODO description
+     * @param direction
+     *      TODO description
+     *
+     * @return
+     *      TODO description
+     */
     public boolean isColliding(ICollidable c, String direction){
         switch (direction){
             case "DOWN":
@@ -52,6 +83,7 @@ public class Collider {
 
     }
 
+    // Getters - JavaDoc not needed
     public int getX(){
         return this.x;
     }
@@ -60,7 +92,11 @@ public class Collider {
         return this.y;
     }
 
-    public int getWidth() {return this.width; }
+    public int getWidth() {
+        return this.width;
+    }
 
-    public int getHeight() {return this.height; }
+    public int getHeight() {
+        return this.height;
+    }
 }
