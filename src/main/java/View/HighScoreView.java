@@ -1,9 +1,9 @@
 package View;
 
-import Controller.HighscoreController;
+import Controller.HighScoreController;
 import Controller.ScreenController;
 import Model.GameManager;
-import Model.Highscore;
+import Model.HighScore;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -22,19 +22,19 @@ import de.gurkenlabs.litiengine.resources.Resources;
  * @author Emma Pettersson
  * @author Jennifer Krogh
  */
-public class HighscoreView extends Screen implements IUpdateable {
+public class HighScoreView extends Screen implements IUpdateable {
     private static final BufferedImage brickBG = Resources.images().get("src/main/resources/HelpView/BrickBG.png");
 
-    private List<Highscore> highscoreList = new ArrayList<>(); //{h1, h2, h3, h4, h5, h6, h7, h8, h9, h10};
+    private List<HighScore> highScoreList = new ArrayList<>(); //{h1, h2, h3, h4, h5, h6, h7, h8, h9, h10};
 
     private ScreenController screenController;
-    private HighscoreController hc = new HighscoreController(highscoreList);
+    private HighScoreController hc = new HighScoreController(highScoreList);
 
     /**
      * @param screenName
      *      Name of the screen.
      */
-    public HighscoreView(String screenName) {
+    public HighScoreView(String screenName) {
         super(screenName);
     }
 
@@ -60,7 +60,7 @@ public class HighscoreView extends Screen implements IUpdateable {
 
         g.setFont(GameManager.PIXELED_BIG);
         g.setColor(Color.MAGENTA);
-        TextRenderer.render(g, "HIGHSCORES", GameManager.centerX - 320, 100);
+        TextRenderer.render(g, "HIGH SCORES", GameManager.centerX - 320, 100);
 
         g.setFont(GameManager.PIXELED_XSMALL);
         TextRenderer.render(g, "PRESS ENTER TO RETURN TO MAIN MENU", GameManager.centerX - (34 * 12) / 2.0, 125);
@@ -75,9 +75,9 @@ public class HighscoreView extends Screen implements IUpdateable {
         g.setFont(GameManager.PIXELED_SMALL);
 
         int y = 190;
-        for (Highscore hs : highscoreList) {
+        for (HighScore hs : highScoreList) {
             TextRenderer.render(g, hs.getPlayer(), 320, (y + 50));
-            TextRenderer.render(g, Integer.toString(hs.getHighscore()), 720, (y + 50));
+            TextRenderer.render(g, Integer.toString(hs.getHighScore()), 720, (y + 50));
             y += 50;
         }
 

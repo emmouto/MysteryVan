@@ -38,7 +38,7 @@ public class MenuView extends Screen implements IUpdateable {
 
         this.screenController = new ScreenController(GameManager.centerX - buttonWidth / 2,
                 GameManager.centerY * 1.3, buttonWidth, GameManager.centerY / 2,
-                "HIGHSCORE", "PLAY", "EXIT");
+                "HIGH SCORE", "PLAY", "EXIT");
         this.getComponents().add(this.screenController);
     }
 
@@ -81,13 +81,13 @@ public class MenuView extends Screen implements IUpdateable {
         super.render(g);
     }
 
-    public static void showHighscore() {
+    public static void showHighScore() {
         Game.audio().playSound(GameManager.SELECT_SOUND);
         Game.window().getRenderComponent().fadeOut(500);
 
         Game.loop().perform(500, () -> {
             Game.window().getRenderComponent().fadeIn(500);
-            Game.screens().display("Highscore");
+            Game.screens().display("HighScore");
         });
     }
 

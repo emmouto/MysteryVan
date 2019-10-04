@@ -83,7 +83,7 @@ public class ScreenController extends Menu {
 
             switch (c) {
                 case 0:
-                     MenuView.showHighscore();
+                     MenuView.showHighScore();
                     break;
                 case 1:
                     MenuView.startGame();

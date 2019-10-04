@@ -1,10 +1,8 @@
 package ChalmersForce;
 
-import Controller.MapController;
 import View.*;
 
 import de.gurkenlabs.litiengine.Game;
-import de.gurkenlabs.litiengine.environment.Environment;
 import de.gurkenlabs.litiengine.gui.screens.GameScreen;
 import de.gurkenlabs.litiengine.gui.screens.Resolution;
 import de.gurkenlabs.litiengine.resources.Resources;
@@ -40,7 +38,7 @@ public class GameRunner {
         Game.screens().add(new MenuView("Menu"));
         Game.screens().add(new SelectionView("Selection"));
         Game.screens().add(new HelpView("Help"));
-        Game.screens().add(new HighscoreView("Highscore"));
+        Game.screens().add(new HighScoreView("HighScore"));
         Game.screens().add(new GameScreen());
         Game.screens().add(new DefeatView("Defeat"));
         Game.screens().add(new PauseView("Pause"));

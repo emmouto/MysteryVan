@@ -52,7 +52,7 @@ public class DefeatView extends Screen {
         this.screenController = new ScreenController(0, 0, 0, 0, "");
         this.getComponents().add(this.screenController);
 
-        this.screenController.onConfirm(c -> this.showHighscore());
+        this.screenController.onConfirm(c -> this.showHighScore());
     }
 
     /**
@@ -85,7 +85,7 @@ public class DefeatView extends Screen {
         TextRenderer.render(g, "Your score: " + hsOutput, 430, 300);
 
         g.setFont(GameManager.PIXELED_SMALL);
-        TextRenderer.render(g, "PRESS ENTER TO SEE HIGHSCORES", GameManager.centerX - (29 * 24) / 2.0, GameManager.centerY * 1.3);
+        TextRenderer.render(g, "PRESS ENTER TO SEE HIGH SCORES", GameManager.centerX - (29 * 24) / 2.0, GameManager.centerY * 1.3);
 
         Game.audio().playMusic(DEFEAT_THEME);
 
@@ -99,14 +99,17 @@ public class DefeatView extends Screen {
         }
     }
 
-    private void showHighscore() {
+    /**
+     * Method displaying the high score view when called.
+     */
+    private void showHighScore() {
         screenController.disableController();
         Game.audio().playSound(GameManager.SELECT_SOUND);
         Game.window().getRenderComponent().fadeOut(500);
 
         Game.loop().perform(500, () -> {
             Game.window().getRenderComponent().fadeIn(500);
-            Game.screens().display("Highscore");
+            Game.screens().display("HighScore");
         });
     }
 }
