@@ -101,6 +101,9 @@ public class SelectionView extends Screen implements IUpdateable {
         }
     }
 
+    /**
+     * No idea what this does tbh
+     */
     @Override
     public void update() {
 

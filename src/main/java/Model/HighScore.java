@@ -1,8 +1,5 @@
 package Model;
 
-
-import java.util.LinkedList;
-
 /**
  * Highscore Class saves and adds the points the player collects during the game,
  * which can later be shown in the Highscore screen.
@@ -11,7 +8,7 @@ import java.util.LinkedList;
  * @author Antonia Welzel
  * @author Jennifer Krogh
  */
-public class Highscore {
+public class HighScore {
     private int highscore;
     private String player;
 
@@ -24,13 +21,13 @@ public class Highscore {
      * @param player
      *      TODO description
      */
-    public Highscore(int highscore, String player) {
+    public HighScore(int highscore, String player) {
         this.highscore = highscore;
         this.player = player;
 
     }
 
-    public int getHighscore() {
+    public int getHighScore() {
         return highscore;
     }
 

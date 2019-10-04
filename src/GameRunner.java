@@ -46,7 +46,7 @@ public class GameRunner {
         Game.screens().add(new MenuView("Menu"));
         Game.screens().add(new SelectionView("Selection"));
         Game.screens().add(new HelpView("Help"));
-        Game.screens().add(new HighscoreView("Highscore"));
+        Game.screens().add(new HighScoreView("HighScore"));
         Game.screens().add(new DefeatView("Defeat"));
         Game.screens().add(new PauseView("Pause"));
 

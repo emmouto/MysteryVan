@@ -8,26 +8,21 @@ import de.gurkenlabs.litiengine.IUpdateable;
 import de.gurkenlabs.litiengine.graphics.ImageRenderer;
 import de.gurkenlabs.litiengine.graphics.TextRenderer;
 import de.gurkenlabs.litiengine.gui.screens.Screen;
-import de.gurkenlabs.litiengine.input.Input;
 import de.gurkenlabs.litiengine.resources.Resources;
-import de.gurkenlabs.litiengine.sound.Sound;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
 /**
  * The screen that shows when the player starts the game, shows the controls used for the game.
  *
  * @author Jennifer Krogh
+ * @author Emma Pettersson
  */
-
 public class HelpView extends Screen implements IUpdateable {
-    private static final BufferedImage brickBG = Resources.images().get("src/main/resources/HelpView/BrickBG.png");
-    private static final BufferedImage controlPic = Resources.images().get("src/main/resources/HelpView/controlPic.png");
-    private static final BufferedImage GoToGame = Resources.images().get("src/main/resources/HelpView/GoToGame.png");
-
-    private ScreenController screenController;
+    private static final BufferedImage BRICK_BG = Resources.images().get("src/main/resources/HelpView/BrickBG.png");
+    private static final BufferedImage CONTROL_PIC = Resources.images().get("src/main/resources/HelpView/controlPic.png");
+    private static final BufferedImage GO_TO_GAME = Resources.images().get("src/main/resources/HelpView/GoToGame.png");
 
     /**
      * @param screenName
@@ -41,11 +36,8 @@ public class HelpView extends Screen implements IUpdateable {
      * When enter is pressed, method calls on the change-screen method.
      */
     protected void initializeComponents() {
-
-        this.screenController = new ScreenController(0, 0, 0, 0, "");
-        this.getComponents().add(this.screenController);
-
-        this.screenController.onConfirm(c -> this.goToSelect());
+        ScreenController screenController = new ScreenController(0, 0, 0, 0, "");
+        this.getComponents().add(screenController);
     }
 
     /**
@@ -63,17 +55,18 @@ public class HelpView extends Screen implements IUpdateable {
      * Renders out the components.
      *
      * @param g
+     *      The graphics object to render on.
      */
     public void render(final Graphics2D g) {
 
-        ImageRenderer.render(g, brickBG, 0, 0);
+        ImageRenderer.render(g, BRICK_BG, 0, 0);
         g.setColor(Color.BLACK);
         g.fillRect(100,150,500,250);
         g.fillRect(700,150,500,250);
         g.fillRect(700,430,500,250);
 
-        ImageRenderer.render(g, controlPic, 180, 155);
-        ImageRenderer.render(g, GoToGame, 100, 430);
+        ImageRenderer.render(g, CONTROL_PIC, 180, 155);
+        ImageRenderer.render(g, GO_TO_GAME, 100, 430);
 
         g.setColor(Color.WHITE);
         g.drawRect(100,150,500,250);
@@ -114,6 +107,9 @@ public class HelpView extends Screen implements IUpdateable {
         });
     }
 
+    /**
+     * No idea what this does tbh
+     */
     @Override
     public void update() {
 

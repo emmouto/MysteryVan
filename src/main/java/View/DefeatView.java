@@ -32,14 +32,14 @@ public class DefeatView extends Screen {
     private int timer2 = 5;
     private int timer3 = 5;
 
-    private ScreenController screenController;
-
     // TODO Change this so it takes in the player's achieved score
     private int hs = 100;
     private String hsOutput = Integer.toString(hs);
     // Above is temporary.
 
     /**
+     * Constructor. Sets the name of the screen.
+     *
      * @param screenName
      *      Name of the screen.
      */
@@ -49,10 +49,8 @@ public class DefeatView extends Screen {
 
     @Override
     protected void initializeComponents() {
-        this.screenController = new ScreenController(0, 0, 0, 0, "DefeatView");
-        this.getComponents().add(this.screenController);
-
-        this.screenController.onConfirm(c -> this.showHighscore());
+        ScreenController screenController = new ScreenController(0, 0, 0, 0, "");
+        this.getComponents().add(screenController);
     }
 
     /**
@@ -85,7 +83,7 @@ public class DefeatView extends Screen {
         TextRenderer.render(g, "Your score: " + hsOutput, 430, 300);
 
         g.setFont(GameManager.PIXELED_SMALL);
-        TextRenderer.render(g, "PRESS ENTER TO SEE HIGHSCORES", GameManager.centerX - (29 * 24) / 2.0, GameManager.centerY * 1.3);
+        TextRenderer.render(g, "PRESS ENTER TO SEE HIGH SCORES", GameManager.centerX - (29 * 24) / 2.0, GameManager.centerY * 1.3);
 
         Game.audio().playMusic(DEFEAT_THEME);
 
@@ -99,13 +97,16 @@ public class DefeatView extends Screen {
         }
     }
 
-    public static void showHighscore() {
+    /**
+     * Method displaying the high score view when called.
+     */
+    public static void showHighScore() {
         Game.audio().playSound(GameManager.SELECT_SOUND);
         Game.window().getRenderComponent().fadeOut(500);
 
         Game.loop().perform(500, () -> {
             Game.window().getRenderComponent().fadeIn(500);
-            Game.screens().display("Highscore");
+            Game.screens().display("HighScore");
         });
     }
 }

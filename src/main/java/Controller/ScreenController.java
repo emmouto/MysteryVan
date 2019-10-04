@@ -3,7 +3,7 @@ package Controller;
 import Model.GameManager;
 import View.DefeatView;
 import View.HelpView;
-import View.HighscoreView;
+import View.HighScoreView;
 import View.MenuView;
 
 import java.awt.*;
@@ -136,7 +136,7 @@ public class ScreenController extends Menu {
                 switch (c) {
                     case 0:
                         GameManager.setState(GameManager.GameState.HIGHSCORE_SCREEN);
-                        MenuView.showHighscore();
+                        MenuView.showHighScore();
                         break;
                     case 1:
                         GameManager.setState(GameManager.GameState.HELP_SCREEN);
@@ -151,10 +151,10 @@ public class ScreenController extends Menu {
             });
         } else if (GameManager.getState() == GameManager.GameState.DEFEAT_SCREEN) {
             GameManager.setState(GameManager.GameState.HIGHSCORE_SCREEN);
-            DefeatView.showHighscore();
+            DefeatView.showHighScore();
         } else if (GameManager.getState() == GameManager.GameState.HIGHSCORE_SCREEN) {
             GameManager.setState(GameManager.GameState.TITLE_SCREEN);
-            HighscoreView.showMenu();
+            HighScoreView.showMenu();
         } else if (GameManager.getState() == GameManager.GameState.HELP_SCREEN) {
             GameManager.setState(GameManager.GameState.SELECTION_SCREEN);
             HelpView.goToSelect();
