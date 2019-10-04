@@ -104,11 +104,14 @@ public class HelpView extends Screen implements IUpdateable {
     /**
      * Method which changes current screen to selection.
      */
-    private void goToSelect() {
-        this.screenController.setEnabled(false);
+    public static void goToSelect() {
         Game.audio().playSound(GameManager.SELECT_SOUND);
+        Game.window().getRenderComponent().fadeOut(500);
 
-        Game.screens().display("Selection");
+        Game.loop().perform(500, () -> {
+            Game.window().getRenderComponent().fadeIn(500);
+            Game.screens().display("Selection");
+        });
     }
 
     @Override

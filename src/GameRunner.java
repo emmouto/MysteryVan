@@ -23,6 +23,8 @@ import java.io.IOException;
  */
 public class GameRunner {
     /**
+     * TODO description
+     *
      * @param args
      *      The command line arguments.
      */
@@ -48,30 +50,33 @@ public class GameRunner {
         Game.screens().add(new DefeatView("Defeat"));
         Game.screens().add(new PauseView("Pause"));
 
-        Game.graphics().setBaseRenderScale(2.001f);
-        Game.screens().add(new GameScreen());
-
-        Resources.load("game.litidata");
-
-        PlayerController pc = new PlayerController();
-        EnemyController ec = new EnemyController(pc.getPlayers());
-        mc.initCamera();
-        ec.loadMap(mc.getMap());
-        pc.loadMap(mc.getMap());
-
-        CreatureMapObjectLoader.registerCustomCreatureType(ec.getCreatures().get(0).getClass());
-        CreatureMapObjectLoader.registerCustomCreatureType(pc.getCreatures().get(0).getClass());
-
-        Game.loop().attach(ec);
-        Game.loop().attach(pc);
-
-        Game.world().loadEnvironment("new_map");
-        Game.world().environment().add(ec.getCreatures().get(0));
-        pc.getCreatures().get(0).setLocation(0,100);
-        Game.world().environment().add(pc.getCreatures().get(0));
-
         // Displays the title screen ("Menu").
         Game.screens().display("Menu");
+
+        /*
+            Game.graphics().setBaseRenderScale(2.001f);
+            Game.screens().add(new GameScreen());
+
+            Resources.load("game.litidata");
+
+            PlayerController pc = new PlayerController();
+            EnemyController ec = new EnemyController(pc.getPlayers());
+            mc.initCamera();
+            ec.loadMap(mc.getMap());
+            pc.loadMap(mc.getMap());
+
+            CreatureMapObjectLoader.registerCustomCreatureType(ec.getCreatures().get(0).getClass());
+            CreatureMapObjectLoader.registerCustomCreatureType(pc.getCreatures().get(0).getClass());
+
+            Game.loop().attach(ec);
+            Game.loop().attach(pc);
+
+            Game.world().loadEnvironment("new_map");
+            Game.world().environment().add(ec.getCreatures().get(0));
+            pc.getCreatures().get(0).setLocation(0,100);
+            Game.world().environment().add(pc.getCreatures().get(0));
+
+         */
 
         Game.start();
     }

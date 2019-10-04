@@ -39,7 +39,7 @@ public class HighscoreView extends Screen implements IUpdateable {
     }
 
     protected void initializeComponents() {
-        this.screenController = new ScreenController(0, 0, 0, 0, "");
+        this.screenController = new ScreenController(0, 0, 0, 0, "HighscoreView");
         this.getComponents().add(this.screenController);
 
         this.screenController.onConfirm(c -> this.showMenu());
@@ -87,8 +87,7 @@ public class HighscoreView extends Screen implements IUpdateable {
     /**
      * Method to call when current screen is changed to menu screen.
      */
-    private void showMenu() {
-        screenController.disableController();
+    public static void showMenu() {
         Game.window().getRenderComponent().fadeOut(500);
 
         Game.loop().perform(500, () -> {

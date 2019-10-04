@@ -76,7 +76,6 @@ public class Player implements IMovable, ICollidable{
         return boost2;
     }
 
-
     public void setHP(int HP) {
         this.HP = HP;
     }
@@ -179,7 +178,6 @@ public class Player implements IMovable, ICollidable{
                 }
             }
         }
-
     }
 
     private void updateCollider(){

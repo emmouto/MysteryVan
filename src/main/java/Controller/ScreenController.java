@@ -1,6 +1,9 @@
 package Controller;
 
 import Model.GameManager;
+import View.DefeatView;
+import View.HelpView;
+import View.HighscoreView;
 import View.MenuView;
 
 import java.awt.*;
@@ -75,24 +78,6 @@ public class ScreenController extends Menu {
                 incFocus();
             }
         });
-
-        this.onConfirm(c -> {
-            disableController();
-
-            switch (c) {
-                case 0:
-                     MenuView.showHighscore();
-                    break;
-                case 1:
-                    MenuView.startGame();
-                    break;
-                case 2:
-                    MenuView.exit();
-                    break;
-                default:
-                    break;
-            }
-        });
     }
 
     private boolean inputIsLocked() {
@@ -130,16 +115,49 @@ public class ScreenController extends Menu {
     /**
      * TODO description
      *
-     * @param cons
+     * @param consumer
      *      TODO description
      */
-    public void onConfirm(Consumer<Integer> cons) {
-        this.confirmConsumer.add(cons);
+    public void onConfirm(Consumer<Integer> consumer) {
+        this.confirmConsumer.add(consumer);
     }
 
     private void confirm() {
+        changeView();
+
         for (Consumer<Integer> cons : this.confirmConsumer) {
             cons.accept(this.currentFocus);
+        }
+    }
+
+    private void changeView() {
+        if (GameManager.getState() == GameManager.GameState.TITLE_SCREEN) {
+            this.onConfirm(c -> {
+                switch (c) {
+                    case 0:
+                        GameManager.setState(GameManager.GameState.HIGHSCORE_SCREEN);
+                        MenuView.showHighscore();
+                        break;
+                    case 1:
+                        GameManager.setState(GameManager.GameState.HELP_SCREEN);
+                        MenuView.startGame();
+                        break;
+                    case 2:
+                        MenuView.exit();
+                        break;
+                    default:
+                        break;
+                }
+            });
+        } else if (GameManager.getState() == GameManager.GameState.DEFEAT_SCREEN) {
+            GameManager.setState(GameManager.GameState.HIGHSCORE_SCREEN);
+            DefeatView.showHighscore();
+        } else if (GameManager.getState() == GameManager.GameState.HIGHSCORE_SCREEN) {
+            GameManager.setState(GameManager.GameState.TITLE_SCREEN);
+            HighscoreView.showMenu();
+        } else if (GameManager.getState() == GameManager.GameState.HELP_SCREEN) {
+            GameManager.setState(GameManager.GameState.SELECTION_SCREEN);
+            HelpView.goToSelect();
         }
     }
 
@@ -155,6 +173,7 @@ public class ScreenController extends Menu {
 
     private void updateFocus() {
         this.setCurrentSelection(this.currentFocus);
+
         for (int i = 0; i < this.getCellComponents().size(); i++) {
             this.getCellComponents().get(i).setHovered(i == this.currentFocus);
         }

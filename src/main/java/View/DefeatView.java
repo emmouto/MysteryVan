@@ -49,7 +49,7 @@ public class DefeatView extends Screen {
 
     @Override
     protected void initializeComponents() {
-        this.screenController = new ScreenController(0, 0, 0, 0, "");
+        this.screenController = new ScreenController(0, 0, 0, 0, "DefeatView");
         this.getComponents().add(this.screenController);
 
         this.screenController.onConfirm(c -> this.showHighscore());
@@ -99,8 +99,7 @@ public class DefeatView extends Screen {
         }
     }
 
-    private void showHighscore() {
-        screenController.disableController();
+    public static void showHighscore() {
         Game.audio().playSound(GameManager.SELECT_SOUND);
         Game.window().getRenderComponent().fadeOut(500);
 
