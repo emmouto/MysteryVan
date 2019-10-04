@@ -1,19 +1,78 @@
 package Model;
+import java.util.List;
 
 
-public class Enemy {
+public class Enemy implements ICollidable, IMovable {
 
     private int HP;
-    private Equipment equipment; //Enemies can have a weapon, armor etc that will make them harder to defeat.
+    private Equipment equipment; //Enemy can have a weapon, armor etc that will make them harder to defeat.
+    private Collider collider;
+    private int height;
+    private int width;
+    private int x;
+    private int y;
+    private String sprite;
+    private boolean isGrounded = false;
 
-    private int defeatPoints; //number which equals the difficulty of defeating enemy
-                            // and how many points the player gets, btw 50-200pts?
 
 
-    public Enemy(int HP, Equipment equipment, int defeatPoints) {
-        this.HP = HP;
-        this.equipment = equipment;
-        this.defeatPoints = defeatPoints;
+
+    public Enemy(String sprite, int posX, int posY, int width, int height){
+        this.sprite = sprite;
+        this.x = posX;
+        this.y = posY;
+        this.width = width;
+        this.height = height;
+        this.collider = new Collider();
+        this.collider.updatePosition(posX, posY);
+        this.collider.updateSize(width, height);
+    }
+
+
+    public void checkGrounded(List<Platform> platforms){
+        if(!isGrounded){
+            for (ICollidable platform : platforms){
+                if (!isGrounded){
+                    isGrounded = collider.isColliding(platform, "DOWN");
+                }
+            }
+        }
+
+    }
+
+    public boolean checkPlayerCollision(ICollidable player){
+        if (collider.isColliding(player, "UP")){
+            return true;
+        } else if (collider.isColliding(player, "RIGHT")){
+            return true;
+        } else if(collider.isColliding(player, "DOWN")){
+            return true;
+        } else if (collider.isColliding(player, "LEFT")){
+            return true;
+        }
+
+        return false;
+    }
+
+    private void doGravity(){
+        if (!isGrounded){
+            setY(getY()+3);
+        }
+    }
+
+    private void updateCollider(){
+        this.collider.updatePosition(getX(),getY());
+    }
+
+    public void update(){
+        doGravity();
+        updateCollider();
+        // move();
+    }
+
+    public void move(){
+        setX(getX() + 1);
+        isGrounded = false;
     }
 
     public int getHP() {
@@ -32,11 +91,36 @@ public class Enemy {
         this.equipment = weapon;
     }
 
-    public int getDefeatPoints() {
-        return defeatPoints;
+
+    @Override
+    public Collider getCollider() {
+        return this.collider;
     }
 
-    public void setDefeatPoints(int defeatPoints) {
-        this.defeatPoints = defeatPoints;
+    public int getX(){
+        return this.x;
+    }
+
+    public int getY(){
+        return this.y;
+    }
+
+    public void setX(int x){
+        this.x = x;
+    }
+    public void setY(int y){
+        this.y = y;
+    }
+
+    public String getSprite(){
+        return this.sprite;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public int getWidth() {
+        return width;
     }
 }

@@ -1,21 +1,25 @@
 package Model;
 
-import javazoom.spi.mpeg.sampled.file.tag.StringableTag;
-
 public class Boost {
 
+
+    //TODO change class to interface or similar? -----#####------
+
+
+    //changed to private
     private String name;
     private int HP;
     private int strength;
-    private int armour;
+    private int defence; // used to be armour
 
-    public Boost(String name, int HP, int strength, int armour) {
+
+    public Boost(String name, int HP, int strength, int defence) {
         this.name = name;
         this.HP = HP;
         this.strength = strength;
-        this.armour = armour;
+        this.defence = defence;
     }
-
+    
 
     public String getName() {
         return name;
@@ -41,11 +45,12 @@ public class Boost {
         this.strength = strength;
     }
 
-    public int getArmour() {
-        return armour;
+    public int getDefence() {
+        return defence;
     }
 
-    public void setArmour(int armour) {
-        this.armour = armour;
+    public void setDefence(int armour) {
+        this.defence = armour;
     }
+
 }

@@ -1,4 +1,5 @@
 C:\Users\jonat\Documents\IT\TDA367 - Objektorienterat programmeringsprojekt\Projekt\src\main\java\Model\Weapon.java
+C:\Users\jonat\Documents\IT\TDA367 - Objektorienterat programmeringsprojekt\Projekt\src\main\java\Model\Enemy.java
 C:\Users\jonat\Documents\IT\TDA367 - Objektorienterat programmeringsprojekt\Projekt\src\main\java\Model\Map.java
 C:\Users\jonat\Documents\IT\TDA367 - Objektorienterat programmeringsprojekt\Projekt\src\main\java\Model\Player.java
 C:\Users\jonat\Documents\IT\TDA367 - Objektorienterat programmeringsprojekt\Projekt\src\main\java\Model\Boost.java
@@ -8,7 +9,7 @@ C:\Users\jonat\Documents\IT\TDA367 - Objektorienterat programmeringsprojekt\Proj
 C:\Users\jonat\Documents\IT\TDA367 - Objektorienterat programmeringsprojekt\Projekt\src\main\java\Model\IMovable.java
 C:\Users\jonat\Documents\IT\TDA367 - Objektorienterat programmeringsprojekt\Projekt\src\main\java\View\PauseView.java
 C:\Users\jonat\Documents\IT\TDA367 - Objektorienterat programmeringsprojekt\Projekt\src\main\java\Model\Item.java
-C:\Users\jonat\Documents\IT\TDA367 - Objektorienterat programmeringsprojekt\Projekt\src\main\java\Model\Enemies.java
+C:\Users\jonat\Documents\IT\TDA367 - Objektorienterat programmeringsprojekt\Projekt\src\main\java\Model\Collider.java
 C:\Users\jonat\Documents\IT\TDA367 - Objektorienterat programmeringsprojekt\Projekt\src\main\java\View\GameView.java
 C:\Users\jonat\Documents\IT\TDA367 - Objektorienterat programmeringsprojekt\Projekt\src\main\java\Controller\MapController.java
 C:\Users\jonat\Documents\IT\TDA367 - Objektorienterat programmeringsprojekt\Projekt\src\main\java\Model\Plattform.java
@@ -16,4 +17,4 @@ C:\Users\jonat\Documents\IT\TDA367 - Objektorienterat programmeringsprojekt\Proj
 C:\Users\jonat\Documents\IT\TDA367 - Objektorienterat programmeringsprojekt\Projekt\src\main\java\Model\ICollidable.java
 C:\Users\jonat\Documents\IT\TDA367 - Objektorienterat programmeringsprojekt\Projekt\src\main\java\Controller\ItemController.java
 C:\Users\jonat\Documents\IT\TDA367 - Objektorienterat programmeringsprojekt\Projekt\src\main\java\Model\Equipment.java
-C:\Users\jonat\Documents\IT\TDA367 - Objektorienterat programmeringsprojekt\Projekt\src\main\java\View\MenyView.java
+C:\Users\jonat\Documents\IT\TDA367 - Objektorienterat programmeringsprojekt\Projekt\src\main\java\View\MenuView.java
