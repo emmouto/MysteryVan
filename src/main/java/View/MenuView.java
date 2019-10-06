@@ -57,8 +57,6 @@ public class MenuView extends Screen implements IUpdateable {
 
         Game.loop().attach(this);
         Game.graphics().setBaseRenderScale(6f * Game.window().getResolutionScale());
-
-        this.screenController.incFocus();
     }
 
     /**

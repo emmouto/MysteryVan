@@ -45,13 +45,16 @@ public class GameRunner {
         // Adds all the screens
         Game.screens().add(new MenuView("Menu"));
         Game.screens().add(new SelectionView("Selection"));
+        Game.screens().add(new SelectionView("Selection_Name"));
+        Game.screens().add(new SelectionView("Selection_Character"));
+        Game.screens().add(new SelectionView("Selection_Level"));
         Game.screens().add(new HelpView("Help"));
         Game.screens().add(new HighScoreView("HighScore"));
         Game.screens().add(new DefeatView("Defeat"));
         Game.screens().add(new PauseView("Pause"));
 
         // Displays the title screen ("Menu").
-        Game.screens().display("Menu");
+        Game.screens().display("Selection");
 
         /*
             Game.graphics().setBaseRenderScale(2.001f);

@@ -1,7 +1,7 @@
 package Model;
 
 /**
- * Highscore Class saves and adds the points the player collects during the game,
+ * HighScore Class saves and adds the points the player collects during the game,
  * which can later be shown in the Highscore screen.
  * A player receives points when killing enemies.
  *

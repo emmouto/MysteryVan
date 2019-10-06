@@ -8,6 +8,7 @@ import java.util.List;
  * @author
  */
 public class Player implements IMovable, ICollidable{
+    private String name;
     private int HP;
     private int strength;
     private int defence;
@@ -46,6 +47,14 @@ public class Player implements IMovable, ICollidable{
         this.collider = new Collider();
         this.collider.updatePosition(posX, posY);
         this.collider.updateSize(width, height);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getHP() {
@@ -152,7 +161,7 @@ public class Player implements IMovable, ICollidable{
     /**
      * TODO description
      */
-    public void update(){
+    public void update() {
         doGravity();
         updateCollider();
     }
@@ -160,7 +169,7 @@ public class Player implements IMovable, ICollidable{
     /**
      * TODO description
      */
-    public void move(){
+    public void move() {
 
     }
 
@@ -170,7 +179,7 @@ public class Player implements IMovable, ICollidable{
      * @param platforms
      *      TODO description
      */
-    public void checkGrounded(List<Platform> platforms){
+    public void checkGrounded(List<Platform> platforms) {
         if(!isGrounded){
             for (ICollidable platform : platforms){
                 if (!isGrounded){
@@ -180,7 +189,7 @@ public class Player implements IMovable, ICollidable{
         }
     }
 
-    private void updateCollider(){
+    private void updateCollider() {
         this.collider.updatePosition(getX(),getY());
     }
 

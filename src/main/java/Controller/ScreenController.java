@@ -112,13 +112,7 @@ public class ScreenController extends Menu {
         });
     }
 
-    /**
-     * TODO description
-     *
-     * @param consumer
-     *      TODO description
-     */
-    public void onConfirm(Consumer<Integer> consumer) {
+    private void onConfirm(Consumer<Integer> consumer) {
         this.confirmConsumer.add(consumer);
     }
 
@@ -166,7 +160,7 @@ public class ScreenController extends Menu {
         this.updateFocus();
     }
 
-    public void incFocus() {
+    private void incFocus() {
         this.currentFocus = ++this.currentFocus % this.getCellComponents().size();
         this.updateFocus();
     }
@@ -186,22 +180,16 @@ public class ScreenController extends Menu {
     }
 
     /**
-     * TODO description
+     * Places the MenuView buttons in their correct places.
      */
     public void fixMenuView() {
-        // Places the MenuView buttons in their correct places.
         this.getCellComponents().get(0).setX(210);
         this.getCellComponents().get(0).setY(460);
         this.getCellComponents().get(1).setX(550);
         this.getCellComponents().get(1).setY(460);
         this.getCellComponents().get(2).setX(880);
         this.getCellComponents().get(2).setY(460);
-    }
 
-    /**
-     * TODO description
-     */
-    public void disableController() {
-        this.setEnabled(false);
+        incFocus();
     }
 }

@@ -1,14 +1,17 @@
 package View;
 
-import Controller.ScreenController;
 import Controller.SelectionController;
+import Model.CHARACTER;
 import Model.GameManager;
+
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.IUpdateable;
 import de.gurkenlabs.litiengine.graphics.ImageRenderer;
 import de.gurkenlabs.litiengine.graphics.TextRenderer;
 import de.gurkenlabs.litiengine.gui.screens.Screen;
 import de.gurkenlabs.litiengine.resources.Resources;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -18,23 +21,12 @@ import java.awt.image.BufferedImage;
  *
  * @author Emma Pettersson
  */
-public class SelectionView extends Screen implements IUpdateable {
+public class SelectionView extends Screen implements IUpdateable, Observable {
+    private String screenName;
+
     SelectionController selectionController;
 
     public TextField nameField;
-
-    // Temporary
-        final BufferedImage CH1 = Resources.images().get("src/main/resources/SelectionView/ch1.png");
-        final BufferedImage CH2 = Resources.images().get("src/main/resources/SelectionView/ch2.png");
-        final BufferedImage CH3 = Resources.images().get("src/main/resources/SelectionView/ch3.png");
-        final BufferedImage CH4 = Resources.images().get("src/main/resources/SelectionView/ch4.png");
-        final BufferedImage CH5 = Resources.images().get("src/main/resources/SelectionView/ch5.png");
-
-        final BufferedImage P1 = Resources.images().get("src/main/resources/SelectionView/p1.png");
-        final BufferedImage P2 = Resources.images().get("src/main/resources/SelectionView/p2.png");
-        final BufferedImage P3 = Resources.images().get("src/main/resources/SelectionView/p3.png");
-        final BufferedImage P4 = Resources.images().get("src/main/resources/SelectionView/p4.png");
-        final BufferedImage P5 = Resources.images().get("src/main/resources/SelectionView/p5.png");
 
     /**
      * @param screenName
@@ -42,13 +34,21 @@ public class SelectionView extends Screen implements IUpdateable {
      */
     public SelectionView(String screenName) {
         super(screenName);
+        this.screenName = screenName;
     }
 
     @Override
     protected void initializeComponents() {
+        this.selectionController = new SelectionController(0, 0);
+        this.getComponents().add(this.selectionController);
+
         nameField = new TextField("");
     }
 
+    /**
+     * Prepare the GuiComponent and all its child Components
+     * (Makes the GuiComponent visible and adds mouse listeners.).
+     */
     @Override
     public void prepare() {
         super.prepare();
@@ -62,29 +62,55 @@ public class SelectionView extends Screen implements IUpdateable {
      */
     @Override
     public void render(final Graphics2D g) {
-        final BufferedImage BG = Resources.images().get("src/main/resources/SelectionView/bg.png");
+        switch (screenName) {
+            case "Selection":
+                final BufferedImage BG = Resources.images().get("src/main/resources/SelectionView/bg.png");
 
-        renderMovingBG(g);
-        ImageRenderer.render(g, BG, 0, 0);
+                renderMovingBG(g);
+                ImageRenderer.render(g, BG, 0, 0);
+                break;
 
-        g.setFont(GameManager.PIXELED_MEDIUM);
-        g.setColor(Color.WHITE);
-        TextRenderer.renderWithOutline(g, "Who are you?", GameManager.centerX - (12 * 40) / 2.0, 100, Color.BLACK);
+            case "Selection_Name":
+                enterName(g);
+                break;
 
-        renderCharacterPortraits(g);
+            case "Selection_Character":
+                chooseCharacter(g);
+                break;
+
+            case "Selection_Level":
+
+                break;
+        }
 
         super.render(g);
     }
 
-    private void renderCharacterPortraits(final Graphics2D g) {
-        ImageRenderer.render(g, P1, 295, 150);
-        ImageRenderer.render(g, P2, 445, 150);
-        ImageRenderer.render(g, P3, GameManager.centerX - (P3.getWidth() / 2.0), 150);
-        ImageRenderer.render(g, P4, 745, 150);
-        ImageRenderer.render(g, P5, 895, 150);
+    public void enterName(final Graphics2D g) {
+        g.setFont(GameManager.PIXELED_MEDIUM);
+        g.setColor(Color.WHITE);
+        TextRenderer.renderWithOutline(g, "Enter your name", GameManager.centerX - (12 * 40) / 2.0,
+                100, Color.BLACK);
     }
 
-    private void renderChosenCharacter(final Graphics2D g, String characterID) {
+    public void chooseCharacter(final Graphics2D g) {
+        g.setFont(GameManager.PIXELED_MEDIUM);
+        g.setColor(Color.WHITE);
+        TextRenderer.renderWithOutline(g, "Choose your character", GameManager.centerX - (12 * 40) / 2.0,
+                100, Color.BLACK);
+
+        renderCharacterPortraits(g);
+    }
+
+    private void renderCharacterPortraits(final Graphics2D g) {
+        ImageRenderer.render(g, CHARACTER.ADAM.getCharacterPortrait(), 295, 150);
+        ImageRenderer.render(g, CHARACTER.ANTONIA.getCharacterPortrait(), 445, 150);
+        ImageRenderer.render(g, CHARACTER.EMMA.getCharacterPortrait(), 600, 150);
+        ImageRenderer.render(g, CHARACTER.JENNIFER.getCharacterPortrait(), 745, 150);
+        ImageRenderer.render(g, CHARACTER.JONATHAN.getCharacterPortrait(), 895, 150);
+    }
+
+    private void renderChosenCharacter(final Graphics2D g, CHARACTER character) {
 
     }
 
@@ -102,10 +128,20 @@ public class SelectionView extends Screen implements IUpdateable {
     }
 
     /**
-     * No idea what this does tbh
+     * This method is called by the game loop on all objects that need to update their attributes.
      */
     @Override
     public void update() {
+
+    }
+
+    @Override
+    public void addListener(InvalidationListener listener) {
+
+    }
+
+    @Override
+    public void removeListener(InvalidationListener listener) {
 
     }
 }

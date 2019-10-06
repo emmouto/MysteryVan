@@ -1,8 +1,8 @@
 package View;
 
-
 import Controller.ScreenController;
 import Model.GameManager;
+
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.IUpdateable;
 import de.gurkenlabs.litiengine.graphics.ImageRenderer;

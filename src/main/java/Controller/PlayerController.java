@@ -23,7 +23,7 @@ public class PlayerController implements IUpdateable {
      */
     public PlayerController() {
         super();
-        spawnPlayer("player", 100, 100, 0,new Hat("ugly", new Boost("boost", 0, 0, 0)), new Weapon("xd", 0, 0));
+        spawnPlayer("player", 100, 100, 0, new Hat("ugly", new Boost("boost", 0, 0, 0)), new Weapon("xd", 0, 0));
         updatePlayerController();
     }
 
@@ -94,12 +94,11 @@ public class PlayerController implements IUpdateable {
      */
     @Override
     public void update() {
-        for(int i = 0; i < playerList.size(); i++){
+        for (int i = 0; i < playerList.size(); i++) {
             getPlayers().get(i).update();
             getPlayers().get(i).checkGrounded(this.map.getPlatforms());
-            creatureList.get(i).setLocation(playerList.get(i).getX(),playerList.get(i).getY());
+            creatureList.get(i).setLocation(playerList.get(i).getX(), playerList.get(i).getY());
         }
-
     }
 
     /**

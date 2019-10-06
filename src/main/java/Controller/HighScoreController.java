@@ -64,7 +64,7 @@ public class HighScoreController {
         setH(this.HighScoreList); // Change later? this is used for testing with hardcoded values.
         sortList(this.HighScoreList); // Change later? this is used for testing with hardcoded values.
 
-        try{
+        try {
             HighScoreDataPath = HighScoreController.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
         } catch (Exception e){
             e.printStackTrace();
@@ -85,11 +85,10 @@ public class HighScoreController {
 
             writer.write("No HighScore:0");
             writer.close();
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 
     /**
      * Loads the HighScores from the file.
