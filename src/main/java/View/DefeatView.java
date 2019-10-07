@@ -32,7 +32,7 @@ public class DefeatView extends Screen {
     private int timer2 = 5;
     private int timer3 = 5;
 
-    private int score;
+    private int score = 0;
 
     /**
      * Constructor. Sets the name of the screen.
