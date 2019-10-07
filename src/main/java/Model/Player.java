@@ -20,6 +20,7 @@ public class Player implements IMovable, ICollidable{
     private int posY;
     private int height;
     private int width;
+    private int maxHP;
     private String sprite;
     private Collider collider;
     private boolean isGrounded = false;
@@ -47,6 +48,8 @@ public class Player implements IMovable, ICollidable{
         this.collider = new Collider();
         this.collider.updatePosition(posX, posY);
         this.collider.updateSize(width, height);
+        this.maxHP = 10;
+
     }
 
     public String getName() {
@@ -158,6 +161,10 @@ public class Player implements IMovable, ICollidable{
         return posY;
     }
 
+    public int getMaxHP(){
+        return this.maxHP;
+    }
+
     /**
      * TODO description
      */
@@ -191,6 +198,10 @@ public class Player implements IMovable, ICollidable{
 
     private void updateCollider() {
         this.collider.updatePosition(getX(),getY());
+    }
+
+    private void notifyListeners(){
+
     }
 
     private void doGravity(){

@@ -43,6 +43,7 @@ public class Enemy implements ICollidable, IMovable {
             return true;
         } else return collider.isColliding(player, "LEFT");
 
+        return false;
     }
 
     private void doGravity(){

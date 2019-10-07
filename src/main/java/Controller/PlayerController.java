@@ -1,8 +1,10 @@
 package Controller;
 
 import Model.*;
+import View.GameView;
 import de.gurkenlabs.litiengine.IUpdateable;
 import de.gurkenlabs.litiengine.entities.Creature;
+import de.gurkenlabs.litiengine.gui.screens.Screen;
 import de.gurkenlabs.litiengine.physics.MovementController;
 
 import java.util.ArrayList;
@@ -17,6 +19,7 @@ public class PlayerController implements IUpdateable {
     List<Player> playerList = new ArrayList<>();
     List<Creature> creatureList = new ArrayList<>();
     private Map map;
+    private GameView gameView;
 
     /**
      * TODO description
@@ -43,6 +46,26 @@ public class PlayerController implements IUpdateable {
         while (true) {
             playerList.get(0).setPosX(playerList.get(0).getPosX() + 1);
         }
+    }
+
+    public List<Player> getPlayers() {
+        return playerList;
+    }
+
+    public List<Creature> getCreatures() {
+        return creatureList;
+    }
+
+    public Creature getPlayer1(){
+        return creatureList.get(0);
+    }
+
+    public GameView getGameView() {
+        return gameView;
+    }
+
+    public void setGameView(Screen gameView) {
+        this.gameView = (GameView) gameView;
     }
 
     /**
@@ -79,7 +102,7 @@ public class PlayerController implements IUpdateable {
             for (int i = 0; i < playerList.size(); i++) {
                 Creature c = new Creature();
                 creatureList.add(c);
-                creatureList.get(i).getHitPoints().setMaxValue(10);
+                creatureList.get(i).getHitPoints().setMaxValue(playerList.get(i).getMaxHP());
                 creatureList.get(i).getHitPoints().setToMaxValue();
                 creatureList.get(i).getHitBox().getBounds().height = playerList.get(i).getHeight();
                 creatureList.get(i).getHitBox().getBounds().width = playerList.get(i).getWidth();
