@@ -129,7 +129,7 @@ public class ScreenController extends Menu {
             this.onConfirm(c -> {
                 switch (c) {
                     case 0:
-                        GameManager.setState(GameManager.GameState.HIGHSCORE_SCREEN);
+                        GameManager.setState(GameManager.GameState.HIGH_SCORE_SCREEN);
                         MenuView.showHighScore();
                         break;
                     case 1:
@@ -144,9 +144,9 @@ public class ScreenController extends Menu {
                 }
             });
         } else if (GameManager.getState() == GameManager.GameState.DEFEAT_SCREEN) {
-            GameManager.setState(GameManager.GameState.HIGHSCORE_SCREEN);
+            GameManager.setState(GameManager.GameState.HIGH_SCORE_SCREEN);
             DefeatView.showHighScore();
-        } else if (GameManager.getState() == GameManager.GameState.HIGHSCORE_SCREEN) {
+        } else if (GameManager.getState() == GameManager.GameState.HIGH_SCORE_SCREEN) {
             GameManager.setState(GameManager.GameState.TITLE_SCREEN);
             HighScoreView.showMenu();
         } else if (GameManager.getState() == GameManager.GameState.HELP_SCREEN) {

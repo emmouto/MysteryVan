@@ -34,7 +34,7 @@ public final class GameManager {
         INGAME_PAUSE,
         DEFEAT_SCREEN,
         TITLE_SCREEN,
-        HIGHSCORE_SCREEN,
+        HIGH_SCORE_SCREEN,
         HELP_SCREEN,
         SELECTION_SCREEN
     }
