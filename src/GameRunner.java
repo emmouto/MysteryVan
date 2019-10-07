@@ -3,6 +3,7 @@ import Controller.MapController;
 import Controller.PlayerController;
 import Model.Enemy;
 import Model.Player;
+import View.GameView;
 import com.sun.javafx.iio.png.PNGImageLoader2;
 import de.gurkenlabs.litiengine.Direction;
 import de.gurkenlabs.litiengine.Game;
@@ -55,7 +56,7 @@ public class GameRunner {
         Game.window().setResolution(Resolution.custom(1280, 720, "720p"));
 
         Game.graphics().setBaseRenderScale(2.001f);
-        Game.screens().add(new GameScreen());
+        Game.screens().add(new GameView("game"));
 
         Resources.load("game.litidata");
 
@@ -66,6 +67,7 @@ public class GameRunner {
         mc.initCamera();
         ec.loadMap(mc.getMap());
         pc.loadMap(mc.getMap());
+        pc.setGameView(Game.screens().current());
 
 
         CreatureMapObjectLoader.registerCustomCreatureType(ec.getCreatures().get(0).getClass());

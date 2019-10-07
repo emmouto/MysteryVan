@@ -1,8 +1,10 @@
 package Controller;
 
 import Model.*;
+import View.GameView;
 import de.gurkenlabs.litiengine.IUpdateable;
 import de.gurkenlabs.litiengine.entities.Creature;
+import de.gurkenlabs.litiengine.gui.screens.Screen;
 import de.gurkenlabs.litiengine.physics.MovementController;
 
 import java.util.ArrayList;
@@ -13,6 +15,7 @@ public class PlayerController implements IUpdateable {
     List<Player> playerList = new ArrayList<>();
     List<Creature> creatureList = new ArrayList<>();
     private Map map;
+    private GameView gameView;
 
 
     public PlayerController() {
@@ -45,6 +48,14 @@ public class PlayerController implements IUpdateable {
         return creatureList.get(0);
     }
 
+    public GameView getGameView() {
+        return gameView;
+    }
+
+    public void setGameView(Screen gameView) {
+        this.gameView = (GameView) gameView;
+    }
+
     public void spawnPlayer(String name, int hp, int defense, int strength, Hat hat, Weapon weapon){
         Player p = new Player(name, 0, 0, 18, 35);
         p.setHP(hp);
@@ -60,7 +71,7 @@ public class PlayerController implements IUpdateable {
             for (int i = 0; i < playerList.size(); i++) {
                 Creature c = new Creature();
                 creatureList.add(c);
-                creatureList.get(i).getHitPoints().setMaxValue(10);
+                creatureList.get(i).getHitPoints().setMaxValue(playerList.get(i).getMaxHP());
                 creatureList.get(i).getHitPoints().setToMaxValue();
                 creatureList.get(i).getHitBox().getBounds().height = playerList.get(i).getHeight();
                 creatureList.get(i).getHitBox().getBounds().width = playerList.get(i).getWidth();
