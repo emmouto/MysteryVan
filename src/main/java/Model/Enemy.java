@@ -2,6 +2,9 @@ package Model;
 
 import java.util.List;
 
+/**
+ *
+ */
 public class Enemy implements ICollidable, IMovable {
     private int HP;
     private Equipment equipment = new Equipment(); //Enemy can have a weapon, armor etc that will make them harder to defeat.
@@ -13,6 +16,14 @@ public class Enemy implements ICollidable, IMovable {
     private String sprite;
     private boolean isGrounded = false;
 
+    /**
+     *
+     * @param sprite
+     * @param posX
+     * @param posY
+     * @param width
+     * @param height
+     */
     public Enemy(String sprite, int posX, int posY, int width, int height){
         this.sprite = sprite;
         this.x = posX;
@@ -24,6 +35,10 @@ public class Enemy implements ICollidable, IMovable {
         this.collider.updateSize(width, height);
     }
 
+    /**
+     *
+     * @param platforms
+     */
     public void checkGrounded(List<Platform> platforms){
         if(!isGrounded){
             for (ICollidable platform : platforms){
@@ -34,14 +49,22 @@ public class Enemy implements ICollidable, IMovable {
         }
     }
 
+    /**
+     *
+     * @param player
+     *
+     * @return
+     */
     public boolean checkPlayerCollision(ICollidable player){
-        if (collider.isColliding(player, "UP")){
+        if (collider.isColliding(player, "UP")) {
             return true;
-        } else if (collider.isColliding(player, "RIGHT")){
+        } else if (collider.isColliding(player, "RIGHT")) {
             return true;
-        } else if(collider.isColliding(player, "DOWN")){
+        } else if (collider.isColliding(player, "DOWN")) {
             return true;
-        } else return collider.isColliding(player, "LEFT");
+        } else if (collider.isColliding(player, "LEFT")) {
+            return true;
+        }
 
         return false;
     }

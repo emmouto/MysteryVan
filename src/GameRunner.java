@@ -45,9 +45,6 @@ public class GameRunner {
         // Adds all the screens
         Game.screens().add(new MenuView("Menu"));
         Game.screens().add(new SelectionView("Selection"));
-        Game.screens().add(new SelectionView("Selection_Name"));
-        Game.screens().add(new SelectionView("Selection_Character"));
-        Game.screens().add(new SelectionView("Selection_Level"));
         Game.screens().add(new HelpView("Help"));
         Game.screens().add(new HighScoreView("HighScore"));
         Game.screens().add(new DefeatView("Defeat"));

@@ -1,6 +1,8 @@
 Render Loop threw an exception:
 java.lang.NullPointerException
-	at View.SelectionView.render(SelectionView.java:78)
+	at View.SelectionView$enterNameComponent.render(SelectionView.java:138)
+	at de.gurkenlabs.litiengine.gui.GuiComponent.render(GuiComponent.java:713)
+	at View.SelectionView.render(SelectionView.java:65)
 	at de.gurkenlabs.litiengine.graphics.RenderComponent.render(RenderComponent.java:157)
 	at de.gurkenlabs.litiengine.RenderLoop.process(RenderLoop.java:25)
 	at de.gurkenlabs.litiengine.UpdateLoop.run(UpdateLoop.java:46)

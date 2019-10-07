@@ -8,10 +8,10 @@ import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.IUpdateable;
 import de.gurkenlabs.litiengine.graphics.ImageRenderer;
 import de.gurkenlabs.litiengine.graphics.TextRenderer;
+import de.gurkenlabs.litiengine.gui.GuiComponent;
+import de.gurkenlabs.litiengine.gui.TextFieldComponent;
 import de.gurkenlabs.litiengine.gui.screens.Screen;
 import de.gurkenlabs.litiengine.resources.Resources;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -21,12 +21,9 @@ import java.awt.image.BufferedImage;
  *
  * @author Emma Pettersson
  */
-public class SelectionView extends Screen implements IUpdateable, Observable {
-    private String screenName;
-
+public class SelectionView extends Screen implements IUpdateable {
+    private enterNameComponent enterNameComponent;
     SelectionController selectionController;
-
-    public TextField nameField;
 
     /**
      * @param screenName
@@ -34,15 +31,14 @@ public class SelectionView extends Screen implements IUpdateable, Observable {
      */
     public SelectionView(String screenName) {
         super(screenName);
-        this.screenName = screenName;
+
+        this.enterNameComponent = new enterNameComponent();
+        this.getComponents().add(this.enterNameComponent);
     }
 
     @Override
     protected void initializeComponents() {
-        this.selectionController = new SelectionController(0, 0);
-        this.getComponents().add(this.selectionController);
 
-        nameField = new TextField("");
     }
 
     /**
@@ -62,44 +58,24 @@ public class SelectionView extends Screen implements IUpdateable, Observable {
      */
     @Override
     public void render(final Graphics2D g) {
-        switch (screenName) {
-            case "Selection":
-                final BufferedImage BG = Resources.images().get("src/main/resources/SelectionView/bg.png");
+        final BufferedImage BG = Resources.images().get("src/main/resources/SelectionView/bg.png");
 
-                renderMovingBG(g);
-                ImageRenderer.render(g, BG, 0, 0);
-                break;
-
-            case "Selection_Name":
-                enterName(g);
-                break;
-
-            case "Selection_Character":
-                chooseCharacter(g);
-                break;
-
-            case "Selection_Level":
-
-                break;
-        }
+        renderMovingBG(g);
+        ImageRenderer.render(g, BG, 0, 0);
 
         super.render(g);
     }
 
-    public void enterName(final Graphics2D g) {
-        g.setFont(GameManager.PIXELED_MEDIUM);
-        g.setColor(Color.WHITE);
-        TextRenderer.renderWithOutline(g, "Enter your name", GameManager.centerX - (12 * 40) / 2.0,
-                100, Color.BLACK);
-    }
-
     public void chooseCharacter(final Graphics2D g) {
+        String headerText = "Choose your character";
+
         g.setFont(GameManager.PIXELED_MEDIUM);
         g.setColor(Color.WHITE);
-        TextRenderer.renderWithOutline(g, "Choose your character", GameManager.centerX - (12 * 40) / 2.0,
-                100, Color.BLACK);
+        TextRenderer.renderWithOutline(g, headerText, GameManager.centerX - (headerText.length() * g.getFont().getSize()) / 2.0, 100, Color.BLACK);
 
         renderCharacterPortraits(g);
+
+        super.render(g);
     }
 
     private void renderCharacterPortraits(final Graphics2D g) {
@@ -135,13 +111,43 @@ public class SelectionView extends Screen implements IUpdateable, Observable {
 
     }
 
-    @Override
-    public void addListener(InvalidationListener listener) {
+    /**
+     *
+     */
+    public static class enterNameComponent extends GuiComponent {
+        TextFieldComponent enterName;
 
-    }
+        enterNameComponent() {
+            super(0, 0, Game.window().getResolution().getWidth(), Game.window().getResolution().getHeight());
 
-    @Override
-    public void removeListener(InvalidationListener listener) {
+            enterName = new TextFieldComponent(GameManager.centerX - (300 / 2.0), 200, 300, 100, null, "|");
+            this.getComponents().add(this.enterName);
+        }
 
+        /**
+         *
+         * @param g
+         *      The graphics object to render on.
+         */
+        @Override
+        public void render(Graphics2D g) {
+            renderHeader(g);
+            renderTextField(g);
+
+            super.render(g);
+        }
+
+        private void renderHeader(Graphics2D g) {
+            String headerText = "Enter your name";
+
+            g.setFont(GameManager.PIXELED_MEDIUM);
+            g.setColor(Color.WHITE);
+            TextRenderer.renderWithOutline(g, headerText, GameManager.centerX - (headerText.length() * g.getFont().getSize()) / 2.0, 100, Color.BLACK);
+        }
+
+        private void renderTextField(Graphics2D g) {
+            enterName.setFont(GameManager.RAINY_MEDIUM);
+            enterName.getAppearance().setForeColor(Color.BLACK);
+        }
     }
 }

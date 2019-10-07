@@ -10,15 +10,15 @@ import java.awt.image.BufferedImage;
  * @author Emma Pettersson
  */
 public enum CHARACTER {
-    ADAM("Passive-aggressive and undead",15, 20, 10,
+    ADAM    ("Passive-aggressive and undead",15, 20, 10,
             Resources.images().get("src/main/resources/SelectionView/Adam.png"),
             Resources.images().get("src/main/resources/SelectionView/p1.png")),
 
-    ANTONIA("Strong and hungry",20, 25, 20,
+    ANTONIA ("Strong and hungry",20, 25, 20,
             Resources.images().get("src/main/resources/SelectionView/Antonia.png"),
             Resources.images().get("src/main/resources/SelectionView/p2.png")),
 
-    EMMA("Brave and stylish", 20, 15, 10,
+    EMMA    ("Brave and stylish", 20, 15, 10,
             Resources.images().get("src/main/resources/SelectionView/Emma.png"),
             Resources.images().get("src/main/resources/SelectionView/p3.png")),
 
@@ -35,8 +35,24 @@ public enum CHARACTER {
     private int str;
     private int def;
     private BufferedImage characterPortrait;
-    private BufferedImage sprite;
+    private BufferedImage sprite; // Temporary - should be changed to String later.
 
+    /**
+     * Constructor for a CHARACTER.
+     *
+     * @param description
+     *      Short description of the character (flavour text).
+     * @param hp
+     *      The CHARACTER's base health points.
+     * @param str
+     *      The CHARACTER's base strength.
+     * @param def
+     *      The CHARACTER's base defence.
+     * @param characterPortrait
+     *      The CHARACTER's portrait, used when selecting character.
+     * @param sprite
+     *      The CHARACTER's sprite.
+     */
     CHARACTER(String description, int hp, int str, int def, BufferedImage characterPortrait, BufferedImage sprite) {
         this.description = description;
         this.hp = hp;

@@ -48,26 +48,6 @@ public class PlayerController implements IUpdateable {
         }
     }
 
-    public List<Player> getPlayers() {
-        return playerList;
-    }
-
-    public List<Creature> getCreatures() {
-        return creatureList;
-    }
-
-    public Creature getPlayer1(){
-        return creatureList.get(0);
-    }
-
-    public GameView getGameView() {
-        return gameView;
-    }
-
-    public void setGameView(Screen gameView) {
-        this.gameView = (GameView) gameView;
-    }
-
     /**
      * TODO description
      *
@@ -134,7 +114,7 @@ public class PlayerController implements IUpdateable {
         this.map = map;
     }
 
-    // Getters - JavaDoc not needed
+    // Getters & Setters - JavaDoc not needed
     public List<Player> getPlayers() {
         return playerList;
     }
@@ -145,5 +125,13 @@ public class PlayerController implements IUpdateable {
 
     public Creature getPlayer1(){
         return creatureList.get(0);
+    }
+
+    public GameView getGameView() {
+        return gameView;
+    }
+
+    public void setGameView(Screen gameView) {
+        this.gameView = (GameView) gameView;
     }
 }
