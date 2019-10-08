@@ -49,9 +49,10 @@ public class GameRunner {
         Game.screens().add(new HighScoreView("HighScore"));
         Game.screens().add(new DefeatView("Defeat"));
         Game.screens().add(new PauseView("Pause"));
+        Game.screens().add(new GameView("Game"));
 
         // Displays the title screen ("Menu").
-        Game.screens().display("Selection");
+        Game.screens().display("Game");
 
         /*
             Game.graphics().setBaseRenderScale(2.001f);

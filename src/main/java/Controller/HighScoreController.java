@@ -4,6 +4,8 @@ import Model.HighScore;
 
 import java.io.*;
 import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Creates and sorts a list of HighScores that is displayed in the HighScoreView.
@@ -49,28 +51,26 @@ public class HighScoreController {
     private HighScore h9 = new HighScore(p9, player9);
     private HighScore h10 = new HighScore(p10, player10);
 
-    private List<HighScore> HighScoreList = new ArrayList<HighScore>();
+    private List<HighScore> highScoreList = new ArrayList<>();
     private String HighScoreDataPath;
     private String filename = "HighScoreData";
 
     /**
      * Class constructor.
      *
-     * @param HighScoreList
-     *      List containing HighScores.
+     * @param highScoreList List containing HighScores.
      */
-    public HighScoreController(List<HighScore> HighScoreList) {
-        this.HighScoreList = HighScoreList;
-        setH(this.HighScoreList); // Change later? this is used for testing with hardcoded values.
-        sortList(this.HighScoreList); // Change later? this is used for testing with hardcoded values.
+    public HighScoreController(List<HighScore> highScoreList) {
+        this.highScoreList = highScoreList;
+        setH(this.highScoreList); // Change later? this is used for testing with hardcoded values.
+        sortList(this.highScoreList); // Change later? this is used for testing with hardcoded values.
 
         try {
             HighScoreDataPath = HighScoreController.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        setHighScoreData();
         loadHighScore();
     }
 
@@ -96,11 +96,11 @@ public class HighScoreController {
     private void loadHighScore() {
         String line;
         int playerScore;
-        String [] storeSplit;
+        String[] storeSplit;
         String playerName;
         HighScore newHigh;
 
-        HighScoreList.clear();
+        highScoreList.clear();
 
         try {
             File file = new File(HighScoreDataPath, filename);
@@ -115,16 +115,16 @@ public class HighScoreController {
                 throw new IOException();
             }
 
-           while ((line = reader.readLine()) != null) {
-               storeSplit = line.split(":");
-               playerScore = Integer.parseInt(storeSplit[1]);
-               playerName = storeSplit[0];
-               newHigh = new HighScore(playerScore, playerName);
-               HighScoreList.add(newHigh);
-           }
+            while ((line = reader.readLine()) != null) {
+                storeSplit = line.split(":");
+                playerScore = Integer.parseInt(storeSplit[1]);
+                playerName = storeSplit[0];
+                newHigh = new HighScore(playerScore, playerName);
+                highScoreList.add(newHigh);
+            }
 
-           reader.close();
-        } catch(Exception e) {
+            reader.close();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -132,7 +132,7 @@ public class HighScoreController {
     /**
      * Writes the HighScore list to the file.
      */
-    private void setHighScoreData (){
+    private void setHighScoreData() {
         FileWriter output = null;
 
         try {
@@ -140,12 +140,12 @@ public class HighScoreController {
             output = new FileWriter(file);
             BufferedWriter writer = new BufferedWriter(output);
 
-            for (HighScore HighScore : HighScoreList) {
+            for (HighScore HighScore : highScoreList) {
                 writer.write(HighScore.getPlayer() + ":" + HighScore.getHighScore() + "\n");
             }
 
             writer.close();
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -153,49 +153,43 @@ public class HighScoreController {
     /**
      * Method to add a new HighScore to the list, if the score is greater than all other values on the list.
      *
-     * @param newScore
-     *      The score that possibly will be added to the list.
-     * @param HighScoreList
-     *      The list to which the HighScore is added.
+     * @param newScore      The score that possibly will be added to the list.
      */
-    // This method should be called when a gamerun has ended!!
-    public void addToScoreList(HighScore newScore, List<HighScore> HighScoreList) {
-        if (HighScoreList.size() < 10) {
-            HighScoreList.add(newScore);
+    public void addToScoreList(HighScore newScore) {
+        if (highScoreList.size() < 10) {
+            highScoreList.add(newScore);
         } else {
-            for (HighScore oldScores : HighScoreList) {
-                if (newScore.getHighScore() > oldScores.getHighScore()) {
-                    HighScoreList.remove(oldScores);
-                    HighScoreList.add(newScore);
-                    break;
-                }
+            if (newScore.getHighScore() > highScoreList.get(9).getHighScore()) {
+                highScoreList.remove(9);
+                highScoreList.add(newScore);
             }
         }
+        setHighScoreData();
     }
 
-    /**
-     * Method to sort the list in order of size, where the highest score is listed first.
-     *
-     * @param HighScoreList
-     *      List that needs to be sorted, usually after a new HighScore was added
-     */
-    private void sortList(List<HighScore> HighScoreList) {
+        /**
+         * Method to sort the list in order of size, where the highest score is listed first.
+         *
+         * @param highScoreList
+         *      List that needs to be sorted, usually after a new HighScore has been added.
+         */
+   private void sortList(List<HighScore> highScoreList){
         Comparator<HighScore> HighScoreComparator = Comparator.comparingInt(HighScore::getHighScore);
         Comparator<HighScore> comparatorReversed = HighScoreComparator.reversed();
 
-        HighScoreList.sort(comparatorReversed);
+        highScoreList.sort(comparatorReversed);
     }
 
-    private void setH(List<HighScore> hList) {
-        hList.add(h1);
-        hList.add(h2);
-        hList.add(h3);
-        hList.add(h4);
-        hList.add(h5);
-        hList.add(h6);
-        hList.add(h7);
-        hList.add(h8);
-        hList.add(h9);
-        hList.add(h10);
-    }
+    private void setH(List<HighScore> highScoreList) {
+        highScoreList.add(h1);
+        highScoreList.add(h2);
+        highScoreList.add(h3);
+        highScoreList.add(h4);
+        highScoreList.add(h5);
+        highScoreList.add(h6);
+        highScoreList.add(h7);
+        highScoreList.add(h8);
+        highScoreList.add(h9);
+        highScoreList.add(h10);
+      }
 }

@@ -40,7 +40,7 @@ public class HighScoreView extends Screen implements IUpdateable {
     }
 
     protected void initializeComponents() {
-        ScreenController screenController = new ScreenController(0, 0, 0, 0, "HighscoreView");
+        ScreenController screenController = new ScreenController(0, 0, 0, 0, "HighScoreView");
         this.getComponents().add(screenController);
     }
 

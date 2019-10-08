@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.*;
+import View.DefeatView;
 import View.GameView;
 import de.gurkenlabs.litiengine.IUpdateable;
 import de.gurkenlabs.litiengine.entities.Creature;
@@ -17,9 +18,13 @@ import java.util.List;
  */
 public class PlayerController implements IUpdateable {
     List<Player> playerList = new ArrayList<>();
-    List<Creature> creatureList = new ArrayList<>();
+    private List<Creature> creatureList = new ArrayList<>();
     private Map map;
     private GameView gameView;
+
+    private DefeatView dv;
+    private HighScoreController hc;
+
 
     /**
      * TODO description
@@ -101,6 +106,25 @@ public class PlayerController implements IUpdateable {
             getPlayers().get(i).update();
             getPlayers().get(i).checkGrounded(this.map.getPlatforms());
             creatureList.get(i).setLocation(playerList.get(i).getX(), playerList.get(i).getY());
+        }
+    }
+
+    /**
+     * Checks if player is dead, if so, then this method handles what happens.
+     */
+    // Call on this method somewhere were the game is updated!
+    private void whenDead(){
+
+        HighScore newScore;
+
+        for (Player p : playerList) {
+
+            if(p.getState() == Player.State.DEAD){
+                dv.scoreDefeat(p.getScore());
+                newScore = new HighScore(p.getScore(), p.getName());
+                hc.addToScoreList(newScore);
+                DefeatView.showDefeat();
+            }
         }
     }
 

@@ -99,8 +99,7 @@ public class DefeatView extends Screen {
      *
      * @param score
      */
-
-    public void scoreDefeat (int score){
+    public void scoreDefeat(int score){
         this.score = score;
     }
 
@@ -114,6 +113,18 @@ public class DefeatView extends Screen {
         Game.loop().perform(500, () -> {
             Game.window().getRenderComponent().fadeIn(500);
             Game.screens().display("HighScore");
+        });
+    }
+
+    /**
+     * Method displaying the defeat view when called.
+     */
+    public static void showDefeat() {
+        Game.window().getRenderComponent().fadeOut(500);
+
+        Game.loop().perform(500, () -> {
+            Game.window().getRenderComponent().fadeIn(500);
+            Game.screens().display("Defeat");
         });
     }
 }

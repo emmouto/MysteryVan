@@ -24,6 +24,8 @@ public class Player implements IMovable, ICollidable{
     private String sprite;
     private Collider collider;
     private boolean isGrounded = false;
+    private int score;
+    private State state;
 
     /**
      * TODO description
@@ -49,7 +51,16 @@ public class Player implements IMovable, ICollidable{
         this.collider.updatePosition(posX, posY);
         this.collider.updateSize(width, height);
         this.maxHP = 10;
+        this.score = 0;
+        state = State.ALIVE;
+    }
 
+    /**
+     * State of the player. Alive when created, dead when HP = 0;
+     */
+    public enum State {
+        DEAD,
+        ALIVE
     }
 
     public String getName() {
@@ -163,6 +174,22 @@ public class Player implements IMovable, ICollidable{
 
     public int getMaxHP(){
         return this.maxHP;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public State getState() {
+        return state;
+    }
+
+    public void setState(State state) {
+        this.state = state;
     }
 
     /**

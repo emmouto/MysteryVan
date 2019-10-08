@@ -11,15 +11,19 @@ import java.util.List;
 public class Map {
     private String name;
     private List<Platform> platforms= new ArrayList<>();
+    private Ground ground;
 
     /**
-     * TODO description
+     * Constructor for the game map.
      *
      * @param name
-     *      TODO description
+     *      Name of the map,
+     * @param ground
+     *      Type of ground for the map.
      */
-    public Map(String name) {
+    public Map(String name, Ground ground) {
         this.name = name;
+        this.ground = ground;
         init(name);
     }
 
@@ -27,7 +31,7 @@ public class Map {
      * TODO description
      *
      * @param name
-     *      TODO description
+     *      Name of the map.
      */
     public void init(String name){
         switch (name){
