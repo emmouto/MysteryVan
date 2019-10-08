@@ -34,7 +34,8 @@ public class Player implements IMovable, ICollidable{
         this.collider = new Collider();
         this.collider.updatePosition(posX, posY);
         this.collider.updateSize(width, height);
-        this.maxHP = 10;
+        this.maxHP = 23;
+        this.setHP(maxHP);
 
     }
 
