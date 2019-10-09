@@ -148,31 +148,6 @@ public class Player implements IMovable, ICollidable{
         return this.maxHP;
     }
 
-    /*public void keyPressed(KeyEvent e){
-        int key = e.getKeyCode();
-        if(key == KeyEvent.VK_W){
-            this.jump();
-        }
-        if(key == KeyEvent.VK_A){
-            this.dx = -1;
-        }
-        if(key == KeyEvent.VK_D){
-            this.dx = 1;
-        }
-    }
-
-    public void keyReleased(KeyEvent e) {
-
-        int key = e.getKeyCode();
-
-        if (key == KeyEvent.VK_A) {
-            dx = 0;
-        }
-        if (key == KeyEvent.VK_D) {
-            dx = 0;
-        }
-    }*/
-
     public void update(){
         move();
         doGravity();
@@ -180,14 +155,14 @@ public class Player implements IMovable, ICollidable{
     }
 
     public void move(){
-        if(Key.up.isDown){
+        if(Key.up.isDown && this.isGrounded ){
             this.jump();
         }
-        if(Key.left.isDown){
-            this.setPosX(getX()-1);
+        if(Key.left.isDown && this.getX() > 0){
+                this.setPosX(getX() - 1);
         }
-        if(Key.right.isDown){
-            this.setPosX(getX()+1);
+        if(Key.right.isDown && this.getX() < 720){
+                this.setPosX(getX() + 1);
         }
     }
 

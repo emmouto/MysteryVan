@@ -1,6 +1,7 @@
 package Controller;
 import Model.Key;
 import de.gurkenlabs.litiengine.IUpdateable;
+import de.gurkenlabs.litiengine.input.Input;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -10,12 +11,25 @@ public class KeyController implements KeyListener, IUpdateable {
     PlayerController pc;
     //Assigning the variable keys to actual letters
     public KeyController(PlayerController pc) {
+        this.pc = pc;
+        initKeyController();
+    }
+
+
+    private void initKeyController(){
         bind(KeyEvent.VK_W, Key.up);
         bind(KeyEvent.VK_A, Key.left);
         bind(KeyEvent.VK_S, Key.down);
         bind(KeyEvent.VK_D, Key.right);
         bind(KeyEvent.VK_SPACE, Key.special);
-        this.pc = pc;
+
+        Input.keyboard().onKeyPressed(e ->{
+            keyPressed(e);
+        });
+        Input.keyboard().onKeyReleased(e->{
+            keyReleased(e);
+        });
+
     }
 
     @Override
