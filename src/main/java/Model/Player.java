@@ -25,6 +25,7 @@ public class Player implements IMovable, ICollidable{
     private int height;
     private int width;
     private int maxHP;
+    private int score;
     private String sprite;
     private Collider collider;
     private boolean isGrounded = false;
@@ -158,6 +159,14 @@ public class Player implements IMovable, ICollidable{
         return this.maxHP;
     }
 
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
     /**
      * Updates the players position and its collider.
      */
@@ -165,8 +174,12 @@ public class Player implements IMovable, ICollidable{
         move();
         doGravity();
         updateCollider();
+        updateScore();
     }
 
+    private void updateScore(){
+        this.setScore(this.getScore()+1);
+    }
     /**
      * Moves the player depending on input from the user.
      */
@@ -182,6 +195,9 @@ public class Player implements IMovable, ICollidable{
         }
     }
 
+    /**
+     * Makes the player jump.
+     */
     public void jump(){
 
     }

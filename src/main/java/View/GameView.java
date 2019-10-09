@@ -1,10 +1,10 @@
 package View;
 
 import Controller.PlayerController;
-import Model.Player;
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.IUpdateable;
 import de.gurkenlabs.litiengine.graphics.ImageRenderer;
+import de.gurkenlabs.litiengine.graphics.TextRenderer;
 import de.gurkenlabs.litiengine.gui.GuiComponent;
 import de.gurkenlabs.litiengine.gui.screens.GameScreen;
 import de.gurkenlabs.litiengine.resources.Resources;
@@ -12,6 +12,8 @@ import de.gurkenlabs.litiengine.util.Imaging;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+
+import static java.awt.Color.BLACK;
 
 /**
  * @author Jonathan Carbol
@@ -22,6 +24,7 @@ public class GameView extends GameScreen implements IUpdateable {
     private Hud hud;
     private int HP;
     private int maxHP;
+    private int score;
 
     private static int PADDING =10;
     private final BufferedImage HEART = Imaging.scale(Resources.images().get("src/main/resources/heart.png"),0.05);
@@ -82,6 +85,14 @@ public class GameView extends GameScreen implements IUpdateable {
         this.maxHP = maxHP;
     }
 
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
     /**
      * @author Jonathan Carbol
      * An inbedded class Hud, used to display graphical components on the game screen.
@@ -93,6 +104,7 @@ public class GameView extends GameScreen implements IUpdateable {
          */
         protected Hud() {
             super(0, 0, Game.window().getResolution().getWidth(), Game.window().getResolution().getHeight());
+
         }
 
         /**
@@ -102,6 +114,7 @@ public class GameView extends GameScreen implements IUpdateable {
         @Override
         public void render(Graphics2D g) {
             renderHP(g);
+            renderScore(g);
             super.render(g);
         }
 
@@ -137,6 +150,18 @@ public class GameView extends GameScreen implements IUpdateable {
                 }
                 ImageRenderer.render(g, img, x + (i * img.getWidth()/4) + PADDING, y);
             }
+        }
+
+        /**
+         * Renders the score of the player.
+         * @param g the graphic to be rendered.
+         */
+        private void renderScore(Graphics2D g){
+            //g.setFont(GameManager.PIXELED_BIG);
+            g.setColor(BLACK);
+
+            String string = Integer.toString(score);
+            TextRenderer.render(g,string,50,50);
         }
     }
 

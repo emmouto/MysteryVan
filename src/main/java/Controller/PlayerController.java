@@ -5,7 +5,6 @@ import View.GameView;
 import de.gurkenlabs.litiengine.IUpdateable;
 import de.gurkenlabs.litiengine.entities.Creature;
 import de.gurkenlabs.litiengine.gui.screens.Screen;
-import de.gurkenlabs.litiengine.physics.MovementController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -113,6 +112,7 @@ public class PlayerController implements IUpdateable {
             getPlayers().get(i).checkGrounded(this.map.getPlatforms());
             creatureList.get(i).setLocation(playerList.get(i).getX(),playerList.get(i).getY());
             updateHealth(i);
+            updateScore(i);
         }
 
     }
@@ -126,6 +126,14 @@ public class PlayerController implements IUpdateable {
         gameView.setMaxHP(playerList.get(i).getMaxHP());
         creatureList.get(i).getHitPoints().setMaxValue(playerList.get(i).getHP());
         creatureList.get(i).getHitPoints().setToMaxValue();
+    }
+
+    /**
+     * Updates the score of the player and sends the data to the view to be displayed.
+     * @param i the index of the player to be updated.
+     */
+    public void updateScore(int i){
+        gameView.setScore(playerList.get(i).getScore());
     }
 
     /**
