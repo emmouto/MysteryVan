@@ -82,7 +82,7 @@ public class GameRunner {
 
         Game.world().loadEnvironment("new_map");
         Game.world().environment().add(ec.getCreatures().get(0));
-        pc.getCreatures().get(0).setLocation(0,100);
+        pc.getCreatures().get(0).setLocation(250,100);
         Game.world().environment().add(pc.getCreatures().get(0));
         Game.start();
 

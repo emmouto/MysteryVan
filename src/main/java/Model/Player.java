@@ -171,10 +171,10 @@ public class Player implements IMovable, ICollidable{
      * Updates the players position and its collider.
      */
     public void update(){
-        move();
         doGravity();
         updateCollider();
         updateScore();
+        move();
     }
 
     private void updateScore(){
@@ -193,6 +193,7 @@ public class Player implements IMovable, ICollidable{
         if(Key.right.isDown && this.getX() < 720){
                 this.setPosX(getX() + 1);
         }
+        isGrounded = false;
     }
 
     /**
