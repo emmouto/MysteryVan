@@ -1,9 +1,10 @@
 package Model;
 
 /**
- * TODO description
+ * ...
  *
  * @author
+ * @version
  */
 public class Boost {
     //TODO change class to interface or similar? -----#####------
@@ -15,16 +16,12 @@ public class Boost {
     private int defence; // used to be armour
 
     /**
-     * TODO description
+     * ...
      *
      * @param name
-     *      TODO description
      * @param HP
-     *      TODO description
      * @param strength
-     *      TODO description
      * @param defence
-     *      TODO description
      */
     public Boost(String name, int HP, int strength, int defence) {
         this.name = name;

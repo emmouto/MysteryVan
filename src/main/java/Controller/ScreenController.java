@@ -21,6 +21,7 @@ import de.gurkenlabs.litiengine.input.Input;
  *
  * @author Emma Pettersson
  * @author Jennifer Krogh
+ * @version
  */
 public class ScreenController extends Menu {
     private static final int DELAY = 180;
@@ -34,15 +35,10 @@ public class ScreenController extends Menu {
      * Constructor for the ScreenController.
      *
      * @param x
-     *      TODO description
      * @param y
-     *      TODO description
      * @param width
-     *      TODO description
      * @param height
-     *      TODO description
      * @param items
-     *      TODO description
      */
     public ScreenController(double x, double y, double width, double height, String... items) {
         super(x, y, width, height, items);
@@ -90,7 +86,7 @@ public class ScreenController extends Menu {
     }
 
     /**
-     * TODO description
+     * ...
      */
     @Override
     public void prepare() {

@@ -3,7 +3,10 @@ package Model;
 import java.util.List;
 
 /**
+ * ...
  *
+ * @author
+ * @version
  */
 public class Enemy implements ICollidable, IMovable {
     private int HP;
@@ -17,6 +20,7 @@ public class Enemy implements ICollidable, IMovable {
     private boolean isGrounded = false;
 
     /**
+     * ...
      *
      * @param sprite
      * @param posX
@@ -36,6 +40,7 @@ public class Enemy implements ICollidable, IMovable {
     }
 
     /**
+     * ...
      *
      * @param platforms
      */
@@ -50,9 +55,9 @@ public class Enemy implements ICollidable, IMovable {
     }
 
     /**
+     * ...
      *
      * @param player
-     *
      * @return
      */
     public boolean checkPlayerCollision(ICollidable player){

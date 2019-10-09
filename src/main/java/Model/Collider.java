@@ -1,9 +1,10 @@
 package Model;
 
 /**
- * TODO description
+ * ...
  *
  * @author
+ * @version
  */
 public class Collider {
     private int radius;
@@ -15,19 +16,17 @@ public class Collider {
     private ICollidable body;
 
     /**
-     * TODO description
+     * ...
      */
     public Collider(){
 
     }
 
     /**
-     * TODO description
+     * ...
      *
      * @param x
-     *      TODO description
      * @param y
-     *      TODO description
      */
     public void updatePosition(int x, int y){
         this.x = x;
@@ -35,12 +34,10 @@ public class Collider {
     }
 
     /**
-     * TODO description
+     * ...
      *
      * @param width
-     *      TODO description
      * @param height
-     *      TODO description
      */
     public void updateSize(int width, int height){
         this.width = width;
@@ -48,15 +45,12 @@ public class Collider {
     }
 
     /**
-     * TODO description
+     * ...
      *
      * @param c
-     *      TODO description
      * @param direction
-     *      TODO description
      *
      * @return
-     *      TODO description
      */
     public boolean isColliding(ICollidable c, String direction){
         switch (direction){
@@ -83,7 +77,6 @@ public class Collider {
 
     }
 
-    // Getters - JavaDoc not needed
     public int getX(){
         return this.x;
     }

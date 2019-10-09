@@ -18,6 +18,7 @@ import java.awt.image.BufferedImage;
  *
  * @author Jennifer Krogh
  * @author Emma Pettersson
+ * @version
  */
 public class HelpView extends Screen implements IUpdateable {
     private static final BufferedImage BRICK_BG = Resources.images().get("src/main/resources/HelpView/BrickBG.png");
@@ -25,8 +26,7 @@ public class HelpView extends Screen implements IUpdateable {
     private static final BufferedImage GO_TO_GAME = Resources.images().get("src/main/resources/HelpView/GoToGame.png");
 
     /**
-     * @param screenName
-     *      Name of the screen.
+     * @param screenName Name of the screen.
      */
     public HelpView(String screenName) {
         super(screenName);
@@ -54,11 +54,9 @@ public class HelpView extends Screen implements IUpdateable {
     /**
      * Renders out the components.
      *
-     * @param g
-     *      The graphics object to render on.
+     * @param g The graphics object to render on.
      */
     public void render(final Graphics2D g) {
-
         ImageRenderer.render(g, BRICK_BG, 0, 0);
         g.setColor(Color.BLACK);
         g.fillRect(100,150,500,250);
@@ -108,7 +106,7 @@ public class HelpView extends Screen implements IUpdateable {
     }
 
     /**
-     * No idea what this does tbh
+     * This method is called by the game loop on all objects that need to update their attributes.
      */
     @Override
     public void update() {

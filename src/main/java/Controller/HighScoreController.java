@@ -13,6 +13,7 @@ import java.util.List;
  * @author Jennifer Krogh
  * @author Antonia Welzel
  * @author Emma Pettersson
+ * @version
  */
 public class HighScoreController {
     //Player names -- hardcoded
@@ -153,7 +154,7 @@ public class HighScoreController {
     /**
      * Method to add a new HighScore to the list, if the score is greater than all other values on the list.
      *
-     * @param newScore      The score that possibly will be added to the list.
+     * @param newScore The score that possibly will be added to the list.
      */
     public void addToScoreList(HighScore newScore) {
         if (highScoreList.size() < 10) {
@@ -167,13 +168,12 @@ public class HighScoreController {
         setHighScoreData();
     }
 
-        /**
-         * Method to sort the list in order of size, where the highest score is listed first.
-         *
-         * @param highScoreList
-         *      List that needs to be sorted, usually after a new HighScore has been added.
-         */
-   private void sortList(List<HighScore> highScoreList){
+    /**
+     * Method to sort the list in order of size, where the highest score is listed first.
+     *
+     * @param highScoreList List that needs to be sorted, usually after a new HighScore has been added.
+     */
+    private void sortList(List<HighScore> highScoreList){
         Comparator<HighScore> HighScoreComparator = Comparator.comparingInt(HighScore::getHighScore);
         Comparator<HighScore> comparatorReversed = HighScoreComparator.reversed();
 

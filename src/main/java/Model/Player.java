@@ -4,9 +4,12 @@ import java.awt.event.KeyEvent;
 import java.util.List;
 
 /**
- * @author Jonathan Carbol
  * The main Player class used to model the player, its movement and has other important attributes such hit points and weapon.
  * It implements IMovable and ICollidable interfaces used to check movement and collision.
+ *
+ * @author Jonathan Carbol
+ * @author Jennifer Krogh
+ * @version
  */
 public class Player implements IMovable, ICollidable{
     private String name;
@@ -30,12 +33,12 @@ public class Player implements IMovable, ICollidable{
     private boolean isGrounded = false;
     private boolean hasJumped = false;
     private double gravity;
-    private int score;
     private State state;
 
 
     /**
      * The public constructor for the Player class.
+     *
      * @param sprite the sprite prefix for the player.
      * @param posX the starting x position of the player.
      * @param posY the starting y position of the player.
@@ -54,6 +57,10 @@ public class Player implements IMovable, ICollidable{
         this.maxHP = 10;
         this.score = 0;
         state = State.ALIVE;
+        this.maxHP = 23;
+        this.setHP(maxHP);
+        this.gravity=3;
+        this.hasJumped = false;
     }
 
     /**
@@ -63,10 +70,6 @@ public class Player implements IMovable, ICollidable{
         DEAD,
         ALIVE
     }
-        this.maxHP = 23;
-        this.setHP(maxHP);
-        this.gravity=3;
-        this.hasJumped = false;
 
     public String getName() {
         return name;
@@ -198,18 +201,6 @@ public class Player implements IMovable, ICollidable{
     }
 
     /**
-     * TODO description
-     */
-    public void update() {
-    public int getScore() {
-        return score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
-    }
-
-    /**
      * Updates the players position and its collider.
      */
     public void update(){
@@ -253,6 +244,7 @@ public class Player implements IMovable, ICollidable{
 
     /**
      * Checks if the player is standing on a platform.
+     *
      * @param platforms the list of platforms to check if the player is standing on.
      */
     public void checkGrounded(List<Platform> platforms){
@@ -269,7 +261,6 @@ public class Player implements IMovable, ICollidable{
      * Updates the collider position in order to check for collisions.
      */
     private void updateCollider(){
-    private void updateCollider() {
         this.collider.updatePosition(getX(),getY());
     }
 

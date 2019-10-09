@@ -6,9 +6,10 @@ import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.graphics.Camera;
 
 /**
- * TODO description
+ * ...
  *
  * @author
+ * @version
  */
 public class MapController {
     private Camera camera = new Camera();
@@ -24,10 +25,9 @@ public class MapController {
     }
 
     /**
-     * TODO description
+     * ...
      *
-     * @return
-     *      The current map (?)
+     * @return the current map (?)
      */
     public Map getMap(){
         return this.map;

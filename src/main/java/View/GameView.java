@@ -1,7 +1,5 @@
 package View;
 
-import Controller.PlayerController;
-
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.IUpdateable;
 import de.gurkenlabs.litiengine.graphics.ImageRenderer;
@@ -14,11 +12,11 @@ import de.gurkenlabs.litiengine.util.Imaging;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-import static java.awt.Color.BLACK;
-
 /**
- * @author Jonathan Carbol
  * The GameView class, which displays the game.
+ *
+ * @author Jonathan Carbol
+ * @version
  */
 public class GameView extends GameScreen implements IUpdateable {
     private Hud hud;
@@ -35,6 +33,7 @@ public class GameView extends GameScreen implements IUpdateable {
 
     /**
      * The public constructor for the GameView class.
+     *
      * @param screenName the name of the screen.
      */
     public GameView(String screenName) {
@@ -54,6 +53,7 @@ public class GameView extends GameScreen implements IUpdateable {
 
     /**
      * Renders the GameView.
+     *
      * @param g the graphical item to be rendered.
      */
     @Override
@@ -94,11 +94,12 @@ public class GameView extends GameScreen implements IUpdateable {
     }
 
     /**
+     * An embedded class, Hud, used to display graphical components on the game screen.
+     *
      * @author Jonathan Carbol
-     * An inbedded class Hud, used to display graphical components on the game screen.
+     * @version
      */
     public class Hud extends GuiComponent {
-
         /**
          * The protected constructor of the Hud class.
          */
@@ -108,6 +109,7 @@ public class GameView extends GameScreen implements IUpdateable {
 
         /**
          * Renders the graphical components.
+         *
          * @param g the graphic to be rendered.
          */
         @Override
@@ -116,21 +118,18 @@ public class GameView extends GameScreen implements IUpdateable {
             renderScore(g);
             super.render(g);
         }
-
         /**
          * Renders the HP of the player.
+         *
          * @param g the graphic to be rendered.
          */
         private void renderHP(Graphics2D g){
-
             double y = Game.window().getResolution().getHeight() - PADDING * 2 - HEART.getHeight();
-            double x = Game.window().getResolution().getWidth() / 2.0 - ((Math.ceil(maxHP /  4)* (HEART.getWidth() + PADDING) * 0.5) - PADDING);
+            double x = Game.window().getResolution().getWidth() / 2.0 - ((Math.ceil(maxHP / 4.0)* (HEART.getWidth() + PADDING) * 0.5) - PADDING);
             boolean end = false;
-            for (int i = 0; i < maxHP; i++) {
-                if(i == 0){
 
-            for (int i = 0; i < (maxHP + 4); i++) {
-                if (i == 0) {
+            for (int i = 0; i < maxHP; i++) {
+                if (i == 0){
                     i += 4;
                 } else {
                     i += 3;
@@ -140,13 +139,13 @@ public class GameView extends GameScreen implements IUpdateable {
 
                 if (i <= HP) {
                     img = HEART;
-                } else if ((i <= maxHP+4 && i >= HP && HP % 4 == 1) && (end == false)){
+                } else if(i <= maxHP+4 && i >= HP && HP % 4 == 1 && end == false) {
                     img = HEART_QUARTER;
                     end = true;
-                } else if ((i <= maxHP+4 && i >= HP && HP % 4 == 2) && (end == false)){
+                } else if (i <= maxHP+4 && i >= HP && HP % 4 == 2 && end == false) {
                     img = HEART_HALF;
                     end = true;
-                } else if ((i <= maxHP+4 && i >= HP && HP % 4 == 3) && (end == false)) {
+                } else if (i <= maxHP+4 && i >= HP && HP % 4 == 3 && end == false) {
                     img = HEART_THREEQUARTER;
                     end = true;
                 } else {
@@ -159,11 +158,12 @@ public class GameView extends GameScreen implements IUpdateable {
 
         /**
          * Renders the score of the player.
+         *
          * @param g the graphic to be rendered.
          */
         private void renderScore(Graphics2D g){
             //g.setFont(GameManager.PIXELED_BIG);
-            g.setColor(BLACK);
+            g.setColor(Color.BLACK);
 
             String string = Integer.toString(score);
             TextRenderer.render(g,string,50,50);

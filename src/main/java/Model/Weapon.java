@@ -1,9 +1,10 @@
 package Model;
 
 /**
- * TODO description
+ * ...
  *
  * @author
+ * @version
  */
 public class Weapon {
     private String name;
@@ -11,14 +12,11 @@ public class Weapon {
     private int range;
 
     /**
-     * TODO description
+     * ...
      *
      * @param name
-     *      TODO description
      * @param damage
-     *      TODO description
      * @param range
-     *      TODO description
      */
     public Weapon(String name, int damage, int range) {
         this.name = name;

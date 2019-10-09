@@ -7,6 +7,7 @@ package Model;
  *
  * @author Antonia Welzel
  * @author Jennifer Krogh
+ * @version
  */
 public class HighScore {
     private int highScore;
@@ -17,9 +18,7 @@ public class HighScore {
      * and the player's name which will then be used in the list of high scores.
      *
      * @param highScore
-     *      TODO description
      * @param player
-     *      TODO description
      */
     public HighScore(int highScore, String player) {
         this.highScore = highScore;

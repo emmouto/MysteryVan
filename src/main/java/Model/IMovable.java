@@ -1,16 +1,17 @@
 package Model;
 
 /**
- * TODO description
+ * ...
  *
  * @author
+ * @version
  */
 public interface IMovable extends IUpdateable {
     int getX();
     int getY();
 
     /**
-     * TODO description
+     * ...
      */
     void move();
 }

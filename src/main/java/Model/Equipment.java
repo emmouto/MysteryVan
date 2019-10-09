@@ -1,9 +1,10 @@
 package Model;
 
 /**
- * TODO description
+ * ...
  *
  * @author
+ * @version
  */
 public class Equipment {
     private int strength;

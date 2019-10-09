@@ -6,13 +6,6 @@ import View.*;
 
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.environment.CreatureMapObjectLoader;
-import de.gurkenlabs.litiengine.environment.CustomMapObjectLoader;
-import de.gurkenlabs.litiengine.environment.Environment;
-import de.gurkenlabs.litiengine.environment.MapObjectLoader;
-import de.gurkenlabs.litiengine.graphics.RenderComponent;
-import de.gurkenlabs.litiengine.graphics.RenderEngine;
-import de.gurkenlabs.litiengine.gui.GuiComponent;
-import de.gurkenlabs.litiengine.gui.GuiProperties;
 import de.gurkenlabs.litiengine.gui.screens.GameScreen;
 import de.gurkenlabs.litiengine.gui.screens.Resolution;
 import de.gurkenlabs.litiengine.input.Input;
@@ -33,8 +26,7 @@ public class GameRunner {
     /**
      * TODO description
      *
-     * @param args
-     *      The command line arguments.
+     * @param args the command line arguments.
      */
     public static void main(String[] args) throws IOException {
         MapController mc = new MapController();
@@ -62,13 +54,10 @@ public class GameRunner {
         // Displays the title screen ("Menu").
         Game.screens().display("Game");
 
-        /*
-            Game.graphics().setBaseRenderScale(2.001f);
-            Game.screens().add(new GameScreen());
+        Game.graphics().setBaseRenderScale(2.001f);
+        Game.screens().add(new GameScreen());
 
-            Resources.load("game.litidata");
-
-        Game.audio().playMusic(Resources.sounds().get("src/main/resources/sounds/title_theme.mp3"));
+        Resources.load("game.litidata");
 
         PlayerController pc = new PlayerController();
         EnemyController ec = new EnemyController(pc.getPlayers());
@@ -77,7 +66,6 @@ public class GameRunner {
         ec.loadMap(mc.getMap());
         pc.loadMap(mc.getMap());
         pc.setGameView(Game.screens().current());
-
 
         CreatureMapObjectLoader.registerCustomCreatureType(ec.getCreatures().get(0).getClass());
         CreatureMapObjectLoader.registerCustomCreatureType(pc.getCreatures().get(0).getClass());
@@ -90,5 +78,6 @@ public class GameRunner {
         pc.getCreatures().get(0).setLocation(250,100);
         Game.world().environment().add(pc.getCreatures().get(0));
         Game.start();
+
     }
 }

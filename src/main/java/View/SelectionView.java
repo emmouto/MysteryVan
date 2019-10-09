@@ -20,14 +20,14 @@ import java.awt.image.BufferedImage;
  * Lets the player choose a name, a character and a difficulty level.
  *
  * @author Emma Pettersson
+ * @version 0.1
  */
 public class SelectionView extends Screen implements IUpdateable {
     private enterNameComponent enterNameComponent;
     SelectionController selectionController;
 
     /**
-     * @param screenName
-     *      Name of the screen.
+     * @param screenName Name of the screen.
      */
     public SelectionView(String screenName) {
         super(screenName);
@@ -53,8 +53,7 @@ public class SelectionView extends Screen implements IUpdateable {
     }
 
     /**
-     * @param g
-     *      The graphics object to render on.
+     * @param g The graphics object to render on.
      */
     @Override
     public void render(final Graphics2D g) {
@@ -112,7 +111,10 @@ public class SelectionView extends Screen implements IUpdateable {
     }
 
     /**
+     * ...
      *
+     * @author Emma Pettersson
+     * @version 0.1
      */
     public static class enterNameComponent extends GuiComponent {
         TextFieldComponent enterName;
@@ -126,8 +128,7 @@ public class SelectionView extends Screen implements IUpdateable {
 
         /**
          *
-         * @param g
-         *      The graphics object to render on.
+         * @param g The graphics object to render on.
          */
         @Override
         public void render(Graphics2D g) {

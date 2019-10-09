@@ -3,9 +3,10 @@ package Model;
 import java.util.Random;
 
 /**
- * TODO description
+ * ...
  *
- * @author Jonathan Carbol
+ * @author
+ * @version
  */
 public class Food implements ICollidable{
     private String name;
@@ -14,7 +15,7 @@ public class Food implements ICollidable{
     private int armour;
 
     /**
-     * TODO description
+     * ...
      */
     public Food() {
         this.HP = 0;
@@ -24,7 +25,7 @@ public class Food implements ICollidable{
     }
 
     /**
-     * TODO description
+     * ...
      */
     public void determineFood(){
         Random rand = new Random();
@@ -50,10 +51,9 @@ public class Food implements ICollidable{
     }
 
     /**
-     * TODO description
+     * ...
      *
      * @return
-     *      TODO description
      */
     @Override
     public Collider getCollider() {

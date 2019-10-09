@@ -9,6 +9,7 @@ import View.SelectionView;
  * Controls for the SelectionView.
  *
  * @author Emma Pettersson
+ * @version 0.1
  */
 public class SelectionController {
     private enum SELECTION_STATE {
@@ -27,8 +28,7 @@ public class SelectionController {
     /**
      * Takes the name entered by the user and sets it as the Player's name.
      *
-     * @param name
-     *      The name entered by the user.
+     * @param name The name entered by the user.
      */
     public void setPlayerName(String name) {
         playerController.playerList.get(0).setName(name);
@@ -45,8 +45,7 @@ public class SelectionController {
 
     /**
      *
-     * @param weapon
-     *      The weapon chosen by the user.
+     * @param weapon The weapon chosen by the user.
      */
     public void setPlayerWeapon(Weapon weapon) {
         playerController.playerList.get(0).setWeapon(weapon);
@@ -54,8 +53,7 @@ public class SelectionController {
 
     /**
      *
-     * @param hat
-     *      The hat chosen by the user.
+     * @param hat The hat chosen by the user.
      */
     public void setPlayerHat(Hat hat) {
         playerController.playerList.get(0).setHat(hat);

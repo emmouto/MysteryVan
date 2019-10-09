@@ -18,6 +18,7 @@ import de.gurkenlabs.litiengine.sound.Sound;
  *
  * @author Jennifer Krogh
  * @author Emma Pettersson
+ * @version
  */
 
 public class DefeatView extends Screen {
@@ -37,8 +38,7 @@ public class DefeatView extends Screen {
     /**
      * Constructor. Sets the name of the screen.
      *
-     * @param screenName
-     *      Name of the screen.
+     * @param screenName Name of the screen.
      */
     public DefeatView(String screenName) {
         super(screenName);
@@ -53,8 +53,7 @@ public class DefeatView extends Screen {
     /**
      * Renders out the components.
      *
-     * @param g
-     *      The graphics object to render on.
+     * @param g The graphics object to render on.
      */
     public void render(final Graphics2D g) {
         if (timer1 > 0) {

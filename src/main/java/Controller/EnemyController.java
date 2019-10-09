@@ -13,9 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * TODO description
+ * ...
  *
  * @author
+ * @version
  */
 public class EnemyController implements IUpdateable {
     private List<Player> players;
@@ -25,11 +26,9 @@ public class EnemyController implements IUpdateable {
     private Map map;
 
     /**
-     * Constructor.
-     * TODO better description
+     * ...
      *
-     * @param players
-     *      List containing the players for the game.
+     * @param players list containing the players for the game.
      */
     public EnemyController(List<Player> players){
         this.players = players;
@@ -39,9 +38,9 @@ public class EnemyController implements IUpdateable {
     }
 
     /**
-     * TODO description
+     * ...
      */
-    public void spawnEnemy(){
+    public void spawnEnemy() {
         enemies.add(new Enemy("enemy", 0, 0, 32, 50));
         Creature c = new Creature();
         creatureList.add(c);
@@ -54,7 +53,7 @@ public class EnemyController implements IUpdateable {
     }
 
     /**
-     * TODO description
+     * ...
      */
     @Override
     public void update() {
@@ -81,20 +80,18 @@ public class EnemyController implements IUpdateable {
     }
 
     /**
-     * TODO description
+     * ...
      *
      * @return
-     *      TODO description
      */
     public List<Creature> getCreatures() {
         return creatureList;
     }
 
     /**
-     * TODO description
+     * ...
      *
      * @param map
-     *      TODO description
      */
     public void loadMap(Map map){
         this.map = map;

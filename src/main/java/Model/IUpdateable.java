@@ -1,13 +1,14 @@
 package Model;
 
 /**
- * TODO description
+ * ...
  *
  * @author
+ * @version
  */
 public interface IUpdateable {
     /**
-     * TODO description
+     * ...
      */
     public void update();
 }

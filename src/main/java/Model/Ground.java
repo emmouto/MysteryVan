@@ -5,6 +5,7 @@ package Model;
  *
  * @author Antonia Welzel
  * @author Jennifer Krogh
+ * @version
  */
 public class Ground implements ICollidable{
     private Type type;
@@ -17,6 +18,13 @@ public class Ground implements ICollidable{
         SKY
     }
 
+    /**
+     * ...
+     *
+     * @param type
+     * @param dealDamage
+     * @param instantDeath
+     */
     public Ground(Type type, boolean dealDamage, boolean instantDeath) {
         this.type = type;
         this.dealDamage = dealDamage;

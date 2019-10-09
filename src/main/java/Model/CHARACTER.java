@@ -5,9 +5,10 @@ import de.gurkenlabs.litiengine.resources.Resources;
 import java.awt.image.BufferedImage;
 
 /**
- *
+ * ...
  *
  * @author Emma Pettersson
+ * @version
  */
 public enum CHARACTER {
     ADAM    ("Passive-aggressive and undead",15, 20, 10,
@@ -40,18 +41,12 @@ public enum CHARACTER {
     /**
      * Constructor for a CHARACTER.
      *
-     * @param description
-     *      Short description of the character (flavour text).
-     * @param hp
-     *      The CHARACTER's base health points.
-     * @param str
-     *      The CHARACTER's base strength.
-     * @param def
-     *      The CHARACTER's base defence.
-     * @param characterPortrait
-     *      The CHARACTER's portrait, used when selecting character.
-     * @param sprite
-     *      The CHARACTER's sprite.
+     * @param description Short description of the character (flavour text).
+     * @param hp The CHARACTER's base health points.
+     * @param str The CHARACTER's base strength.
+     * @param def The CHARACTER's base defence.
+     * @param characterPortrait The CHARACTER's portrait, used when selecting character.
+     * @param sprite The CHARACTER's sprite.
      */
     CHARACTER(String description, int hp, int str, int def, BufferedImage characterPortrait, BufferedImage sprite) {
         this.description = description;

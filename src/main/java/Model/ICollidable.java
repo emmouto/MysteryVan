@@ -1,9 +1,10 @@
 package Model;
 
 /**
- * TODO description
+ * ...
  *
  * @author
+ * @version
  */
 public interface ICollidable {
     Collider getCollider();

@@ -10,6 +10,7 @@ import java.awt.*;
  * Holds data used in several places. Or something like that.
  *
  * @author Emma Pettersson
+ * @version
  */
 public final class GameManager {
     public static final double centerX = Game.window().getResolution().getWidth() / 2.0;

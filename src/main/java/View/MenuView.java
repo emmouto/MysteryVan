@@ -18,6 +18,7 @@ import de.gurkenlabs.litiengine.sound.Sound;
  * The game's title screen.
  *
  * @author Emma Pettersson
+ * @version
  */
 public class MenuView extends Screen implements IUpdateable {
     private static final Sound TITLE_THEME = Resources.sounds().get("src/main/resources/audio/music/title_theme.mp3");
@@ -27,8 +28,7 @@ public class MenuView extends Screen implements IUpdateable {
     /**
      * Constructor. Sets the name of the screen.
      *
-     * @param screenName
-     *      Name of the screen.
+     * @param screenName Name of the screen.
      */
     public MenuView(String screenName) {
         super(screenName);
@@ -60,8 +60,7 @@ public class MenuView extends Screen implements IUpdateable {
     }
 
     /**
-     * @param g
-     *      The graphics object to render on.
+     * @param g The graphics object to render on.
      */
     @Override
     public void render(final Graphics2D g) {
@@ -119,7 +118,7 @@ public class MenuView extends Screen implements IUpdateable {
     }
 
     /**
-     * No idea what this does tbh
+     * This method is called by the game loop on all objects that need to update their attributes.
      */
     @Override
     public void update() {

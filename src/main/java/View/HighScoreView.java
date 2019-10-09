@@ -18,9 +18,12 @@ import de.gurkenlabs.litiengine.gui.screens.Screen;
 import de.gurkenlabs.litiengine.resources.Resources;
 
 /**
+ * ...
+ *
  * @author Antonia Welzel
  * @author Emma Pettersson
  * @author Jennifer Krogh
+ * @version
  */
 public class HighScoreView extends Screen implements IUpdateable {
     private static final BufferedImage BRICK_BG = Resources.images().get("src/main/resources/HelpView/BrickBG.png");
@@ -32,8 +35,7 @@ public class HighScoreView extends Screen implements IUpdateable {
     /**
      * Constructor. Sets the name of the screen.
      *
-     * @param screenName
-     *      Name of the screen.
+     * @param screenName Name of the screen.
      */
     public HighScoreView(String screenName) {
         super(screenName);
@@ -45,8 +47,7 @@ public class HighScoreView extends Screen implements IUpdateable {
     }
 
     /**
-     * @param g
-     *      The graphics object to render on.
+     * @param g The graphics object to render on.
      */
     @Override
     public void render(final Graphics2D g) {
@@ -96,7 +97,7 @@ public class HighScoreView extends Screen implements IUpdateable {
     }
 
     /**
-     * No idea what this does tbh
+     * This method is called by the game loop on all objects that need to update their attributes.
      */
     @Override
     public void update() {
