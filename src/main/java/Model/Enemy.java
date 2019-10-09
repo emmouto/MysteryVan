@@ -1,6 +1,7 @@
 package Model;
 
 import java.util.List;
+import java.util.Random;
 
 /**
  * ...
@@ -10,7 +11,7 @@ import java.util.List;
  */
 public class Enemy implements ICollidable, IMovable {
     private int HP;
-    private Equipment equipment = new Equipment(); //Enemy can have a weapon, armor etc that will make them harder to defeat.
+  //  private Equipment equipment; //Enemy can have a weapon, armor etc that will make them harder to defeat.
     private Collider collider;
     private int height;
     private int width;
@@ -18,6 +19,8 @@ public class Enemy implements ICollidable, IMovable {
     private int y;
     private String sprite;
     private boolean isGrounded = false;
+    private Random rand = new Random();
+    private int speed;
 
     /**
      * ...
@@ -37,6 +40,10 @@ public class Enemy implements ICollidable, IMovable {
         this.collider = new Collider();
         this.collider.updatePosition(posX, posY);
         this.collider.updateSize(width, height);
+        this.speed = rand.nextInt(5);
+        if (speed == 0){
+            speed = 1;
+        }
     }
 
     /**
@@ -99,17 +106,17 @@ public class Enemy implements ICollidable, IMovable {
         return HP;
     }
 
-    public Equipment getWeapon() {
-        return equipment;
-    }
+   // public Equipment getWeapon() {
+    //    return equipment;
+   // }
 
     public void setHP(int HP) {
         this.HP = HP;
     }
 
-    public void setWeapon(Equipment weapon) {
-        this.equipment = weapon;
-    }
+   // public void setWeapon(Equipment weapon) {
+    //    this.equipment = weapon;
+    //}
 
     @Override
     public Collider getCollider() {
