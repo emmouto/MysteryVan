@@ -3,9 +3,13 @@ package Model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class that represents the game area
+ */
 public class Map {
 
     private String name;
+
     private List<Platform> platforms= new ArrayList<>();
 
     public Map(String name) {
@@ -13,6 +17,11 @@ public class Map {
         init(name);
     }
 
+
+    /**
+     * Method to initiate the map with platforms in the right position
+     * @param name Variable which decides what map/platforms are shown
+     */
     public void init(String name){
 
         switch (name){

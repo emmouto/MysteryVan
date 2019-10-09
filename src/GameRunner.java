@@ -1,4 +1,5 @@
 import Controller.EnemyController;
+import Controller.FoodController;
 import Controller.MapController;
 import Controller.PlayerController;
 import Model.Enemy;
@@ -63,13 +64,17 @@ public class GameRunner {
 
         PlayerController pc = new PlayerController();
         EnemyController ec = new EnemyController(pc.getPlayers());
+        FoodController fc = new FoodController();
         mc.initCamera();
         ec.loadMap(mc.getMap());
         pc.loadMap(mc.getMap());
+        fc.loadMap(mc.getMap());
 
 
         CreatureMapObjectLoader.registerCustomCreatureType(ec.getCreatures().get(0).getClass());
         CreatureMapObjectLoader.registerCustomCreatureType(pc.getCreatures().get(0).getClass());
+        //MapObjectLoader.loadDefaultProperties(fc.getFood().get(0).getClass());
+
 
         Game.loop().attach(ec);
         Game.loop().attach(pc);

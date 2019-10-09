@@ -5,7 +5,7 @@ import java.util.List;
 public class Enemy implements ICollidable, IMovable {
 
     private int HP;
-    private Equipment equipment; //Enemy can have a weapon, armor etc that will make them harder to defeat.
+    //private Equipment equipment;
     private Collider collider;
     private int height;
     private int width;
@@ -79,17 +79,17 @@ public class Enemy implements ICollidable, IMovable {
         return HP;
     }
 
-    public Equipment getWeapon() {
+    /*public Equipment getWeapon() {
         return equipment;
-    }
+    }*/
 
     public void setHP(int HP) {
         this.HP = HP;
     }
 
-    public void setWeapon(Equipment weapon) {
+    /*public void setWeapon(Equipment weapon) {
         this.equipment = weapon;
-    }
+    }*/
 
 
     @Override

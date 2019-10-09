@@ -4,7 +4,7 @@ import java.util.List;
 
 
 /**
- *
+ * A class that represent a Player in the game
  */
 public class Player implements IMovable, ICollidable{
 
