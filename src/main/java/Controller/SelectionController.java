@@ -5,14 +5,28 @@ import Model.Hat;
 import Model.Weapon;
 import View.SelectionView;
 
+import de.gurkenlabs.litiengine.Game;
+import de.gurkenlabs.litiengine.gui.GuiComponent;
+
 /**
  * Controls for the SelectionView.
  *
  * @author Emma Pettersson
  * @version 0.1
  */
-public class SelectionController {
-    private enum SELECTION_STATE {
+public class SelectionController extends GuiComponent {
+    private SelectionView selectionView;
+    private PlayerController playerController;
+    private CHARACTER selectedChar;
+
+    public SelectionController() {
+        super(0, 0, Game.window().getResolution().getWidth(), Game.window().getResolution().getHeight());
+    }
+
+    /**
+     *
+     */
+    public enum SELECTION_STATE {
         ENTER_NAME,
         CHOOSE_CHARACTER,
         CHOOSE_WEAPON,
@@ -20,10 +34,8 @@ public class SelectionController {
         CHOOSE_LEVEL
     }
 
-    private SelectionView selectionView;
-    private PlayerController playerController;
-    private CHARACTER selectedChar;
-    private SELECTION_STATE state = SELECTION_STATE.ENTER_NAME;
+    public SELECTION_STATE state = SELECTION_STATE.ENTER_NAME;
+
 
     /**
      * Takes the name entered by the user and sets it as the Player's name.
