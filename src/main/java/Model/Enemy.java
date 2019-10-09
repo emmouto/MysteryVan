@@ -17,9 +17,7 @@ public class Enemy implements ICollidable, IMovable {
     private Random rand = new Random();
     private int speed;
 
-
-
-
+    
     public Enemy(String sprite, int posX, int posY, int width, int height){
         this.sprite = sprite;
         this.x = posX;
@@ -74,7 +72,7 @@ public class Enemy implements ICollidable, IMovable {
     public void update(){
         doGravity();
         updateCollider();
-        // move();
+        move();
     }
 
     public void move(){

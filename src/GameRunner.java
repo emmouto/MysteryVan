@@ -1,8 +1,10 @@
 import Controller.EnemyController;
+import Controller.KeyController;
 import Controller.MapController;
 import Controller.PlayerController;
 import Model.Enemy;
 import Model.Player;
+import View.GameView;
 import com.sun.javafx.iio.png.PNGImageLoader2;
 import de.gurkenlabs.litiengine.Direction;
 import de.gurkenlabs.litiengine.Game;
@@ -16,6 +18,8 @@ import de.gurkenlabs.litiengine.environment.Environment;
 import de.gurkenlabs.litiengine.environment.MapObjectLoader;
 import de.gurkenlabs.litiengine.graphics.RenderComponent;
 import de.gurkenlabs.litiengine.graphics.RenderEngine;
+import de.gurkenlabs.litiengine.gui.GuiComponent;
+import de.gurkenlabs.litiengine.gui.GuiProperties;
 import de.gurkenlabs.litiengine.gui.screens.GameScreen;
 import de.gurkenlabs.litiengine.gui.screens.Resolution;
 import de.gurkenlabs.litiengine.input.Input;
@@ -55,7 +59,7 @@ public class GameRunner {
         Game.window().setResolution(Resolution.custom(1280, 720, "720p"));
 
         Game.graphics().setBaseRenderScale(2.001f);
-        Game.screens().add(new GameScreen());
+        Game.screens().add(new GameView("game"));
 
         Resources.load("game.litidata");
 
@@ -63,9 +67,11 @@ public class GameRunner {
 
         PlayerController pc = new PlayerController();
         EnemyController ec = new EnemyController(pc.getPlayers());
+        KeyController kc = new KeyController(pc);
         mc.initCamera();
         ec.loadMap(mc.getMap());
         pc.loadMap(mc.getMap());
+        pc.setGameView(Game.screens().current());
 
 
         CreatureMapObjectLoader.registerCustomCreatureType(ec.getCreatures().get(0).getClass());
@@ -76,7 +82,7 @@ public class GameRunner {
 
         Game.world().loadEnvironment("new_map");
         Game.world().environment().add(ec.getCreatures().get(0));
-        pc.getCreatures().get(0).setLocation(0,100);
+        pc.getCreatures().get(0).setLocation(250,100);
         Game.world().environment().add(pc.getCreatures().get(0));
         Game.start();
 
