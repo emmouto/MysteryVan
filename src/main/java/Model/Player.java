@@ -1,5 +1,6 @@
 package Model;
 
+import java.awt.event.KeyEvent;
 import java.util.List;
 
 
@@ -17,6 +18,8 @@ public class Player implements IMovable, ICollidable{
     private Boost boost2;
     private int posX;
     private int posY;
+    private int dx;
+    private int dy;
     private int height;
     private int width;
     private int maxHP;
@@ -145,12 +148,50 @@ public class Player implements IMovable, ICollidable{
         return this.maxHP;
     }
 
+    /*public void keyPressed(KeyEvent e){
+        int key = e.getKeyCode();
+        if(key == KeyEvent.VK_W){
+            this.jump();
+        }
+        if(key == KeyEvent.VK_A){
+            this.dx = -1;
+        }
+        if(key == KeyEvent.VK_D){
+            this.dx = 1;
+        }
+    }
+
+    public void keyReleased(KeyEvent e) {
+
+        int key = e.getKeyCode();
+
+        if (key == KeyEvent.VK_A) {
+            dx = 0;
+        }
+        if (key == KeyEvent.VK_D) {
+            dx = 0;
+        }
+    }*/
+
     public void update(){
+        move();
         doGravity();
         updateCollider();
     }
 
     public void move(){
+        if(Key.up.isDown){
+            this.jump();
+        }
+        if(Key.left.isDown){
+            this.setPosX(getX()-1);
+        }
+        if(Key.right.isDown){
+            this.setPosX(getX()+1);
+        }
+    }
+
+    public void jump(){
 
     }
 

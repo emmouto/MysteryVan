@@ -1,4 +1,5 @@
 import Controller.EnemyController;
+import Controller.KeyController;
 import Controller.MapController;
 import Controller.PlayerController;
 import Model.Enemy;
@@ -64,6 +65,7 @@ public class GameRunner {
 
         PlayerController pc = new PlayerController();
         EnemyController ec = new EnemyController(pc.getPlayers());
+        KeyController kc = new KeyController(pc);
         mc.initCamera();
         ec.loadMap(mc.getMap());
         pc.loadMap(mc.getMap());
