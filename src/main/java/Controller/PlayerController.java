@@ -10,6 +10,12 @@ import de.gurkenlabs.litiengine.physics.MovementController;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * @author Jonathan Carbol
+ * The PlayerController class. It connects the Players from the model to a external game engine in order to use its functions.
+ * It implements an IUpdatable interface which makes sure that it is updated in the game loop.
+ */
 public class PlayerController implements IUpdateable {
 
     List<Player> playerList = new ArrayList<>();
@@ -18,6 +24,9 @@ public class PlayerController implements IUpdateable {
     private GameView gameView;
 
 
+    /**
+     * The public constructor of the PlayerController.
+     */
     public PlayerController() {
         super();
         spawnPlayer("player", 23, 100, 0,new Hat("ugly", new Boost("boost", 0, 0, 0)), new Weapon("xd", 0, 0));
@@ -56,6 +65,15 @@ public class PlayerController implements IUpdateable {
         this.gameView = (GameView) gameView;
     }
 
+    /**
+     * Spawns a player with certain attributes.
+     * @param name the name of the player.
+     * @param hp the hp of the player.
+     * @param defense the defense of the player.
+     * @param strength the strength of the player.
+     * @param hat the equipped hat of the player.
+     * @param weapon the equipped weapon of the player.
+     */
     public void spawnPlayer(String name, int hp, int defense, int strength, Hat hat, Weapon weapon){
         Player p = new Player(name, 0, 0, 18, 35);
         p.setHP(hp);
@@ -66,6 +84,9 @@ public class PlayerController implements IUpdateable {
         playerList.add(p);
     }
 
+    /**
+     * Updates the PlayerController, by setting the displayed creatures HP, hitbox and sprite among other things.
+     */
     public void updatePlayerController(){
         if(!playerList.isEmpty()) {
             for (int i = 0; i < playerList.size(); i++) {
@@ -82,6 +103,9 @@ public class PlayerController implements IUpdateable {
 
     }
 
+    /**
+     * Updates the players in the PlayerController, for their position, their gravity application and health.
+     */
     @Override
     public void update() {
         for(int i = 0; i < playerList.size(); i++){
@@ -93,6 +117,10 @@ public class PlayerController implements IUpdateable {
 
     }
 
+    /**
+     * Updates the health of the players and sends the data to the view to be displayed.
+     * @param i the index of the player to be updated.
+     */
     public void updateHealth(int i){
         gameView.setHP(playerList.get(i).getHP());
         gameView.setMaxHP(playerList.get(i).getMaxHP());
@@ -100,6 +128,10 @@ public class PlayerController implements IUpdateable {
         creatureList.get(i).getHitPoints().setToMaxValue();
     }
 
+    /**
+     * Loads the map of the into the PlayerController.
+     * @param map the map to be loaded.
+     */
     public void loadMap(Map map){
         this.map = map;
     }
