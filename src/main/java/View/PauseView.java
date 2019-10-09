@@ -7,7 +7,7 @@ import de.gurkenlabs.litiengine.gui.screens.Screen;
  * ...
  *
  * @author
- * @version
+ * @version 0.1
  */
 public class PauseView extends Screen implements IUpdateable {
     /**

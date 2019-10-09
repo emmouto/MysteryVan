@@ -12,17 +12,14 @@ import de.gurkenlabs.litiengine.graphics.ImageRenderer;
 import de.gurkenlabs.litiengine.graphics.TextRenderer;
 import de.gurkenlabs.litiengine.gui.screens.Screen;
 import de.gurkenlabs.litiengine.resources.Resources;
-import de.gurkenlabs.litiengine.sound.Sound;
 
 /**
  * The game's title screen.
  *
  * @author Emma Pettersson
- * @version
+ * @version 0.1
  */
 public class MenuView extends Screen implements IUpdateable {
-    private static final Sound TITLE_THEME = Resources.sounds().get("src/main/resources/audio/music/title_theme.mp3");
-
     private ScreenController screenController;
 
     /**
@@ -49,7 +46,7 @@ public class MenuView extends Screen implements IUpdateable {
      */
     @Override
     public void prepare() {
-        Game.audio().playMusic(TITLE_THEME);
+        Game.audio().playMusic(GameManager.TITLE_THEME);
 
         this.screenController.setEnabled(true);
         super.prepare();
@@ -69,13 +66,16 @@ public class MenuView extends Screen implements IUpdateable {
         renderClouds(g);
         ImageRenderer.render(g, BG, 0, 0);
 
+        String text = "CHALMERSFORCE";
         g.setFont(GameManager.PIXELED_BIG);
         g.setColor(Color.BLACK);
-        TextRenderer.renderWithOutline(g, "CHALMERSFORCE",
-                GameManager.centerX - (13 * 64) / 2.0, 200, Color.WHITE);
+        TextRenderer.renderWithOutline(g, text,
+                GameManager.centerX - (text.length() * g.getFont().getSize()) / 2.0, 200, Color.WHITE);
+
+        text = "© 2019 by Mystery Inc.";
         g.setFont(GameManager.RAINY_MEDIUM);
-        TextRenderer.renderWithOutline(g, "© 2019 by Mystery Inc.",
-                GameManager.centerX - (13 * 64) / 2.0, 250, Color.WHITE);
+        TextRenderer.renderWithOutline(g, text,
+                GameManager.centerX - (text.length() * g.getFont().getSize()) / 2.65, 250, Color.WHITE);
 
         super.render(g);
     }
@@ -125,7 +125,6 @@ public class MenuView extends Screen implements IUpdateable {
 
     }
 
-    // This is kind of ugly and only works for like, a few minutes, but at least it works. Kind of.
     private void renderClouds(Graphics2D g) {
         final BufferedImage CLOUDS = Resources.images().get("src/main/resources/MenuView/clouds.png");
         final double cloudSpeed = 0.3;

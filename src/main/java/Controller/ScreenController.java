@@ -21,7 +21,7 @@ import de.gurkenlabs.litiengine.input.Input;
  *
  * @author Emma Pettersson
  * @author Jennifer Krogh
- * @version
+ * @version 0.1
  */
 public class ScreenController extends Menu {
     private static final int DELAY = 180;

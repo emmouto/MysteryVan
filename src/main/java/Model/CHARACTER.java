@@ -5,31 +5,31 @@ import de.gurkenlabs.litiengine.resources.Resources;
 import java.awt.image.BufferedImage;
 
 /**
- * ...
+ * Enum containing the information about all the playable characters.
  *
  * @author Emma Pettersson
- * @version
+ * @version 0.1
  */
 public enum CHARACTER {
     ADAM    ("Passive-aggressive and undead",15, 20, 10,
-            Resources.images().get("src/main/resources/SelectionView/Adam.png"),
-            Resources.images().get("src/main/resources/SelectionView/p1.png")),
+            Resources.images().get("src/main/resources/SelectionView/Adam_portait.png"),
+            Resources.images().get("src/main/resources/SelectionView/Adam.png")),
 
     ANTONIA ("Strong and hungry",20, 25, 20,
-            Resources.images().get("src/main/resources/SelectionView/Antonia.png"),
-            Resources.images().get("src/main/resources/SelectionView/p2.png")),
+            Resources.images().get("src/main/resources/SelectionView/Antonia_portait.png"),
+            Resources.images().get("src/main/resources/SelectionView/Antonia.png")),
 
     EMMA    ("Brave and stylish", 20, 15, 10,
-            Resources.images().get("src/main/resources/SelectionView/Emma.png"),
-            Resources.images().get("src/main/resources/SelectionView/p3.png")),
+            Resources.images().get("src/main/resources/SelectionView/Emma_portait.png"),
+            Resources.images().get("src/main/resources/SelectionView/Emma.png")),
 
     JENNIFER("Kind and sporty", 30, 15, 15,
-            Resources.images().get("src/main/resources/SelectionView/Jennifer.png"),
-            Resources.images().get("src/main/resources/SelectionView/p4.png")),
+            Resources.images().get("src/main/resources/SelectionView/Jennifer_portait.png"),
+            Resources.images().get("src/main/resources/SelectionView/Jennifer.png")),
 
     JONATHAN("Cute and beardy", 10, 10, 20,
-            Resources.images().get("src/main/resources/SelectionView/Jonathan.png"),
-            Resources.images().get("src/main/resources/SelectionView/p5.png"));
+            Resources.images().get("src/main/resources/SelectionView/Jonathan_portait.png"),
+            Resources.images().get("src/main/resources/SelectionView/Jonathan.png"));
 
     private String description;
     private int hp;

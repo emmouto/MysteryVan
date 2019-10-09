@@ -18,10 +18,10 @@ import java.util.List;
  *
  * @author Jonathan Carbol
  * @author Jennifer Krogh
- * @version
+ * @version 0.1
  */
 public class PlayerController implements IUpdateable {
-    List<Player> playerList = new ArrayList<>();
+    static List<Player> playerList = new ArrayList<>();
     private List<Creature> creatureList = new ArrayList<>();
     private Map map;
     private GameView gameView;

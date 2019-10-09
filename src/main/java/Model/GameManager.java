@@ -10,7 +10,7 @@ import java.awt.*;
  * Holds data used in several places. Or something like that.
  *
  * @author Emma Pettersson
- * @version
+ * @version 0.1
  */
 public final class GameManager {
     public static final double centerX = Game.window().getResolution().getWidth() / 2.0;
@@ -26,6 +26,7 @@ public final class GameManager {
 
     // Sounds
     public static final Sound SELECT_SOUND = Resources.sounds().get("src/main/resources/audio/sfx/menu_sound.wav");
+    public static final Sound TITLE_THEME = Resources.sounds().get("src/main/resources/audio/music/title_theme.mp3");
 
     /**
      * The possible states for the game.

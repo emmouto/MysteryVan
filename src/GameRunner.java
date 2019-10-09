@@ -21,15 +21,17 @@ import java.io.IOException;
  * @author Emma Pettersson
  * @author Adam Rohdell
  * @author Antonia Welzel
+ * @version 0.1
  */
 public class GameRunner {
     /**
-     * TODO description
+     * ...
      *
      * @param args the command line arguments.
+     * @throws java.io.IOException when...
      */
     public static void main(String[] args) throws IOException {
-        MapController mc = new MapController();
+        MapController mapController = new MapController();
 
         Game.config().graphics().setResolutionHeight(720);
         Game.config().graphics().setResolutionWidth(1280);
@@ -50,34 +52,36 @@ public class GameRunner {
         Game.screens().add(new DefeatView("Defeat"));
         Game.screens().add(new PauseView("Pause"));
         Game.screens().add(new GameView("Game"));
-
-        // Displays the title screen ("Menu").
-        Game.screens().display("Game");
-
-        Game.graphics().setBaseRenderScale(2.001f);
         Game.screens().add(new GameScreen());
 
-        Resources.load("game.litidata");
+        // TODO move some of this code somewhere else..?
+            /*Game.graphics().setBaseRenderScale(2.001f);
+            Resources.load("game.litidata");*/
 
-        PlayerController pc = new PlayerController();
-        EnemyController ec = new EnemyController(pc.getPlayers());
-        KeyController kc = new KeyController(pc);
-        mc.initCamera();
-        ec.loadMap(mc.getMap());
-        pc.loadMap(mc.getMap());
-        pc.setGameView(Game.screens().current());
+            PlayerController playerController = new PlayerController();
+            /*EnemyController enemyController = new EnemyController(playerController.getPlayers());
+            KeyController keyController = new KeyController(playerController);*/
 
-        CreatureMapObjectLoader.registerCustomCreatureType(ec.getCreatures().get(0).getClass());
-        CreatureMapObjectLoader.registerCustomCreatureType(pc.getCreatures().get(0).getClass());
+            /*mapController.initCamera();
+            enemyController.loadMap(mapController.getMap());*/
+            playerController.loadMap(mapController.getMap());
 
-        Game.loop().attach(ec);
-        Game.loop().attach(pc);
+            playerController.setGameView(Game.screens().get("Menu"));
 
-        Game.world().loadEnvironment("new_map");
-        Game.world().environment().add(ec.getCreatures().get(0));
-        pc.getCreatures().get(0).setLocation(250,100);
-        Game.world().environment().add(pc.getCreatures().get(0));
+           /* CreatureMapObjectLoader.registerCustomCreatureType(enemyController.getCreatures().get(0).getClass());
+            CreatureMapObjectLoader.registerCustomCreatureType(playerController.getCreatures().get(0).getClass());
+
+            Game.loop().attach(enemyController);
+            Game.loop().attach(playerController);
+
+            Game.world().loadEnvironment("new_map");
+            Game.world().environment().add(enemyController.getCreatures().get(0));
+            playerController.getCreatures().get(0).setLocation(250,100);
+            Game.world().environment().add(playerController.getCreatures().get(0));*/
+
+        // Displays the title screen ("Menu").
+        Game.screens().display("Selection");
+
         Game.start();
-
     }
 }

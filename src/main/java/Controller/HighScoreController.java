@@ -13,7 +13,7 @@ import java.util.List;
  * @author Jennifer Krogh
  * @author Antonia Welzel
  * @author Emma Pettersson
- * @version
+ * @version 0.1
  */
 public class HighScoreController {
     //Player names -- hardcoded
@@ -52,7 +52,7 @@ public class HighScoreController {
     private HighScore h9 = new HighScore(p9, player9);
     private HighScore h10 = new HighScore(p10, player10);
 
-    private List<HighScore> highScoreList = new ArrayList<>();
+    private List<HighScore> highScoreList;
     private String HighScoreDataPath;
     private String filename = "HighScoreData";
 
@@ -134,7 +134,7 @@ public class HighScoreController {
      * Writes the HighScore list to the file.
      */
     private void setHighScoreData() {
-        FileWriter output = null;
+        FileWriter output;
 
         try {
             File file = new File(HighScoreDataPath, filename);
@@ -156,7 +156,7 @@ public class HighScoreController {
      *
      * @param newScore The score that possibly will be added to the list.
      */
-    public void addToScoreList(HighScore newScore) {
+    void addToScoreList(HighScore newScore) {
         if (highScoreList.size() < 10) {
             highScoreList.add(newScore);
         } else {
