@@ -13,6 +13,10 @@ import de.gurkenlabs.litiengine.util.Imaging;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/**
+ * @author Jonathan Carbol
+ * The GameView class, which displays the game.
+ */
 public class GameView extends GameScreen implements IUpdateable {
 
     private Hud hud;
@@ -26,23 +30,37 @@ public class GameView extends GameScreen implements IUpdateable {
     private final BufferedImage HEART_THREEQUARTER = Imaging.scale(Resources.images().get("src/main/resources/heart3-4_2.png"),0.05);
     private final BufferedImage HEART_EMPTY = Imaging.scale(Resources.images().get("src/main/resources/heart0_2.png"), 0.05);
 
+    /**
+     * The public constructor for the GameView class.
+     * @param screenName the name of the screen.
+     */
     public GameView(String screenName) {
         super(screenName);
         this.hud = new Hud();
         this.getComponents().add(this.hud);
     }
 
+    /**
+     * Attaches the GameView to the game loop.
+     */
     @Override
     public void prepare(){
         super.prepare();
         Game.loop().attach(this);
     }
 
+    /**
+     * Renders the GameView.
+     * @param g the graphical item to be rendered.
+     */
     @Override
     public void render(Graphics2D g) {
         super.render(g);
     }
 
+    /**
+     * Updates the GameView.
+     */
     @Override
     public void update() {
 
@@ -64,18 +82,33 @@ public class GameView extends GameScreen implements IUpdateable {
         this.maxHP = maxHP;
     }
 
+    /**
+     * @author Jonathan Carbol
+     * An inbedded class Hud, used to display graphical components on the game screen.
+     */
     public class Hud extends GuiComponent {
 
+        /**
+         * The protected constructor of the Hud class.
+         */
         protected Hud() {
             super(0, 0, Game.window().getResolution().getWidth(), Game.window().getResolution().getHeight());
         }
 
+        /**
+         * Renders the graphical components.
+         * @param g the graphic to be rendered.
+         */
         @Override
         public void render(Graphics2D g) {
             renderHP(g);
             super.render(g);
         }
 
+        /**
+         * Renders the HP of the player.
+         * @param g the graphic to be rendered.
+         */
         private void renderHP(Graphics2D g){
 
             double y = Game.window().getResolution().getHeight() - PADDING * 2 - HEART.getHeight();

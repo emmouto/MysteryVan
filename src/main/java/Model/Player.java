@@ -4,7 +4,9 @@ import java.util.List;
 
 
 /**
- *
+ * @author Jonathan Carbol
+ * The main Player class used to model the player, its movement and has other important attributes such hit points and weapon.
+ * It implements IMovable and ICollidable interfaces used to check movement and collision.
  */
 public class Player implements IMovable, ICollidable{
 
@@ -25,6 +27,14 @@ public class Player implements IMovable, ICollidable{
     private boolean isGrounded = false;
 
 
+    /**
+     * The public constructor for the Player class.
+     * @param sprite the sprite prefix for the player.
+     * @param posX the starting x position of the player.
+     * @param posY the starting y position of the player.
+     * @param width the width of the player.
+     * @param height the height of the player.
+     */
     public Player(String sprite, int posX, int posY, int width, int height) {
         this.sprite = sprite;
         this.posX = posX;
@@ -145,15 +155,25 @@ public class Player implements IMovable, ICollidable{
         return this.maxHP;
     }
 
+    /**
+     * Updates the players position and its collider.
+     */
     public void update(){
         doGravity();
         updateCollider();
     }
 
+    /**
+     * Moves the player depending on input from the user.
+     */
     public void move(){
 
     }
 
+    /**
+     * Checks if the player is standing on a platform.
+     * @param platforms the list of platforms to check if the player is standing on.
+     */
     public void checkGrounded(List<Platform> platforms){
         if(!isGrounded){
             for (ICollidable platform : platforms){
@@ -164,6 +184,9 @@ public class Player implements IMovable, ICollidable{
         }
     }
 
+    /**
+     * Updates the collider position in order to check for collisions.
+     */
     private void updateCollider(){
         this.collider.updatePosition(getX(),getY());
     }
@@ -172,6 +195,9 @@ public class Player implements IMovable, ICollidable{
 
     }
 
+    /**
+     * Applies gravity to the player.
+     */
     private void doGravity(){
         if (!isGrounded){
             setPosY((getY()+3));
