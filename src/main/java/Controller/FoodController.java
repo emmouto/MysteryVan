@@ -103,7 +103,7 @@ public class FoodController implements IUpdateable {
     public void update() {
         for(int i = 0; i < getFood().size(); i++) {
             if(this.getFood().get(i).checkPlayerCollision(players.get(0))) {
-                // removes food from the list and subsequently remove it from the game after collision
+                // removes food from the list and subsequently removes it from the game after collision
                 foodList.remove(0);
                 players.get(0).setHP(players.get(0).getHP() + foodList.get(0).getHP());
                 players.get(0).setStrength(players.get(0).getStrength() + foodList.get(0).getArmour());
