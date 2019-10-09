@@ -66,7 +66,7 @@ public class GameRunner {
             enemyController.loadMap(mapController.getMap());*/
             playerController.loadMap(mapController.getMap());
 
-            playerController.setGameView(Game.screens().get("Menu"));
+            playerController.setGameView(Game.screens().get("Game"));
 
            /* CreatureMapObjectLoader.registerCustomCreatureType(enemyController.getCreatures().get(0).getClass());
             CreatureMapObjectLoader.registerCustomCreatureType(playerController.getCreatures().get(0).getClass());
@@ -80,7 +80,7 @@ public class GameRunner {
             Game.world().environment().add(playerController.getCreatures().get(0));*/
 
         // Displays the title screen ("Menu").
-        Game.screens().display("Selection");
+        Game.screens().display("Menu");
 
         Game.start();
     }
