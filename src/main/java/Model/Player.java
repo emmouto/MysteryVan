@@ -29,6 +29,8 @@ public class Player implements IMovable, ICollidable{
     private String sprite;
     private Collider collider;
     private boolean isGrounded = false;
+    private boolean hasJumped = false;
+    private double gravity;
 
 
     /**
@@ -50,7 +52,8 @@ public class Player implements IMovable, ICollidable{
         this.collider.updateSize(width, height);
         this.maxHP = 23;
         this.setHP(maxHP);
-
+        this.gravity=3;
+        this.hasJumped = false;
     }
 
     public int getHP() {
@@ -194,13 +197,19 @@ public class Player implements IMovable, ICollidable{
                 this.setPosX(getX() + 1);
         }
         isGrounded = false;
+        if(gravity <= 3){
+            gravity += 0.1;
+        }else{
+            hasJumped = false;
+        }
     }
 
     /**
      * Makes the player jump.
      */
     public void jump(){
-
+        this.gravity = -5;
+        hasJumped = true;
     }
 
     /**
@@ -232,8 +241,8 @@ public class Player implements IMovable, ICollidable{
      * Applies gravity to the player.
      */
     private void doGravity(){
-        if (!isGrounded){
-            setPosY((getY()+3));
+        if (!isGrounded || hasJumped){
+            setPosY(((int)(getY()+this.gravity)));
         }
     }
 }
