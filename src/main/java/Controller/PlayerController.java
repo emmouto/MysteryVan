@@ -3,31 +3,31 @@ package Controller;
 import Model.*;
 import View.DefeatView;
 import View.GameView;
+
 import de.gurkenlabs.litiengine.IUpdateable;
 import de.gurkenlabs.litiengine.entities.Creature;
 import de.gurkenlabs.litiengine.gui.screens.Screen;
-import de.gurkenlabs.litiengine.physics.MovementController;
 
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
- * TODO description
- *
- * @author
+ * @author Jonathan Carbol
+ * The PlayerController class. It connects the Players from the model to a external game engine in order to use its functions.
+ * It implements an IUpdatable interface which makes sure that it is updated in the game loop.
  */
 public class PlayerController implements IUpdateable {
     List<Player> playerList = new ArrayList<>();
-    private List<Creature> creatureList = new ArrayList<>();
+    List<Creature> creatureList = new ArrayList<>();
     private Map map;
     private GameView gameView;
 
     private DefeatView dv;
     private HighScoreController hc;
 
-
     /**
-     * TODO description
+     * The public constructor of the PlayerController.
      */
     public PlayerController() {
         super();
@@ -53,21 +53,34 @@ public class PlayerController implements IUpdateable {
         }
     }
 
+    public List<Player> getPlayers() {
+        return playerList;
+    }
+
+    public List<Creature> getCreatures() {
+        return creatureList;
+    }
+
+    public Creature getPlayer1(){
+        return creatureList.get(0);
+    }
+
+    public GameView getGameView() {
+        return gameView;
+    }
+
+    public void setGameView(Screen gameView) {
+        this.gameView = (GameView) gameView;
+    }
+
     /**
-     * TODO description
-     *
-     * @param name
-     *      TODO description
-     * @param hp
-     *      TODO description
-     * @param defense
-     *      TODO description
-     * @param strength
-     *      TODO description
-     * @param hat
-     *      TODO description
-     * @param weapon
-     *      TODO description
+     * Spawns a player with certain attributes.
+     * @param name the name of the player.
+     * @param hp the hp of the player.
+     * @param defense the defense of the player.
+     * @param strength the strength of the player.
+     * @param hat the equipped hat of the player.
+     * @param weapon the equipped weapon of the player.
      */
     public void spawnPlayer(String name, int hp, int defense, int strength, Hat hat, Weapon weapon){
         Player p = new Player(name, 0, 0, 18, 35);
@@ -80,7 +93,7 @@ public class PlayerController implements IUpdateable {
     }
 
     /**
-     * TODO description
+     * Updates the PlayerController, by setting the displayed creatures HP, hitbox and sprite among other things.
      */
     public void updatePlayerController(){
         if(!playerList.isEmpty()) {
@@ -99,16 +112,16 @@ public class PlayerController implements IUpdateable {
     }
 
     /**
-     * TODO description
+     * Updates the players in the PlayerController, for their position, their gravity application and health.
      */
     @Override
     public void update() {
         for (int i = 0; i < playerList.size(); i++) {
             getPlayers().get(i).update();
             getPlayers().get(i).checkGrounded(this.map.getPlatforms());
-            creatureList.get(i).setLocation(playerList.get(i).getX(), playerList.get(i).getY());
             creatureList.get(i).setLocation(playerList.get(i).getX(),playerList.get(i).getY());
             updateHealth(i);
+            updateScore(i);
         }
     }
 
@@ -124,6 +137,10 @@ public class PlayerController implements IUpdateable {
 
     }
 
+    /**
+     * Updates the health of the players and sends the data to the view to be displayed.
+     * @param i the index of the player to be updated.
+     */
     public void updateHealth(int i){
         gameView.setHP(playerList.get(i).getHP());
         gameView.setMaxHP(playerList.get(i).getMaxHP());
@@ -139,10 +156,16 @@ public class PlayerController implements IUpdateable {
     }
 
     /**
-     * TODO description
-     *
-     * @param map
-     *      TODO description
+     * Updates the score of the player and sends the data to the view to be displayed.
+     * @param i the index of the player to be updated.
+     */
+    public void updateScore(int i){
+        gameView.setScore(playerList.get(i).getScore());
+    }
+
+    /**
+     * Loads the map of the into the PlayerController.
+     * @param map the map to be loaded.
      */
     public void loadMap(Map map){
         this.map = map;

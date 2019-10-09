@@ -1,9 +1,8 @@
 package Model;
 
 /**
- * TODO description
- *
- * @author
+ * @author Jonathan Carbol
+ * The Platform class used in the model.
  */
 public class Platform implements ICollidable{
     // Side platforms are 160px wide and 48px high
@@ -14,17 +13,13 @@ public class Platform implements ICollidable{
     private int width;
     private int height;
 
+
     /**
-     * TODO description
-     *
-     * @param x
-     *      TODO description
-     * @param y
-     *      TODO description
-     * @param height
-     *      TODO description
-     * @param width
-     *      TODO description
+     * The public constructor of the Platform class.
+     * @param x the x position of the platform.
+     * @param y the y position of the platform.
+     * @param height the height of the platform.
+     * @param width the width of the platform.
      */
     public Platform(int x, int y, int height, int width){
         this.x = x;

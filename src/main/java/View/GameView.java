@@ -1,8 +1,11 @@
 package View;
 
+import Controller.PlayerController;
+
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.IUpdateable;
 import de.gurkenlabs.litiengine.graphics.ImageRenderer;
+import de.gurkenlabs.litiengine.graphics.TextRenderer;
 import de.gurkenlabs.litiengine.gui.GuiComponent;
 import de.gurkenlabs.litiengine.gui.screens.GameScreen;
 import de.gurkenlabs.litiengine.resources.Resources;
@@ -11,13 +14,17 @@ import de.gurkenlabs.litiengine.util.Imaging;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+import static java.awt.Color.BLACK;
+
 /**
  * @author Jonathan Carbol
+ * The GameView class, which displays the game.
  */
 public class GameView extends GameScreen implements IUpdateable {
     private Hud hud;
     private int HP;
     private int maxHP;
+    private int score;
 
     private static int PADDING =10;
     private final BufferedImage HEART = Imaging.scale(Resources.images().get("src/main/resources/heart.png"),0.05);
@@ -27,8 +34,8 @@ public class GameView extends GameScreen implements IUpdateable {
     private final BufferedImage HEART_EMPTY = Imaging.scale(Resources.images().get("src/main/resources/heart0_2.png"), 0.05);
 
     /**
-     * @param screenName
-     *      Name of the screen.
+     * The public constructor for the GameView class.
+     * @param screenName the name of the screen.
      */
     public GameView(String screenName) {
         super(screenName);
@@ -37,7 +44,7 @@ public class GameView extends GameScreen implements IUpdateable {
     }
 
     /**
-     *
+     * Attaches the GameView to the game loop.
      */
     @Override
     public void prepare() {
@@ -46,9 +53,8 @@ public class GameView extends GameScreen implements IUpdateable {
     }
 
     /**
-     *
-     * @param g
-     *      The graphics object to render on.
+     * Renders the GameView.
+     * @param g the graphical item to be rendered.
      */
     @Override
     public void render(Graphics2D g) {
@@ -56,16 +62,13 @@ public class GameView extends GameScreen implements IUpdateable {
     }
 
     /**
-     *
+     * Updates the GameView.
      */
     @Override
     public void update() {
 
     }
 
-    /**
-     *
-     */
     public int getHP() {
         return HP;
     }
@@ -82,31 +85,42 @@ public class GameView extends GameScreen implements IUpdateable {
         this.maxHP = maxHP;
     }
 
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    /**
+     * @author Jonathan Carbol
+     * An inbedded class Hud, used to display graphical components on the game screen.
+     */
     public class Hud extends GuiComponent {
+
+        /**
+         * The protected constructor of the Hud class.
+         */
         protected Hud() {
             super(0, 0, Game.window().getResolution().getWidth(), Game.window().getResolution().getHeight());
         }
 
         /**
-         *
-         * @param g
-         *      The graphics object to render on.
+         * Renders the graphical components.
+         * @param g the graphic to be rendered.
          */
         @Override
         public void render(Graphics2D g) {
             renderHP(g);
+            renderScore(g);
             super.render(g);
         }
 
         /**
-         *
-         * @param g
-         *      The graphics object to render on.
+         * Renders the HP of the player.
+         * @param g the graphic to be rendered.
          */
-        public void renderHP(Graphics2D g) {
-            int HP = 20;
-            double maxHP = 25;
-            int PADDING = 10;
         private void renderHP(Graphics2D g){
 
             double y = Game.window().getResolution().getHeight() - PADDING * 2 - HEART.getHeight();
@@ -141,6 +155,18 @@ public class GameView extends GameScreen implements IUpdateable {
 
                 ImageRenderer.render(g, img, x + (i * img.getWidth() / 4.0) + PADDING, y);
             }
+        }
+
+        /**
+         * Renders the score of the player.
+         * @param g the graphic to be rendered.
+         */
+        private void renderScore(Graphics2D g){
+            //g.setFont(GameManager.PIXELED_BIG);
+            g.setColor(BLACK);
+
+            String string = Integer.toString(score);
+            TextRenderer.render(g,string,50,50);
         }
     }
 }
