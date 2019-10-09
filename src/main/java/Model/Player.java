@@ -62,6 +62,8 @@ public class Player implements IMovable, ICollidable{
         DEAD,
         ALIVE
     }
+        this.maxHP = 23;
+        this.setHP(maxHP);
 
     public String getName() {
         return name;

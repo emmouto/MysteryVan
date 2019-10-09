@@ -31,7 +31,7 @@ public class PlayerController implements IUpdateable {
      */
     public PlayerController() {
         super();
-        spawnPlayer("player", 100, 100, 0, new Hat("ugly", new Boost("boost", 0, 0, 0)), new Weapon("xd", 0, 0));
+        spawnPlayer("player", 23, 100, 0,new Hat("ugly", new Boost("boost", 0, 0, 0)), new Weapon("xd", 0, 0));
         updatePlayerController();
     }
 
@@ -95,6 +95,7 @@ public class PlayerController implements IUpdateable {
                 creatureList.get(i).setSpritePrefix(playerList.get(i).getSprite());
             }
         }
+
     }
 
     /**
@@ -106,6 +107,8 @@ public class PlayerController implements IUpdateable {
             getPlayers().get(i).update();
             getPlayers().get(i).checkGrounded(this.map.getPlatforms());
             creatureList.get(i).setLocation(playerList.get(i).getX(), playerList.get(i).getY());
+            creatureList.get(i).setLocation(playerList.get(i).getX(),playerList.get(i).getY());
+            updateHealth(i);
         }
     }
 
@@ -119,6 +122,13 @@ public class PlayerController implements IUpdateable {
 
         for (Player p : playerList) {
 
+    }
+
+    public void updateHealth(int i){
+        gameView.setHP(playerList.get(i).getHP());
+        gameView.setMaxHP(playerList.get(i).getMaxHP());
+        creatureList.get(i).getHitPoints().setMaxValue(playerList.get(i).getHP());
+        creatureList.get(i).getHitPoints().setToMaxValue();
             if(p.getState() == Player.State.DEAD){
                 dv.scoreDefeat(p.getScore());
                 newScore = new HighScore(p.getScore(), p.getName());

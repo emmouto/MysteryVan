@@ -16,7 +16,10 @@ import java.awt.image.BufferedImage;
  */
 public class GameView extends GameScreen implements IUpdateable {
     private Hud hud;
+    private int HP;
+    private int maxHP;
 
+    private static int PADDING =10;
     private final BufferedImage HEART = Imaging.scale(Resources.images().get("src/main/resources/heart.png"),0.05);
     private final BufferedImage HEART_QUARTER = Imaging.scale(Resources.images().get("src/main/resources/heart1-4_2.png"),0.05);
     private final BufferedImage HEART_HALF = Imaging.scale(Resources.images().get("src/main/resources/heart1-2_2.png"),0.05);
@@ -63,6 +66,22 @@ public class GameView extends GameScreen implements IUpdateable {
     /**
      *
      */
+    public int getHP() {
+        return HP;
+    }
+
+    public void setHP(int HP) {
+        this.HP = HP;
+    }
+
+    public int getMaxHP() {
+        return maxHP;
+    }
+
+    public void setMaxHP(int maxHP) {
+        this.maxHP = maxHP;
+    }
+
     public class Hud extends GuiComponent {
         protected Hud() {
             super(0, 0, Game.window().getResolution().getWidth(), Game.window().getResolution().getHeight());
@@ -88,9 +107,13 @@ public class GameView extends GameScreen implements IUpdateable {
             int HP = 20;
             double maxHP = 25;
             int PADDING = 10;
+        private void renderHP(Graphics2D g){
+
             double y = Game.window().getResolution().getHeight() - PADDING * 2 - HEART.getHeight();
             double x = Game.window().getResolution().getWidth() / 2.0 - ((Math.ceil(maxHP /  4)* (HEART.getWidth() + PADDING) * 0.5) - PADDING);
             boolean end = false;
+            for (int i = 0; i < maxHP; i++) {
+                if(i == 0){
 
             for (int i = 0; i < (maxHP + 4); i++) {
                 if (i == 0) {
