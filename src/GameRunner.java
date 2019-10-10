@@ -71,7 +71,8 @@ public class GameRunner {
             playerController.loadMap(mapController.getMap());
 
             playerController.setGameView(Game.screens().get("Game"));
-            Resources.spritesheets().get("Bread", true);
+            Resources.spritesheets().get("AppleWorm", true);
+
            /* CreatureMapObjectLoader.registerCustomCreatureType(enemyController.getCreatures().get(0).getClass());
             CreatureMapObjectLoader.registerCustomCreatureType(playerController.getCreatures().get(0).getClass());
 
