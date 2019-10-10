@@ -16,7 +16,6 @@ import java.util.HashMap;
  * @version
  */
 public class KeyController implements KeyListener, IUpdateable {
-    PlayerController pc;
 
     /**
      * Assigning the variable keys to actual letters
@@ -24,7 +23,6 @@ public class KeyController implements KeyListener, IUpdateable {
      * @param pc
      */
     public KeyController(PlayerController pc) {
-        this.pc = pc;
         initKeyController();
     }
 
@@ -34,6 +32,7 @@ public class KeyController implements KeyListener, IUpdateable {
         bind(KeyEvent.VK_S, Key.down);
         bind(KeyEvent.VK_D, Key.right);
         bind(KeyEvent.VK_SPACE, Key.special);
+        bind(KeyEvent.VK_P, Key.pause);
 
         Input.keyboard().onKeyPressed(e ->{
             keyPressed(e);

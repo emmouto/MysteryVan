@@ -24,7 +24,7 @@ public class GameView extends GameScreen implements IUpdateable {
     private int maxHP;
     private int score;
 
-    private static int PADDING =10;
+    private static int PADDING = 10;
     private final BufferedImage HEART = Imaging.scale(Resources.images().get("src/main/resources/heart.png"),0.05);
     private final BufferedImage HEART_QUARTER = Imaging.scale(Resources.images().get("src/main/resources/heart1-4_2.png"),0.05);
     private final BufferedImage HEART_HALF = Imaging.scale(Resources.images().get("src/main/resources/heart1-2_2.png"),0.05);
