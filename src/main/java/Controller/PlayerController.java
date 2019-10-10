@@ -1,7 +1,9 @@
 package Controller;
 
 import Model.*;
+import View.DefeatView;
 import View.GameView;
+
 import de.gurkenlabs.litiengine.IUpdateable;
 import de.gurkenlabs.litiengine.entities.Creature;
 import de.gurkenlabs.litiengine.gui.screens.Screen;
@@ -9,38 +11,49 @@ import de.gurkenlabs.litiengine.gui.screens.Screen;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
- * @author Jonathan Carbol
- * The PlayerController class. It connects the Players from the model to a external game engine in order to use its functions.
+ * The PlayerController class.
+ * It connects the Players from the model to a external game engine in order to use its functions.
  * It implements an IUpdatable interface which makes sure that it is updated in the game loop.
+ *
+ * @author Jonathan Carbol
+ * @author Jennifer Krogh
+ * @version 0.1
  */
 public class PlayerController implements IUpdateable {
-
-    List<Player> playerList = new ArrayList<>();
-    List<Creature> creatureList = new ArrayList<>();
+    static List<Player> playerList = new ArrayList<>();
+    private List<Creature> creatureList = new ArrayList<>();
     private Map map;
     private GameView gameView;
 
+    private DefeatView defeatView;
+    private HighScoreController highScoreController;
 
     /**
      * The public constructor of the PlayerController.
      */
     public PlayerController() {
         super();
-        spawnPlayer("player", 23, 100, 0,new Hat("ugly", new Boost("boost", 0, 0, 0)), new Weapon("xd", 0, 0));
+        spawnPlayer("player", 23, 100, 0, new Hat("ugly", new Boost("boost",
+                0, 0, 0)), new Weapon("xd", 0, 0));
         updatePlayerController();
     }
 
-    public void walkLeft(){
-        while(true){
-            playerList.get(0).setPosX(playerList.get(0).getPosX()-1);
+    /**
+     * ...
+     */
+    public void walkLeft() {
+        while (true) {
+            playerList.get(0).setPosX(playerList.get(0).getPosX() - 1);
         }
     }
 
-    public void walkRight(){
-        while(true){
-            playerList.get(0).setPosX(playerList.get(0).getPosX()+1);
+    /**
+     * ...
+     */
+    public void walkRight() {
+        while (true) {
+            playerList.get(0).setPosX(playerList.get(0).getPosX() + 1);
         }
     }
 
@@ -66,6 +79,7 @@ public class PlayerController implements IUpdateable {
 
     /**
      * Spawns a player with certain attributes.
+     *
      * @param name the name of the player.
      * @param hp the hp of the player.
      * @param defense the defense of the player.
@@ -99,7 +113,6 @@ public class PlayerController implements IUpdateable {
                 creatureList.get(i).setSpritePrefix(playerList.get(i).getSprite());
             }
         }
-
     }
 
     /**
@@ -107,21 +120,38 @@ public class PlayerController implements IUpdateable {
      */
     @Override
     public void update() {
-        for(int i = 0; i < playerList.size(); i++){
+        for (int i = 0; i < playerList.size(); i++) {
             getPlayers().get(i).update();
             getPlayers().get(i).checkGrounded(this.map.getPlatforms());
             creatureList.get(i).setLocation(playerList.get(i).getX(),playerList.get(i).getY());
             updateHealth(i);
             updateScore(i);
         }
+    }
 
+    /**
+     * Checks if player is dead, if so, then this method handles what happens.
+     */
+    // Call on this method somewhere were the game is updated!
+    private void whenDead() {
+        HighScore newScore;
+
+        for (Player p : playerList) {
+            if (p.getState() == Player.State.DEAD) {
+                defeatView.scoreDefeat(p.getScore());
+                newScore = new HighScore(p.getScore(), p.getName());
+                highScoreController.addToScoreList(newScore);
+                DefeatView.showDefeat();
+            }
+        }
     }
 
     /**
      * Updates the health of the players and sends the data to the view to be displayed.
+     *
      * @param i the index of the player to be updated.
      */
-    public void updateHealth(int i){
+    public void updateHealth(int i) {
         gameView.setHP(playerList.get(i).getHP());
         gameView.setMaxHP(playerList.get(i).getMaxHP());
         creatureList.get(i).getHitPoints().setMaxValue(playerList.get(i).getHP());
@@ -130,17 +160,19 @@ public class PlayerController implements IUpdateable {
 
     /**
      * Updates the score of the player and sends the data to the view to be displayed.
+     *
      * @param i the index of the player to be updated.
      */
-    public void updateScore(int i){
+    public void updateScore(int i) {
         gameView.setScore(playerList.get(i).getScore());
     }
 
     /**
      * Loads the map of the into the PlayerController.
+     *
      * @param map the map to be loaded.
      */
-    public void loadMap(Map map){
+    public void loadMap(Map map) {
         this.map = map;
     }
 }
