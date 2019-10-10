@@ -1,11 +1,17 @@
 package Model;
+
 import java.util.List;
+import java.util.Random;
 
-
+/**
+ * ...
+ *
+ * @author
+ * @version
+ */
 public class Enemy implements ICollidable, IMovable {
-
     private int HP;
-    //private Equipment equipment;
+  //  private Equipment equipment; //Enemy can have a weapon, armor etc that will make them harder to defeat.
     private Collider collider;
     private int height;
     private int width;
@@ -13,10 +19,18 @@ public class Enemy implements ICollidable, IMovable {
     private int y;
     private String sprite;
     private boolean isGrounded = false;
+    private Random rand = new Random();
+    private int speed;
 
-
-
-
+    /**
+     * ...
+     *
+     * @param sprite
+     * @param posX
+     * @param posY
+     * @param width
+     * @param height
+     */
     public Enemy(String sprite, int posX, int posY, int width, int height){
         this.sprite = sprite;
         this.x = posX;
@@ -26,9 +40,17 @@ public class Enemy implements ICollidable, IMovable {
         this.collider = new Collider();
         this.collider.updatePosition(posX, posY);
         this.collider.updateSize(width, height);
+        this.speed = rand.nextInt(5);
+        if (speed == 0){
+            speed = 1;
+        }
     }
 
-
+    /**
+     * ...
+     *
+     * @param platforms
+     */
     public void checkGrounded(List<Platform> platforms){
         if(!isGrounded){
             for (ICollidable platform : platforms){
@@ -37,17 +59,22 @@ public class Enemy implements ICollidable, IMovable {
                 }
             }
         }
-
     }
 
+    /**
+     * ...
+     *
+     * @param player
+     * @return
+     */
     public boolean checkPlayerCollision(ICollidable player){
-        if (collider.isColliding(player, "UP")){
+        if (collider.isColliding(player, "UP")) {
             return true;
-        } else if (collider.isColliding(player, "RIGHT")){
+        } else if (collider.isColliding(player, "RIGHT")) {
             return true;
-        } else if(collider.isColliding(player, "DOWN")){
+        } else if (collider.isColliding(player, "DOWN")) {
             return true;
-        } else if (collider.isColliding(player, "LEFT")){
+        } else if (collider.isColliding(player, "LEFT")) {
             return true;
         }
 
@@ -61,13 +88,13 @@ public class Enemy implements ICollidable, IMovable {
     }
 
     private void updateCollider(){
-        this.collider.updatePosition(getX(),getY());
+        this.collider.updatePosition(getX(), getY());
     }
 
     public void update(){
         doGravity();
         updateCollider();
-        // move();
+        move();
     }
 
     public void move(){
@@ -79,18 +106,17 @@ public class Enemy implements ICollidable, IMovable {
         return HP;
     }
 
-    /*public Equipment getWeapon() {
-        return equipment;
-    }*/
+   // public Equipment getWeapon() {
+    //    return equipment;
+   // }
 
     public void setHP(int HP) {
         this.HP = HP;
     }
 
-    /*public void setWeapon(Equipment weapon) {
-        this.equipment = weapon;
-    }*/
-
+   // public void setWeapon(Equipment weapon) {
+    //    this.equipment = weapon;
+    //}
 
     @Override
     public Collider getCollider() {
@@ -108,6 +134,7 @@ public class Enemy implements ICollidable, IMovable {
     public void setX(int x){
         this.x = x;
     }
+
     public void setY(int y){
         this.y = y;
     }

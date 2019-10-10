@@ -1,89 +1,87 @@
 import Controller.EnemyController;
-import Controller.FoodController;
+import Controller.KeyController;
 import Controller.MapController;
 import Controller.PlayerController;
-import Model.Enemy;
-import Model.Player;
-import com.sun.javafx.iio.png.PNGImageLoader2;
-import de.gurkenlabs.litiengine.Direction;
+import View.*;
+
 import de.gurkenlabs.litiengine.Game;
-import de.gurkenlabs.litiengine.RenderLoop;
-import de.gurkenlabs.litiengine.entities.Creature;
-import de.gurkenlabs.litiengine.entities.EntityControllers;
-import de.gurkenlabs.litiengine.entities.Spawnpoint;
 import de.gurkenlabs.litiengine.environment.CreatureMapObjectLoader;
-import de.gurkenlabs.litiengine.environment.CustomMapObjectLoader;
-import de.gurkenlabs.litiengine.environment.Environment;
-import de.gurkenlabs.litiengine.environment.MapObjectLoader;
-import de.gurkenlabs.litiengine.graphics.RenderComponent;
-import de.gurkenlabs.litiengine.graphics.RenderEngine;
 import de.gurkenlabs.litiengine.gui.screens.GameScreen;
 import de.gurkenlabs.litiengine.gui.screens.Resolution;
 import de.gurkenlabs.litiengine.input.Input;
-import de.gurkenlabs.litiengine.input.PlatformingMovementController;
-import de.gurkenlabs.litiengine.resources.Resource;
 import de.gurkenlabs.litiengine.resources.Resources;
 
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.geom.Point2D;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.net.URL;
-import java.nio.Buffer;
-import java.util.ArrayList;
 
-
-/** Runs the game.
- * @author xx, xxx, Emma Pettersson
+/**
+ * Sets up all the screens and runs the game.
+ *
+ * @author Jonathan Carbol
+ * @author Jennifer Krogh
+ * @author Emma Pettersson
+ * @author Adam Rohdell
+ * @author Antonia Welzel
+ * @version 0.1
  */
 public class GameRunner {
-
+    /**
+     * ...
+     *
+     * @param args the command line arguments.
+     * @throws java.io.IOException when...
+     */
     public static void main(String[] args) throws IOException {
-        MapController mc = new MapController();
-
+        MapController mapController = new MapController();
 
         Game.config().graphics().setResolutionHeight(720);
-        Game.config().graphics().setFullscreen(true);
         Game.config().graphics().setResolutionWidth(1280);
+        Game.config().graphics().setFullscreen(true);
 
         Game.setInfo("gameinfo.xml");
 
         Game.init(args);
         Input.mouse().setGrabMouse(false);
         Game.window().setResolution(Resolution.custom(1280, 720, "720p"));
+        Game.window().setIconImage(Resources.images().get("src/main/resources/icon.png"));
 
-        Game.graphics().setBaseRenderScale(2.001f);
+        // Adds all the screens
+        Game.screens().add(new MenuView("Menu"));
+        Game.screens().add(new SelectionView("Selection"));
+        Game.screens().add(new HelpView("Help"));
+        Game.screens().add(new HighScoreView("HighScore"));
+        Game.screens().add(new DefeatView("Defeat"));
+        Game.screens().add(new PauseView("Pause"));
+        Game.screens().add(new GameView("Game"));
         Game.screens().add(new GameScreen());
 
-        Resources.load("game.litidata");
+        // TODO move some of this code somewhere else..?
+            Game.graphics().setBaseRenderScale(2.001f);
+            Resources.load("game.litidata");
 
-        Game.audio().playMusic(Resources.sounds().get("src/main/resources/sounds/title_theme.mp3"));
+            PlayerController playerController = new PlayerController();
+            EnemyController enemyController = new EnemyController(playerController.getPlayers());
+            KeyController keyController = new KeyController(playerController);
 
-        PlayerController pc = new PlayerController();
-        EnemyController ec = new EnemyController(pc.getPlayers());
-        FoodController fc = new FoodController();
-        mc.initCamera();
-        ec.loadMap(mc.getMap());
-        pc.loadMap(mc.getMap());
-        fc.loadMap(mc.getMap());
+            mapController.initCamera();
+            enemyController.loadMap(mapController.getMap());
+            playerController.loadMap(mapController.getMap());
 
+            playerController.setGameView(Game.screens().get("Game"));
 
-        CreatureMapObjectLoader.registerCustomCreatureType(ec.getCreatures().get(0).getClass());
-        CreatureMapObjectLoader.registerCustomCreatureType(pc.getCreatures().get(0).getClass());
-        //MapObjectLoader.loadDefaultProperties(fc.getFood().get(0).getClass());
+            CreatureMapObjectLoader.registerCustomCreatureType(enemyController.getCreatures().get(0).getClass());
+            CreatureMapObjectLoader.registerCustomCreatureType(playerController.getCreatures().get(0).getClass());
 
+            Game.loop().attach(enemyController);
+            Game.loop().attach(playerController);
 
-        Game.loop().attach(ec);
-        Game.loop().attach(pc);
+            Game.world().loadEnvironment("new_map");
+            Game.world().environment().add(enemyController.getCreatures().get(0));
+            playerController.getCreatures().get(0).setLocation(250,100);
+            Game.world().environment().add(playerController.getCreatures().get(0));
 
-        Game.world().loadEnvironment("new_map");
-        Game.world().environment().add(ec.getCreatures().get(0));
-        pc.getCreatures().get(0).setLocation(0,100);
-        Game.world().environment().add(pc.getCreatures().get(0));
+        // Displays the title screen ("Menu").
+        Game.screens().display("Menu");
+
         Game.start();
-
     }
 }

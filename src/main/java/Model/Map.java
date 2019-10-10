@@ -4,38 +4,41 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class that represents the game area
+ * The Map class for the project. It containes a list of platforms that are used to check player/enemy movements such as gravity.
+ *
+ * @author Jonathan Carbol
+ * @version
  */
 public class Map {
-
     private String name;
-
     private List<Platform> platforms= new ArrayList<>();
 
+    /**
+     * The public constructor for the Map class.
+     *
+     * @param name the name of the map.
+     */
     public Map(String name) {
         this.name = name;
         init(name);
     }
 
-
     /**
-     * Method to initiate the map with platforms in the right position
-     * @param name Variable which decides what map/platforms are shown
+     * Initiates the list of platforms depending on which map is loaded.
+     *
+     * @param name
      */
     public void init(String name){
-
         switch (name){
             case "map1" :   platforms.add(new Platform(0,112,48,160));
                             platforms.add(new Platform(480,112,48,160));
                             platforms.add(new Platform(120,336,48,160));
                             platforms.add(new Platform(480,336,48,160));
                             platforms.add(new Platform(192,208,16,288));
-
         }
     }
 
     public List<Platform> getPlatforms(){
         return this.platforms;
     }
-
 }
