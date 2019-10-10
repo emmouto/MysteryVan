@@ -1,9 +1,9 @@
 package Controller;
 
-import Model.CHARACTER;
 import Model.Hat;
 import Model.Weapon;
 
+import View.CHARACTER;
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.gui.GuiComponent;
 import de.gurkenlabs.litiengine.input.Input;

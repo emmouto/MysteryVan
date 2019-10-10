@@ -1,8 +1,6 @@
 package View;
 
 import Controller.SelectionController;
-import Model.CHARACTER;
-import Model.GameManager;
 
 import de.gurkenlabs.litiengine.Align;
 import de.gurkenlabs.litiengine.Game;
