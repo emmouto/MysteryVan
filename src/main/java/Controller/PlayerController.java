@@ -126,6 +126,7 @@ public class PlayerController implements IUpdateable {
             creatureList.get(i).setLocation(playerList.get(i).getX(),playerList.get(i).getY());
             updateHealth(i);
             updateScore(i);
+            whenDead();
         }
     }
 
@@ -156,6 +157,10 @@ public class PlayerController implements IUpdateable {
         gameView.setMaxHP(playerList.get(i).getMaxHP());
         creatureList.get(i).getHitPoints().setMaxValue(playerList.get(i).getHP());
         creatureList.get(i).getHitPoints().setToMaxValue();
+
+       if (playerList.get(i).getHP() <= 0) {
+                playerList.get(i).setState(Player.State.DEAD);
+            }
     }
 
     /**
