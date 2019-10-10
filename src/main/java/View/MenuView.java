@@ -1,7 +1,6 @@
 package View;
 
 import Controller.ScreenController;
-import Model.GameManager;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

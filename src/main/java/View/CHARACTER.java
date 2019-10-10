@@ -1,4 +1,4 @@
-package Model;
+package View;
 
 import de.gurkenlabs.litiengine.resources.Resources;
 
