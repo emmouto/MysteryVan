@@ -5,12 +5,16 @@ import Controller.PlayerController;
 import View.*;
 
 import de.gurkenlabs.litiengine.Game;
+import de.gurkenlabs.litiengine.entities.Prop;
 import de.gurkenlabs.litiengine.environment.CreatureMapObjectLoader;
+import de.gurkenlabs.litiengine.environment.PropMapObjectLoader;
+import de.gurkenlabs.litiengine.graphics.ImageRenderer;
 import de.gurkenlabs.litiengine.gui.screens.GameScreen;
 import de.gurkenlabs.litiengine.gui.screens.Resolution;
 import de.gurkenlabs.litiengine.input.Input;
 import de.gurkenlabs.litiengine.resources.Resources;
 
+import java.awt.*;
 import java.io.IOException;
 
 /**
@@ -67,7 +71,7 @@ public class GameRunner {
             playerController.loadMap(mapController.getMap());
 
             playerController.setGameView(Game.screens().get("Game"));
-
+            Resources.spritesheets().get("Bread", true);
            /* CreatureMapObjectLoader.registerCustomCreatureType(enemyController.getCreatures().get(0).getClass());
             CreatureMapObjectLoader.registerCustomCreatureType(playerController.getCreatures().get(0).getClass());
 
