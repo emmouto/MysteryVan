@@ -1,7 +1,12 @@
 package Model;
 
+/**
+ * ...
+ *
+ * @author
+ * @version
+ */
 public class Collider {
-
     private int radius;
     private int width;
     private int height;
@@ -10,23 +15,43 @@ public class Collider {
 
     private ICollidable body;
 
-
+    /**
+     * ...
+     */
     public Collider(){
 
     }
 
+    /**
+     * ...
+     *
+     * @param x
+     * @param y
+     */
     public void updatePosition(int x, int y){
         this.x = x;
         this.y = y;
     }
 
+    /**
+     * ...
+     *
+     * @param width
+     * @param height
+     */
     public void updateSize(int width, int height){
         this.width = width;
         this.height = height;
     }
 
-
-
+    /**
+     * ...
+     *
+     * @param c
+     * @param direction
+     *
+     * @return
+     */
     public boolean isColliding(ICollidable c, String direction){
         switch (direction){
             case "DOWN":
@@ -59,7 +84,11 @@ public class Collider {
         return this.y;
     }
 
-    public int getWidth() {return this.width; }
+    public int getWidth() {
+        return this.width;
+    }
 
-    public int getHeight() {return this.height; }
+    public int getHeight() {
+        return this.height;
+    }
 }

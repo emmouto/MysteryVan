@@ -1,10 +1,23 @@
 package Model;
 
+/**
+ * ...
+ *
+ * @author
+ * @version
+ */
 public class Weapon {
     private String name;
     private int damage;
     private int range;
 
+    /**
+     * ...
+     *
+     * @param name
+     * @param damage
+     * @param range
+     */
     public Weapon(String name, int damage, int range) {
         this.name = name;
         this.damage = damage;

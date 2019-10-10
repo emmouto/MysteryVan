@@ -1,5 +1,11 @@
 package Model;
 
+/**
+ *  ...
+ *
+ * @author
+ * @version
+ */
 public class Key{
     // Creating the keys as simply variables
     public static Key up = new Key();
@@ -8,7 +14,9 @@ public class Key{
     public static Key right = new Key();
     public static Key special = new Key();
 
-    /* toggles the keys current state*/
+    /**
+     *  Toggles the keys current state.
+     */
     public void toggle(){
         isDown =  !isDown;
     }
