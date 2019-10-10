@@ -1,6 +1,6 @@
 package Controller;
 
-import Model.GameManager;
+import View.GameManager;
 import View.DefeatView;
 import View.HelpView;
 import View.HighScoreView;

@@ -2,7 +2,6 @@ package View;
 
 import Controller.HighScoreController;
 import Controller.ScreenController;
-import Model.GameManager;
 import Model.HighScore;
 
 import java.awt.*;

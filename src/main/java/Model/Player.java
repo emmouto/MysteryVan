@@ -9,7 +9,7 @@ import java.util.List;
  *
  * @author Jonathan Carbol
  * @author Jennifer Krogh
- * @version
+ * @version 0.1
  */
 public class Player implements IMovable, ICollidable{
     private String name;

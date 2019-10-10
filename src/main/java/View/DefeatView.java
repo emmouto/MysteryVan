@@ -5,7 +5,6 @@ import Controller.ScreenController;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-import Model.GameManager;
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.graphics.ImageRenderer;
 import de.gurkenlabs.litiengine.graphics.TextRenderer;

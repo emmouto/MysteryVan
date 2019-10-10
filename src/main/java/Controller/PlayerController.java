@@ -126,24 +126,22 @@ public class PlayerController implements IUpdateable {
             creatureList.get(i).setLocation(playerList.get(i).getX(),playerList.get(i).getY());
             updateHealth(i);
             updateScore(i);
+            whenDead(i);
         }
     }
 
     /**
      * Checks if player is dead, if so, then this method handles what happens.
      */
-    // Call on this method somewhere were the game is updated!
-    private void whenDead() {
+    private void whenDead(int i) {
         HighScore newScore;
 
-        for (Player p : playerList) {
-            if (p.getState() == Player.State.DEAD) {
-                defeatView.scoreDefeat(p.getScore());
-                newScore = new HighScore(p.getScore(), p.getName());
+            if (playerList.get(i).getState() == Player.State.DEAD) {
+                defeatView.scoreDefeat(playerList.get(i).getScore());
+                newScore = new HighScore(playerList.get(i).getScore(), playerList.get(i).getName());
                 highScoreController.addToScoreList(newScore);
                 DefeatView.showDefeat();
             }
-        }
     }
 
     /**
@@ -156,6 +154,10 @@ public class PlayerController implements IUpdateable {
         gameView.setMaxHP(playerList.get(i).getMaxHP());
         creatureList.get(i).getHitPoints().setMaxValue(playerList.get(i).getHP());
         creatureList.get(i).getHitPoints().setToMaxValue();
+
+       if (playerList.get(i).getHP() <= 0) {
+                playerList.get(i).setState(Player.State.DEAD);
+            }
     }
 
     /**
