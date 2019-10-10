@@ -1,10 +1,7 @@
 package Controller;
 
 import Model.*;
-import de.gurkenlabs.litiengine.graphics.Spritesheet;
-import de.gurkenlabs.litiengine.graphics.emitters.SpritesheetEmitter;
 
-import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -20,17 +17,21 @@ public class FoodController implements IUpdateable {
 
 
     private List<Food> foodList = new ArrayList<>();
-    private Map map;
+    private Map map = new Map("map1");
     private List<Player> players;
+    private int size = map.getPlatforms().size();
 
 
     // Array Lists that will contain the different x and y - values where platforms exist
-    int[] xCoords = fillXCoord(map.getPlatforms().size());
-    int[] yCoords = fillYCoord(map.getPlatforms().size());
+    public int[] xCoords = new int[size];
+    public int[] yCoords = new int[size];
 
     public FoodController() {
         super();
         spawnFood();
+        fillXCoord(xCoords);
+        fillYCoord(yCoords);
+
     }
 
     /**
@@ -66,28 +67,28 @@ public class FoodController implements IUpdateable {
     /**
      * Method fills the xCoords array with the platforms-List's x-positions
      * and adds to it so item is later on more centered on the platform.
-     * @param size Size of the array
+     * @param arr Array to be filled
      * @return returns the finished array
      */
-    public int[] fillXCoord(int size) {
-        for (int i = 0; i < xCoords.length; i++) {
-            xCoords[i] = map.getPlatforms().get(i).getX() + 20;
+    public int[] fillXCoord(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = map.getPlatforms().get(i).getX() + 20;
         }
 
-        return xCoords;
+        return arr;
     }
 
     /**
      * Method fills the yCoords array with the platforms-List's y-positions.
-     * @param size Size of the array
+     * @param arr Array to be filled
      * @return returns the finished array
      */
-    public int[] fillYCoord(int size) {
-        for (int i = 0; i < yCoords.length; i++) {
-            yCoords[i] = map.getPlatforms().get(i).getY();
+    public int[] fillYCoord(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = map.getPlatforms().get(i).getY();
         }
 
-        return yCoords;
+        return arr;
     }
 
     // Method which chooses a value from an array randomly

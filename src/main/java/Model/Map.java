@@ -30,6 +30,7 @@ public class Map {
                             platforms.add(new Platform(120,336,48,160));
                             platforms.add(new Platform(480,336,48,160));
                             platforms.add(new Platform(192,208,16,288));
+
         }
     }
 

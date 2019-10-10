@@ -1,5 +1,5 @@
 main threw an exception:
-java.lang.IndexOutOfBoundsException: Index: 0, Size: 0
-	at java.util.ArrayList.rangeCheck(ArrayList.java:657)
-	at java.util.ArrayList.get(ArrayList.java:433)
-	at GameRunner.main(GameRunner.java:70)
+java.lang.NullPointerException
+	at Controller.FoodController.fillXCoord(FoodController.java:81)
+	at Controller.FoodController.<init>(FoodController.java:38)
+	at GameRunner.main(GameRunner.java:67)
