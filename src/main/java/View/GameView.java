@@ -102,7 +102,7 @@ public class GameView extends GameScreen implements IUpdateable {
         /**
          * The protected constructor of the Hud class.
          */
-        protected Hud() {
+        Hud() {
             super(0, 0, Game.window().getResolution().getWidth(), Game.window().getResolution().getHeight());
 
         }

@@ -73,7 +73,7 @@ public class PlayerController implements IUpdateable {
      * @param hat the equipped hat of the player.
      * @param weapon the equipped weapon of the player.
      */
-    public void spawnPlayer(String name, int hp, int defense, int strength, Hat hat, Weapon weapon){
+    private void spawnPlayer(String name, int hp, int defense, int strength, Hat hat, Weapon weapon){
         Player p = new Player(name, 0, 0, 18, 35);
         p.setHP(hp);
         p.setDefence(defense);
@@ -86,7 +86,7 @@ public class PlayerController implements IUpdateable {
     /**
      * Updates the PlayerController, by setting the displayed creatures HP, hitbox and sprite among other things.
      */
-    public void updatePlayerController(){
+    private void updatePlayerController(){
         if(!playerList.isEmpty()) {
             for (int i = 0; i < playerList.size(); i++) {
                 Creature c = new Creature();
@@ -121,7 +121,7 @@ public class PlayerController implements IUpdateable {
      * Updates the health of the players and sends the data to the view to be displayed.
      * @param i the index of the player to be updated.
      */
-    public void updateHealth(int i){
+    private void updateHealth(int i){
         gameView.setHP(playerList.get(i).getHP());
         gameView.setMaxHP(playerList.get(i).getMaxHP());
         creatureList.get(i).getHitPoints().setMaxValue(playerList.get(i).getHP());
@@ -132,7 +132,7 @@ public class PlayerController implements IUpdateable {
      * Updates the score of the player and sends the data to the view to be displayed.
      * @param i the index of the player to be updated.
      */
-    public void updateScore(int i){
+    private void updateScore(int i){
         gameView.setScore(playerList.get(i).getScore());
     }
 
