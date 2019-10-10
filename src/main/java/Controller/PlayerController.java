@@ -5,10 +5,12 @@ import View.DefeatView;
 import View.GameManager;
 import View.GameView;
 
+import View.PauseView;
 import de.gurkenlabs.litiengine.IUpdateable;
 import de.gurkenlabs.litiengine.entities.Creature;
 import de.gurkenlabs.litiengine.gui.screens.Screen;
 
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +31,7 @@ public class PlayerController implements IUpdateable {
 
     private DefeatView defeatView;
     private HighScoreController highScoreController;
+    private KeyController keyController;
 
     /**
      * The public constructor of the PlayerController.
@@ -129,6 +132,7 @@ public class PlayerController implements IUpdateable {
                 updateHealth(i);
                 updateScore(i);
                 whenDead(i);
+                changeToPause();
             }
         }
     }
@@ -148,6 +152,17 @@ public class PlayerController implements IUpdateable {
     }
 
     /**
+     * Pauses the game when P is pressed.
+     */
+    private void changeToPause (){
+
+        if(Key.pause.isDown){
+            GameManager.setState(GameManager.GameState.INGAME_PAUSE);
+            PauseView.showPause();
+        }
+    }
+
+    /**
      * Updates the health of the players and sends the data to the view to be displayed.
      * @param i the index of the player to be updated.
      */
@@ -164,6 +179,7 @@ public class PlayerController implements IUpdateable {
 
     /**
      * Updates the score of the player and sends the data to the view to be displayed.
+     *
      * @param i the index of the player to be updated.
      */
     private void updateScore(int i){
