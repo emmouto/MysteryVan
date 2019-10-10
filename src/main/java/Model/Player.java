@@ -54,10 +54,9 @@ public class Player implements IMovable, ICollidable{
         this.collider = new Collider();
         this.collider.updatePosition(posX, posY);
         this.collider.updateSize(width, height);
-        this.maxHP = 10;
         this.score = 0;
         state = State.ALIVE;
-        this.maxHP = 23;
+        this.maxHP = 10;
         this.setHP(maxHP);
         this.gravity=3;
         this.hasJumped = false;
@@ -182,6 +181,10 @@ public class Player implements IMovable, ICollidable{
 
     public int getMaxHP(){
         return this.maxHP;
+    }
+
+    public void setMaxHP(int maxHP){
+        this.maxHP = maxHP;
     }
 
     public int getScore() {

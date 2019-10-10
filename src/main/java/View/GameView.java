@@ -162,11 +162,11 @@ public class GameView extends GameScreen implements IUpdateable {
          * @param g the graphic to be rendered.
          */
         private void renderScore(Graphics2D g){
-            //g.setFont(GameManager.PIXELED_BIG);
+            g.setFont(GameManager.PIXELED_BIG);
             g.setColor(Color.BLACK);
 
             String string = Integer.toString(score);
-            TextRenderer.render(g,string,50,50);
+            TextRenderer.render(g,string,Game.window().getWidth()-350,100);
         }
     }
 }

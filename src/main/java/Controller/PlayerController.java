@@ -2,6 +2,7 @@ package Controller;
 
 import Model.*;
 import View.DefeatView;
+import View.GameManager;
 import View.GameView;
 
 import de.gurkenlabs.litiengine.IUpdateable;
@@ -120,13 +121,15 @@ public class PlayerController implements IUpdateable {
      */
     @Override
     public void update() {
-        for (int i = 0; i < playerList.size(); i++) {
-            getPlayers().get(i).update();
-            getPlayers().get(i).checkGrounded(this.map.getPlatforms());
-            creatureList.get(i).setLocation(playerList.get(i).getX(),playerList.get(i).getY());
-            updateHealth(i);
-            updateScore(i);
-            whenDead(i);
+        if(GameManager.getState() == GameManager.GameState.INGAME) {
+            for (int i = 0; i < playerList.size(); i++) {
+                getPlayers().get(i).update();
+                getPlayers().get(i).checkGrounded(this.map.getPlatforms());
+                creatureList.get(i).setLocation(playerList.get(i).getX(), playerList.get(i).getY());
+                updateHealth(i);
+                updateScore(i);
+                whenDead(i);
+            }
         }
     }
 

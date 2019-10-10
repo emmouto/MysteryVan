@@ -128,6 +128,9 @@ public class SelectionView extends Screen implements IUpdateable {
                 break;
             case GAME_START:
                 this.getComponents().clear();
+                Game.screens().display("Game");
+                Game.graphics().setBaseRenderScale(2.001f);
+                GameManager.setState(GameManager.GameState.INGAME);
                 break;
             default:
                 break;
