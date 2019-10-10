@@ -166,7 +166,6 @@ public class PlayerController implements IUpdateable {
      * Updates the score of the player and sends the data to the view to be displayed.
      * @param i the index of the player to be updated.
      */
-
     private void updateScore(int i){
         gameView.setScore(playerList.get(i).getScore());
     }
