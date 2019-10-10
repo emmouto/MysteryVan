@@ -16,41 +16,6 @@ import java.util.List;
  * @version 0.1
  */
 public class HighScoreController {
-    //Player names -- hardcoded
-    private String player1 = "Emma";
-    private String player2 = "Antonia";
-    private String player3 = "Jennifer";
-    private String player4 = "Adam";
-    private String player5 = "Jonathan";
-    private String player6 = "Pettersson";
-    private String player7 = "Welzel";
-    private String player8 = "Krogh";
-    private String player9 = "Rohdell";
-    private String player10 = "Carbol";
-
-    //Player scores -- hardcoded
-    private int p1 = 1540;
-    private int p2 = 4000;
-    private int p3 = 250;
-    private int p4 = 30;
-    private int p5 = 2010;
-    private int p6 = 300;
-    private int p7 = 1110;
-    private int p8 = 660;
-    private int p9 = 9999;
-    private int p10 = 1230;
-
-    //HighScores -- hardcoded
-    private HighScore h1 = new HighScore(p1, player1);
-    private HighScore h2 = new HighScore(p2, player2);
-    private HighScore h3 = new HighScore(p3, player3);
-    private HighScore h4 = new HighScore(p4, player4);
-    private HighScore h5 = new HighScore(p5, player5);
-    private HighScore h6 = new HighScore(p6, player6);
-    private HighScore h7 = new HighScore(p7, player7);
-    private HighScore h8 = new HighScore(p8, player8);
-    private HighScore h9 = new HighScore(p9, player9);
-    private HighScore h10 = new HighScore(p10, player10);
 
     private List<HighScore> highScoreList;
     private String HighScoreDataPath;
@@ -63,7 +28,6 @@ public class HighScoreController {
      */
     public HighScoreController(List<HighScore> highScoreList) {
         this.highScoreList = highScoreList;
-        setH(this.highScoreList); // Change later? this is used for testing with hardcoded values.
         sortList(this.highScoreList); // Change later? this is used for testing with hardcoded values.
 
         try {
@@ -179,17 +143,4 @@ public class HighScoreController {
 
         highScoreList.sort(comparatorReversed);
     }
-
-    private void setH(List<HighScore> highScoreList) {
-        highScoreList.add(h1);
-        highScoreList.add(h2);
-        highScoreList.add(h3);
-        highScoreList.add(h4);
-        highScoreList.add(h5);
-        highScoreList.add(h6);
-        highScoreList.add(h7);
-        highScoreList.add(h8);
-        highScoreList.add(h9);
-        highScoreList.add(h10);
-      }
 }
