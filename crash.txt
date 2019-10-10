@@ -1,0 +1,4 @@
+main threw an exception:
+java.lang.ClassCastException: View.MenuView cannot be cast to View.GameView
+	at Controller.PlayerController.setGameView(PlayerController.java:77)
+	at GameRunner.main(GameRunner.java:69)
