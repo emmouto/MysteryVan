@@ -1,8 +1,10 @@
 package Model;
 
 /**
- * @author Jonathan Carbol
  * The Platform class used in the model.
+ *
+ * @author Jonathan Carbol
+ * @version
  */
 public class Platform implements ICollidable{
     // Side platforms are 160px wide and 48px high
@@ -13,9 +15,9 @@ public class Platform implements ICollidable{
     private int width;
     private int height;
 
-
     /**
      * The public constructor of the Platform class.
+     *
      * @param x the x position of the platform.
      * @param y the y position of the platform.
      * @param height the height of the platform.

@@ -1,7 +1,12 @@
 package Model;
 
+/**
+ * ...
+ *
+ * @author
+ * @version
+ */
 public class Collider {
-
     private int radius;
     private int width;
     private int height;
@@ -10,28 +15,47 @@ public class Collider {
 
     private ICollidable body;
 
-
+    /**
+     * ...
+     */
     public Collider(){
 
     }
 
+    /**
+     * ...
+     *
+     * @param x
+     * @param y
+     */
     public void updatePosition(int x, int y){
         this.x = x;
         this.y = y;
     }
 
+    /**
+     * ...
+     *
+     * @param width
+     * @param height
+     */
     public void updateSize(int width, int height){
         this.width = width;
         this.height = height;
     }
 
-
-
+    /**
+     * ...
+     *
+     * @param c
+     * @param direction
+     *
+     * @return
+     */
     public boolean isColliding(ICollidable c, String direction){
         switch (direction){
             case "DOWN":
                 if ((c.getCollider().getX() - this.getWidth() <= this.getX()) && (c.getCollider().getX() + c.getCollider().getWidth() >= this.getX()) && (this.getY() + this.getHeight() >= c.getCollider().getY()) && (this.getY() + this.getHeight() <= c.getCollider().getY() + c.getCollider().getHeight())){
-                    System.out.println("memes");
                     return true;
                 }
             case "UP":
@@ -60,7 +84,11 @@ public class Collider {
         return this.y;
     }
 
-    public int getWidth() {return this.width; }
+    public int getWidth() {
+        return this.width;
+    }
 
-    public int getHeight() {return this.height; }
+    public int getHeight() {
+        return this.height;
+    }
 }

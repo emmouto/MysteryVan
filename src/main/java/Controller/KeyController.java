@@ -1,5 +1,7 @@
 package Controller;
+
 import Model.Key;
+
 import de.gurkenlabs.litiengine.IUpdateable;
 import de.gurkenlabs.litiengine.input.Input;
 
@@ -7,14 +9,24 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.HashMap;
 
+/**
+ * ...
+ *
+ * @author
+ * @version
+ */
 public class KeyController implements KeyListener, IUpdateable {
     PlayerController pc;
-    //Assigning the variable keys to actual letters
+
+    /**
+     * Assigning the variable keys to actual letters
+     *
+     * @param pc
+     */
     public KeyController(PlayerController pc) {
         this.pc = pc;
         initKeyController();
     }
-
 
     private void initKeyController(){
         bind(KeyEvent.VK_W, Key.up);
@@ -72,6 +84,7 @@ public class KeyController implements KeyListener, IUpdateable {
     }
 
     public HashMap<Integer, Key> keyBindings = new HashMap<Integer, Key>();
+
     public static boolean other[] = new boolean[256];
 
     @Override

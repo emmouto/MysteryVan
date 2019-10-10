@@ -3,14 +3,16 @@ package Model;
 import java.awt.event.KeyEvent;
 import java.util.List;
 
-
 /**
- * @author Jonathan Carbol
  * The main Player class used to model the player, its movement and has other important attributes such hit points and weapon.
  * It implements IMovable and ICollidable interfaces used to check movement and collision.
+ *
+ * @author Jonathan Carbol
+ * @author Jennifer Krogh
+ * @version
  */
 public class Player implements IMovable, ICollidable{
-
+    private String name;
     private int HP;
     private int strength;
     private int defence;
@@ -31,10 +33,12 @@ public class Player implements IMovable, ICollidable{
     private boolean isGrounded = false;
     private boolean hasJumped = false;
     private double gravity;
+    private State state;
 
 
     /**
      * The public constructor for the Player class.
+     *
      * @param sprite the sprite prefix for the player.
      * @param posX the starting x position of the player.
      * @param posY the starting y position of the player.
@@ -50,10 +54,29 @@ public class Player implements IMovable, ICollidable{
         this.collider = new Collider();
         this.collider.updatePosition(posX, posY);
         this.collider.updateSize(width, height);
+        this.maxHP = 10;
+        this.score = 0;
+        state = State.ALIVE;
         this.maxHP = 23;
         this.setHP(maxHP);
         this.gravity=3;
         this.hasJumped = false;
+    }
+
+    /**
+     * State of the player. Alive when created, dead when HP = 0;
+     */
+    public enum State {
+        DEAD,
+        ALIVE
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getHP() {
@@ -83,7 +106,6 @@ public class Player implements IMovable, ICollidable{
     public Boost getBoost2() {
         return boost2;
     }
-
 
     public void setHP(int HP) {
         this.HP = HP;
@@ -170,6 +192,14 @@ public class Player implements IMovable, ICollidable{
         this.score = score;
     }
 
+    public State getState() {
+        return state;
+    }
+
+    public void setState(State state) {
+        this.state = state;
+    }
+
     /**
      * Updates the players position and its collider.
      */
@@ -214,6 +244,7 @@ public class Player implements IMovable, ICollidable{
 
     /**
      * Checks if the player is standing on a platform.
+     *
      * @param platforms the list of platforms to check if the player is standing on.
      */
     public void checkGrounded(List<Platform> platforms){

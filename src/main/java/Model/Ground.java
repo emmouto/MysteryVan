@@ -1,12 +1,37 @@
 package Model;
 
+/**
+ * Class which handles the different attributes of the ground.
+ *
+ * @author Antonia Welzel
+ * @author Jennifer Krogh
+ * @version
+ */
 public class Ground implements ICollidable{
-
-    private String type;
+    private Type type;
     private boolean dealDamage; // damage when falling into ground, ex. lava but not immediate death
-    private boolean instantDeath; // instant death when the grounds are skz/clouds = no ground
+    private boolean instantDeath; // instant death when the grounds are sky/clouds = no ground
 
-    public String getType() {
+    private enum Type {
+        GRASS,
+        LAVA,
+        SKY
+    }
+
+    /**
+     * ...
+     *
+     * @param type
+     * @param dealDamage
+     * @param instantDeath
+     */
+    public Ground(Type type, boolean dealDamage, boolean instantDeath) {
+        this.type = type;
+        this.dealDamage = dealDamage;
+        this.instantDeath = instantDeath;
+    }
+
+    public Type getType() {
         return type;
     }
 
@@ -18,6 +43,17 @@ public class Ground implements ICollidable{
         return instantDeath;
     }
 
+    public void setType(Type type) {
+        this.type = type;
+    }
+
+    public void setDealDamage(boolean dealDamage) {
+        this.dealDamage = dealDamage;
+    }
+
+    public void setInstantDeath(boolean instantDeath) {
+        this.instantDeath = instantDeath;
+    }
 
     @Override
     public Collider getCollider() {
