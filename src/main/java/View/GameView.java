@@ -24,7 +24,7 @@ public class GameView extends GameScreen implements IUpdateable {
     private int maxHP;
     private int score;
 
-    private static int PADDING =10;
+    private static int PADDING = 10;
     private final BufferedImage HEART = Imaging.scale(Resources.images().get("src/main/resources/heart.png"),0.05);
     private final BufferedImage HEART_QUARTER = Imaging.scale(Resources.images().get("src/main/resources/heart1-4_2.png"),0.05);
     private final BufferedImage HEART_HALF = Imaging.scale(Resources.images().get("src/main/resources/heart1-2_2.png"),0.05);
@@ -103,7 +103,7 @@ public class GameView extends GameScreen implements IUpdateable {
         /**
          * The protected constructor of the Hud class.
          */
-        protected Hud() {
+        Hud() {
             super(0, 0, Game.window().getResolution().getWidth(), Game.window().getResolution().getHeight());
         }
 
@@ -162,11 +162,11 @@ public class GameView extends GameScreen implements IUpdateable {
          * @param g the graphic to be rendered.
          */
         private void renderScore(Graphics2D g){
-            //g.setFont(GameManager.PIXELED_BIG);
+            g.setFont(GameManager.PIXELED_BIG);
             g.setColor(Color.BLACK);
 
             String string = Integer.toString(score);
-            TextRenderer.render(g,string,50,50);
+            TextRenderer.render(g,string,Game.window().getWidth()-350,100);
         }
     }
 }

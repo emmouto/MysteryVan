@@ -16,7 +16,6 @@ import java.util.HashMap;
  * @version
  */
 public class KeyController implements KeyListener, IUpdateable {
-    PlayerController pc;
 
     /**
      * Assigning the variable keys to actual letters
@@ -24,7 +23,6 @@ public class KeyController implements KeyListener, IUpdateable {
      * @param pc
      */
     public KeyController(PlayerController pc) {
-        this.pc = pc;
         initKeyController();
     }
 
@@ -34,6 +32,7 @@ public class KeyController implements KeyListener, IUpdateable {
         bind(KeyEvent.VK_S, Key.down);
         bind(KeyEvent.VK_D, Key.right);
         bind(KeyEvent.VK_SPACE, Key.special);
+        bind(KeyEvent.VK_P, Key.pause);
 
         Input.keyboard().onKeyPressed(e ->{
             keyPressed(e);
@@ -46,14 +45,22 @@ public class KeyController implements KeyListener, IUpdateable {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        other[e.getExtendedKeyCode()] = true;
-        keyBindings.get(e.getKeyCode()).isDown = true;
+        try {
+            other[e.getExtendedKeyCode()] = true;
+            keyBindings.get(e.getKeyCode()).isDown = true;
+        }catch (Exception n){
+
+        }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        other[e.getExtendedKeyCode()] = false;
-        keyBindings.get(e.getKeyCode()).isDown = false;
+        try {
+            other[e.getExtendedKeyCode()] = false;
+            keyBindings.get(e.getKeyCode()).isDown = false;
+        }catch (Exception n){
+
+        }
     }
 
     public boolean isKeyBinded(int extendedKey) {

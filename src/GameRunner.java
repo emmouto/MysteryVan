@@ -58,34 +58,40 @@ public class GameRunner {
         Game.screens().add(new GameView("Game"));
         Game.screens().add(new GameScreen());
 
+        Resources.load("game.litidata");
+        PlayerController playerController = new PlayerController();
+        EnemyController enemyController = new EnemyController(playerController.getPlayers());
+        KeyController keyController = new KeyController(playerController);
+
+        mapController.initCamera();
+        enemyController.loadMap(mapController.getMap());
+        playerController.loadMap(mapController.getMap());
+        playerController.setGameView(Game.screens().get("Game"));
+
+        CreatureMapObjectLoader.registerCustomCreatureType(enemyController.getCreatures().get(0).getClass());
+        CreatureMapObjectLoader.registerCustomCreatureType(playerController.getCreatures().get(0).getClass());
+
+        Game.loop().attach(enemyController);
+        Game.loop().attach(playerController);
+
+        Game.world().loadEnvironment("new_map");
+        Game.world().environment().add(enemyController.getCreatures().get(0));
+        playerController.getCreatures().get(0).setLocation(250,100);
+        Game.world().environment().add(playerController.getCreatures().get(0));
+
+        Game.screens().display("Menu");
+
         // TODO move some of this code somewhere else..?
-            /*Game.graphics().setBaseRenderScale(2.001f);
-            Resources.load("game.litidata");*/
+            /*Game.graphics().setBaseRenderScale(2.001f);*/
 
-            PlayerController playerController = new PlayerController();
-            /*EnemyController enemyController = new EnemyController(playerController.getPlayers());
-            KeyController keyController = new KeyController(playerController);*/
 
-            /*mapController.initCamera();
-            enemyController.loadMap(mapController.getMap());*/
-            playerController.loadMap(mapController.getMap());
 
             playerController.setGameView(Game.screens().get("Game"));
             Resources.spritesheets().get("AppleWorm", true);
 
-           /* CreatureMapObjectLoader.registerCustomCreatureType(enemyController.getCreatures().get(0).getClass());
-            CreatureMapObjectLoader.registerCustomCreatureType(playerController.getCreatures().get(0).getClass());
-
-            Game.loop().attach(enemyController);
-            Game.loop().attach(playerController);
-
-            Game.world().loadEnvironment("new_map");
-            Game.world().environment().add(enemyController.getCreatures().get(0));
-            playerController.getCreatures().get(0).setLocation(250,100);
-            Game.world().environment().add(playerController.getCreatures().get(0));*/
 
         // Displays the title screen ("Menu").
-        Game.screens().display("Menu");
+
 
         Game.start();
     }
