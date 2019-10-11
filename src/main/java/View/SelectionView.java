@@ -26,7 +26,7 @@ public class SelectionView extends Screen implements IUpdateable {
     private EnterNameComponent enterNameComponent;
     private ChooseCharacterComponent chooseCharacterComponent;
     private ChooseLevelComponent chooseLevelComponent;
-    private SelectionController selectionController;
+    private static SelectionController selectionController;
 
     /**
      * Constructor for the SelectionView
@@ -39,13 +39,13 @@ public class SelectionView extends Screen implements IUpdateable {
 
     @Override
     protected void initializeComponents() {
-        this.selectionController = new SelectionController();
+        selectionController = new SelectionController();
         this.enterNameComponent = new EnterNameComponent();
-        this.chooseCharacterComponent = new ChooseCharacterComponent(selectionController);
+        this.chooseCharacterComponent = new ChooseCharacterComponent();
         this.chooseLevelComponent = new ChooseLevelComponent();
 
         this.getComponents().add(this.enterNameComponent);
-        this.getComponents().add(this.selectionController);
+        this.getComponents().add(selectionController);
     }
 
     /**
@@ -100,6 +100,7 @@ public class SelectionView extends Screen implements IUpdateable {
         switch (selectionController.state) {
             case CHOOSE_CHARACTER:
                 if (!this.getComponents().contains(this.chooseCharacterComponent)) {
+                    Game.audio().playSound(GameManager.SELECT_SOUND);
                     selectionController.setPlayerName(enterNameComponent.enterName.getText());
                     enterNameComponent.enterName.setSelected(false);
                     enterNameComponent.enterName.setEnabled(false);
@@ -110,14 +111,9 @@ public class SelectionView extends Screen implements IUpdateable {
                 }
 
                 break;
-            case CHOOSE_HAT:
-
-                break;
-            case CHOOSE_WEAPON:
-
-                break;
             case CHOOSE_LEVEL:
                 if (!this.getComponents().contains(this.chooseLevelComponent)) {
+                    Game.audio().playSound(GameManager.SELECT_SOUND);
                     selectionController.setPlayerCharacter();
 
                     // TODO add code for when different difficulty levels have been chosen
@@ -129,9 +125,22 @@ public class SelectionView extends Screen implements IUpdateable {
                 break;
             case GAME_START:
                 this.getComponents().clear();
-                Game.screens().display("Game");
-                Game.graphics().setBaseRenderScale(2.001f);
-                GameManager.setState(GameManager.GameState.INGAME);
+                this.suspend();
+                selectionController.state = SelectionController.SELECTION_STATE.GAME_STARTED;
+
+                Game.audio().playSound(GameManager.SELECT_SOUND);
+                Game.window().getRenderComponent().fadeOut(1500);
+                Game.audio().fadeMusic(150);
+
+                Game.loop().perform(2500, () -> {
+                    Game.window().getRenderComponent().fadeIn(1000);
+                    Game.screens().display("Game");
+                    Game.graphics().setBaseRenderScale(2.001f);
+                    GameManager.setState(GameManager.GameState.INGAME);
+                });
+
+                break;
+            case GAME_STARTED:
                 break;
             default:
                 break;
@@ -183,6 +192,7 @@ public class SelectionView extends Screen implements IUpdateable {
             enterName.getAppearance().setTransparentBackground(false);
             enterName.setFont(GameManager.RAINY_MEDIUM);
             enterName.getAppearance().setForeColor(Color.BLACK);
+            // TODO make the text align work properly
             enterName.setTextAlign(Align.CENTER_RIGHT);
             enterName.setSelected(true);
         }
@@ -195,12 +205,8 @@ public class SelectionView extends Screen implements IUpdateable {
      * @version 0.1
      */
     public static class ChooseCharacterComponent extends GuiComponent {
-        private SelectionController selectionController;
-
-        ChooseCharacterComponent(SelectionController selectionController) {
+        ChooseCharacterComponent() {
             super(0, 0, Game.window().getResolution().getWidth(), Game.window().getResolution().getHeight());
-
-            this.selectionController = selectionController;
         }
 
         /**
@@ -262,8 +268,7 @@ public class SelectionView extends Screen implements IUpdateable {
         @Override
         public void render(Graphics2D g) {
             renderHeader(g);
-
-
+            renderChoices(g);
 
             super.render(g);
         }
@@ -277,6 +282,21 @@ public class SelectionView extends Screen implements IUpdateable {
                     GameManager.centerX - (text.length() * g.getFont().getSize()) / 2.0 + 100, 100, Color.BLACK);
         }
 
+        private void renderChoices(Graphics2D g) {
+            int i  = 200;
+            g.setFont(GameManager.PIXELED_MEDIUM);
 
+            for (SelectionController.DIFFICULTY_LEVEL difficultyLevel : SelectionController.DIFFICULTY_LEVEL.values()) {
+                if (difficultyLevel == selectionController.selectedDifficulty) {
+                    g.setColor(Color.BLACK);
+                    TextRenderer.render(g, difficultyLevel.name(), i, 400);
+                } else {
+                    g.setColor(Color.WHITE);
+                    TextRenderer.render(g, difficultyLevel.name(), i, 400);
+                }
+
+                i += 300;
+            }
+        }
     }
 }

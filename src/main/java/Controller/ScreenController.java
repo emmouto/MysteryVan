@@ -171,7 +171,7 @@ public class ScreenController extends Menu {
         lastInput = Game.time().now();
 
         if (this.isVisible() && Game.time().now() > 10){
-            Game.audio().playSound(GameManager.SELECT_SOUND);
+            Game.audio().playSound(GameManager.MENU_SOUND);
         }
     }
 

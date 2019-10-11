@@ -10,7 +10,6 @@ import de.gurkenlabs.litiengine.IUpdateable;
 import de.gurkenlabs.litiengine.entities.Creature;
 import de.gurkenlabs.litiengine.gui.screens.Screen;
 
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +37,7 @@ public class PlayerController implements IUpdateable {
      */
     public PlayerController() {
         super();
-        spawnPlayer("player", 23, 100, 0, new Hat("ugly", new Boost("boost",
+        spawnPlayer("player", 23, 100, 0, new Hat("ugly", new Boost(
                 0, 0, 0)), new Weapon("xd", 0, 0));
         updatePlayerController();
     }

@@ -1,9 +1,8 @@
 package Controller;
 
-import Model.Hat;
-import Model.Weapon;
 import View.CHARACTER;
 
+import View.GameManager;
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.gui.GuiComponent;
 import de.gurkenlabs.litiengine.input.Input;
@@ -41,8 +40,9 @@ public class SelectionController extends GuiComponent {
                     return;
                 }
 
-                this.confirm();
                 lastInput = Game.time().now();
+
+                this.confirm();
             }
         });
 
@@ -55,6 +55,8 @@ public class SelectionController extends GuiComponent {
                 lastInput = Game.time().now();
 
                 if (state == SELECTION_STATE.CHOOSE_CHARACTER) {
+                    Game.audio().playSound(GameManager.MENU_SOUND);
+
                     switch (selectedChar) {
                         case ADAM:
                             selectedChar = CHARACTER.JONATHAN;
@@ -73,6 +75,8 @@ public class SelectionController extends GuiComponent {
                             break;
                     }
                 } else if (state == SELECTION_STATE.CHOOSE_LEVEL) {
+                    Game.audio().playSound(GameManager.MENU_SOUND);
+
                     switch (selectedDifficulty) {
                         case EASY:
                             selectedDifficulty = DIFFICULTY_LEVEL.HARD;
@@ -97,6 +101,8 @@ public class SelectionController extends GuiComponent {
                 lastInput = Game.time().now();
 
                 if (state == SELECTION_STATE.CHOOSE_CHARACTER) {
+                    Game.audio().playSound(GameManager.MENU_SOUND);
+
                     switch (selectedChar) {
                         case ADAM:
                             selectedChar = CHARACTER.ANTONIA;
@@ -114,6 +120,8 @@ public class SelectionController extends GuiComponent {
                             selectedChar = CHARACTER.ADAM;
                     }
                 } else if (state == SELECTION_STATE.CHOOSE_LEVEL) {
+                    Game.audio().playSound(GameManager.MENU_SOUND);
+
                     switch (selectedDifficulty) {
                         case EASY:
                             selectedDifficulty = DIFFICULTY_LEVEL.MEDIUM;
@@ -131,7 +139,6 @@ public class SelectionController extends GuiComponent {
     }
 
     private void confirm() {
-        // TODO insert hat and weapon states
         switch (state) {
             case ENTER_NAME:
                 state = SELECTION_STATE.CHOOSE_CHARACTER;
@@ -159,10 +166,9 @@ public class SelectionController extends GuiComponent {
     public enum SELECTION_STATE {
         ENTER_NAME,
         CHOOSE_CHARACTER,
-        CHOOSE_WEAPON,
-        CHOOSE_HAT,
         CHOOSE_LEVEL,
-        GAME_START
+        GAME_START,
+        GAME_STARTED
     }
 
     /**
@@ -191,20 +197,8 @@ public class SelectionController extends GuiComponent {
         PlayerController.playerList.get(0).setMaxHP(selectedChar.getHp());
         PlayerController.playerList.get(0).setStrength(selectedChar.getStr());
         PlayerController.playerList.get(0).setDefence(selectedChar.getDef());
-    }
-
-    /**
-     * @param weapon The weapon chosen by the user.
-     */
-    public void setPlayerWeapon(Weapon weapon) {
-        PlayerController.playerList.get(0).setWeapon(weapon);
-    }
-
-    /**
-     * @param hat The hat chosen by the user.
-     */
-    public void setPlayerHat(Hat hat) {
-        PlayerController.playerList.get(0).setHat(hat);
+        PlayerController.playerList.get(0).setHat(selectedChar.getHat());
+        PlayerController.playerList.get(0).setWeapon(selectedChar.getWpn());
     }
 
     /**

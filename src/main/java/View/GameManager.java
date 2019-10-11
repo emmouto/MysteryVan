@@ -25,8 +25,12 @@ public final class GameManager {
     public static final Font RAINY_SMALL = Resources.fonts().get("src/main/resources/fonts/RainyHearts.ttf",24f);
 
     // Sounds
-    public static final Sound SELECT_SOUND = Resources.sounds().get("src/main/resources/audio/sfx/menu_sound.wav");
+    public static final Sound MENU_SOUND = Resources.sounds().get("src/main/resources/audio/sfx/menu_sound.wav");
+    static final Sound SELECT_SOUND = Resources.sounds().get("src/main/resources/audio/sfx/menu_selection.wav");
     static final Sound TITLE_THEME = Resources.sounds().get("src/main/resources/audio/music/title_theme.mp3");
+    static final Sound STAGE_1 = Resources.sounds().get("src/main/resources/audio/music/stage1.ogg");
+    public static final Sound STAGE_2 = Resources.sounds().get("src/main/resources/audio/music/stage2.ogg");
+    public static final Sound STAGE_3 = Resources.sounds().get("src/main/resources/audio/music/stage3.ogg");
 
     /**
      * The possible states for the game.

@@ -10,8 +10,6 @@ package Model;
 public class Boost {
     //TODO change class to interface or similar? -----#####------
 
-    //changed to private
-    private String name;
     private int HP;
     private int strength;
     private int defence; // used to be armour
@@ -19,25 +17,14 @@ public class Boost {
     /**
      * ...
      *
-     * @param name
      * @param HP
      * @param strength
      * @param defence
      */
-    public Boost(String name, int HP, int strength, int defence) {
-        this.name = name;
+    public Boost(int HP, int strength, int defence) {
         this.HP = HP;
         this.strength = strength;
         this.defence = defence;
-    }
-
-    // Getters and setters - JavaDoc not needed
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public int getHP() {

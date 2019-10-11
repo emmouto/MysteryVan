@@ -91,11 +91,11 @@ public class MenuView extends Screen implements IUpdateable {
 
     public static void showSelection() {
         Game.audio().playSound(GameManager.SELECT_SOUND);
-        Game.window().getRenderComponent().fadeOut(2500);
-        Game.audio().fadeMusic(250);
+        Game.window().getRenderComponent().fadeOut(1500);
+        Game.audio().fadeMusic(150);
 
         // Display Help Screen
-        Game.loop().perform(3500, () -> {
+        Game.loop().perform(2500, () -> {
             Game.window().getRenderComponent().fadeIn(1000);
             Game.screens().display("Help");
         });
@@ -113,7 +113,6 @@ public class MenuView extends Screen implements IUpdateable {
     public void suspend() {
         super.suspend();
         Game.loop().detach(this);
-        //Game.audio().stopMusic();
     }
 
     /**

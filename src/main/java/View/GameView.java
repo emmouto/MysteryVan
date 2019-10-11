@@ -72,6 +72,10 @@ public class GameView extends GameScreen implements IUpdateable {
     @Override
     public void prepare() {
         super.prepare();
+
+        // TODO play different music depending on level
+        Game.audio().playMusic(GameManager.STAGE_1);
+
         Game.loop().attach(this);
     }
 
