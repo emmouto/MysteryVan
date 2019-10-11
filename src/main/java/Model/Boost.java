@@ -3,8 +3,9 @@ package Model;
 /**
  * ...
  *
- * @author
- * @version
+ * @author Antonia Welzel
+ * @author Jonathan Carbol
+ * @version 0.1
  */
 public class Boost {
     //TODO change class to interface or similar? -----#####------

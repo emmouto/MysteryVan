@@ -1,20 +1,21 @@
 package Model;
 
 /**
- * ...
+ * Class defining a <code>Hat</code>, an item that gives the player a <code>Boost</code>.
  *
- * @author
- * @version
+ * @author Jennifer Krogh
+ * @author Jonathan Carbol
+ * @version 0.1
  */
 public class Hat {
     private String name;
     private Boost boost;
 
     /**
-     * ...
+     * Creates a new hat and sets the name and <code>Boost</code>.
      *
-     * @param name
-     * @param boost
+     * @param name name of the <code>Hat</code>.
+     * @param boost the boost that the <code>Hat</code> gives.
      */
     public Hat(String name, Boost boost) {
         this.name = name;

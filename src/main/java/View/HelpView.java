@@ -17,7 +17,7 @@ import java.awt.image.BufferedImage;
  *
  * @author Jennifer Krogh
  * @author Emma Pettersson
- * @version
+ * @version 0.1
  */
 public class HelpView extends Screen implements IUpdateable {
     private static final BufferedImage BRICK_BG = Resources.images().get("src/main/resources/HelpView/BrickBG.png");

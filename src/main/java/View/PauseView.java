@@ -10,7 +10,7 @@ import java.awt.*;
 /**
  * ...
  *
- * @author
+ * @author Jennifer Krogh
  * @version 0.1
  */
 public class PauseView extends Screen implements IUpdateable {

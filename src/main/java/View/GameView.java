@@ -16,7 +16,7 @@ import java.awt.image.BufferedImage;
  * The GameView class, which displays the game.
  *
  * @author Jonathan Carbol
- * @version
+ * @version 0.1
  */
 public class GameView extends GameScreen implements IUpdateable {
     private Hud hud;
@@ -40,6 +40,30 @@ public class GameView extends GameScreen implements IUpdateable {
         super(screenName);
         this.hud = new Hud();
         this.getComponents().add(this.hud);
+    }
+
+    public int getHP() {
+        return HP;
+    }
+
+    public void setHP(int HP) {
+        this.HP = HP;
+    }
+
+    public int getMaxHP() {
+        return maxHP;
+    }
+
+    public void setMaxHP(int maxHP) {
+        this.maxHP = maxHP;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 
     /**
@@ -69,35 +93,11 @@ public class GameView extends GameScreen implements IUpdateable {
 
     }
 
-    public int getHP() {
-        return HP;
-    }
-
-    public void setHP(int HP) {
-        this.HP = HP;
-    }
-
-    public int getMaxHP() {
-        return maxHP;
-    }
-
-    public void setMaxHP(int maxHP) {
-        this.maxHP = maxHP;
-    }
-
-    public int getScore() {
-        return score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
-    }
-
     /**
      * An embedded class, Hud, used to display graphical components on the game screen.
      *
      * @author Jonathan Carbol
-     * @version
+     * @version 0.1
      */
     public class Hud extends GuiComponent {
         /**
@@ -139,13 +139,13 @@ public class GameView extends GameScreen implements IUpdateable {
 
                 if (i <= HP) {
                     img = HEART;
-                } else if(i <= maxHP+4 && i >= HP && HP % 4 == 1 && end == false) {
+                } else if(i <= maxHP + 4 && i >= HP && HP % 4 == 1 && end == false) {
                     img = HEART_QUARTER;
                     end = true;
-                } else if (i <= maxHP+4 && i >= HP && HP % 4 == 2 && end == false) {
+                } else if (i <= maxHP + 4 && i >= HP && HP % 4 == 2 && end == false) {
                     img = HEART_HALF;
                     end = true;
-                } else if (i <= maxHP+4 && i >= HP && HP % 4 == 3 && end == false) {
+                } else if (i <= maxHP + 4 && i >= HP && HP % 4 == 3 && end == false) {
                     img = HEART_THREEQUARTER;
                     end = true;
                 } else {
@@ -166,7 +166,7 @@ public class GameView extends GameScreen implements IUpdateable {
             g.setColor(Color.BLACK);
 
             String string = Integer.toString(score);
-            TextRenderer.render(g,string,Game.window().getWidth()-350,100);
+            TextRenderer.render(g,string,Game.window().getWidth() - 350,100);
         }
     }
 }

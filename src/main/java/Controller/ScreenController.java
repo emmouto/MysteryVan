@@ -130,7 +130,7 @@ public class ScreenController extends Menu {
                         break;
                     case 1:
                         GameManager.setState(GameManager.GameState.HELP_SCREEN);
-                        MenuView.startGame();
+                        MenuView.showSelection();
                         break;
                     case 2:
                         MenuView.exit();

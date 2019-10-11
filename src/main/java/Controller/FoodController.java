@@ -9,8 +9,9 @@ import java.util.Random;
 /**
  * ...
  *
- * @author
- * @version
+ * @author Antonia Welzel
+ * @author Jonathan Carbol
+ * @version 0.1
  */
 public class FoodController implements IUpdateable {
     private List<Food> food = new ArrayList<>();
@@ -18,7 +19,7 @@ public class FoodController implements IUpdateable {
     /**
      * ...
      */
-    public void spawnFruit(){
+    public void spawnFruit() {
         food.add(new Food());
     }
 

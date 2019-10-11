@@ -17,12 +17,12 @@ import de.gurkenlabs.litiengine.gui.screens.Screen;
 import de.gurkenlabs.litiengine.resources.Resources;
 
 /**
- * ...
+ * Class for creating and displaying the HighScore View.
  *
  * @author Antonia Welzel
  * @author Emma Pettersson
  * @author Jennifer Krogh
- * @version
+ * @version 0.1
  */
 public class HighScoreView extends Screen implements IUpdateable {
     private static final BufferedImage BRICK_BG = Resources.images().get("src/main/resources/HelpView/BrickBG.png");

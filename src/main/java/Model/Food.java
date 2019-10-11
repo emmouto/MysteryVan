@@ -5,8 +5,9 @@ import java.util.Random;
 /**
  * ...
  *
- * @author
- * @version
+ * @author Antonia Welzel
+ * @author Jonathan Carbol
+ * @version 0.1
  */
 public class Food implements ICollidable{
     private String name;

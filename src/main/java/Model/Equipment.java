@@ -3,8 +3,9 @@ package Model;
 /**
  * ...
  *
- * @author
- * @version
+ * @author Jennifer Krogh
+ * @author Jonathan Carbol
+ * @version 0.1
  */
 public class Equipment {
     private int strength;

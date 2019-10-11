@@ -5,7 +5,8 @@ package Model;
  *
  * @author Antonia Welzel
  * @author Jennifer Krogh
- * @version
+ * @author Jonathan Carbol
+ * @version 0.1
  */
 public class Ground implements ICollidable{
     private Type type;

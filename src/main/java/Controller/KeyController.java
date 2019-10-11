@@ -12,17 +12,20 @@ import java.util.HashMap;
 /**
  * ...
  *
- * @author
- * @version
+ * @author Jennifer Krogh
+ * @author Jonathan Carbol
+ * @version 0.1
  */
 public class KeyController implements KeyListener, IUpdateable {
+    public HashMap<Integer, Key> keyBindings = new HashMap<Integer, Key>();
+    public static boolean other[] = new boolean[256];
 
     /**
      * Assigning the variable keys to actual letters
      *
-     * @param pc
+     * @param playerController
      */
-    public KeyController(PlayerController pc) {
+    public KeyController(PlayerController playerController) {
         initKeyController();
     }
 
@@ -43,16 +46,24 @@ public class KeyController implements KeyListener, IUpdateable {
 
     }
 
+    /**
+     *
+     * @param e
+     */
     @Override
     public void keyPressed(KeyEvent e) {
         try {
             other[e.getExtendedKeyCode()] = true;
             keyBindings.get(e.getKeyCode()).isDown = true;
-        }catch (Exception n){
+        } catch (Exception n) {
 
         }
     }
 
+    /**
+     *
+     * @param e
+     */
     @Override
     public void keyReleased(KeyEvent e) {
         try {
@@ -63,29 +74,44 @@ public class KeyController implements KeyListener, IUpdateable {
         }
     }
 
+    /**
+     *
+     * @param extendedKey
+     * @return
+     */
     public boolean isKeyBinded(int extendedKey) {
         return keyBindings.containsKey(extendedKey);
     }
 
+    /**
+     *
+     * @param e
+     */
     @Override
     public void keyTyped(KeyEvent e) {
     }
 
-
+    /**
+     *
+     * @param keyCode
+     * @param key
+     */
     public void bind(Integer keyCode, Key key) {
         keyBindings.put(keyCode, key);
     }
 
+    /**
+     *
+     */
     public void releaseAll() {
         for (Key key : keyBindings.values()) {
             key.isDown = false;
         }
     }
 
-    public HashMap<Integer, Key> keyBindings = new HashMap<Integer, Key>();
-
-    public static boolean other[] = new boolean[256];
-
+    /**
+     *
+     */
     @Override
     public void update() {
     }
