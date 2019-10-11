@@ -2,8 +2,8 @@ package Controller;
 
 import Model.Hat;
 import Model.Weapon;
-
 import View.CHARACTER;
+
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.gui.GuiComponent;
 import de.gurkenlabs.litiengine.input.Input;
@@ -21,12 +21,14 @@ public class SelectionController extends GuiComponent {
     private static long lastInput;
 
     public CHARACTER selectedChar;
+    public DIFFICULTY_LEVEL selectedDifficulty;
     public SELECTION_STATE state;
 
     public SelectionController() {
         super(0, 0, Game.window().getResolution().getWidth(), Game.window().getResolution().getHeight());
 
         this.selectedChar = CHARACTER.EMMA;
+        this.selectedDifficulty = DIFFICULTY_LEVEL.MEDIUM;
         this.state = SELECTION_STATE.ENTER_NAME;
 
         initControls();
@@ -70,9 +72,19 @@ public class SelectionController extends GuiComponent {
                             selectedChar = CHARACTER.JENNIFER;
                             break;
                     }
+                } else if (state == SELECTION_STATE.CHOOSE_LEVEL) {
+                    switch (selectedDifficulty) {
+                        case EASY:
+                            selectedDifficulty = DIFFICULTY_LEVEL.HARD;
+                            break;
+                        case MEDIUM:
+                            selectedDifficulty = DIFFICULTY_LEVEL.EASY;
+                            break;
+                        case HARD:
+                            selectedDifficulty = DIFFICULTY_LEVEL.MEDIUM;
+                            break;
+                    }
                 }
-
-
             }
         });
 
@@ -100,6 +112,18 @@ public class SelectionController extends GuiComponent {
                             break;
                         case JONATHAN:
                             selectedChar = CHARACTER.ADAM;
+                    }
+                } else if (state == SELECTION_STATE.CHOOSE_LEVEL) {
+                    switch (selectedDifficulty) {
+                        case EASY:
+                            selectedDifficulty = DIFFICULTY_LEVEL.MEDIUM;
+                            break;
+                        case MEDIUM:
+                            selectedDifficulty = DIFFICULTY_LEVEL.HARD;
+                            break;
+                        case HARD:
+                            selectedDifficulty = DIFFICULTY_LEVEL.EASY;
+                            break;
                     }
                 }
             }
@@ -142,6 +166,15 @@ public class SelectionController extends GuiComponent {
     }
 
     /**
+     *
+     */
+    public enum DIFFICULTY_LEVEL {
+        EASY,
+        MEDIUM,
+        HARD
+    }
+
+    /**
      * Takes the name entered by the user and sets it as the Player's name.
      *
      * @param name The name entered by the user.
@@ -151,7 +184,7 @@ public class SelectionController extends GuiComponent {
     }
 
     /**
-     *
+     * Takes the saved info from the <code>CHARACTER</code> enum and updates the player character with it.
      */
     public void setPlayerCharacter() {
         PlayerController.playerList.get(0).setHP(selectedChar.getHp());
@@ -161,7 +194,6 @@ public class SelectionController extends GuiComponent {
     }
 
     /**
-     *
      * @param weapon The weapon chosen by the user.
      */
     public void setPlayerWeapon(Weapon weapon) {
@@ -169,7 +201,6 @@ public class SelectionController extends GuiComponent {
     }
 
     /**
-     *
      * @param hat The hat chosen by the user.
      */
     public void setPlayerHat(Hat hat) {
@@ -177,7 +208,7 @@ public class SelectionController extends GuiComponent {
     }
 
     /**
-     *
+     * Takes the players chosen difficulty level and loads the correct map.
      */
     public void setDifficultyLevel() {
         // Easy, Medium, or Hard - Load the correct level

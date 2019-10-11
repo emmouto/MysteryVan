@@ -89,7 +89,7 @@ public class MenuView extends Screen implements IUpdateable {
         });
     }
 
-    public static void startGame() {
+    public static void showSelection() {
         Game.audio().playSound(GameManager.SELECT_SOUND);
         Game.window().getRenderComponent().fadeOut(2500);
         Game.audio().fadeMusic(250);

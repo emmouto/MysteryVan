@@ -80,7 +80,6 @@ public class SelectionView extends Screen implements IUpdateable {
         }
     }
 
-
     private void renderMovingBG(Graphics2D g) {
         final BufferedImage CLOUDS = Resources.images().get("src/main/resources/SelectionView/bg_clouds.png");
         final BufferedImage WATER = Resources.images().get("src/main/resources/SelectionView/bg_water.png");
@@ -120,6 +119,8 @@ public class SelectionView extends Screen implements IUpdateable {
             case CHOOSE_LEVEL:
                 if (!this.getComponents().contains(this.chooseLevelComponent)) {
                     selectionController.setPlayerCharacter();
+
+                    // TODO add code for when different difficulty levels have been chosen
 
                     this.getComponents().remove(this.chooseCharacterComponent);
                     this.getComponents().add(this.chooseLevelComponent);
@@ -262,6 +263,8 @@ public class SelectionView extends Screen implements IUpdateable {
         public void render(Graphics2D g) {
             renderHeader(g);
 
+
+
             super.render(g);
         }
 
@@ -273,5 +276,7 @@ public class SelectionView extends Screen implements IUpdateable {
             TextRenderer.renderWithOutline(g, text,
                     GameManager.centerX - (text.length() * g.getFont().getSize()) / 2.0 + 100, 100, Color.BLACK);
         }
+
+
     }
 }
