@@ -17,7 +17,7 @@ import java.awt.image.BufferedImage;
 
 /**
  * Lets the player choose a name, a character and a difficulty level.
- * Renders different components depending on the current <code>SELECTION_STATE</code>.
+ * Renders different components depending on the current SELECTION_STATE.
  *
  * @author Emma Pettersson
  * @version 0.1
@@ -26,6 +26,7 @@ public class SelectionView extends Screen implements IUpdateable {
     private EnterNameComponent enterNameComponent;
     private ChooseCharacterComponent chooseCharacterComponent;
     private ChooseLevelComponent chooseLevelComponent;
+
     private static SelectionController selectionController;
 
     /**
@@ -49,7 +50,7 @@ public class SelectionView extends Screen implements IUpdateable {
     }
 
     /**
-     * Prepare the <code>GuiComponent</code> and all its child Components
+     * Prepare the GuiComponent and all its child Components
      * (Makes the GuiComponent visible and adds mouse listeners).
      */
     @Override
@@ -148,7 +149,8 @@ public class SelectionView extends Screen implements IUpdateable {
     }
 
     /**
-     * ...
+     * Embedded class for a EnterNameComponent.
+     * Lets the player enter their name.
      *
      * @author Emma Pettersson
      * @version 0.1
@@ -192,14 +194,16 @@ public class SelectionView extends Screen implements IUpdateable {
             enterName.getAppearance().setTransparentBackground(false);
             enterName.setFont(GameManager.RAINY_MEDIUM);
             enterName.getAppearance().setForeColor(Color.BLACK);
-            // TODO make the text align work properly
+
+            // TODO make the text align work properly cuz it is currently very ugly
             enterName.setTextAlign(Align.CENTER_RIGHT);
             enterName.setSelected(true);
         }
     }
 
     /**
-     * ...
+     * Embedded class for a ChooseCharacterComponent.
+     * Lets the player choose a character and displays the characters name and stats.
      *
      * @author Emma Pettersson
      * @version 0.1
@@ -246,13 +250,32 @@ public class SelectionView extends Screen implements IUpdateable {
         private void renderChosenCharacter(final Graphics2D g) {
             CHARACTER character = selectionController.selectedChar;
 
-            ImageRenderer.render(g, character.getSprite(),
-                    GameManager.centerX - (character.getSprite().getWidth()) / 2.0, 255);
+            ImageRenderer.renderScaled(g, character.getSprite(),
+                    GameManager.centerX - (character.getSprite().getWidth()) / 2.0, 300, 0.75);
+
+            g.setFont(GameManager.PIXELED_SMALL);
+            g.setColor(Color.BLACK);
+            TextRenderer.renderWithOutline(g, character.name(),
+                    GameManager.centerX - (character.name().length() * g.getFont().getSize() / 2.0),290,
+                    Color.WHITE);
+
+            g.setFont(GameManager.PIXELED_XSMALL);
+            TextRenderer.render(g, "  HP:", 720, 350);
+            TextRenderer.render(g, "DEF:", 720, 380);
+            TextRenderer.render(g, "STR:", 720, 410);
+
+            g.setColor(Color.WHITE);
+            TextRenderer.render(g, Integer.toString(character.getHp()), 780, 350);
+            TextRenderer.render(g, Integer.toString(character.getDef()), 780, 380);
+            TextRenderer.render(g, Integer.toString(character.getStr()), 780, 410);
+
+            // TODO render weapon (and hat?)
         }
     }
 
     /**
-     * Renders the components necessary for choosing the difficulty level.
+     * Embedded class for a ChooseLevelComponent.
+     * Lets the player choose a difficulty and displayts its description.
      *
      * @author Emma Pettersson
      * @version 0.1
@@ -263,6 +286,8 @@ public class SelectionView extends Screen implements IUpdateable {
         }
 
         /**
+         * Renders the header text and the difficulty choices.
+         *
          * @param g The graphics object to render on.
          */
         @Override
@@ -283,19 +308,26 @@ public class SelectionView extends Screen implements IUpdateable {
         }
 
         private void renderChoices(Graphics2D g) {
-            int i  = 200;
-            g.setFont(GameManager.PIXELED_MEDIUM);
+            // This array (and the iteration variable i) is needed to place the text in the proper places.
+            // TODO maybe find a better solution?
+            double[] placement = new double[] {200, 550, 950};
+            int i  = 0;
 
             for (SelectionController.DIFFICULTY_LEVEL difficultyLevel : SelectionController.DIFFICULTY_LEVEL.values()) {
+                g.setFont(GameManager.PIXELED_MEDIUM);
+
                 if (difficultyLevel == selectionController.selectedDifficulty) {
                     g.setColor(Color.BLACK);
-                    TextRenderer.render(g, difficultyLevel.name(), i, 400);
+                    TextRenderer.render(g, difficultyLevel.name(), placement[i], 350);
+
+                    g.setFont(GameManager.RAINY_MEDIUM);
+                    TextRenderer.render(g, difficultyLevel.getDescription(), GameManager.centerX - 400, 445);
                 } else {
                     g.setColor(Color.WHITE);
-                    TextRenderer.render(g, difficultyLevel.name(), i, 400);
+                    TextRenderer.render(g, difficultyLevel.name(), placement[i], 350);
                 }
 
-                i += 300;
+                i ++;
             }
         }
     }

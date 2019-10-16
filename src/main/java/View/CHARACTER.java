@@ -55,14 +55,14 @@ public enum CHARACTER {
     private BufferedImage sprite; // Temporary - should be changed to String later.
 
     /**
-     * Constructor for a <code>CHARACTER</code>.
+     * Constructor for a CHARACTER.
      *
      * @param description Short description of the character (flavour text).
      * @param hp The CHARACTER's base health points.
      * @param str The CHARACTER's base strength.
      * @param def The CHARACTER's base defence.
-     * @param hat
-     * @param wpn
+     * @param hat The CHARACTER's Hat.
+     * @param wpn The CHARACTER's Weapon.
      * @param characterPortrait The CHARACTER's portrait, used when selecting character.
      * @param sprite The CHARACTER's sprite.
      */

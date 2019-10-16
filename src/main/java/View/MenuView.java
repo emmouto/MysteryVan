@@ -41,7 +41,9 @@ public class MenuView extends Screen implements IUpdateable {
     }
 
     /**
-     *
+     * Prepare the GuiComponent and all its child Components.
+     * (Makes the GuiComponent visible and adds mouse listeners).
+     * This is, for example, done right before switching to a new screen.
      */
     @Override
     public void prepare() {
@@ -79,7 +81,11 @@ public class MenuView extends Screen implements IUpdateable {
         super.render(g);
     }
 
-    public static void showHighScore() {
+    /**
+     * Switches to the HighScore screen.
+     * Fades the Menu screen out, and the HighScore screen in.
+     */
+    public static void showHighScoreScreen() {
         Game.audio().playSound(GameManager.SELECT_SOUND);
         Game.window().getRenderComponent().fadeOut(500);
 
@@ -89,25 +95,33 @@ public class MenuView extends Screen implements IUpdateable {
         });
     }
 
-    public static void showSelection() {
+    /**
+     * Switches to the Help screen.
+     * Fades the Menu screen out, and the Help screen in.
+     * Also fades out the music for a nice transition.
+     */
+    public static void showHelpScreen() {
         Game.audio().playSound(GameManager.SELECT_SOUND);
         Game.window().getRenderComponent().fadeOut(1500);
         Game.audio().fadeMusic(150);
 
-        // Display Help Screen
         Game.loop().perform(2500, () -> {
             Game.window().getRenderComponent().fadeIn(1000);
             Game.screens().display("Help");
         });
     }
 
+    /**
+     * Exits the game.
+     */
     public static void exit() {
         Game.audio().playSound(GameManager.SELECT_SOUND);
         System.exit(0);
     }
 
     /**
-     *
+     * Suspend the GuiComponent and all its child Components.
+     * (Makes the GuiComponent invisible and removes mouse listeners).
      */
     @Override
     public void suspend() {

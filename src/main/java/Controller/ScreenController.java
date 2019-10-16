@@ -32,13 +32,13 @@ public class ScreenController extends Menu {
     private static long lastInput;
 
     /**
-     * Constructor for the ScreenController.
+     * Constructor for the ScreenController (based on Menu).
      *
-     * @param x
-     * @param y
-     * @param width
-     * @param height
-     * @param items
+     * @param x the Menu's x coordinate.
+     * @param y the Menu's y coordinate.
+     * @param width the Menu's width.
+     * @param height the Menu's height.
+     * @param items the items in the Menu.
      */
     public ScreenController(double x, double y, double width, double height, String... items) {
         super(x, y, width, height, items);
@@ -77,7 +77,6 @@ public class ScreenController extends Menu {
     }
 
     private boolean inputIsLocked() {
-        // Disable Screen controls if view has changed.
         if (this.isSuspended() || !this.isVisible() || !this.isEnabled()) {
             return true;
         }
@@ -86,7 +85,9 @@ public class ScreenController extends Menu {
     }
 
     /**
-     * ...
+     * Prepare the GuiComponent and all its child Components.
+     * (Makes the GuiComponent visible and adds mouse listeners).
+     * This is, for example, done right before switching to a new screen.
      */
     @Override
     public void prepare() {
@@ -126,11 +127,11 @@ public class ScreenController extends Menu {
                 switch (c) {
                     case 0:
                         GameManager.setState(GameManager.GameState.HIGH_SCORE_SCREEN);
-                        MenuView.showHighScore();
+                        MenuView.showHighScoreScreen();
                         break;
                     case 1:
                         GameManager.setState(GameManager.GameState.HELP_SCREEN);
-                        MenuView.showSelection();
+                        MenuView.showHelpScreen();
                         break;
                     case 2:
                         MenuView.exit();

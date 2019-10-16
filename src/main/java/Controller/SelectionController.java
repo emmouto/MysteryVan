@@ -23,11 +23,16 @@ public class SelectionController extends GuiComponent {
     public DIFFICULTY_LEVEL selectedDifficulty;
     public SELECTION_STATE state;
 
+    /**
+     * Constructor for a new SelectionController.
+     * Sets the initial values for the selected character, difficulty, and the starting state.
+     * Also inintializes the controls for the Controller.
+     */
     public SelectionController() {
         super(0, 0, Game.window().getResolution().getWidth(), Game.window().getResolution().getHeight());
 
         this.selectedChar = CHARACTER.EMMA;
-        this.selectedDifficulty = DIFFICULTY_LEVEL.MEDIUM;
+        this.selectedDifficulty = DIFFICULTY_LEVEL.NORMAL;
         this.state = SELECTION_STATE.ENTER_NAME;
 
         initControls();
@@ -81,11 +86,11 @@ public class SelectionController extends GuiComponent {
                         case EASY:
                             selectedDifficulty = DIFFICULTY_LEVEL.HARD;
                             break;
-                        case MEDIUM:
+                        case NORMAL:
                             selectedDifficulty = DIFFICULTY_LEVEL.EASY;
                             break;
                         case HARD:
-                            selectedDifficulty = DIFFICULTY_LEVEL.MEDIUM;
+                            selectedDifficulty = DIFFICULTY_LEVEL.NORMAL;
                             break;
                     }
                 }
@@ -124,9 +129,9 @@ public class SelectionController extends GuiComponent {
 
                     switch (selectedDifficulty) {
                         case EASY:
-                            selectedDifficulty = DIFFICULTY_LEVEL.MEDIUM;
+                            selectedDifficulty = DIFFICULTY_LEVEL.NORMAL;
                             break;
-                        case MEDIUM:
+                        case NORMAL:
                             selectedDifficulty = DIFFICULTY_LEVEL.HARD;
                             break;
                         case HARD:
@@ -161,7 +166,7 @@ public class SelectionController extends GuiComponent {
     }
 
     /**
-     *
+     * Enum containing the different states for the Selection screen.
      */
     public enum SELECTION_STATE {
         ENTER_NAME,
@@ -172,12 +177,27 @@ public class SelectionController extends GuiComponent {
     }
 
     /**
-     *
+     * Enum containing the different difficulty levels and their descriptions.
      */
     public enum DIFFICULTY_LEVEL {
-        EASY,
-        MEDIUM,
-        HARD
+        EASY    ("You cannot die from falling off the map."),
+        NORMAL  ("You take damage when you hit the bottom."),
+        HARD    ("If you fall of the map, you die. Instantly.");
+
+        private String description;
+
+        /**
+         * Constructor for a difficulty level.
+         *
+         * @param description text describing what the difficulty entails.
+         */
+        DIFFICULTY_LEVEL(String description) {
+            this.description = description;
+        }
+
+        public String getDescription() {
+            return description;
+        }
     }
 
     /**
@@ -206,5 +226,6 @@ public class SelectionController extends GuiComponent {
      */
     public void setDifficultyLevel() {
         // Easy, Medium, or Hard - Load the correct level
+        // TODO implement this (when different levels/maps exist)
     }
 }
