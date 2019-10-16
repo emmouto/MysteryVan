@@ -155,6 +155,7 @@ public class SelectionController extends GuiComponent {
      */
     public void setPlayerCharacter() {
         PlayerController.playerList.get(0).setHP(selectedChar.getHp());
+        PlayerController.playerList.get(0).setMaxHP(selectedChar.getHp());
         PlayerController.playerList.get(0).setStrength(selectedChar.getStr());
         PlayerController.playerList.get(0).setDefence(selectedChar.getDef());
     }

@@ -4,6 +4,7 @@ import Model.Enemy;
 import Model.Map;
 import Model.Player;
 
+import View.GameManager;
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.IUpdateable;
 import de.gurkenlabs.litiengine.entities.Creature;
@@ -57,13 +58,15 @@ public class EnemyController implements IUpdateable {
      */
     @Override
     public void update() {
-        for(int i = 0; i < this.getEnemies().size(); i++){
-            this.getEnemies().get(i).update();
-            if (this.getEnemies().get(i).checkPlayerCollision(getPlayers().get(0))){
-                System.out.println("haha");
+        if(GameManager.getState() == GameManager.GameState.INGAME) {
+            for (int i = 0; i < this.getEnemies().size(); i++) {
+                this.getEnemies().get(i).update();
+                if (this.getEnemies().get(i).checkPlayerCollision(getPlayers().get(0))) {
+                    System.out.println("haha");
+                }
+                this.getEnemies().get(i).checkGrounded(this.map.getPlatforms());
+                creatureList.get(i).setLocation(enemies.get(i).getX(), enemies.get(i).getY());
             }
-            this.getEnemies().get(i).checkGrounded(this.map.getPlatforms());
-            creatureList.get(i).setLocation(enemies.get(i).getX(),enemies.get(i).getY());
         }
 
     }

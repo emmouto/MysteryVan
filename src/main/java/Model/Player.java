@@ -54,10 +54,9 @@ public class Player implements IMovable, ICollidable{
         this.collider = new Collider();
         this.collider.updatePosition(posX, posY);
         this.collider.updateSize(width, height);
-        this.maxHP = 10;
         this.score = 0;
         state = State.ALIVE;
-        this.maxHP = 23;
+        this.maxHP = 10;
         this.setHP(maxHP);
         this.gravity=3;
         this.hasJumped = false;
@@ -147,7 +146,7 @@ public class Player implements IMovable, ICollidable{
         return posY;
     }
 
-    public void setPosY(int posY) {
+    private void setPosY(int posY) {
         this.posY = posY;
     }
 
@@ -184,11 +183,15 @@ public class Player implements IMovable, ICollidable{
         return this.maxHP;
     }
 
+    public void setMaxHP(int maxHP){
+        this.maxHP = maxHP;
+    }
+
     public int getScore() {
         return score;
     }
 
-    public void setScore(int score) {
+    private void setScore(int score) {
         this.score = score;
     }
 
@@ -221,14 +224,14 @@ public class Player implements IMovable, ICollidable{
             this.jump();
         }
         if(Key.left.isDown && this.getX() > 0){
-                this.setPosX(getX() - 1);
+                this.setPosX(getX() - 2);
         }
         if(Key.right.isDown && this.getX() < 720){
-                this.setPosX(getX() + 1);
+                this.setPosX(getX() + 2);
         }
         isGrounded = false;
         if(gravity <= 3){
-            gravity += 0.1;
+            gravity += 0.2;
         }else{
             hasJumped = false;
         }
@@ -237,8 +240,8 @@ public class Player implements IMovable, ICollidable{
     /**
      * Makes the player jump.
      */
-    public void jump(){
-        this.gravity = -5;
+    private void jump(){
+        this.gravity = -7;
         hasJumped = true;
     }
 

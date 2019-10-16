@@ -46,14 +46,22 @@ public class KeyController implements KeyListener, IUpdateable {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        other[e.getExtendedKeyCode()] = true;
-        keyBindings.get(e.getKeyCode()).isDown = true;
+        try {
+            other[e.getExtendedKeyCode()] = true;
+            keyBindings.get(e.getKeyCode()).isDown = true;
+        }catch (Exception n){
+
+        }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        other[e.getExtendedKeyCode()] = false;
-        keyBindings.get(e.getKeyCode()).isDown = false;
+        try {
+            other[e.getExtendedKeyCode()] = false;
+            keyBindings.get(e.getKeyCode()).isDown = false;
+        }catch (Exception n){
+
+        }
     }
 
     public boolean isKeyBinded(int extendedKey) {
