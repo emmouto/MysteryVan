@@ -72,7 +72,7 @@ public class HelpView extends Screen implements IUpdateable {
         g.drawRect(700,430,500,250);
 
         g.setFont(GameManager.PIXELED_BIG);
-        g.setColor(Color.WHITE);
+        g.setColor(Color.ORANGE);
         String text = "HOW TO PLAY";
         TextRenderer.render(g, text, GameManager.centerX - (text.length() * g.getFont().getSize()) / 2.0, 115);
 

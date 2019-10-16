@@ -123,6 +123,7 @@ public class PlayerController implements IUpdateable {
      */
     @Override
     public void update() {
+
         if(GameManager.getState() == GameManager.GameState.INGAME) {
             for (int i = 0; i < playerList.size(); i++) {
                 getPlayers().get(i).update();
@@ -133,6 +134,9 @@ public class PlayerController implements IUpdateable {
                 whenDead(i);
                 changeToPause();
             }
+        }
+        else if(GameManager.getState() == GameManager.GameState.INGAME_PAUSE){
+            changeToPause();
         }
     }
 
@@ -153,11 +157,14 @@ public class PlayerController implements IUpdateable {
     /**
      * Pauses the game when P is pressed.
      */
-    private void changeToPause (){
+    public void changeToPause (){
 
-        if(Key.pause.isDown){
+        if(Key.pause.isDown && (GameManager.getState() == GameManager.GameState.INGAME)){
             GameManager.setState(GameManager.GameState.INGAME_PAUSE);
             PauseView.showPause();
+        }else if(Key.pause.isDown && (GameManager.getState() == GameManager.GameState.INGAME_PAUSE)){
+            GameManager.setState(GameManager.GameState.INGAME);
+            PauseView.showGame();
         }
     }
 

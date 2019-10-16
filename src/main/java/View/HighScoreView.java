@@ -58,7 +58,7 @@ public class HighScoreView extends Screen implements IUpdateable {
         g.drawRect(300, 130, 630, 580);
 
         g.setFont(GameManager.PIXELED_BIG);
-        g.setColor(Color.MAGENTA);
+        g.setColor(Color.ORANGE);
         TextRenderer.render(g, "HIGH SCORES", GameManager.centerX - 320, 100);
 
         g.setFont(GameManager.PIXELED_XSMALL);
@@ -67,7 +67,7 @@ public class HighScoreView extends Screen implements IUpdateable {
         g.setFont(GameManager.PIXELED_MEDIUM);
         g.setColor(Color.CYAN);
         TextRenderer.render(g, "PLAYER", 320, 190);
-        g.setColor(Color.ORANGE);
+        g.setColor(Color.MAGENTA);
         TextRenderer.render(g, "SCORE", 720, 190);
 
         g.setColor(Color.WHITE);

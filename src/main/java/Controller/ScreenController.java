@@ -143,6 +143,9 @@ public class ScreenController extends Menu {
         } else if (GameManager.getState() == GameManager.GameState.DEFEAT_SCREEN) {
             GameManager.setState(GameManager.GameState.HIGH_SCORE_SCREEN);
             DefeatView.showHighScore();
+        } else if (GameManager.getState() == GameManager.GameState.INGAME_PAUSE) {
+            GameManager.setState(GameManager.GameState.TITLE_SCREEN);
+            HighScoreView.showMenu();
         } else if (GameManager.getState() == GameManager.GameState.HIGH_SCORE_SCREEN) {
             GameManager.setState(GameManager.GameState.TITLE_SCREEN);
             HighScoreView.showMenu();
