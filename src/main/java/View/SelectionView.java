@@ -313,15 +313,15 @@ public class SelectionView extends Screen implements IUpdateable {
             double[] placement = new double[] {200, 550, 950};
             int i  = 0;
 
-            for (SelectionController.DIFFICULTY_LEVEL difficultyLevel : SelectionController.DIFFICULTY_LEVEL.values()) {
+            for (GameManager.DIFFICULTY_LEVEL difficultyLevel : GameManager.DIFFICULTY_LEVEL.values()) {
                 g.setFont(GameManager.PIXELED_MEDIUM);
 
-                if (difficultyLevel == selectionController.selectedDifficulty) {
+                if (difficultyLevel == GameManager.getSelectedDifficulty()) {
                     g.setColor(Color.BLACK);
                     TextRenderer.render(g, difficultyLevel.name(), placement[i], 350);
 
                     g.setFont(GameManager.RAINY_MEDIUM);
-                    TextRenderer.render(g, difficultyLevel.getDescription(), GameManager.centerX - 400, 445);
+                    TextRenderer.render(g, difficultyLevel.getDescription(), GameManager.centerX - 300, 445);
                 } else {
                     g.setColor(Color.WHITE);
                     TextRenderer.render(g, difficultyLevel.name(), placement[i], 350);

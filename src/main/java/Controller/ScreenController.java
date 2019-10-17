@@ -121,17 +121,29 @@ public class ScreenController extends Menu {
         }
     }
 
+    private void changeScreen(String screenName, int fadeTime) {
+        Game.audio().playSound(GameManager.SELECT_SOUND);
+        Game.window().getRenderComponent().fadeOut(fadeTime);
+        if (fadeTime == 1500) { Game.audio().fadeMusic(150); }
+
+        Game.loop().perform(fadeTime, () -> {
+            Game.window().getRenderComponent().fadeIn(fadeTime);
+            Game.screens().display(screenName);
+        });
+    }
+
+    //TODO change name
     private void changeView() {
         if (GameManager.getState() == GameManager.GameState.TITLE_SCREEN) {
             this.onConfirm(c -> {
                 switch (c) {
                     case 0:
                         GameManager.setState(GameManager.GameState.HIGH_SCORE_SCREEN);
-                        MenuView.showHighScoreScreen();
+                        changeScreen("HighScore", 500);
                         break;
                     case 1:
                         GameManager.setState(GameManager.GameState.HELP_SCREEN);
-                        MenuView.showHelpScreen();
+                        changeScreen("Help", 1500);
                         break;
                     case 2:
                         MenuView.exit();
@@ -142,16 +154,16 @@ public class ScreenController extends Menu {
             });
         } else if (GameManager.getState() == GameManager.GameState.DEFEAT_SCREEN) {
             GameManager.setState(GameManager.GameState.HIGH_SCORE_SCREEN);
-            DefeatView.showHighScore();
+            changeScreen("HighScore", 500);
         } else if (GameManager.getState() == GameManager.GameState.INGAME_PAUSE) {
             GameManager.setState(GameManager.GameState.TITLE_SCREEN);
-            HighScoreView.showMenu();
+            changeScreen("Menu", 500);
         } else if (GameManager.getState() == GameManager.GameState.HIGH_SCORE_SCREEN) {
             GameManager.setState(GameManager.GameState.TITLE_SCREEN);
-            HighScoreView.showMenu();
+            changeScreen("Menu", 500);
         } else if (GameManager.getState() == GameManager.GameState.HELP_SCREEN) {
             GameManager.setState(GameManager.GameState.SELECTION_SCREEN);
-            HelpView.goToSelect();
+            changeScreen("Selection", 500);
         }
     }
 

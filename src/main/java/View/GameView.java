@@ -16,6 +16,7 @@ import java.awt.image.BufferedImage;
  * The GameView class, which displays the game.
  *
  * @author Jonathan Carbol
+ * @author Emma Pettersson
  * @version 0.1
  */
 public class GameView extends GameScreen implements IUpdateable {
@@ -73,8 +74,18 @@ public class GameView extends GameScreen implements IUpdateable {
     public void prepare() {
         super.prepare();
 
-        // TODO play different music depending on level
-        Game.audio().playMusic(GameManager.STAGE_1);
+        // Play different music depeding on the game's difficulty.
+        switch (GameManager.getSelectedDifficulty()) {
+            case EASY:
+                Game.audio().playMusic(GameManager.STAGE_1);
+                break;
+            case NORMAL:
+                Game.audio().playMusic(GameManager.STAGE_2);
+                break;
+            case HARD:
+                Game.audio().playMusic(GameManager.STAGE_3);
+                break;
+        }
 
         Game.loop().attach(this);
     }
@@ -105,7 +116,7 @@ public class GameView extends GameScreen implements IUpdateable {
      */
     public class Hud extends GuiComponent {
         /**
-         * The protected constructor of the Hud class.
+         * The package-protected constructor of the Hud class.
          */
         Hud() {
             super(0, 0, Game.window().getResolution().getWidth(), Game.window().getResolution().getHeight());
@@ -143,13 +154,13 @@ public class GameView extends GameScreen implements IUpdateable {
 
                 if (i <= HP) {
                     img = HEART;
-                } else if(i <= maxHP + 4 && i >= HP && HP % 4 == 1 && end == false) {
+                } else if(i <= maxHP + 4 && i >= HP && HP % 4 == 1 && !end) {
                     img = HEART_QUARTER;
                     end = true;
-                } else if (i <= maxHP + 4 && i >= HP && HP % 4 == 2 && end == false) {
+                } else if (i <= maxHP + 4 && i >= HP && HP % 4 == 2 && !end) {
                     img = HEART_HALF;
                     end = true;
-                } else if (i <= maxHP + 4 && i >= HP && HP % 4 == 3 && end == false) {
+                } else if (i <= maxHP + 4 && i >= HP && HP % 4 == 3 && !end) {
                     img = HEART_THREEQUARTER;
                     end = true;
                 } else {

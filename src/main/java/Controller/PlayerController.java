@@ -158,11 +158,10 @@ public class PlayerController implements IUpdateable {
      * Pauses the game when P is pressed.
      */
     public void changeToPause (){
-
-        if(Key.pause.isDown && (GameManager.getState() == GameManager.GameState.INGAME)){
+        if (Key.pause.isDown && (GameManager.getState() == GameManager.GameState.INGAME)) {
             GameManager.setState(GameManager.GameState.INGAME_PAUSE);
             PauseView.showPause();
-        }else if(Key.pause.isDown && (GameManager.getState() == GameManager.GameState.INGAME_PAUSE)){
+        } else if(Key.pause.isDown && (GameManager.getState() == GameManager.GameState.INGAME_PAUSE)) {
             GameManager.setState(GameManager.GameState.INGAME);
             PauseView.showGame();
         }
@@ -172,7 +171,7 @@ public class PlayerController implements IUpdateable {
      * Updates the health of the players and sends the data to the view to be displayed.
      * @param i the index of the player to be updated.
      */
-    private void updateHealth(int i){
+    private void updateHealth(int i) {
         gameView.setHP(playerList.get(i).getHP());
         gameView.setMaxHP(playerList.get(i).getMaxHP());
         creatureList.get(i).getHitPoints().setMaxValue(playerList.get(i).getHP());
@@ -188,7 +187,7 @@ public class PlayerController implements IUpdateable {
      *
      * @param i the index of the player to be updated.
      */
-    private void updateScore(int i){
+    private void updateScore(int i) {
         gameView.setScore(playerList.get(i).getScore());
     }
 
