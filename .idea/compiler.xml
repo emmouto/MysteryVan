@@ -12,8 +12,5 @@
         <module name="Projekt" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="MysteryVan" target="8" />
-    </bytecodeTargetLevel>
   </component>
 </project>

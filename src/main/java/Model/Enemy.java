@@ -6,7 +6,7 @@ import java.util.Random;
 /**
  * ...
  *
- * @author
+ * @author Adam Rohdell
  * @version
  */
 public class Enemy implements ICollidable, IMovable {
