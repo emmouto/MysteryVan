@@ -1,4 +1,7 @@
-main threw an exception:
-java.lang.ClassCastException: View.MenuView cannot be cast to View.GameView
-	at Controller.PlayerController.setGameView(PlayerController.java:77)
-	at GameRunner.main(GameRunner.java:69)
+Render Loop threw an exception:
+java.lang.NullPointerException
+	at View.MenuView.renderClouds(MenuView.java:145)
+	at View.MenuView.render(MenuView.java:67)
+	at de.gurkenlabs.litiengine.graphics.RenderComponent.render(RenderComponent.java:157)
+	at de.gurkenlabs.litiengine.RenderLoop.process(RenderLoop.java:25)
+	at de.gurkenlabs.litiengine.UpdateLoop.run(UpdateLoop.java:46)

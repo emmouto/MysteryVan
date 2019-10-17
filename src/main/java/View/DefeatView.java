@@ -17,7 +17,7 @@ import de.gurkenlabs.litiengine.sound.Sound;
  *
  * @author Jennifer Krogh
  * @author Emma Pettersson
- * @version
+ * @version 0.1
  */
 
 public class DefeatView extends Screen {
@@ -95,9 +95,9 @@ public class DefeatView extends Screen {
     /**
      * Call this method when the game has ended to set the score for the screen.
      *
-     * @param score
+     * @param score the score that the <code>Player</code> has at the end of the game.
      */
-    public void scoreDefeat(int score){
+    public void scoreDefeat(int score) {
         this.score = score;
     }
 

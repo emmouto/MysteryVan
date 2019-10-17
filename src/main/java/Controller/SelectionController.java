@@ -1,9 +1,8 @@
 package Controller;
 
-import Model.Hat;
-import Model.Weapon;
-
 import View.CHARACTER;
+
+import View.GameManager;
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.gui.GuiComponent;
 import de.gurkenlabs.litiengine.input.Input;
@@ -21,12 +20,19 @@ public class SelectionController extends GuiComponent {
     private static long lastInput;
 
     public CHARACTER selectedChar;
+    public DIFFICULTY_LEVEL selectedDifficulty;
     public SELECTION_STATE state;
 
+    /**
+     * Constructor for a new SelectionController.
+     * Sets the initial values for the selected character, difficulty, and the starting state.
+     * Also inintializes the controls for the Controller.
+     */
     public SelectionController() {
         super(0, 0, Game.window().getResolution().getWidth(), Game.window().getResolution().getHeight());
 
         this.selectedChar = CHARACTER.EMMA;
+        this.selectedDifficulty = DIFFICULTY_LEVEL.NORMAL;
         this.state = SELECTION_STATE.ENTER_NAME;
 
         initControls();
@@ -39,8 +45,9 @@ public class SelectionController extends GuiComponent {
                     return;
                 }
 
-                this.confirm();
                 lastInput = Game.time().now();
+
+                this.confirm();
             }
         });
 
@@ -53,6 +60,8 @@ public class SelectionController extends GuiComponent {
                 lastInput = Game.time().now();
 
                 if (state == SELECTION_STATE.CHOOSE_CHARACTER) {
+                    Game.audio().playSound(GameManager.MENU_SOUND);
+
                     switch (selectedChar) {
                         case ADAM:
                             selectedChar = CHARACTER.JONATHAN;
@@ -70,9 +79,21 @@ public class SelectionController extends GuiComponent {
                             selectedChar = CHARACTER.JENNIFER;
                             break;
                     }
+                } else if (state == SELECTION_STATE.CHOOSE_LEVEL) {
+                    Game.audio().playSound(GameManager.MENU_SOUND);
+
+                    switch (selectedDifficulty) {
+                        case EASY:
+                            selectedDifficulty = DIFFICULTY_LEVEL.HARD;
+                            break;
+                        case NORMAL:
+                            selectedDifficulty = DIFFICULTY_LEVEL.EASY;
+                            break;
+                        case HARD:
+                            selectedDifficulty = DIFFICULTY_LEVEL.NORMAL;
+                            break;
+                    }
                 }
-
-
             }
         });
 
@@ -85,6 +106,8 @@ public class SelectionController extends GuiComponent {
                 lastInput = Game.time().now();
 
                 if (state == SELECTION_STATE.CHOOSE_CHARACTER) {
+                    Game.audio().playSound(GameManager.MENU_SOUND);
+
                     switch (selectedChar) {
                         case ADAM:
                             selectedChar = CHARACTER.ANTONIA;
@@ -101,13 +124,26 @@ public class SelectionController extends GuiComponent {
                         case JONATHAN:
                             selectedChar = CHARACTER.ADAM;
                     }
+                } else if (state == SELECTION_STATE.CHOOSE_LEVEL) {
+                    Game.audio().playSound(GameManager.MENU_SOUND);
+
+                    switch (selectedDifficulty) {
+                        case EASY:
+                            selectedDifficulty = DIFFICULTY_LEVEL.NORMAL;
+                            break;
+                        case NORMAL:
+                            selectedDifficulty = DIFFICULTY_LEVEL.HARD;
+                            break;
+                        case HARD:
+                            selectedDifficulty = DIFFICULTY_LEVEL.EASY;
+                            break;
+                    }
                 }
             }
         });
     }
 
     private void confirm() {
-        // TODO insert hat and weapon states
         switch (state) {
             case ENTER_NAME:
                 state = SELECTION_STATE.CHOOSE_CHARACTER;
@@ -130,15 +166,38 @@ public class SelectionController extends GuiComponent {
     }
 
     /**
-     *
+     * Enum containing the different states for the Selection screen.
      */
     public enum SELECTION_STATE {
         ENTER_NAME,
         CHOOSE_CHARACTER,
-        CHOOSE_WEAPON,
-        CHOOSE_HAT,
         CHOOSE_LEVEL,
-        GAME_START
+        GAME_START,
+        GAME_STARTED
+    }
+
+    /**
+     * Enum containing the different difficulty levels and their descriptions.
+     */
+    public enum DIFFICULTY_LEVEL {
+        EASY    ("You cannot die from falling off the map."),
+        NORMAL  ("You take damage when you hit the bottom."),
+        HARD    ("If you fall of the map, you die. Instantly.");
+
+        private String description;
+
+        /**
+         * Constructor for a difficulty level.
+         *
+         * @param description text describing what the difficulty entails.
+         */
+        DIFFICULTY_LEVEL(String description) {
+            this.description = description;
+        }
+
+        public String getDescription() {
+            return description;
+        }
     }
 
     /**
@@ -151,35 +210,22 @@ public class SelectionController extends GuiComponent {
     }
 
     /**
-     *
+     * Takes the saved info from the <code>CHARACTER</code> enum and updates the player character with it.
      */
     public void setPlayerCharacter() {
         PlayerController.playerList.get(0).setHP(selectedChar.getHp());
         PlayerController.playerList.get(0).setMaxHP(selectedChar.getHp());
         PlayerController.playerList.get(0).setStrength(selectedChar.getStr());
         PlayerController.playerList.get(0).setDefence(selectedChar.getDef());
+        PlayerController.playerList.get(0).setHat(selectedChar.getHat());
+        PlayerController.playerList.get(0).setWeapon(selectedChar.getWpn());
     }
 
     /**
-     *
-     * @param weapon The weapon chosen by the user.
-     */
-    public void setPlayerWeapon(Weapon weapon) {
-        PlayerController.playerList.get(0).setWeapon(weapon);
-    }
-
-    /**
-     *
-     * @param hat The hat chosen by the user.
-     */
-    public void setPlayerHat(Hat hat) {
-        PlayerController.playerList.get(0).setHat(hat);
-    }
-
-    /**
-     *
+     * Takes the players chosen difficulty level and loads the correct map.
      */
     public void setDifficultyLevel() {
         // Easy, Medium, or Hard - Load the correct level
+        // TODO implement this (when different levels/maps exist)
     }
 }

@@ -3,8 +3,8 @@ package Model;
 /**
  * ...
  *
- * @author
- * @version
+ * @author Adam Rohdell
+ * @version 0.1
  */
 public class Collider {
     private int radius;

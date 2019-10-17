@@ -16,7 +16,7 @@ import java.awt.image.BufferedImage;
  * The GameView class, which displays the game.
  *
  * @author Jonathan Carbol
- * @version
+ * @version 0.1
  */
 public class GameView extends GameScreen implements IUpdateable {
     private Hud hud;
@@ -40,33 +40,6 @@ public class GameView extends GameScreen implements IUpdateable {
         super(screenName);
         this.hud = new Hud();
         this.getComponents().add(this.hud);
-    }
-
-    /**
-     * Attaches the GameView to the game loop.
-     */
-    @Override
-    public void prepare() {
-        super.prepare();
-        Game.loop().attach(this);
-    }
-
-    /**
-     * Renders the GameView.
-     *
-     * @param g the graphical item to be rendered.
-     */
-    @Override
-    public void render(Graphics2D g) {
-        super.render(g);
-    }
-
-    /**
-     * Updates the GameView.
-     */
-    @Override
-    public void update() {
-
     }
 
     public int getHP() {
@@ -94,10 +67,41 @@ public class GameView extends GameScreen implements IUpdateable {
     }
 
     /**
+     * Attaches the GameView to the game loop.
+     */
+    @Override
+    public void prepare() {
+        super.prepare();
+
+        // TODO play different music depending on level
+        Game.audio().playMusic(GameManager.STAGE_1);
+
+        Game.loop().attach(this);
+    }
+
+    /**
+     * Renders the GameView.
+     *
+     * @param g the graphical item to be rendered.
+     */
+    @Override
+    public void render(Graphics2D g) {
+        super.render(g);
+    }
+
+    /**
+     * Updates the GameView.
+     */
+    @Override
+    public void update() {
+
+    }
+
+    /**
      * An embedded class, Hud, used to display graphical components on the game screen.
      *
      * @author Jonathan Carbol
-     * @version
+     * @version 0.1
      */
     public class Hud extends GuiComponent {
         /**
@@ -139,13 +143,13 @@ public class GameView extends GameScreen implements IUpdateable {
 
                 if (i <= HP) {
                     img = HEART;
-                } else if(i <= maxHP+4 && i >= HP && HP % 4 == 1 && end == false) {
+                } else if(i <= maxHP + 4 && i >= HP && HP % 4 == 1 && end == false) {
                     img = HEART_QUARTER;
                     end = true;
-                } else if (i <= maxHP+4 && i >= HP && HP % 4 == 2 && end == false) {
+                } else if (i <= maxHP + 4 && i >= HP && HP % 4 == 2 && end == false) {
                     img = HEART_HALF;
                     end = true;
-                } else if (i <= maxHP+4 && i >= HP && HP % 4 == 3 && end == false) {
+                } else if (i <= maxHP + 4 && i >= HP && HP % 4 == 3 && end == false) {
                     img = HEART_THREEQUARTER;
                     end = true;
                 } else {
@@ -166,7 +170,7 @@ public class GameView extends GameScreen implements IUpdateable {
             g.setColor(Color.BLACK);
 
             String string = Integer.toString(score);
-            TextRenderer.render(g,string,Game.window().getWidth()-350,100);
+            TextRenderer.render(g,string,Game.window().getWidth() - 350,100);
         }
     }
 }

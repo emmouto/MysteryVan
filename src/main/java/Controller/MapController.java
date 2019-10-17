@@ -8,28 +8,25 @@ import de.gurkenlabs.litiengine.graphics.Camera;
 /**
  * ...
  *
- * @author
- * @version
+ * @author Adam Rohdell
+ * @author Jonathan Carbol
+ * @version 0.1
  */
 public class MapController {
     private Camera camera = new Camera();
     private Map map = new Map("map1");
 
-    /**
-     * Initiate the Camera to focus on the center of the map
-     */
-    public void initCamera(){
-        camera.setFocus(Game.window().getResolution().getWidth() * 0.5 / camera.getRenderScale(), Game.window().getResolution().getHeight() * 0.5 / camera.getRenderScale());
-        camera.setClampToMap(true);
-        Game.world().setCamera(camera);
+    public Map getMap() {
+        return this.map;
     }
 
     /**
-     * ...
-     *
-     * @return the current map (?)
+     * Initiate the Camera to focus on the center of the map
      */
-    public Map getMap(){
-        return this.map;
+    public void initCamera() {
+        camera.setFocus(Game.window().getResolution().getWidth() * 0.5 / camera.getRenderScale(),
+                Game.window().getResolution().getHeight() * 0.5 / camera.getRenderScale());
+        camera.setClampToMap(true);
+        Game.world().setCamera(camera);
     }
 }

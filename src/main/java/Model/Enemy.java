@@ -7,7 +7,9 @@ import java.util.Random;
  * ...
  *
  * @author Adam Rohdell
- * @version
+ * @author Antonia Welzel
+ * @author Jonathan Carbol
+ * @version 0.1
  */
 public class Enemy implements ICollidable, IMovable {
     private int HP;
@@ -64,8 +66,8 @@ public class Enemy implements ICollidable, IMovable {
     /**
      * ...
      *
-     * @param player
-     * @return
+     * @param player the player to check for collision.
+     * @return true if colliding, otherwise false.
      */
     public boolean checkPlayerCollision(ICollidable player){
         if (collider.isColliding(player, "UP")) {

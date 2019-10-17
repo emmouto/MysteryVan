@@ -7,7 +7,7 @@ package Model;
  *
  * @author Antonia Welzel
  * @author Jennifer Krogh
- * @version
+ * @version 0.1
  */
 public class HighScore {
     private int highScore;
@@ -17,13 +17,12 @@ public class HighScore {
      * At the end of the game, create new high score with the current score of the player
      * and the player's name which will then be used in the list of high scores.
      *
-     * @param highScore
-     * @param player
+     * @param highScore the score that the <code>Player</code> has at the end of the game.
+     * @param player the current <code>Player</code>.
      */
     public HighScore(int highScore, String player) {
         this.highScore = highScore;
         this.player = player;
-
     }
 
     public int getHighScore() {

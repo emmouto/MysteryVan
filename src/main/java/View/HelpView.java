@@ -17,7 +17,7 @@ import java.awt.image.BufferedImage;
  *
  * @author Jennifer Krogh
  * @author Emma Pettersson
- * @version
+ * @version 0.1
  */
 public class HelpView extends Screen implements IUpdateable {
     private static final BufferedImage BRICK_BG = Resources.images().get("src/main/resources/HelpView/BrickBG.png");
@@ -71,12 +71,12 @@ public class HelpView extends Screen implements IUpdateable {
         g.drawRect(700,150,500,250);
         g.drawRect(700,430,500,250);
 
-        g.setFont(Resources.fonts().get("src/main/resources/fonts/Pixeled.ttf",64f));
-        g.setColor(Color.YELLOW);
-        TextRenderer.render(g, "How to play", 300, 115);
+        g.setFont(GameManager.PIXELED_BIG);
+        g.setColor(Color.ORANGE);
+        String text = "HOW TO PLAY";
+        TextRenderer.render(g, text, GameManager.centerX - (text.length() * g.getFont().getSize()) / 2.0, 115);
 
-        Font smallFont = new Font("arial", 1, 28);
-        g.setFont(smallFont);
+        g.setFont(GameManager.PIXELED_XSMALL);
         g.setColor(Color.WHITE);
         TextRenderer.render(g, "Controls for movement, S-key", 720, 210);
         TextRenderer.render(g, "picks up items.", 720, 250);

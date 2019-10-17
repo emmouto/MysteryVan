@@ -10,7 +10,6 @@ import de.gurkenlabs.litiengine.IUpdateable;
 import de.gurkenlabs.litiengine.entities.Creature;
 import de.gurkenlabs.litiengine.gui.screens.Screen;
 
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +37,7 @@ public class PlayerController implements IUpdateable {
      */
     public PlayerController() {
         super();
-        spawnPlayer("player", 23, 100, 0, new Hat("ugly", new Boost("boost",
+        spawnPlayer("player", 23, 100, 0, new Hat("ugly", new Boost(
                 0, 0, 0)), new Weapon("xd", 0, 0));
         updatePlayerController();
     }
@@ -124,6 +123,7 @@ public class PlayerController implements IUpdateable {
      */
     @Override
     public void update() {
+
         if(GameManager.getState() == GameManager.GameState.INGAME) {
             for (int i = 0; i < playerList.size(); i++) {
                 getPlayers().get(i).update();
@@ -134,6 +134,9 @@ public class PlayerController implements IUpdateable {
                 whenDead(i);
                 changeToPause();
             }
+        }
+        else if(GameManager.getState() == GameManager.GameState.INGAME_PAUSE){
+            changeToPause();
         }
     }
 
@@ -154,11 +157,14 @@ public class PlayerController implements IUpdateable {
     /**
      * Pauses the game when P is pressed.
      */
-    private void changeToPause (){
+    public void changeToPause (){
 
-        if(Key.pause.isDown){
+        if(Key.pause.isDown && (GameManager.getState() == GameManager.GameState.INGAME)){
             GameManager.setState(GameManager.GameState.INGAME_PAUSE);
             PauseView.showPause();
+        }else if(Key.pause.isDown && (GameManager.getState() == GameManager.GameState.INGAME_PAUSE)){
+            GameManager.setState(GameManager.GameState.INGAME);
+            PauseView.showGame();
         }
     }
 

@@ -4,7 +4,7 @@ package Model;
  *  The Key class, which are connected to key inputs.
  *
  * @author Jonathan Carbol
- * @version 0.0.1
+ * @version 0.1
  */
 public class Key{
     // Creating the keys as simply variables

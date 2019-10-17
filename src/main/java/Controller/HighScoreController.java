@@ -10,8 +10,6 @@ import java.util.List;
  * Creates and sorts a list of HighScores that is displayed in the HighScoreView.
  *
  * @author Jennifer Krogh
- * @author Antonia Welzel
- * @author Emma Pettersson
  * @version 0.1
  */
 public class HighScoreController {
@@ -27,7 +25,7 @@ public class HighScoreController {
      */
     public HighScoreController(List<HighScore> highScoreList) {
         this.highScoreList = highScoreList;
-        sortList(this.highScoreList); // Change later? this is used for testing with hardcoded values.
+        sortList(this.highScoreList);
 
         try {
             HighScoreDataPath = HighScoreController.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();

@@ -14,7 +14,6 @@ import de.gurkenlabs.litiengine.gui.screens.Resolution;
 import de.gurkenlabs.litiengine.input.Input;
 import de.gurkenlabs.litiengine.resources.Resources;
 
-import java.awt.*;
 import java.io.IOException;
 
 /**
@@ -29,7 +28,7 @@ import java.io.IOException;
  */
 public class GameRunner {
     /**
-     * ...
+     * The main function!
      *
      * @param args the command line arguments.
      * @throws java.io.IOException when...
@@ -79,19 +78,12 @@ public class GameRunner {
         playerController.getCreatures().get(0).setLocation(250,100);
         Game.world().environment().add(playerController.getCreatures().get(0));
 
+        // Displays the title screen ("Menu")
         Game.screens().display("Menu");
+        //Game.graphics().setBaseRenderScale(2.001f);
 
-        // TODO move some of this code somewhere else..?
-            /*Game.graphics().setBaseRenderScale(2.001f);*/
-
-
-
-            playerController.setGameView(Game.screens().get("Game"));
-            Resources.spritesheets().get("AppleWorm", true);
-
-
-        // Displays the title screen ("Menu").
-
+        playerController.setGameView(Game.screens().get("Game"));
+        Resources.spritesheets().get("AppleWorm", true);
 
         Game.start();
     }
