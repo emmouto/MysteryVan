@@ -35,8 +35,9 @@ public class PlayerController implements IUpdateable {
     /**
      * The public constructor of the PlayerController.
      */
-    public PlayerController() {
+    public PlayerController(Map map) {
         super();
+        this.map=map;
         spawnPlayer("player", 23, 100, 0, new Hat("ugly", new Boost(
                 0, 0, 0)), new Weapon("xd", 0, 0));
         updatePlayerController();
@@ -91,7 +92,7 @@ public class PlayerController implements IUpdateable {
      * @param weapon the equipped weapon of the player.
      */
     private void spawnPlayer(String name, int hp, int defense, int strength, Hat hat, Weapon weapon){
-        Player p = new Player(name, 0, 0, 18, 35);
+        Player p = new Player(name, 0, 0, 18, 35, this.map.getPlatforms());
         p.setHP(hp);
         p.setDefence(defense);
         p.setHat(hat);
@@ -126,8 +127,6 @@ public class PlayerController implements IUpdateable {
 
         if(GameManager.getState() == GameManager.GameState.INGAME) {
             for (int i = 0; i < playerList.size(); i++) {
-                getPlayers().get(i).update();
-                getPlayers().get(i).checkGrounded(this.map.getPlatforms());
                 creatureList.get(i).setLocation(playerList.get(i).getX(), playerList.get(i).getY());
                 updateHealth(i);
                 updateScore(i);
@@ -197,7 +196,4 @@ public class PlayerController implements IUpdateable {
      *
      * @param map the map to be loaded.
      */
-    public void loadMap(Map map) {
-        this.map = map;
-    }
 }

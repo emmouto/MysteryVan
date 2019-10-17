@@ -1,5 +1,6 @@
 package Model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -23,7 +24,8 @@ public class Enemy implements ICollidable, IMovable {
     private boolean isGrounded = false;
     private Random rand = new Random();
     private int speed;
-
+    private List<Platform> platforms = new ArrayList<>();
+    private Player target;
     /**
      * ...
      *
@@ -33,8 +35,10 @@ public class Enemy implements ICollidable, IMovable {
      * @param width
      * @param height
      */
-    public Enemy(String sprite, int posX, int posY, int width, int height){
+    public Enemy(String sprite, int posX, int posY, int width, int height, List<Platform> platforms, Player player){
         this.sprite = sprite;
+        this.platforms = platforms;
+        this.target = player;
         this.x = posX;
         this.y = posY;
         this.width = width;
@@ -50,10 +54,8 @@ public class Enemy implements ICollidable, IMovable {
 
     /**
      * ...
-     *
-     * @param platforms
      */
-    public void checkGrounded(List<Platform> platforms){
+    public void checkGrounded(){
         if(!isGrounded){
             for (ICollidable platform : platforms){
                 if (!isGrounded){
@@ -65,18 +67,16 @@ public class Enemy implements ICollidable, IMovable {
 
     /**
      * ...
-     *
-     * @param player the player to check for collision.
      * @return true if colliding, otherwise false.
      */
-    public boolean checkPlayerCollision(ICollidable player){
-        if (collider.isColliding(player, "UP")) {
+    public boolean checkPlayerCollision(){
+        if (collider.isColliding(target, "UP")) {
             return true;
-        } else if (collider.isColliding(player, "RIGHT")) {
+        } else if (collider.isColliding(target, "RIGHT")) {
             return true;
-        } else if (collider.isColliding(player, "DOWN")) {
+        } else if (collider.isColliding(target, "DOWN")) {
             return true;
-        } else if (collider.isColliding(player, "LEFT")) {
+        } else if (collider.isColliding(target, "LEFT")) {
             return true;
         }
 
@@ -96,6 +96,8 @@ public class Enemy implements ICollidable, IMovable {
     public void update(){
         doGravity();
         updateCollider();
+        checkPlayerCollision();
+        checkGrounded();
         move();
     }
 
