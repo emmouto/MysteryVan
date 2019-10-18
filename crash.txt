@@ -5,6 +5,7 @@ java.lang.NullPointerException
 	at java.util.concurrent.ConcurrentHashMap$ValueSpliterator.forEachRemaining(ConcurrentHashMap.java:3566)
 	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:482)
 	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:472)
+
 	at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708)
 	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
 	at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:499)
@@ -13,6 +14,7 @@ java.lang.NullPointerException
 	at de.gurkenlabs.litiengine.environment.Environment.render(Environment.java:1061)
 	at de.gurkenlabs.litiengine.gui.screens.GameScreen.render(GameScreen.java:19)
 	at View.GameView.render(GameView.java:100)
+
 	at de.gurkenlabs.litiengine.graphics.RenderComponent.render(RenderComponent.java:157)
 	at de.gurkenlabs.litiengine.RenderLoop.process(RenderLoop.java:25)
 	at de.gurkenlabs.litiengine.UpdateLoop.run(UpdateLoop.java:46)

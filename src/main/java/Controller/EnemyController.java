@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Enemy;
+import Model.GameLoop;
 import Model.Map;
 import Model.Player;
 
@@ -32,8 +33,9 @@ public class EnemyController implements IUpdateable {
      *
      * @param players list containing the players for the game.
      */
-    public EnemyController(List<Player> players) {
+    public EnemyController(List<Player> players, Map map) {
         this.players = players;
+        this.map = map;
         spawnEnemy();
         //initiatePathfinding();
         lastPathUpdate = Game.time().now();
@@ -59,7 +61,7 @@ public class EnemyController implements IUpdateable {
      * Spawns an <code>Enemy<code> at the specified location, and sets all its properties.
      */
     public void spawnEnemy() {
-        enemies.add(new Enemy("enemy", 0, 0, 32, 50));
+        enemies.add(new Enemy("enemy", 0, 0, 32, 50, map.getPlatforms(), this.getPlayers().get(0)));
         Creature c = new Creature();
         creatureList.add(c);
         creatureList.get(creatureList.size() - 1).setSpritePrefix(enemies.get(enemies.size() - 1).getSprite());
@@ -77,16 +79,10 @@ public class EnemyController implements IUpdateable {
     public void update() {
         if(GameManager.getState() == GameManager.GameState.INGAME) {
             for (int i = 0; i < this.getEnemies().size(); i++) {
-                this.getEnemies().get(i).update();
-
-                if (this.getEnemies().get(i).checkPlayerCollision(getPlayers().get(0))) {
-                    System.out.println("haha"); // TODO what is this
-                }
-
-                this.getEnemies().get(i).checkGrounded(this.map.getPlatforms());
                 creatureList.get(i).setLocation(enemies.get(i).getX(), enemies.get(i).getY());
             }
         }
+        GameLoop.getInstance().setEnemies(enemies);
     }
 
     private void initiatePathfinding() {
@@ -104,7 +100,4 @@ public class EnemyController implements IUpdateable {
      *
      * @param map the <code>Map</code> to be loaded.
      */
-    public void loadMap(Map map) {
-        this.map = map;
-    }
 }

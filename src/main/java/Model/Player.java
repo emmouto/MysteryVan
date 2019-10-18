@@ -35,11 +35,13 @@ public class Player implements IMovable, ICollidable{
     private State state;
     private Direction direction;
     private long time;
+    private List<Platform> platforms;
 
     enum Direction{
         LEFT,
         RIGHT
     }
+
 
     /**
      * The public constructor for the Player class.
@@ -50,12 +52,13 @@ public class Player implements IMovable, ICollidable{
      * @param width the width of the player.
      * @param height the height of the player.
      */
-    public Player(String sprite, int posX, int posY, int width, int height) {
+    public Player(String sprite, int posX, int posY, int width, int height, List<Platform> platforms) {
         this.sprite = sprite;
         this.posX = posX;
         this.posY = posY;
         this.width = width;
         this.height = height;
+        this.platforms = platforms;
         this.collider = new Collider();
         this.collider.updatePosition(posX, posY);
         this.collider.updateSize(width, height);
@@ -223,6 +226,7 @@ public class Player implements IMovable, ICollidable{
      * Updates the players position and its collider.
      */
     public void update() {
+        checkGrounded();
         doGravity();
         updateCollider();
         updateScore();
@@ -276,11 +280,11 @@ public class Player implements IMovable, ICollidable{
      */
     private void attack(){
         if(Key.attack.isDown && System.currentTimeMillis()-time > 1500){
-            for(int i = 0; i < enemies.size()-1; i++) {
-                if(this.getDirection() == Direction.LEFT && enemies.get(i).getX > this.getX()-this.getWeapon().getRange() && enemies.get(i).getX() < this.getX()){
-                    dealDamage(enemies.get(i));
-                }else if(this.getDirection() == Direction.RIGHT && enemies.get(i).getX < this.getX()+this.getWeapon().getRange() && enemies.get(i).getX() > this.getX()){
-                    dealDamage(enemies.get(i));
+            for(int i = 0; i < GameLoop.getInstance().getEnemies().size()-1; i++) {
+                if(this.getDirection() == Direction.LEFT && GameLoop.getInstance().getEnemies().get(i).getX() > this.getX()-this.getWeapon().getRange() && GameLoop.getInstance().getEnemies().get(i).getX() < this.getX()){
+                    dealDamage(GameLoop.getInstance().getEnemies().get(i));
+                }else if(this.getDirection() == Direction.RIGHT && GameLoop.getInstance().getEnemies().get(i).getX() < this.getX()+this.getWeapon().getRange() && GameLoop.getInstance().getEnemies().get(i).getX() > this.getX()){
+                    dealDamage(GameLoop.getInstance().getEnemies().get(i));
                 }
             }
             this.setSprite((this.getSprite().replaceAll("([a-z])","")).replace("_","")+"_attack");
@@ -305,11 +309,10 @@ public class Player implements IMovable, ICollidable{
 
     /**
      * Checks if the player is standing on a platform.
-     * @param platforms the list of platforms to check if the player is standing on.
      */
-    public void checkGrounded(List<Platform> platforms){
+    public void checkGrounded(){
         if (!isGrounded) {
-            for (ICollidable platform : platforms) {
+            for (ICollidable platform : this.platforms) {
                 if (!isGrounded) {
                     isGrounded = collider.isColliding(platform, "DOWN");
                 }
