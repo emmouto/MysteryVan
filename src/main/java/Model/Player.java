@@ -287,11 +287,11 @@ public class Player implements IMovable, ICollidable{
                     dealDamage(GameLoop.getInstance().getEnemies().get(i));
                 }
             }
-            this.setSprite((this.getSprite().replaceAll("([a-z])","")).replace("_","")+"_attack");
+            //this.setSprite((this.getSprite().replaceAll("([a-z])","")).replace("_","")+"_attack");
             time = System.currentTimeMillis();
 
-        }else if(System.currentTimeMillis()-time > 1000){
-            this.setSprite((this.getSprite().replaceAll("([a-z])","")).replace("_",""));
+        }else if(System.currentTimeMillis()-time > 500){
+            //this.setSprite((this.getSprite().replaceAll("([a-z])","")).replace("_",""));
         }
 
     }
@@ -304,6 +304,8 @@ public class Player implements IMovable, ICollidable{
         e.setHP(e.getHP()-this.getWeapon().getDamage());
         if(e.getHP()<0){
             this.setScore(this.getScore()+10);
+            GameLoop.getInstance().getEnemies().remove(e);
+
         }
     }
 
