@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Enemy;
+import Model.GameLoop;
 import Model.Map;
 import Model.Player;
 
@@ -81,6 +82,7 @@ public class EnemyController implements IUpdateable {
                 creatureList.get(i).setLocation(enemies.get(i).getX(), enemies.get(i).getY());
             }
         }
+        GameLoop.getInstance().setEnemies(enemies);
     }
 
     private void initiatePathfinding() {

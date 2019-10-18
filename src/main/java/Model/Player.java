@@ -212,7 +212,7 @@ public class Player implements IMovable, ICollidable{
         updateCollider();
         updateScore();
         move();
-        //attack();
+        attack();
     }
 
     private void updateScore(){

@@ -7,7 +7,9 @@ import java.util.List;
 
 public class GameLoop extends Thread{
 
+    private static GameLoop gameLoop = null;
     List<IUpdateable> updateables = new ArrayList<IUpdateable>();
+    List<Enemy> enemies = new ArrayList<>();
     private boolean interrupted = false;
 
 
@@ -32,5 +34,21 @@ public class GameLoop extends Thread{
         for (IUpdateable u : updateables){
             u.update();
         }
+    }
+
+    public static GameLoop getInstance()
+    {
+        if (gameLoop == null)
+            gameLoop = new GameLoop();
+
+        return gameLoop;
+    }
+
+    public List<Enemy> getEnemies() {
+        return enemies;
+    }
+
+    public void setEnemies(List<Enemy> enemies) {
+        this.enemies = enemies;
     }
 }
