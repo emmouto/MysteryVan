@@ -129,6 +129,7 @@ public class PlayerController implements IUpdateable {
                 getPlayers().get(i).update();
                 getPlayers().get(i).checkGrounded(this.map.getPlatforms());
                 creatureList.get(i).setLocation(playerList.get(i).getX(), playerList.get(i).getY());
+                creatureList.get(i).setSpritePrefix(getPlayers().get(i).getSprite());
                 updateHealth(i);
                 updateScore(i);
                 whenDead(i);
