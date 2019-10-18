@@ -82,36 +82,6 @@ public class MenuView extends Screen implements IUpdateable {
     }
 
     /**
-     * Switches to the HighScore screen.
-     * Fades the Menu screen out, and the HighScore screen in.
-     */
-    public static void showHighScoreScreen() {
-        Game.audio().playSound(GameManager.SELECT_SOUND);
-        Game.window().getRenderComponent().fadeOut(500);
-
-        Game.loop().perform(500, () -> {
-            Game.window().getRenderComponent().fadeIn(500);
-            Game.screens().display("HighScore");
-        });
-    }
-
-    /**
-     * Switches to the Help screen.
-     * Fades the Menu screen out, and the Help screen in.
-     * Also fades out the music for a nice transition.
-     */
-    public static void showHelpScreen() {
-        Game.audio().playSound(GameManager.SELECT_SOUND);
-        Game.window().getRenderComponent().fadeOut(1500);
-        Game.audio().fadeMusic(150);
-
-        Game.loop().perform(2500, () -> {
-            Game.window().getRenderComponent().fadeIn(1000);
-            Game.screens().display("Help");
-        });
-    }
-
-    /**
      * Exits the game.
      */
     public static void exit() {

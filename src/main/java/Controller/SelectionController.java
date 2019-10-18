@@ -1,8 +1,8 @@
 package Controller;
 
 import View.CHARACTER;
-
 import View.GameManager;
+
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.gui.GuiComponent;
 import de.gurkenlabs.litiengine.input.Input;
@@ -20,7 +20,6 @@ public class SelectionController extends GuiComponent {
     private static long lastInput;
 
     public CHARACTER selectedChar;
-    public DIFFICULTY_LEVEL selectedDifficulty;
     public SELECTION_STATE state;
 
     /**
@@ -32,12 +31,12 @@ public class SelectionController extends GuiComponent {
         super(0, 0, Game.window().getResolution().getWidth(), Game.window().getResolution().getHeight());
 
         this.selectedChar = CHARACTER.EMMA;
-        this.selectedDifficulty = DIFFICULTY_LEVEL.NORMAL;
         this.state = SELECTION_STATE.ENTER_NAME;
 
         initControls();
     }
 
+    // TODO fix this ugly code
     private void initControls() {
         Input.keyboard().onKeyReleased(e -> {
             if (e.getKeyCode() == KeyEvent.VK_ENTER ) {
@@ -82,15 +81,15 @@ public class SelectionController extends GuiComponent {
                 } else if (state == SELECTION_STATE.CHOOSE_LEVEL) {
                     Game.audio().playSound(GameManager.MENU_SOUND);
 
-                    switch (selectedDifficulty) {
+                    switch (GameManager.getSelectedDifficulty()) {
                         case EASY:
-                            selectedDifficulty = DIFFICULTY_LEVEL.HARD;
+                            GameManager.setSelectedDifficulty(GameManager.DIFFICULTY_LEVEL.HARD);
                             break;
                         case NORMAL:
-                            selectedDifficulty = DIFFICULTY_LEVEL.EASY;
+                            GameManager.setSelectedDifficulty(GameManager.DIFFICULTY_LEVEL.EASY);
                             break;
                         case HARD:
-                            selectedDifficulty = DIFFICULTY_LEVEL.NORMAL;
+                            GameManager.setSelectedDifficulty(GameManager.DIFFICULTY_LEVEL.NORMAL);
                             break;
                     }
                 }
@@ -127,15 +126,15 @@ public class SelectionController extends GuiComponent {
                 } else if (state == SELECTION_STATE.CHOOSE_LEVEL) {
                     Game.audio().playSound(GameManager.MENU_SOUND);
 
-                    switch (selectedDifficulty) {
+                    switch (GameManager.getSelectedDifficulty()) {
                         case EASY:
-                            selectedDifficulty = DIFFICULTY_LEVEL.NORMAL;
+                            GameManager.setSelectedDifficulty(GameManager.DIFFICULTY_LEVEL.NORMAL);
                             break;
                         case NORMAL:
-                            selectedDifficulty = DIFFICULTY_LEVEL.HARD;
+                            GameManager.setSelectedDifficulty(GameManager.DIFFICULTY_LEVEL.HARD);
                             break;
                         case HARD:
-                            selectedDifficulty = DIFFICULTY_LEVEL.EASY;
+                            GameManager.setSelectedDifficulty(GameManager.DIFFICULTY_LEVEL.EASY);
                             break;
                     }
                 }
@@ -174,30 +173,6 @@ public class SelectionController extends GuiComponent {
         CHOOSE_LEVEL,
         GAME_START,
         GAME_STARTED
-    }
-
-    /**
-     * Enum containing the different difficulty levels and their descriptions.
-     */
-    public enum DIFFICULTY_LEVEL {
-        EASY    ("You cannot die from falling off the map."),
-        NORMAL  ("You take damage when you hit the bottom."),
-        HARD    ("If you fall of the map, you die. Instantly.");
-
-        private String description;
-
-        /**
-         * Constructor for a difficulty level.
-         *
-         * @param description text describing what the difficulty entails.
-         */
-        DIFFICULTY_LEVEL(String description) {
-            this.description = description;
-        }
-
-        public String getDescription() {
-            return description;
-        }
     }
 
     /**

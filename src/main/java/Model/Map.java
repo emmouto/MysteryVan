@@ -35,6 +35,17 @@ public class Map {
                             platforms.add(new Platform(120,336,48,160));
                             platforms.add(new Platform(480,336,48,160));
                             platforms.add(new Platform(192,208,16,288));
+                            platforms.add(new Ground(160,451,1,480-160, Ground.Type.SKY,false,true));
+            case "map2" :   platforms.add(new Platform(0,112,48,160));
+                            platforms.add(new Platform(480,112,48,160));
+                            platforms.add(new Platform(192,208,16,288));
+                            platforms.add(new Platform(0,336,16,640));
+            case "map3" :   platforms.add(new Platform(0,112,48,160));
+                            platforms.add(new Platform(480,112,48,160));
+                            platforms.add(new Platform(120,336,48,160));
+                            platforms.add(new Platform(480,336,48,160));
+                            platforms.add(new Platform(192,208,16,288));
+                            platforms.add(new Ground(160,451,1,480-160, Ground.Type.LAVA,true,false));
         }
     }
 

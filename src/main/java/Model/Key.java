@@ -14,6 +14,7 @@ public class Key{
     public static Key right = new Key();
     public static Key special = new Key();
     public static Key pause = new Key();
+    public static Key enter = new Key();
 
     /**
      *  Toggles the keys current state.

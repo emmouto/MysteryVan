@@ -31,18 +31,19 @@ public class KeyController implements KeyListener, IUpdateable {
 
     private void initKeyController(){
         bind(KeyEvent.VK_W, Key.up);
+        bind(KeyEvent.VK_UP, Key.up);
         bind(KeyEvent.VK_A, Key.left);
+        bind(KeyEvent.VK_LEFT, Key.left);
         bind(KeyEvent.VK_S, Key.down);
+        bind(KeyEvent.VK_DOWN, Key.down);
         bind(KeyEvent.VK_D, Key.right);
+        bind(KeyEvent.VK_RIGHT, Key.right);
         bind(KeyEvent.VK_SPACE, Key.special);
         bind(KeyEvent.VK_P, Key.pause);
+        bind(KeyEvent.VK_ENTER, Key.enter);
 
-        Input.keyboard().onKeyPressed(e ->{
-            keyPressed(e);
-        });
-        Input.keyboard().onKeyReleased(e->{
-            keyReleased(e);
-        });
+        Input.keyboard().onKeyPressed(this::keyPressed);
+        Input.keyboard().onKeyReleased(this::keyReleased);
 
     }
 
@@ -77,7 +78,7 @@ public class KeyController implements KeyListener, IUpdateable {
     /**
      *
      * @param extendedKey
-     * @return
+     * @return if the key is binded or not.
      */
     public boolean isKeyBinded(int extendedKey) {
         return keyBindings.containsKey(extendedKey);
