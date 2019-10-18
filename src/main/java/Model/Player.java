@@ -283,11 +283,11 @@ public class Player implements IMovable, ICollidable{
                     dealDamage(enemies.get(i));
                 }
             }
-            this.setSprite((this.getSprite().replace("([a-z])","")).replace("_","")+"_attack");
+            this.setSprite((this.getSprite().replaceAll("([a-z])","")).replace("_","")+"_attack");
             time = System.currentTimeMillis();
 
         }else if(System.currentTimeMillis()-time > 1000){
-            this.setSprite((this.getSprite().replace("([a-z])","")).replace("_",""));
+            this.setSprite((this.getSprite().replaceAll("([a-z])","")).replace("_",""));
         }
 
     }
