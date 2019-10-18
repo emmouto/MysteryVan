@@ -209,6 +209,7 @@ public class Player implements IMovable, ICollidable{
         updateCollider();
         updateScore();
         move();
+        //attack();
     }
 
     private void updateScore(){
@@ -245,6 +246,11 @@ public class Player implements IMovable, ICollidable{
     private void jump(){
         this.gravity = -7;
         hasJumped = true;
+    }
+
+    private void attack(){
+        if(Key.attack.isDown){}
+
     }
 
     /**

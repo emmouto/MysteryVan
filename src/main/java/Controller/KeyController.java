@@ -38,7 +38,7 @@ public class KeyController implements KeyListener, IUpdateable {
         bind(KeyEvent.VK_DOWN, Key.down);
         bind(KeyEvent.VK_D, Key.right);
         bind(KeyEvent.VK_RIGHT, Key.right);
-        bind(KeyEvent.VK_SPACE, Key.special);
+        bind(KeyEvent.VK_SPACE, Key.attack);
         bind(KeyEvent.VK_P, Key.pause);
         bind(KeyEvent.VK_ENTER, Key.enter);
 

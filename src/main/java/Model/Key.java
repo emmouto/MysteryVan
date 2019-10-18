@@ -12,7 +12,7 @@ public class Key{
     public static Key down = new Key();
     public static Key left = new Key();
     public static Key right = new Key();
-    public static Key special = new Key();
+    public static Key attack = new Key();
     public static Key pause = new Key();
     public static Key enter = new Key();
 
