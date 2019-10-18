@@ -12,14 +12,14 @@ public class Boost {
 
     private int HP;
     private int strength;
-    private int defence; // used to be armour
+    private int defence;
 
     /**
-     * ...
+     * Constructor for a boost.
      *
-     * @param HP
-     * @param strength
-     * @param defence
+     * @param HP the added hp the boost gives, if any.
+     * @param strength the added strength the boost gives, if any.
+     * @param defence the added defence the boost gives, if any.
      */
     public Boost(int HP, int strength, int defence) {
         this.HP = HP;

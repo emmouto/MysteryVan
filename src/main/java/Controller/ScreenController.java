@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Key;
 import View.GameManager;
 import View.DefeatView;
 import View.HelpView;
@@ -121,7 +122,7 @@ public class ScreenController extends Menu {
         }
     }
 
-    private void changeScreen(String screenName, int fadeTime) {
+    void changeScreen(String screenName, int fadeTime) {
         Game.audio().playSound(GameManager.SELECT_SOUND);
         Game.window().getRenderComponent().fadeOut(fadeTime);
         if (fadeTime == 1500) { Game.audio().fadeMusic(150); }
@@ -146,7 +147,7 @@ public class ScreenController extends Menu {
                         changeScreen("Help", 1500);
                         break;
                     case 2:
-                        MenuView.exit();
+                        exit();
                         break;
                     default:
                         break;
@@ -203,5 +204,24 @@ public class ScreenController extends Menu {
         this.getCellComponents().get(2).setY(460);
 
         incFocus();
+    }
+    /**
+     * Pauses the game when P is pressed.
+     */
+    void changeToPause(){
+        if (Key.pause.isDown && (GameManager.getState() == GameManager.GameState.INGAME)) {
+            GameManager.setState(GameManager.GameState.INGAME_PAUSE);
+            changeScreen("Pause", 500);
+        } else if(Key.pause.isDown && (GameManager.getState() == GameManager.GameState.INGAME_PAUSE)) {
+            GameManager.setState(GameManager.GameState.INGAME);
+            changeScreen("Game", 500);
+        }
+    }
+    /**
+     * Exits the game.
+     */
+    private static void exit() {
+        Game.audio().playSound(GameManager.SELECT_SOUND);
+        System.exit(0);
     }
 }

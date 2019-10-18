@@ -25,7 +25,9 @@ public class HelpView extends Screen implements IUpdateable {
     private static final BufferedImage GO_TO_GAME = Resources.images().get("src/main/resources/HelpView/GoToGame.png");
 
     /**
-     * @param screenName Name of the screen.
+     * Constructor. Sets the name of the screen.
+     *
+     * @param screenName name of the screen.
      */
     public HelpView(String screenName) {
         super(screenName);
@@ -53,7 +55,7 @@ public class HelpView extends Screen implements IUpdateable {
     /**
      * Renders out the components.
      *
-     * @param g The graphics object to render on.
+     * @param g the graphics object to render on.
      */
     public void render(final Graphics2D g) {
         ImageRenderer.render(g, BRICK_BG, 0, 0);
@@ -88,19 +90,6 @@ public class HelpView extends Screen implements IUpdateable {
         TextRenderer.render(g, "START THE GAME.", 720, 600);
 
         super.render(g);
-    }
-
-    /**
-     * Method which changes current screen to selection.
-     */
-    public static void goToSelect() {
-        Game.audio().playSound(GameManager.SELECT_SOUND);
-        Game.window().getRenderComponent().fadeOut(500);
-
-        Game.loop().perform(500, () -> {
-            Game.window().getRenderComponent().fadeIn(500);
-            Game.screens().display("Selection");
-        });
     }
 
     /**

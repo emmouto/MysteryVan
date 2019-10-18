@@ -40,15 +40,15 @@ public class EnemyController implements IUpdateable {
         lastPathUpdate = Game.time().now();
     }
 
-    public List<Creature> getCreatures() {
+    List<Creature> getCreatures() {
         return creatureList;
     }
 
-    public List<Enemy> getEnemies() {
+    List<Enemy> getEnemies() {
         return this.enemies;
     }
 
-    public List<Player> getPlayers() {
+    private List<Player> getPlayers() {
         return this.players;
     }
 
@@ -59,7 +59,7 @@ public class EnemyController implements IUpdateable {
     /**
      * Spawns an <code>Enemy<code> at the specified location, and sets all its properties.
      */
-    public void spawnEnemy() {
+    private void spawnEnemy() {
         enemies.add(new Enemy("enemy", 0, 0, 32, 50, map.getPlatforms(), this.getPlayers().get(0)));
         Creature c = new Creature();
         creatureList.add(c);
@@ -93,9 +93,4 @@ public class EnemyController implements IUpdateable {
         }
     }
 
-    /**
-     * ...
-     *
-     * @param map the <code>Map</code> to be loaded.
-     */
 }

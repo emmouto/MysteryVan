@@ -26,9 +26,9 @@ public class Map {
     /**
      * Initiates the list of platforms depending on which map is loaded.
      *
-     * @param name the name of the map.
+     * @param name The name of the map.
      */
-    public void init(String name) {
+    private void init(String name) {
         switch (name) {
             case "map1" :   platforms.add(new Platform(0,112,48,160));
                             platforms.add(new Platform(480,112,48,160));
