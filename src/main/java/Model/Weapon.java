@@ -1,10 +1,11 @@
 package Model;
 
 /**
- * ...
+ * Class for creating the weapons that the players can use.
  *
- * @author
- * @version
+ * @author Antonia Welzel
+ * @author Jonathan Carbol
+ * @version 0.1
  */
 public class Weapon {
     private String name;
@@ -12,11 +13,11 @@ public class Weapon {
     private int range;
 
     /**
-     * ...
+     * Creates a new <code>Weapon</code> and sets its properties.
      *
-     * @param name
-     * @param damage
-     * @param range
+     * @param name the name of the <code>Weapon</code>.
+     * @param damage the damage that the <code>Weapon</code> does.
+     * @param range the range that the <code>Weapon</code> has.
      */
     public Weapon(String name, int damage, int range) {
         this.name = name;

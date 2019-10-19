@@ -17,22 +17,23 @@ import java.util.Random;
 public class FoodController implements IUpdateable {
 
     private List<Food> foodList = new ArrayList<>();
-    private Map map = new Map("map1");
     private List<Player> players;
-    private int size = map.getPlatforms().size();
-    private Collider collider;
-
     private List<Prop> propList = new ArrayList<>();
 
-    private Long lastPathUpdate;
-    private String name;
+    private MapController mc = new MapController();
+    private String mapName = mc.getMapName();
+    private Map map = new Map(mapName);
 
+    private int size = map.getPlatforms().size();
 
     // Array Lists that will contain the different x and y values where platforms exist
-    public int[] xCoords = new int[size];
-    public int[] yCoords = new int[size];
+    private int[] xCoords = new int[size];
+    private int[] yCoords = new int[size];
 
     private int[][] matrixCoord = fillMatrix(xCoords, yCoords);
+
+    private Long lastPathUpdate;
+
 
 
     public FoodController(List<Player> players) {
@@ -41,7 +42,7 @@ public class FoodController implements IUpdateable {
         this.players = players;
         spawnFood();
 
-        //lastPathUpdate = Game.time().now();
+        lastPathUpdate = Game.time().now();
 
     }
 
@@ -60,7 +61,7 @@ public class FoodController implements IUpdateable {
 
         int rnd = new Random().nextInt(size);
 
-        Food f = new Food(matrixCoord[rnd][0] + 25, matrixCoord[rnd][1] - 45);
+        Food f = new Food(matrixCoord[rnd][0], matrixCoord[rnd][1] - 45); //x + 15?
         foodList.add(f);
         determineFoodSprite(f);
         propList.get(0).setLocation(f.getPosX(), f.getPosY());
@@ -85,7 +86,6 @@ public class FoodController implements IUpdateable {
                 propList.add(rotFruit);
 
         }
-        System.out.println(f.getName());
 
     }
 
@@ -147,7 +147,7 @@ public class FoodController implements IUpdateable {
         if (GameManager.getState() == GameManager.GameState.INGAME) {
             for (int i = 0; i < this.getFood().size(); i++) {
 
-                this.getFood().get(i).updateCollider(getPropList().get(0).getX(), getPropList().get(0).getY()); //getPropList().get(0).getX(), getPropList().get(0).getY()
+                this.getFood().get(i).updateCollider(); //getPropList().get(0).getX(), getPropList().get(0).getY()
 
                 if (this.getFood().get(i).checkPlayerCollision(getPlayers().get(0))) {
 
@@ -191,6 +191,8 @@ public class FoodController implements IUpdateable {
     public List<Prop> getPropList() {
         return propList;
     }
+
+
 
 
 }

@@ -17,7 +17,7 @@ import java.awt.image.BufferedImage;
  *
  * @author Jennifer Krogh
  * @author Emma Pettersson
- * @version
+ * @version 0.1
  */
 public class HelpView extends Screen implements IUpdateable {
     private static final BufferedImage BRICK_BG = Resources.images().get("src/main/resources/HelpView/BrickBG.png");
@@ -25,7 +25,9 @@ public class HelpView extends Screen implements IUpdateable {
     private static final BufferedImage GO_TO_GAME = Resources.images().get("src/main/resources/HelpView/GoToGame.png");
 
     /**
-     * @param screenName Name of the screen.
+     * Constructor. Sets the name of the screen.
+     *
+     * @param screenName name of the screen.
      */
     public HelpView(String screenName) {
         super(screenName);
@@ -53,7 +55,7 @@ public class HelpView extends Screen implements IUpdateable {
     /**
      * Renders out the components.
      *
-     * @param g The graphics object to render on.
+     * @param g the graphics object to render on.
      */
     public void render(final Graphics2D g) {
         ImageRenderer.render(g, BRICK_BG, 0, 0);
@@ -71,37 +73,23 @@ public class HelpView extends Screen implements IUpdateable {
         g.drawRect(700,150,500,250);
         g.drawRect(700,430,500,250);
 
-        g.setFont(Resources.fonts().get("src/main/resources/fonts/Pixeled.ttf",64f));
-        g.setColor(Color.YELLOW);
-        TextRenderer.render(g, "How to play", 300, 115);
+        g.setFont(GameManager.PIXELED_BIG);
+        g.setColor(Color.ORANGE);
+        String text = "HOW TO PLAY";
+        TextRenderer.render(g, text, GameManager.centerX - (text.length() * g.getFont().getSize()) / 2.0, 115);
 
-        Font smallFont = new Font("arial", 1, 28);
-        g.setFont(smallFont);
+        g.setFont(GameManager.PIXELED_SMALL);
         g.setColor(Color.WHITE);
-        TextRenderer.render(g, "Controls for movement, S-key", 720, 210);
-        TextRenderer.render(g, "picks up items.", 720, 250);
+        TextRenderer.render(g, "MOVEMENT", 720, 210);
+        g.setFont(GameManager.PIXELED_XSMALL);
+        TextRenderer.render(g, "The S-key picks up items.", 720, 250);
+        TextRenderer.render(g, "Space is used to attack.", 720, 300);
 
-        TextRenderer.render(g, "When 2 players are playing, the", 720, 320);
-        TextRenderer.render(g, "key-arrows are used for player 2.", 720, 360);
-
-        TextRenderer.render(g, "Space is used to shoot. If 2", 720, 490);
-        TextRenderer.render(g, "players, dot-key is used.", 720, 530);
-        TextRenderer.render(g, "Press enter to start game.", 720, 615);
+        g.setFont(GameManager.PIXELED_SMALL);
+        TextRenderer.render(g, "PRESS ENTER TO", 720, 550);
+        TextRenderer.render(g, "START THE GAME.", 720, 600);
 
         super.render(g);
-    }
-
-    /**
-     * Method which changes current screen to selection.
-     */
-    public static void goToSelect() {
-        Game.audio().playSound(GameManager.SELECT_SOUND);
-        Game.window().getRenderComponent().fadeOut(500);
-
-        Game.loop().perform(500, () -> {
-            Game.window().getRenderComponent().fadeIn(500);
-            Game.screens().display("Selection");
-        });
     }
 
     /**

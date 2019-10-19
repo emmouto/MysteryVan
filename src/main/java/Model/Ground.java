@@ -5,27 +5,32 @@ package Model;
  *
  * @author Antonia Welzel
  * @author Jennifer Krogh
- * @version
+ * @author Jonathan Carbol
+ * @version 0.1
  */
-public class Ground implements ICollidable{
+public class Ground extends Platform implements ICollidable{
     private Type type;
-    private boolean dealDamage; // damage when falling into ground, ex. lava but not immediate death
-    private boolean instantDeath; // instant death when the grounds are sky/clouds = no ground
+    private boolean dealDamage;
+    private boolean instantDeath;
 
-    private enum Type {
+    /**
+     * Enum for the ground types.
+     */
+    enum Type {
         GRASS,
         LAVA,
         SKY
     }
 
     /**
-     * ...
+     * Contructor for the ground class.
      *
-     * @param type
-     * @param dealDamage
-     * @param instantDeath
+     * @param type  The type of ground, different for each level.
+     * @param dealDamage    Damage when falling on the ground.
+     * @param instantDeath  Instant death when falling on the ground.
      */
-    public Ground(Type type, boolean dealDamage, boolean instantDeath) {
+    public Ground(int x, int y, int height, int width, Type type, boolean dealDamage, boolean instantDeath) {
+        super(x,y,height,width);
         this.type = type;
         this.dealDamage = dealDamage;
         this.instantDeath = instantDeath;

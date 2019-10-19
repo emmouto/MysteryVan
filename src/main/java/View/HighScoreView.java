@@ -17,12 +17,12 @@ import de.gurkenlabs.litiengine.gui.screens.Screen;
 import de.gurkenlabs.litiengine.resources.Resources;
 
 /**
- * ...
+ * Class for creating and displaying the HighScore View.
  *
  * @author Antonia Welzel
  * @author Emma Pettersson
  * @author Jennifer Krogh
- * @version
+ * @version 0.1
  */
 public class HighScoreView extends Screen implements IUpdateable {
     private static final BufferedImage BRICK_BG = Resources.images().get("src/main/resources/HelpView/BrickBG.png");
@@ -34,7 +34,7 @@ public class HighScoreView extends Screen implements IUpdateable {
     /**
      * Constructor. Sets the name of the screen.
      *
-     * @param screenName Name of the screen.
+     * @param screenName name of the screen.
      */
     public HighScoreView(String screenName) {
         super(screenName);
@@ -46,7 +46,7 @@ public class HighScoreView extends Screen implements IUpdateable {
     }
 
     /**
-     * @param g The graphics object to render on.
+     * @param g the graphics object to render on.
      */
     @Override
     public void render(final Graphics2D g) {
@@ -58,7 +58,7 @@ public class HighScoreView extends Screen implements IUpdateable {
         g.drawRect(300, 130, 630, 580);
 
         g.setFont(GameManager.PIXELED_BIG);
-        g.setColor(Color.MAGENTA);
+        g.setColor(Color.ORANGE);
         TextRenderer.render(g, "HIGH SCORES", GameManager.centerX - 320, 100);
 
         g.setFont(GameManager.PIXELED_XSMALL);
@@ -67,7 +67,7 @@ public class HighScoreView extends Screen implements IUpdateable {
         g.setFont(GameManager.PIXELED_MEDIUM);
         g.setColor(Color.CYAN);
         TextRenderer.render(g, "PLAYER", 320, 190);
-        g.setColor(Color.ORANGE);
+        g.setColor(Color.MAGENTA);
         TextRenderer.render(g, "SCORE", 720, 190);
 
         g.setColor(Color.WHITE);
@@ -81,18 +81,6 @@ public class HighScoreView extends Screen implements IUpdateable {
         }
 
         super.render(g);
-    }
-
-    /**
-     * Method to call when current screen is changed to menu screen.
-     */
-    public static void showMenu() {
-        Game.window().getRenderComponent().fadeOut(500);
-
-        Game.loop().perform(500, () -> {
-            Game.window().getRenderComponent().fadeIn(500);
-            Game.screens().display("Menu");
-        });
     }
 
     /**

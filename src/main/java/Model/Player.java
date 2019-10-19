@@ -1,6 +1,5 @@
 package Model;
 
-import java.awt.event.KeyEvent;
 import java.util.List;
 
 /**
@@ -30,11 +29,11 @@ public class Player implements IMovable, ICollidable{
     private int score;
     private String sprite;
     private Collider collider;
-    private boolean isGrounded = false;
+    public boolean isGrounded = false;
     private boolean hasJumped = false;
     private double gravity;
     private State state;
-
+    private List<Platform> platforms;
 
     /**
      * The public constructor for the Player class.
@@ -45,12 +44,13 @@ public class Player implements IMovable, ICollidable{
      * @param width the width of the player.
      * @param height the height of the player.
      */
-    public Player(String sprite, int posX, int posY, int width, int height) {
+    public Player(String sprite, int posX, int posY, int width, int height, List<Platform> platforms) {
         this.sprite = sprite;
         this.posX = posX;
         this.posY = posY;
         this.width = width;
         this.height = height;
+        this.platforms = platforms;
         this.collider = new Collider();
         this.collider.updatePosition(posX, posY);
         this.collider.updateSize(width, height);
@@ -175,8 +175,16 @@ public class Player implements IMovable, ICollidable{
         return posX;
     }
 
+    public void setX(int posX) {
+        this.posX = posX;
+    }
+
     public int getY() {
         return posY;
+    }
+
+    public void setY(int posY) {
+        this.posY = posY;
     }
 
     public int getMaxHP(){
@@ -185,6 +193,14 @@ public class Player implements IMovable, ICollidable{
 
     public void setMaxHP(int maxHP){
         this.maxHP = maxHP;
+    }
+
+    public double getGravity() {
+        return gravity;
+    }
+
+    public void setGravity(double gravity) {
+        this.gravity = gravity;
     }
 
     public int getScore() {
@@ -206,33 +222,42 @@ public class Player implements IMovable, ICollidable{
     /**
      * Updates the players position and its collider.
      */
-    public void update(){
+    public void update() {
+        checkGrounded();
         doGravity();
         updateCollider();
         updateScore();
         move();
+        //attack();
     }
+
 
     private void updateScore(){
         this.setScore(this.getScore()+1);
     }
+
+
     /**
      * Moves the player depending on input from the user.
      */
-    public void move(){
-        if(Key.up.isDown && this.isGrounded ){
+    public void move() {
+        if (Key.up.isDown && this.isGrounded ) {
             this.jump();
         }
-        if(Key.left.isDown && this.getX() > 0){
+
+        if (Key.left.isDown && this.getX() > 0) {
                 this.setPosX(getX() - 2);
         }
-        if(Key.right.isDown && this.getX() < 720){
+
+        if (Key.right.isDown && this.getX() < 720) {
                 this.setPosX(getX() + 2);
         }
+
         isGrounded = false;
-        if(gravity <= 3){
+
+        if (gravity <= 3) {
             gravity += 0.2;
-        }else{
+        } else {
             hasJumped = false;
         }
     }
@@ -240,20 +265,23 @@ public class Player implements IMovable, ICollidable{
     /**
      * Makes the player jump.
      */
-    private void jump(){
+    public void jump(){
         this.gravity = -7;
         hasJumped = true;
     }
 
+    private void attack(){
+        if(Key.attack.isDown){}
+
+    }
+
     /**
      * Checks if the player is standing on a platform.
-     *
-     * @param platforms the list of platforms to check if the player is standing on.
      */
-    public void checkGrounded(List<Platform> platforms){
-        if(!isGrounded){
-            for (ICollidable platform : platforms){
-                if (!isGrounded){
+    public void checkGrounded(){
+        if (!isGrounded) {
+            for (ICollidable platform : this.platforms) {
+                if (!isGrounded) {
                     isGrounded = collider.isColliding(platform, "DOWN");
                 }
             }
@@ -263,20 +291,20 @@ public class Player implements IMovable, ICollidable{
     /**
      * Updates the collider position in order to check for collisions.
      */
-    private void updateCollider(){
-        this.collider.updatePosition(getX(),getY());
+    private void updateCollider() {
+        this.collider.updatePosition(getX(), getY());
     }
 
-    private void notifyListeners(){
+    private void notifyListeners() {
 
     }
 
     /**
      * Applies gravity to the player.
      */
-    private void doGravity(){
-        if (!isGrounded || hasJumped){
-            setPosY(((int)(getY()+this.gravity)));
+    public void doGravity() {
+        if (!isGrounded || hasJumped) {
+            setPosY(((int)(getY() + this.gravity)));
         }
     }
 }

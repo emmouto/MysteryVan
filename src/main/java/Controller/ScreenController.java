@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Key;
 import View.GameManager;
 import View.DefeatView;
 import View.HelpView;
@@ -32,13 +33,13 @@ public class ScreenController extends Menu {
     private static long lastInput;
 
     /**
-     * Constructor for the ScreenController.
+     * Constructor for the ScreenController (based on Menu).
      *
-     * @param x
-     * @param y
-     * @param width
-     * @param height
-     * @param items
+     * @param x the Menu's x coordinate.
+     * @param y the Menu's y coordinate.
+     * @param width the Menu's width.
+     * @param height the Menu's height.
+     * @param items the items in the Menu.
      */
     public ScreenController(double x, double y, double width, double height, String... items) {
         super(x, y, width, height, items);
@@ -77,7 +78,6 @@ public class ScreenController extends Menu {
     }
 
     private boolean inputIsLocked() {
-        // Disable Screen controls if view has changed.
         if (this.isSuspended() || !this.isVisible() || !this.isEnabled()) {
             return true;
         }
@@ -86,7 +86,9 @@ public class ScreenController extends Menu {
     }
 
     /**
-     * ...
+     * Prepare the GuiComponent and all its child Components.
+     * (Makes the GuiComponent visible and adds mouse listeners).
+     * This is, for example, done right before switching to a new screen.
      */
     @Override
     public void prepare() {
@@ -120,20 +122,32 @@ public class ScreenController extends Menu {
         }
     }
 
+    void changeScreen(String screenName, int fadeTime) {
+        Game.audio().playSound(GameManager.SELECT_SOUND);
+        Game.window().getRenderComponent().fadeOut(fadeTime);
+        if (fadeTime == 1500) { Game.audio().fadeMusic(150); }
+
+        Game.loop().perform(fadeTime, () -> {
+            Game.window().getRenderComponent().fadeIn(fadeTime);
+            Game.screens().display(screenName);
+        });
+    }
+
+    //TODO change name
     private void changeView() {
         if (GameManager.getState() == GameManager.GameState.TITLE_SCREEN) {
             this.onConfirm(c -> {
                 switch (c) {
                     case 0:
                         GameManager.setState(GameManager.GameState.HIGH_SCORE_SCREEN);
-                        MenuView.showHighScore();
+                        changeScreen("HighScore", 500);
                         break;
                     case 1:
                         GameManager.setState(GameManager.GameState.HELP_SCREEN);
-                        MenuView.startGame();
+                        changeScreen("Help", 1500);
                         break;
                     case 2:
-                        MenuView.exit();
+                        exit();
                         break;
                     default:
                         break;
@@ -141,13 +155,16 @@ public class ScreenController extends Menu {
             });
         } else if (GameManager.getState() == GameManager.GameState.DEFEAT_SCREEN) {
             GameManager.setState(GameManager.GameState.HIGH_SCORE_SCREEN);
-            DefeatView.showHighScore();
+            changeScreen("HighScore", 500);
+        } else if (GameManager.getState() == GameManager.GameState.INGAME_PAUSE) {
+            GameManager.setState(GameManager.GameState.TITLE_SCREEN);
+            changeScreen("Menu", 500);
         } else if (GameManager.getState() == GameManager.GameState.HIGH_SCORE_SCREEN) {
             GameManager.setState(GameManager.GameState.TITLE_SCREEN);
-            HighScoreView.showMenu();
+            changeScreen("Menu", 500);
         } else if (GameManager.getState() == GameManager.GameState.HELP_SCREEN) {
             GameManager.setState(GameManager.GameState.SELECTION_SCREEN);
-            HelpView.goToSelect();
+            changeScreen("Selection", 500);
         }
     }
 
@@ -171,7 +188,7 @@ public class ScreenController extends Menu {
         lastInput = Game.time().now();
 
         if (this.isVisible() && Game.time().now() > 10){
-            Game.audio().playSound(GameManager.SELECT_SOUND);
+            Game.audio().playSound(GameManager.MENU_SOUND);
         }
     }
 
@@ -187,5 +204,24 @@ public class ScreenController extends Menu {
         this.getCellComponents().get(2).setY(460);
 
         incFocus();
+    }
+    /**
+     * Pauses the game when P is pressed.
+     */
+    void changeToPause(){
+        if (Key.pause.isDown && (GameManager.getState() == GameManager.GameState.INGAME)) {
+            GameManager.setState(GameManager.GameState.INGAME_PAUSE);
+            changeScreen("Pause", 500);
+        } else if(Key.pause.isDown && (GameManager.getState() == GameManager.GameState.INGAME_PAUSE)) {
+            GameManager.setState(GameManager.GameState.INGAME);
+            changeScreen("Game", 500);
+        }
+    }
+    /**
+     * Exits the game.
+     */
+    private static void exit() {
+        Game.audio().playSound(GameManager.SELECT_SOUND);
+        System.exit(0);
     }
 }

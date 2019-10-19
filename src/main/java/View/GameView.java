@@ -1,6 +1,5 @@
 package View;
 
-import Controller.FoodController;
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.IUpdateable;
 import de.gurkenlabs.litiengine.graphics.ImageRenderer;
@@ -17,7 +16,8 @@ import java.awt.image.BufferedImage;
  * The GameView class, which displays the game.
  *
  * @author Jonathan Carbol
- * @version
+ * @author Emma Pettersson
+ * @version 0.1
  */
 public class GameView extends GameScreen implements IUpdateable {
     private Hud hud;
@@ -25,16 +25,12 @@ public class GameView extends GameScreen implements IUpdateable {
     private int maxHP;
     private int score;
 
-
-    private static int PADDING =10;
+    private static int PADDING = 10;
     private final BufferedImage HEART = Imaging.scale(Resources.images().get("src/main/resources/heart.png"),0.05);
     private final BufferedImage HEART_QUARTER = Imaging.scale(Resources.images().get("src/main/resources/heart1-4_2.png"),0.05);
     private final BufferedImage HEART_HALF = Imaging.scale(Resources.images().get("src/main/resources/heart1-2_2.png"),0.05);
     private final BufferedImage HEART_THREEQUARTER = Imaging.scale(Resources.images().get("src/main/resources/heart3-4_2.png"),0.05);
     private final BufferedImage HEART_EMPTY = Imaging.scale(Resources.images().get("src/main/resources/heart0_2.png"), 0.05);
-
-    private final BufferedImage IMG = Imaging.scale(Resources.images().get("src/main/resources/Beer.png"),50);
-
 
     /**
      * The public constructor for the GameView class.
@@ -45,33 +41,6 @@ public class GameView extends GameScreen implements IUpdateable {
         super(screenName);
         this.hud = new Hud();
         this.getComponents().add(this.hud);
-    }
-
-    /**
-     * Attaches the GameView to the game loop.
-     */
-    @Override
-    public void prepare() {
-        super.prepare();
-        Game.loop().attach(this);
-    }
-
-    /**
-     * Renders the GameView.
-     *
-     * @param g the graphical item to be rendered.
-     */
-    @Override
-    public void render(Graphics2D g) {
-        super.render(g);
-    }
-
-    /**
-     * Updates the GameView.
-     */
-    @Override
-    public void update() {
-
     }
 
     public int getHP() {
@@ -99,14 +68,55 @@ public class GameView extends GameScreen implements IUpdateable {
     }
 
     /**
+     * Attaches the GameView to the game loop.
+     */
+    @Override
+    public void prepare() {
+        super.prepare();
+
+        // Play different music depeding on the game's difficulty.
+        switch (GameManager.getSelectedDifficulty()) {
+            case EASY:
+                Game.audio().playMusic(GameManager.STAGE_1);
+                break;
+            case NORMAL:
+                Game.audio().playMusic(GameManager.STAGE_2);
+                break;
+            case HARD:
+                Game.audio().playMusic(GameManager.STAGE_3);
+                break;
+        }
+
+        Game.loop().attach(this);
+    }
+
+    /**
+     * Renders the GameView.
+     *
+     * @param g the graphical item to be rendered.
+     */
+    @Override
+    public void render(Graphics2D g) {
+        super.render(g);
+    }
+
+    /**
+     * Updates the GameView.
+     */
+    @Override
+    public void update() {
+
+    }
+
+    /**
      * An embedded class, Hud, used to display graphical components on the game screen.
      *
      * @author Jonathan Carbol
-     * @version
+     * @version 0.1
      */
     public class Hud extends GuiComponent {
         /**
-         * The protected constructor of the Hud class.
+         * The package-protected constructor of the Hud class.
          */
         Hud() {
             super(0, 0, Game.window().getResolution().getWidth(), Game.window().getResolution().getHeight());
@@ -121,7 +131,6 @@ public class GameView extends GameScreen implements IUpdateable {
         public void render(Graphics2D g) {
             renderHP(g);
             renderScore(g);
-            //renderFood(g);
             super.render(g);
         }
         /**
@@ -145,13 +154,13 @@ public class GameView extends GameScreen implements IUpdateable {
 
                 if (i <= HP) {
                     img = HEART;
-                } else if(i <= maxHP+4 && i >= HP && HP % 4 == 1 && end == false) {
+                } else if(i <= maxHP + 4 && i >= HP && HP % 4 == 1 && !end) {
                     img = HEART_QUARTER;
                     end = true;
-                } else if (i <= maxHP+4 && i >= HP && HP % 4 == 2 && end == false) {
+                } else if (i <= maxHP + 4 && i >= HP && HP % 4 == 2 && !end) {
                     img = HEART_HALF;
                     end = true;
-                } else if (i <= maxHP+4 && i >= HP && HP % 4 == 3 && end == false) {
+                } else if (i <= maxHP + 4 && i >= HP && HP % 4 == 3 && !end) {
                     img = HEART_THREEQUARTER;
                     end = true;
                 } else {
@@ -172,10 +181,8 @@ public class GameView extends GameScreen implements IUpdateable {
             g.setColor(Color.BLACK);
 
             String string = Integer.toString(score);
-            TextRenderer.render(g,string,Game.window().getWidth()-350,100);
+            TextRenderer.render(g,string,Game.window().getWidth() - 350,100);
         }
-
-
     }
 }
 

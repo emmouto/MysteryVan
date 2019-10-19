@@ -1,5 +1,5 @@
 main threw an exception:
-java.lang.IndexOutOfBoundsException: Index: 2, Size: 2
-	at java.util.ArrayList.rangeCheck(ArrayList.java:657)
-	at java.util.ArrayList.get(ArrayList.java:433)
-	at GameRunner.main(GameRunner.java:126)
+java.lang.ClassCastException: Model.Food cannot be cast to Model.IUpdateable
+	at Controller.GameController.addUpdateablesToGameLoop(GameController.java:95)
+	at Controller.GameController.init(GameController.java:85)
+	at GameRunner.main(GameRunner.java:25)

@@ -24,7 +24,7 @@ public class MenuView extends Screen implements IUpdateable {
     /**
      * Constructor. Sets the name of the screen.
      *
-     * @param screenName Name of the screen.
+     * @param screenName name of the screen.
      */
     public MenuView(String screenName) {
         super(screenName);
@@ -41,7 +41,9 @@ public class MenuView extends Screen implements IUpdateable {
     }
 
     /**
-     *
+     * Prepare the GuiComponent and all its child Components.
+     * (Makes the GuiComponent visible and adds mouse listeners).
+     * This is, for example, done right before switching to a new screen.
      */
     @Override
     public void prepare() {
@@ -56,7 +58,7 @@ public class MenuView extends Screen implements IUpdateable {
     }
 
     /**
-     * @param g The graphics object to render on.
+     * @param g the graphics object to render on.
      */
     @Override
     public void render(final Graphics2D g) {
@@ -79,41 +81,14 @@ public class MenuView extends Screen implements IUpdateable {
         super.render(g);
     }
 
-    public static void showHighScore() {
-        Game.audio().playSound(GameManager.SELECT_SOUND);
-        Game.window().getRenderComponent().fadeOut(500);
-
-        Game.loop().perform(500, () -> {
-            Game.window().getRenderComponent().fadeIn(500);
-            Game.screens().display("HighScore");
-        });
-    }
-
-    public static void startGame() {
-        Game.audio().playSound(GameManager.SELECT_SOUND);
-        Game.window().getRenderComponent().fadeOut(2500);
-        Game.audio().fadeMusic(250);
-
-        // Display Help Screen
-        Game.loop().perform(3500, () -> {
-            Game.window().getRenderComponent().fadeIn(1000);
-            Game.screens().display("Help");
-        });
-    }
-
-    public static void exit() {
-        Game.audio().playSound(GameManager.SELECT_SOUND);
-        System.exit(0);
-    }
-
     /**
-     *
+     * Suspend the GuiComponent and all its child Components.
+     * (Makes the GuiComponent invisible and removes mouse listeners).
      */
     @Override
     public void suspend() {
         super.suspend();
         Game.loop().detach(this);
-        //Game.audio().stopMusic();
     }
 
     /**

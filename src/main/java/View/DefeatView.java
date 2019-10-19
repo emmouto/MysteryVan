@@ -17,7 +17,7 @@ import de.gurkenlabs.litiengine.sound.Sound;
  *
  * @author Jennifer Krogh
  * @author Emma Pettersson
- * @version
+ * @version 0.1
  */
 
 public class DefeatView extends Screen {
@@ -37,7 +37,7 @@ public class DefeatView extends Screen {
     /**
      * Constructor. Sets the name of the screen.
      *
-     * @param screenName Name of the screen.
+     * @param screenName name of the screen.
      */
     public DefeatView(String screenName) {
         super(screenName);
@@ -52,7 +52,7 @@ public class DefeatView extends Screen {
     /**
      * Renders out the components.
      *
-     * @param g The graphics object to render on.
+     * @param g the graphics object to render on.
      */
     public void render(final Graphics2D g) {
         if (timer1 > 0) {
@@ -95,34 +95,10 @@ public class DefeatView extends Screen {
     /**
      * Call this method when the game has ended to set the score for the screen.
      *
-     * @param score
+     * @param score the score that the <code>Player</code> has at the end of the game.
      */
-    public void scoreDefeat(int score){
+    public void scoreDefeat(int score) {
         this.score = score;
     }
 
-    /**
-     * Method displaying the high score view when called.
-     */
-    public static void showHighScore() {
-        Game.audio().playSound(GameManager.SELECT_SOUND);
-        Game.window().getRenderComponent().fadeOut(500);
-
-        Game.loop().perform(500, () -> {
-            Game.window().getRenderComponent().fadeIn(500);
-            Game.screens().display("HighScore");
-        });
-    }
-
-    /**
-     * Method displaying the defeat view when called.
-     */
-    public static void showDefeat() {
-        Game.window().getRenderComponent().fadeOut(500);
-
-        Game.loop().perform(500, () -> {
-            Game.window().getRenderComponent().fadeIn(500);
-            Game.screens().display("Defeat");
-        });
-    }
 }

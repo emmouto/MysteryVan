@@ -27,15 +27,18 @@ public class PlayerController implements IUpdateable {
     private Map map;
     private GameView gameView;
 
+    private ScreenController screenController;
     private DefeatView defeatView;
     private HighScoreController highScoreController;
+    private KeyController keyController;
 
     /**
      * The public constructor of the PlayerController.
      */
-    public PlayerController() {
+    public PlayerController(Map map) {
         super();
-        spawnPlayer("player", 23, 100, 0, new Hat("ugly", new Boost("boost",
+        this.map=map;
+        spawnPlayer("player", 23, 100, 0, new Hat("ugly", new Boost(
                 0, 0, 0)), new Weapon("xd", 0, 0));
         updatePlayerController();
     }
@@ -89,7 +92,7 @@ public class PlayerController implements IUpdateable {
      * @param weapon the equipped weapon of the player.
      */
     private void spawnPlayer(String name, int hp, int defense, int strength, Hat hat, Weapon weapon){
-        Player p = new Player(name, 0, 0, 18, 35);
+        Player p = new Player(name, 0, 0, 18, 35, this.map.getPlatforms());
         p.setHP(hp);
         p.setDefence(defense);
         p.setHat(hat);
@@ -121,15 +124,18 @@ public class PlayerController implements IUpdateable {
      */
     @Override
     public void update() {
+
         if(GameManager.getState() == GameManager.GameState.INGAME) {
             for (int i = 0; i < playerList.size(); i++) {
-                getPlayers().get(i).update();
-                getPlayers().get(i).checkGrounded(this.map.getPlatforms());
                 creatureList.get(i).setLocation(playerList.get(i).getX(), playerList.get(i).getY());
                 updateHealth(i);
                 updateScore(i);
                 whenDead(i);
+                screenController.changeToPause();
             }
+        }
+        else if(GameManager.getState() == GameManager.GameState.INGAME_PAUSE){
+            screenController.changeToPause();
         }
     }
 
@@ -137,21 +143,22 @@ public class PlayerController implements IUpdateable {
      * Checks if player is dead, if so, then this method handles what happens.
      */
     private void whenDead(int i) {
-        HighScore newScore;
 
             if (playerList.get(i).getState() == Player.State.DEAD) {
+                HighScore newScore;
                 defeatView.scoreDefeat(playerList.get(i).getScore());
                 newScore = new HighScore(playerList.get(i).getScore(), playerList.get(i).getName());
                 highScoreController.addToScoreList(newScore);
-                DefeatView.showDefeat();
+                screenController.changeScreen("Defeat", 500);
             }
     }
+
 
     /**
      * Updates the health of the players and sends the data to the view to be displayed.
      * @param i the index of the player to be updated.
      */
-    private void updateHealth(int i){
+    private void updateHealth(int i) {
         gameView.setHP(playerList.get(i).getHP());
         gameView.setMaxHP(playerList.get(i).getMaxHP());
         creatureList.get(i).getHitPoints().setMaxValue(playerList.get(i).getHP());
@@ -164,19 +171,10 @@ public class PlayerController implements IUpdateable {
 
     /**
      * Updates the score of the player and sends the data to the view to be displayed.
+     *
      * @param i the index of the player to be updated.
      */
-
-    private void updateScore(int i){
+    private void updateScore(int i) {
         gameView.setScore(playerList.get(i).getScore());
-    }
-
-    /**
-     * Loads the map of the into the PlayerController.
-     *
-     * @param map the map to be loaded.
-     */
-    public void loadMap(Map map) {
-        this.map = map;
     }
 }

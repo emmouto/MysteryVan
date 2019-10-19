@@ -6,7 +6,7 @@ import java.util.Random;
  * Class that represents food in the game, which is a source for the player
  * to recharge one of its three features - HP, defence and strength/armour.
  */
-public class Food implements ICollidable{
+public class Food implements ICollidable, IUpdateable {
 
     private String name;
     private int HP;
@@ -15,6 +15,7 @@ public class Food implements ICollidable{
     private int posX;
     private int posY;
     private Collider collider;
+
 
 
     public Food(int posX, int posY) {
@@ -38,6 +39,8 @@ public class Food implements ICollidable{
     public void determineFood(){
         Random rand = new Random();
         int x =  rand.nextInt(3)+1;
+
+
         switch (x){
             case 1 :    this.HP = 2;
                 this.name = "beer";
@@ -59,17 +62,15 @@ public class Food implements ICollidable{
                 this.name = "starfruit";*/
         }
 
-        System.out.println(x);
-
     }
 
 
     /**
      * Updates the Collider postion
      **/
-    public void updateCollider(double x, double y) {
+    public void updateCollider() {
 
-       this.collider.updatePosition((int) x, (int) y); //getPosX(), getPosY()
+        this.collider.updatePosition(getPosX(), getPosY());
     }
 
     /**
@@ -101,7 +102,7 @@ public class Food implements ICollidable{
      **/
     public void update() {
 
-            updateCollider(posX, posY);
+            updateCollider();
     }
 
 
@@ -157,5 +158,7 @@ public class Food implements ICollidable{
     public void setDefense(int defense) {
         this.defense = defense;
     }
+
+
 
 }

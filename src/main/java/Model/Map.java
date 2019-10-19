@@ -7,7 +7,7 @@ import java.util.List;
  * The Map class for the project. It containes a list of platforms that are used to check player/enemy movements such as gravity.
  *
  * @author Jonathan Carbol
- * @version
+ * @version 0.1
  */
 public class Map {
     private String name;
@@ -26,19 +26,38 @@ public class Map {
     /**
      * Initiates the list of platforms depending on which map is loaded.
      *
-     * @param name
+     * @param name The name of the map.
      */
-    public void init(String name){
-        switch (name){
+    public void init(String name) {
+        switch (name) {
             case "map1" :   platforms.add(new Platform(0,112,48,160));
                             platforms.add(new Platform(480,112,48,160));
                             platforms.add(new Platform(120,336,48,160));
                             platforms.add(new Platform(480,336,48,160));
                             platforms.add(new Platform(192,208,16,288));
+                            //platforms.add(new Ground(160,451,1,480-160, Ground.Type.SKY,false,true));
+                            break;
+            case "map2" :   platforms.add(new Platform(0,112,48,160));
+                            platforms.add(new Platform(480,112,48,160));
+                            platforms.add(new Platform(192,208,16,288));
+                            platforms.add(new Platform(0,336,16,640));
+                            break;
+            case "map3" :   platforms.add(new Platform(0,112,48,160));
+                            platforms.add(new Platform(480,112,48,160));
+                            platforms.add(new Platform(120,336,48,160));
+                            platforms.add(new Platform(480,336,48,160));
+                            platforms.add(new Platform(192,208,16,288));
+                            //platforms.add(new Ground(160,451,1,480-160, Ground.Type.LAVA,true,false));
+                            break;
+
         }
     }
 
-    public List<Platform> getPlatforms(){
+    public List<Platform> getPlatforms() {
         return this.platforms;
+    }
+
+    public String getName() {
+        return this.name;
     }
 }

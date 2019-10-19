@@ -3,40 +3,28 @@ package Model;
 /**
  * ...
  *
- * @author
- * @version
+ * @author Antonia Welzel
+ * @author Jonathan Carbol
+ * @version 0.1
  */
 public class Boost {
     //TODO change class to interface or similar? -----#####------
 
-    //changed to private
-    private String name;
     private int HP;
     private int strength;
-    private int defence; // used to be armour
+    private int defence;
 
     /**
-     * ...
+     * Constructor for a boost.
      *
-     * @param name
-     * @param HP
-     * @param strength
-     * @param defence
+     * @param HP the added hp the boost gives, if any.
+     * @param strength the added strength the boost gives, if any.
+     * @param defence the added defence the boost gives, if any.
      */
-    public Boost(String name, int HP, int strength, int defence) {
-        this.name = name;
+    public Boost(int HP, int strength, int defence) {
         this.HP = HP;
         this.strength = strength;
         this.defence = defence;
-    }
-
-    // Getters and setters - JavaDoc not needed
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public int getHP() {
