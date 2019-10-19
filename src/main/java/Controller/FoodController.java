@@ -3,36 +3,20 @@ package Controller;
 import Model.*;
 import View.GameManager;
 import de.gurkenlabs.litiengine.Game;
-import de.gurkenlabs.litiengine.entities.Creature;
-import de.gurkenlabs.litiengine.entities.Entity;
-import de.gurkenlabs.litiengine.entities.IEntity;
+import de.gurkenlabs.litiengine.IUpdateable;
 import de.gurkenlabs.litiengine.entities.Prop;
-import de.gurkenlabs.litiengine.environment.MapObjectLoader;
-import de.gurkenlabs.litiengine.graphics.IRenderable;
-import de.gurkenlabs.litiengine.graphics.ImageRenderer;
-import de.gurkenlabs.litiengine.graphics.Spritesheet;
-import de.gurkenlabs.litiengine.resources.Resources;
-import de.gurkenlabs.litiengine.util.Imaging;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 
 /**
  * Class to control the food items in the game.
  */
 public class FoodController implements IUpdateable {
 
-
-    //TODO  collision med spelare --kolla att maten går bort
-    //TODO get xgen & ygen to work properly -- platforms need pair coordinates
-    //TODO evtl ändra fillCoord metoder för att bli mer abstrakt
-
-
-
-    private List<Food> foodList = new ArrayList<>(); //probably don't need it anymore and instead change propList to foodList
+    private List<Food> foodList = new ArrayList<>();
     private Map map = new Map("map1");
     private List<Player> players;
     private int size = map.getPlatforms().size();
@@ -41,30 +25,23 @@ public class FoodController implements IUpdateable {
     private List<Prop> propList = new ArrayList<>();
 
     private Long lastPathUpdate;
-
-
     private String name;
 
-    // Array Lists that will contain the different x and y - values where platforms exist
+
+    // Array Lists that will contain the different x and y values where platforms exist
     public int[] xCoords = new int[size];
     public int[] yCoords = new int[size];
 
-    private int[][] matrixCoord = fillMatrix(xCoords, yCoords); //new int[size][size];
+    private int[][] matrixCoord = fillMatrix(xCoords, yCoords);
+
 
     public FoodController(List<Player> players) {
-       // super();
+        super();
 
         this.players = players;
-
-
-        //fillXCoord(xCoords);
-        //fillYCoord(yCoords);
-
         spawnFood();
 
-        //updateFoodController();
-
-        lastPathUpdate = Game.time().now();
+        //lastPathUpdate = Game.time().now();
 
     }
 
@@ -78,14 +55,17 @@ public class FoodController implements IUpdateable {
      */
     public void spawnFood(){
 
+        foodList.clear();
+        propList.clear();
+
         int rnd = new Random().nextInt(size);
 
-        Food f = new Food(matrixCoord[rnd][0] + 30, matrixCoord[rnd][1] - 45); //genCoord(xCoords) + (new Random().nextInt(10) + 1),genCoord(yCoords) - 10
-        foodList.add(f); //genCoord(xCoords) + (new Random().nextInt(100) + 1), genCoord(yCoords) - 5
-        determineFoodSprite(f); //foodList.get(foodList.size()-1)
+        Food f = new Food(matrixCoord[rnd][0] + 25, matrixCoord[rnd][1] - 45);
+        foodList.add(f);
+        determineFoodSprite(f);
         propList.get(0).setLocation(f.getPosX(), f.getPosY());
 
-        //propList.size()- 1).setLocation(foodList.get(foodList.size() - 1).getPosX(), foodList.get(foodList.size() - 1).getPosY()
+
     }
 
     /**
@@ -95,15 +75,12 @@ public class FoodController implements IUpdateable {
 
         switch (f.getName()){
             case "beer" :
-                //f.setImage(Imaging.scale(Resources.images().get("src/main/resources/Beer.png"),50));
                 Prop beer = new Prop("Beer");
                 propList.add(beer);
             case "bread" :
-                //f.setImage(Imaging.scale(Resources.images().get("src/main/resources/Bread.png"),50));
                 Prop bread = new Prop("Bread");
                 propList.add(bread);
             case "rottenfruit" :
-                //f.setImage(Imaging.scale(Resources.images().get("src/main/resources/AppleWorm.png"),50));
                 Prop rotFruit = new Prop("AppleWorm");
                 propList.add(rotFruit);
 
@@ -112,16 +89,6 @@ public class FoodController implements IUpdateable {
 
     }
 
-    //???
-    private void updateFoodController(){
-        if(!foodList.isEmpty()) {
-            for (int i = 0; i < foodList.size(); i++) {
-                Prop p = new Prop(getFood().get(i).getName());
-                propList.add(p);
-                propList.get(i).setLocation(p.getX(), p.getY()); //p.getX(),p.getY()
-            }
-        }
-    }
 
     /**
      * Method that makes sure that a player's characteristics' values do not exceed a specific maximum value
@@ -133,12 +100,12 @@ public class FoodController implements IUpdateable {
         int maxStrength = 50;
         int maxDefence = 50;
 
-        if(players.get(0).getHP() > maxHP) {
-            players.get(0).setHP(maxHP);
-        } else if(players.get(0).getStrength() > maxStrength) {
-            players.get(0).setStrength(maxStrength);
-        } else if(players.get(0).getDefence() > maxDefence) {
-            players.get(0).setDefence(maxDefence);
+        if(getPlayers().get(0).getHP() > maxHP) {
+            getPlayers().get(0).setHP(maxHP);
+        } else if(getPlayers().get(0).getStrength() > maxStrength) {
+            getPlayers().get(0).setStrength(maxStrength);
+        } else if(getPlayers().get(0).getDefence() > maxDefence) {
+            getPlayers().get(0).setDefence(maxDefence);
         }
 
     }
@@ -158,12 +125,12 @@ public class FoodController implements IUpdateable {
 
             for(int i = 0; i < a.length; i++) {
 
-                m[i][0] = map.getPlatforms().get(arrInd).getX() + 5; //a[arrInd];
+                m[i][0] = map.getPlatforms().get(arrInd).getX() + 5;
                 arrInd++;
             }
 
             for(int j = 0; j < b.length; j++) {
-                m[j][1] = map.getPlatforms().get(bArrInd).getY(); //b[bArrInd];
+                m[j][1] = map.getPlatforms().get(bArrInd).getY();
                 bArrInd++;
             }
 
@@ -180,21 +147,25 @@ public class FoodController implements IUpdateable {
         if (GameManager.getState() == GameManager.GameState.INGAME) {
             for (int i = 0; i < this.getFood().size(); i++) {
 
-                this.getFood().get(i).updateCollider(getFood().get(i).getPosX(), getFood().get(i).getPosY());
-                System.out.println("mmm");
+                this.getFood().get(i).updateCollider(getPropList().get(0).getX(), getPropList().get(0).getY()); //getPropList().get(0).getX(), getPropList().get(0).getY()
 
-                if (this.getFood().get(i).checkPlayerCollision(getPlayers().get(0), getPropList().get(0).getX(), getPropList().get(0).getY())) {
+                if (this.getFood().get(i).checkPlayerCollision(getPlayers().get(0))) {
 
-                    System.out.println("xxx");
+                    // update the player's values and check that the new values don't exceed the highest possible value
+                    getPlayers().get(0).setHP(getPlayers().get(0).getHP() + getFood().get(0).getHP());
+                    getPlayers().get(0).setStrength(getPlayers().get(0).getStrength() + getFood().get(0).getArmour());
+                    getPlayers().get(0).setDefence(getPlayers().get(0).getDefence() + getFood().get(0).getDefense());
+
+                    collisionUpdateValues();
 
                     // removes food from the list and subsequently removes it from the game after collision
-                    foodList.remove(0);
-                    propList.remove(0);
-                    Game.world().environment().remove(propList.get(0));
-                    players.get(0).setHP(players.get(0).getHP() + foodList.get(0).getHP());
-                    players.get(0).setStrength(players.get(0).getStrength() + foodList.get(0).getArmour());
-                    players.get(0).setDefence(players.get(0).getDefence() + foodList.get(0).getDefense());
-                    collisionUpdateValues();
+                    getFood().remove(0);
+                    Game.world().environment().remove(getPropList().get(0));
+                    getPropList().remove(0);
+
+                    // Spawn a new food when the player has taken the previous one
+                    spawnFood();
+                    Game.world().environment().add(getPropList().get(0));
                 }
             }
 

@@ -78,7 +78,7 @@ public class GameRunner {
 
         Game.loop().attach(enemyController);
         Game.loop().attach(playerController);
-        //Game.loop().attach(fc);
+        Game.loop().attach(fc);
 
         Game.world().loadEnvironment("new_map");
         Game.world().environment().add(enemyController.getCreatures().get(0));

@@ -1,6 +1,5 @@
 package Model;
 
-import java.awt.image.BufferedImage;
 import java.util.Random;
 
 /**
@@ -15,18 +14,22 @@ public class Food implements ICollidable{
     private int armour;
     private int posX;
     private int posY;
-    private BufferedImage image;
-
     private Collider collider;
+
 
     public Food(int posX, int posY) {
         this.HP = 0;
         this.defense = 0;
         this.armour = 0;
-        this.image = null;
+
         this.posX = posX;
         this.posY = posY;
+
         determineFood();
+
+        this.collider = new Collider();
+        this.collider.updatePosition(posX,posY);
+        this.collider.updateSize(16,16);
     }
 
     /**
@@ -34,7 +37,7 @@ public class Food implements ICollidable{
      */
     public void determineFood(){
         Random rand = new Random();
-        int x =  rand.nextInt(2)+1;
+        int x =  rand.nextInt(3)+1;
         switch (x){
             case 1 :    this.HP = 2;
                 this.name = "beer";
@@ -42,17 +45,18 @@ public class Food implements ICollidable{
             case 2 :    this.defense = 2;
                 this.name = "bread";
                 break;
-            /*case 3 :    this.armour = 2;
-                this.name = "cheese";
-            case 4 :    this.HP = 2;
-                this.defense = 2;
-                this.armour = 2;
-                this.name = "starfruit";*/
             case 3 :    this.HP = -1;
                 this.defense = -1;
                 this.armour = -1;
                 this.name = "rottenfruit";
                 break;
+
+                /*case 4 :    this.armour = 2;
+                this.name = "cheese";
+                this.HP = 2;
+                this.defense = 2;
+                this.armour = 2;
+                this.name = "starfruit";*/
         }
 
         System.out.println(x);
@@ -60,15 +64,12 @@ public class Food implements ICollidable{
     }
 
 
-
-
     /**
      * Updates the Collider postion
      **/
+    public void updateCollider(double x, double y) {
 
-    public void updateCollider(int x, int y) {
-
-       this.collider.updatePosition(x, y);
+       this.collider.updatePosition((int) x, (int) y); //getPosX(), getPosY()
     }
 
     /**
@@ -76,29 +77,31 @@ public class Food implements ICollidable{
      * @param player The player involved in the collision
      * @return returns a boolean value for whether or not a collision has taken place
      */
-        public boolean checkPlayerCollision(ICollidable player, double x, double y){ //, int x, int y
-
-            //this.collider.updatePosition((int) x, (int) y);
+        public boolean checkPlayerCollision(ICollidable player) {
 
             if (collider.isColliding(player, "UP")){
-            System.out.println("yes");
             return true;
+
         } else if (collider.isColliding(player, "RIGHT")){
-            System.out.println("yes");
             return true;
+
         } else if(collider.isColliding(player, "DOWN")){
-            System.out.println("yes");
             return true;
+
         } else if (collider.isColliding(player, "LEFT")){
-            System.out.println("yes");
             return true;
         }
 
         return false;
     }
 
+
+    /**
+     * Updates the Collider
+     **/
     public void update() {
 
+            updateCollider(posX, posY);
     }
 
 
@@ -155,11 +158,4 @@ public class Food implements ICollidable{
         this.defense = defense;
     }
 
-    public BufferedImage getImage() {
-        return image;
-    }
-
-    public void setImage(BufferedImage image) {
-        this.image = image;
-    }
 }
