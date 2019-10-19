@@ -1,5 +1,4 @@
-import Controller.*;
-import de.gurkenlabs.litiengine.Game;
+import Controller.GameController;
 
 import java.io.IOException;
 
