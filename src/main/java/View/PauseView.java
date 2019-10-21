@@ -25,7 +25,7 @@ public class PauseView extends Screen implements IUpdateable {
     /**
      * Constructor. Sets the name of the screen.
      *
-     * @param screenName Name of the screen.
+     * @param screenName name of the screen.
      */
 
     public PauseView(String screenName) {
@@ -38,6 +38,11 @@ public class PauseView extends Screen implements IUpdateable {
         this.getComponents().add(screenController);
     }
 
+    /**
+     * Renders out the components.
+     *
+     * @param g the graphics object to render on.
+     */
     public void render(final Graphics2D g) {
 
         ImageRenderer.render(g, BRICK_BG, 0, 0);
@@ -58,29 +63,6 @@ public class PauseView extends Screen implements IUpdateable {
         TextRenderer.render(g, "PRESS ENTER TO RETURN TO MENU", GameManager.centerX - (29 * 24) / 2.0, GameManager.centerY * 1.25);
     }
 
-    /**
-     * Method displaying the pause view when called.
-     */
-    public static void showPause() {
-        Game.window().getRenderComponent().fadeOut(500);
-
-        Game.loop().perform(500, () -> {
-            Game.window().getRenderComponent().fadeIn(500);
-            Game.screens().display("Pause");
-        });
-    }
-
-    /**
-     * Method displaying the game view when called.
-     */
-    public static void showGame() {
-        Game.window().getRenderComponent().fadeOut(500);
-
-        Game.loop().perform(500, () -> {
-            Game.window().getRenderComponent().fadeIn(500);
-            Game.screens().display("Game");
-        });
-    }
 
     /**
      * This method is called by the game loop on all objects that need to update their attributes.

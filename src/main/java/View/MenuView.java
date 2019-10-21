@@ -24,7 +24,7 @@ public class MenuView extends Screen implements IUpdateable {
     /**
      * Constructor. Sets the name of the screen.
      *
-     * @param screenName Name of the screen.
+     * @param screenName name of the screen.
      */
     public MenuView(String screenName) {
         super(screenName);
@@ -58,7 +58,7 @@ public class MenuView extends Screen implements IUpdateable {
     }
 
     /**
-     * @param g The graphics object to render on.
+     * @param g the graphics object to render on.
      */
     @Override
     public void render(final Graphics2D g) {
@@ -79,14 +79,6 @@ public class MenuView extends Screen implements IUpdateable {
                 GameManager.centerX - (text.length() * g.getFont().getSize()) / 2.65, 250, Color.WHITE);
 
         super.render(g);
-    }
-
-    /**
-     * Exits the game.
-     */
-    public static void exit() {
-        Game.audio().playSound(GameManager.SELECT_SOUND);
-        System.exit(0);
     }
 
     /**

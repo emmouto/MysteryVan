@@ -26,16 +26,16 @@ public class Map {
     /**
      * Initiates the list of platforms depending on which map is loaded.
      *
-     * @param name the name of the map.
+     * @param name The name of the map.
      */
-    public void init(String name) {
+    private void init(String name) {
         switch (name) {
             case "map1" :   platforms.add(new Platform(0,112,48,160));
                             platforms.add(new Platform(480,112,48,160));
                             platforms.add(new Platform(120,336,48,160));
                             platforms.add(new Platform(480,336,48,160));
                             platforms.add(new Platform(192,208,16,288));
-                            platforms.add(new Ground(160,451,1,480-160, Ground.Type.SKY,false,true));
+                            //platforms.add(new Ground(160,451,1,480-160, Ground.Type.SKY,false,true));
             case "map2" :   platforms.add(new Platform(0,112,48,160));
                             platforms.add(new Platform(480,112,48,160));
                             platforms.add(new Platform(192,208,16,288));
@@ -45,7 +45,7 @@ public class Map {
                             platforms.add(new Platform(120,336,48,160));
                             platforms.add(new Platform(480,336,48,160));
                             platforms.add(new Platform(192,208,16,288));
-                            platforms.add(new Ground(160,451,1,480-160, Ground.Type.LAVA,true,false));
+                            //platforms.add(new Ground(160,451,1,480-160, Ground.Type.LAVA,true,false));
         }
     }
 

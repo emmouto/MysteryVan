@@ -14,8 +14,8 @@ public class HighScore {
     private String player;
 
     /**
-     * At the end of the game, create new high score with the current score of the player
-     * and the player's name which will then be used in the list of high scores.
+     * At the end of the game, a new high score with the current score of the player
+     * and the player's name is created, which might will be added to the high score list.
      *
      * @param highScore the score that the <code>Player</code> has at the end of the game.
      * @param player the current <code>Player</code>.

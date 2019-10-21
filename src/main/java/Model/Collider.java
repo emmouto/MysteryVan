@@ -1,7 +1,7 @@
 package Model;
 
 /**
- * ...
+ * Class controlling collision between objects.
  *
  * @author Adam Rohdell
  * @version 0.1
@@ -18,26 +18,26 @@ public class Collider {
     /**
      * ...
      */
-    public Collider(){
+    Collider(){
 
     }
 
     /**
-     * ...
+     * Updates the position in terms of x- and y-coordinates.
      *
-     * @param x
-     * @param y
+     * @param x the objects x-coordinate.
+     * @param y the objects y-coordinate.
      */
-    public void updatePosition(int x, int y){
+    void updatePosition(int x, int y){
         this.x = x;
         this.y = y;
     }
 
     /**
-     * ...
+     * Updates the size of the object.
      *
-     * @param width
-     * @param height
+     * @param width the width to be updated.
+     * @param height the height to be updated.
      */
     public void updateSize(int width, int height){
         this.width = width;
@@ -45,12 +45,12 @@ public class Collider {
     }
 
     /**
-     * ...
+     * Checks if there is a collision between objects
      *
-     * @param c
-     * @param direction
+     * @param c the collision interface.
+     * @param direction the direction to be checked.
      *
-     * @return
+     * @return true if collision, fals if not.
      */
     public boolean isColliding(ICollidable c, String direction){
         switch (direction){
@@ -76,7 +76,7 @@ public class Collider {
 
     }
 
-    public int getX(){
+    private int getX(){
         return this.x;
     }
 

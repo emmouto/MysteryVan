@@ -3,7 +3,8 @@ package Model;
 import java.util.Random;
 
 /**
- * ...
+ * Class handling the food appearing in the game.
+ * These gives different kinds of boosts to help the player.
  *
  * @author Antonia Welzel
  * @author Jonathan Carbol
@@ -16,7 +17,7 @@ public class Food implements ICollidable{
     private int armour;
 
     /**
-     * ...
+     * Constructor for food. Sets its assets.
      */
     public Food() {
         this.HP = 0;
@@ -26,9 +27,9 @@ public class Food implements ICollidable{
     }
 
     /**
-     * ...
+     * Randomly generates any of the available food items for when one is initialized.
      */
-    public void determineFood(){
+    private void determineFood(){
         Random rand = new Random();
         int x =  rand.nextInt(5) + 1;
 
@@ -52,7 +53,7 @@ public class Food implements ICollidable{
     }
 
     /**
-     * ...
+     * Checks if a player has collided with a food item.
      *
      * @return
      */

@@ -32,7 +32,7 @@ public class SelectionView extends Screen implements IUpdateable {
     /**
      * Constructor for the SelectionView
      *
-     * @param screenName Name of the screen.
+     * @param screenName name of the screen.
      */
     public SelectionView(String screenName) {
         super(screenName);
@@ -63,7 +63,7 @@ public class SelectionView extends Screen implements IUpdateable {
     /**
      * Renders the background for the SelectionView.
      *
-     * @param g The graphics object to render on.
+     * @param g the graphics object to render on.
      */
     @Override
     public void render(final Graphics2D g) {

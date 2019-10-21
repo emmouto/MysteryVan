@@ -33,6 +33,7 @@ public class Player implements IMovable, ICollidable{
     private boolean hasJumped = false;
     private double gravity;
     private State state;
+    private List<Platform> platforms;
 
     /**
      * The public constructor for the Player class.
@@ -43,12 +44,13 @@ public class Player implements IMovable, ICollidable{
      * @param width the width of the player.
      * @param height the height of the player.
      */
-    public Player(String sprite, int posX, int posY, int width, int height) {
+    public Player(String sprite, int posX, int posY, int width, int height, List<Platform> platforms) {
         this.sprite = sprite;
         this.posX = posX;
         this.posY = posY;
         this.width = width;
         this.height = height;
+        this.platforms = platforms;
         this.collider = new Collider();
         this.collider.updatePosition(posX, posY);
         this.collider.updateSize(width, height);
@@ -205,10 +207,12 @@ public class Player implements IMovable, ICollidable{
      * Updates the players position and its collider.
      */
     public void update() {
+        checkGrounded();
         doGravity();
         updateCollider();
         updateScore();
         move();
+        //attack();
     }
 
     private void updateScore(){
@@ -247,14 +251,17 @@ public class Player implements IMovable, ICollidable{
         hasJumped = true;
     }
 
+    private void attack(){
+        if(Key.attack.isDown){}
+
+    }
+
     /**
      * Checks if the player is standing on a platform.
-     *
-     * @param platforms the list of platforms to check if the player is standing on.
      */
-    public void checkGrounded(List<Platform> platforms){
+    public void checkGrounded(){
         if (!isGrounded) {
-            for (ICollidable platform : platforms) {
+            for (ICollidable platform : this.platforms) {
                 if (!isGrounded) {
                     isGrounded = collider.isColliding(platform, "DOWN");
                 }

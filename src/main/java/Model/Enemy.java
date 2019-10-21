@@ -1,10 +1,11 @@
 package Model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 /**
- * ...
+ * Class handling the games enemies.
  *
  * @author Adam Rohdell
  * @author Antonia Welzel
@@ -23,18 +24,21 @@ public class Enemy implements ICollidable, IMovable {
     private boolean isGrounded = false;
     private Random rand = new Random();
     private int speed;
-
+    private List<Platform> platforms = new ArrayList<>();
+    private Player target;
     /**
-     * ...
+     * Constructor for an enemy.
      *
-     * @param sprite
-     * @param posX
-     * @param posY
-     * @param width
-     * @param height
+     * @param sprite the enemy's sprite.
+     * @param posX the enemy's x-coordinate.
+     * @param posY the enemy's y-coordinate.
+     * @param width the enemy's width.
+     * @param height the enemy's height.
      */
-    public Enemy(String sprite, int posX, int posY, int width, int height){
+    public Enemy(String sprite, int posX, int posY, int width, int height, List<Platform> platforms, Player player){
         this.sprite = sprite;
+        this.platforms = platforms;
+        this.target = player;
         this.x = posX;
         this.y = posY;
         this.width = width;
@@ -47,13 +51,56 @@ public class Enemy implements ICollidable, IMovable {
             speed = 1;
         }
     }
+    /**
+     * Updates all aspects of an enemy.
+     */
+    public void update(){
+        doGravity();
+        updateCollider();
+        checkPlayerCollision();
+        checkGrounded();
+        move();
+    }
 
     /**
-     * ...
-     *
-     * @param platforms
+     * If an enemy is not on the ground, this method makes them affected by gravity.
      */
-    public void checkGrounded(List<Platform> platforms){
+    private void doGravity(){
+        if (!isGrounded){
+            setY(getY()+3);
+        }
+    }
+
+    /**
+     * Updates the collider.
+     */
+    private void updateCollider(){
+        this.collider.updatePosition(getX(), getY());
+    }
+
+    /**
+     * Checks if an enemy has collided with a player.
+     *
+     * @return true if colliding, otherwise false.
+     */
+    private boolean checkPlayerCollision(){
+        if (collider.isColliding(target, "UP")) {
+            return true;
+        } else if (collider.isColliding(target, "RIGHT")) {
+            return true;
+        } else if (collider.isColliding(target, "DOWN")) {
+            return true;
+        } else if (collider.isColliding(target, "LEFT")) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Checks if the enemy is on the ground or a platform.
+     */
+    private void checkGrounded(){
         if(!isGrounded){
             for (ICollidable platform : platforms){
                 if (!isGrounded){
@@ -64,41 +111,8 @@ public class Enemy implements ICollidable, IMovable {
     }
 
     /**
-     * ...
-     *
-     * @param player the player to check for collision.
-     * @return true if colliding, otherwise false.
+     * Moves the enemy.
      */
-    public boolean checkPlayerCollision(ICollidable player){
-        if (collider.isColliding(player, "UP")) {
-            return true;
-        } else if (collider.isColliding(player, "RIGHT")) {
-            return true;
-        } else if (collider.isColliding(player, "DOWN")) {
-            return true;
-        } else if (collider.isColliding(player, "LEFT")) {
-            return true;
-        }
-
-        return false;
-    }
-
-    private void doGravity(){
-        if (!isGrounded){
-            setY(getY()+3);
-        }
-    }
-
-    private void updateCollider(){
-        this.collider.updatePosition(getX(), getY());
-    }
-
-    public void update(){
-        doGravity();
-        updateCollider();
-        move();
-    }
-
     public void move(){
         setX(getX() + 1);
         isGrounded = false;
