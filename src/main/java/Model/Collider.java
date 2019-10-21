@@ -15,12 +15,7 @@ public class Collider {
 
     private ICollidable body;
 
-    /**
-     * ...
-     */
-    Collider(){
 
-    }
 
     /**
      * Updates the position in terms of x- and y-coordinates.

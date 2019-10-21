@@ -5,6 +5,8 @@ import java.util.Random;
 /**
  * Class that represents food in the game, which is a source for the player
  * to recharge one of its three features - HP, defence and strength/armour.
+ *
+ * @author Antonia
  */
 public class Food implements ICollidable, IUpdateable {
 

@@ -81,9 +81,14 @@ public class GameController {
         //Game.graphics().setBaseRenderScale(2.001f);
         //Resources.spritesheets().get("AppleWorm", true);
 
+
         Game.start();
+
         addUpdateablesToGameLoop();
         gameLoop.run();
+
+
+
     }
 
     public void addUpdateablesToGameLoop(){

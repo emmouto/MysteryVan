@@ -13,8 +13,11 @@ import java.util.Random;
 
 /**
  * Class to control the food items in the game.
- */
-public class FoodController implements IUpdateable {
+ *
+ * @author Antonia
+ **/
+
+ public class FoodController implements IUpdateable {
 
     private List<Food> foodList = new ArrayList<>();
     private List<Player> players;
@@ -30,10 +33,8 @@ public class FoodController implements IUpdateable {
     private int[] xCoords = new int[size];
     private int[] yCoords = new int[size];
 
+    // Matrix array which contains the x and y coordinates of platforms
     private int[][] matrixCoord = fillMatrix(xCoords, yCoords);
-
-    private Long lastPathUpdate;
-
 
 
     public FoodController(List<Player> players) {
@@ -42,16 +43,14 @@ public class FoodController implements IUpdateable {
         this.players = players;
         spawnFood();
 
-        lastPathUpdate = Game.time().now();
-
     }
 
 
 
     /**
      * Spawns food in the game. Adds to the list a new food with random x and y- coordinates.
-     *  (X-coord + random number 0-100) so it is not always in the same x-position on the platform,
-     *  (y-coord - number) so food "floats" in the air and is not sitting on the platform.
+     *  (X-coord + random number 0-20) so it is not always in the same x-position on the platform,
+     *  (y-coord - 45) so food "floats" in the air and is not sitting on the platform.
      *  The random generating of which food will be displayed is already handled in the Food class.
      */
     public void spawnFood(){
@@ -60,8 +59,9 @@ public class FoodController implements IUpdateable {
         propList.clear();
 
         int rnd = new Random().nextInt(size);
+        int rndX = new Random().nextInt(20);
 
-        Food f = new Food(matrixCoord[rnd][0], matrixCoord[rnd][1] - 45); //x + 15?
+        Food f = new Food(matrixCoord[rnd][0] + rndX, matrixCoord[rnd][1] - 45);
         foodList.add(f);
         determineFoodSprite(f);
         propList.get(0).setLocation(f.getPosX(), f.getPosY());
@@ -70,7 +70,7 @@ public class FoodController implements IUpdateable {
     }
 
     /**
-     * Method that determines which sprite to use for the food chosen.
+     * Method that determines which sprite to use for the chosen food.
      */
     public void determineFoodSprite(Food f){
 
@@ -147,7 +147,7 @@ public class FoodController implements IUpdateable {
         if (GameManager.getState() == GameManager.GameState.INGAME) {
             for (int i = 0; i < this.getFood().size(); i++) {
 
-                this.getFood().get(i).updateCollider(); //getPropList().get(0).getX(), getPropList().get(0).getY()
+                this.getFood().get(i).update(); //getPropList().get(0).getX(), getPropList().get(0).getY()
 
                 if (this.getFood().get(i).checkPlayerCollision(getPlayers().get(0))) {
 
