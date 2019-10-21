@@ -70,6 +70,7 @@ public class EnemyController implements IUpdateable {
         creatureList.get(creatureList.size() - 1).getHitBox().getBounds().height = enemies.get(enemies.size() - 1).getHeight();
         creatureList.get(creatureList.size() - 1).getHitBox().getBounds().width = enemies.get(enemies.size() - 1).getWidth();
         creatureList.get(creatureList.size() - 1).setAcceleration(50);
+        GameLoop.getInstance().setEnemies(enemies);
     }
 
     /**
@@ -80,9 +81,12 @@ public class EnemyController implements IUpdateable {
         if(GameManager.getState() == GameManager.GameState.INGAME) {
             for (int i = 0; i < this.getEnemies().size(); i++) {
                 creatureList.get(i).setLocation(enemies.get(i).getX(), enemies.get(i).getY());
+                if(enemies.get(i).getHP()<0){
+                    enemies.remove(i);
+                    creatureList.remove(i);
+                }
             }
         }
-        GameLoop.getInstance().setEnemies(enemies);
     }
 
     private void initiatePathfinding() {

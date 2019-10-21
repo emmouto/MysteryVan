@@ -33,7 +33,15 @@ public class Player implements IMovable, ICollidable{
     private boolean hasJumped = false;
     private double gravity;
     private State state;
+    private Direction direction;
+    private long time;
     private List<Platform> platforms;
+
+    enum Direction{
+        LEFT,
+        RIGHT
+    }
+
 
     /**
      * The public constructor for the Player class.
@@ -60,6 +68,9 @@ public class Player implements IMovable, ICollidable{
         this.setHP(maxHP);
         this.gravity=3;
         this.hasJumped = false;
+        this.direction = Direction.RIGHT;
+        this.time = System.currentTimeMillis();
+
     }
 
     /**
@@ -203,6 +214,14 @@ public class Player implements IMovable, ICollidable{
         this.state = state;
     }
 
+    public Direction getDirection() {
+        return direction;
+    }
+
+    public void setDirection(Direction direction) {
+        this.direction = direction;
+    }
+
     /**
      * Updates the players position and its collider.
      */
@@ -215,6 +234,9 @@ public class Player implements IMovable, ICollidable{
         attack();
     }
 
+    /**
+     * Updates the score of the Player.
+     */
     private void updateScore(){
         this.setScore(this.getScore()+1);
     }
@@ -228,10 +250,12 @@ public class Player implements IMovable, ICollidable{
 
         if (Key.left.isDown && this.getX() > 0) {
                 this.setPosX(getX() - 2);
+                this.setDirection(Direction.LEFT);
         }
 
         if (Key.right.isDown && this.getX() < 720) {
                 this.setPosX(getX() + 2);
+                this.setDirection(Direction.RIGHT);
         }
 
         isGrounded = false;
@@ -251,9 +275,38 @@ public class Player implements IMovable, ICollidable{
         hasJumped = true;
     }
 
+    /**
+     * Performs an attack and deals damage to enemies within range.
+     */
     private void attack(){
-        if(Key.attack.isDown){}
+        if(Key.attack.isDown && System.currentTimeMillis()-time > 1500){
+            for(int i = 0; i < GameLoop.getInstance().getEnemies().size()-1; i++) {
+                if(this.getDirection() == Direction.LEFT && GameLoop.getInstance().getEnemies().get(i).getX() > this.getX()-this.getWeapon().getRange() && GameLoop.getInstance().getEnemies().get(i).getX() < this.getX()){
+                    dealDamage(GameLoop.getInstance().getEnemies().get(i));
+                }else if(this.getDirection() == Direction.RIGHT && GameLoop.getInstance().getEnemies().get(i).getX() < this.getX()+this.getWeapon().getRange() && GameLoop.getInstance().getEnemies().get(i).getX() > this.getX()){
+                    dealDamage(GameLoop.getInstance().getEnemies().get(i));
+                }
+            }
+            //this.setSprite((this.getSprite().replaceAll("([a-z])","")).replace("_","")+"_attack");
+            time = System.currentTimeMillis();
 
+        }else if(System.currentTimeMillis()-time > 500){
+            //this.setSprite((this.getSprite().replaceAll("([a-z])","")).replace("_",""));
+        }
+
+    }
+
+    /**
+     * Deals damage to an enemy and adds score if an enemy is killed.
+     * @param e the enemy that is being dealt damage to.
+     */
+    private void dealDamage(Enemy e){
+        e.setHP(e.getHP()-this.getWeapon().getDamage());
+        if(e.getHP()<0){
+            this.setScore(this.getScore()+10);
+            GameLoop.getInstance().getEnemies().remove(e);
+
+        }
     }
 
     /**
