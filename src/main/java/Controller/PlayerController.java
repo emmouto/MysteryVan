@@ -5,7 +5,6 @@ import View.DefeatView;
 import View.GameManager;
 import View.GameView;
 
-import View.PauseView;
 import de.gurkenlabs.litiengine.IUpdateable;
 import de.gurkenlabs.litiengine.entities.Creature;
 import de.gurkenlabs.litiengine.gui.screens.Screen;
@@ -28,8 +27,10 @@ public class PlayerController implements IUpdateable {
     private Map map;
     private GameView gameView;
 
-    private DefeatView defeatView;
-    private HighScoreController highScoreController;
+    private ScreenController screenController = new ScreenController(0, 0, 0, 0, "");
+    private DefeatView defeatView = new DefeatView("Defeat");
+    private List<HighScore> highScoreList = new ArrayList<>();
+    private HighScoreController highScoreController = new HighScoreController(highScoreList);
     private KeyController keyController;
 
     /**
@@ -131,11 +132,11 @@ public class PlayerController implements IUpdateable {
                 updateHealth(i);
                 updateScore(i);
                 whenDead(i);
-                changeToPause();
+                screenController.changeToPause();
             }
         }
         else if(GameManager.getState() == GameManager.GameState.INGAME_PAUSE){
-            changeToPause();
+            screenController.changeToPause();
         }
     }
 
@@ -143,28 +144,16 @@ public class PlayerController implements IUpdateable {
      * Checks if player is dead, if so, then this method handles what happens.
      */
     private void whenDead(int i) {
-        HighScore newScore;
 
             if (playerList.get(i).getState() == Player.State.DEAD) {
+                HighScore newScore;
                 defeatView.scoreDefeat(playerList.get(i).getScore());
                 newScore = new HighScore(playerList.get(i).getScore(), playerList.get(i).getName());
                 highScoreController.addToScoreList(newScore);
-                DefeatView.showDefeat();
+                screenController.changeScreen("Defeat", 500);
             }
     }
 
-    /**
-     * Pauses the game when P is pressed.
-     */
-    public void changeToPause (){
-        if (Key.pause.isDown && (GameManager.getState() == GameManager.GameState.INGAME)) {
-            GameManager.setState(GameManager.GameState.INGAME_PAUSE);
-            PauseView.showPause();
-        } else if(Key.pause.isDown && (GameManager.getState() == GameManager.GameState.INGAME_PAUSE)) {
-            GameManager.setState(GameManager.GameState.INGAME);
-            PauseView.showGame();
-        }
-    }
 
     /**
      * Updates the health of the players and sends the data to the view to be displayed.
@@ -189,10 +178,4 @@ public class PlayerController implements IUpdateable {
     private void updateScore(int i) {
         gameView.setScore(playerList.get(i).getScore());
     }
-
-    /**
-     * Loads the map of the into the PlayerController.
-     *
-     * @param map the map to be loaded.
-     */
 }

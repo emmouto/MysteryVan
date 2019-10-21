@@ -1,10 +1,14 @@
 package Model;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A loop for the game.
+ *
+ * @author who?
+ * @version 0.1
+ */
 public class GameLoop extends Thread{
 
     private static GameLoop gameLoop = null;

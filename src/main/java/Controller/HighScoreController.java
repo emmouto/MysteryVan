@@ -21,7 +21,7 @@ public class HighScoreController {
     /**
      * Class constructor.
      *
-     * @param highScoreList List containing HighScores.
+     * @param highScoreList list of highScores.
      */
     public HighScoreController(List<HighScore> highScoreList) {
         this.highScoreList = highScoreList;
@@ -115,7 +115,7 @@ public class HighScoreController {
     /**
      * Method to add a new HighScore to the list, if the score is greater than all other values on the list.
      *
-     * @param newScore The score that possibly will be added to the list.
+     * @param newScore the score that possibly will be added to the list.
      */
     void addToScoreList(HighScore newScore) {
         if (highScoreList.size() < 10) {
@@ -132,7 +132,7 @@ public class HighScoreController {
     /**
      * Method to sort the list in order of size, where the highest score is listed first.
      *
-     * @param highScoreList List that needs to be sorted, usually after a new HighScore has been added.
+     * @param highScoreList list that needs to be sorted, usually after a new HighScore has been added.
      */
     private void sortList(List<HighScore> highScoreList){
         Comparator<HighScore> HighScoreComparator = Comparator.comparingInt(HighScore::getHighScore);

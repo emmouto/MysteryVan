@@ -17,15 +17,15 @@ import java.util.HashMap;
  * @version 0.1
  */
 public class KeyController implements KeyListener, IUpdateable {
-    public HashMap<Integer, Key> keyBindings = new HashMap<Integer, Key>();
-    public static boolean other[] = new boolean[256];
+    private HashMap<Integer, Key> keyBindings = new HashMap<Integer, Key>();
+    private static boolean other[] = new boolean[256];
 
     /**
      * Assigning the variable keys to actual letters
      *
      * @param playerController
      */
-    public KeyController(PlayerController playerController) {
+    KeyController(PlayerController playerController) {
         initKeyController();
     }
 
@@ -48,8 +48,9 @@ public class KeyController implements KeyListener, IUpdateable {
     }
 
     /**
+     * Checks if key is pressed.
      *
-     * @param e
+     * @param e the key to be checked.
      */
     @Override
     public void keyPressed(KeyEvent e) {
@@ -62,8 +63,9 @@ public class KeyController implements KeyListener, IUpdateable {
     }
 
     /**
+     * Checks if key is release
      *
-     * @param e
+     * @param e the key to be checked.
      */
     @Override
     public void keyReleased(KeyEvent e) {

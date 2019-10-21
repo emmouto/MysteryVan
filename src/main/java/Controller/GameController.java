@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Enemy;
 import Model.GameLoop;
+import Model.Key;
 import View.*;
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.environment.CreatureMapObjectLoader;
@@ -9,14 +10,21 @@ import de.gurkenlabs.litiengine.gui.screens.GameScreen;
 import de.gurkenlabs.litiengine.gui.screens.Resolution;
 import de.gurkenlabs.litiengine.input.Input;
 import de.gurkenlabs.litiengine.resources.Resources;
-
+/**
+ * Initializes and controlls the game.
+ *
+ * @author Jonathan Carbol
+ * @author Jennifer Krogh
+ * @version 0.1
+ */
 public class GameController {
 
-    GameLoop gameLoop;
-    PlayerController playerController;
-    EnemyController enemyController;
-    KeyController keyController;
-    MapController mapController;
+
+    private GameLoop gameLoop;
+    private PlayerController playerController;
+    private EnemyController enemyController;
+    private KeyController keyController;
+    private MapController mapController;
 
     public GameController(){
         GameLoop.getInstance();

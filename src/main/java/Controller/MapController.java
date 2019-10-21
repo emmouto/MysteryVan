@@ -14,7 +14,7 @@ import de.gurkenlabs.litiengine.graphics.Camera;
  */
 public class MapController {
     private Camera camera = new Camera();
-    private Map map = new Map("map1");
+    private Map map = new Map("mapHard");
 
     public Map getMap() {
         return this.map;
@@ -23,7 +23,7 @@ public class MapController {
     /**
      * Initiate the Camera to focus on the center of the map
      */
-    public void initCamera() {
+    void initCamera() {
         camera.setFocus(Game.window().getResolution().getWidth() * 0.5 / camera.getRenderScale(),
                 Game.window().getResolution().getHeight() * 0.5 / camera.getRenderScale());
         camera.setClampToMap(true);

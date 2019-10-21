@@ -34,7 +34,7 @@ public class HighScoreView extends Screen implements IUpdateable {
     /**
      * Constructor. Sets the name of the screen.
      *
-     * @param screenName Name of the screen.
+     * @param screenName name of the screen.
      */
     public HighScoreView(String screenName) {
         super(screenName);
@@ -46,7 +46,7 @@ public class HighScoreView extends Screen implements IUpdateable {
     }
 
     /**
-     * @param g The graphics object to render on.
+     * @param g the graphics object to render on.
      */
     @Override
     public void render(final Graphics2D g) {
@@ -81,18 +81,6 @@ public class HighScoreView extends Screen implements IUpdateable {
         }
 
         super.render(g);
-    }
-
-    /**
-     * Method to call when current screen is changed to menu screen.
-     */
-    public static void showMenu() {
-        Game.window().getRenderComponent().fadeOut(500);
-
-        Game.loop().perform(500, () -> {
-            Game.window().getRenderComponent().fadeIn(500);
-            Game.screens().display("Menu");
-        });
     }
 
     /**
