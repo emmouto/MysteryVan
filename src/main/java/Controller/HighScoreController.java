@@ -21,7 +21,7 @@ public class HighScoreController {
     /**
      * Class constructor.
      *
-     * @param highScoreList list containing HighScores.
+     * @param highScoreList list of highScores.
      */
     public HighScoreController(List<HighScore> highScoreList) {
         this.highScoreList = highScoreList;

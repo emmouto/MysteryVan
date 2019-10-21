@@ -14,7 +14,7 @@ import de.gurkenlabs.litiengine.graphics.Camera;
  */
 public class MapController {
     private Camera camera = new Camera();
-    private Map map = new Map("map1");
+    private Map map = new Map("mapHard");
 
     public Map getMap() {
         return this.map;
