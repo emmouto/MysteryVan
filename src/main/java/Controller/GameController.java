@@ -27,7 +27,7 @@ public class GameController {
     private MapController mapController;
 
     public GameController(){
-        gameLoop = new GameLoop();
+        GameLoop.getInstance();
     }
 
     public void init(){
@@ -80,14 +80,15 @@ public class GameController {
 
         Game.start();
         addUpdateablesToGameLoop();
-        gameLoop.run();
-        gameLoop.setDelayTimer(2000);
+
+        GameLoop.getInstance().run();
+        GameLoop.getInstance().setDelayTimer(2000);
     }
 
     public void addUpdateablesToGameLoop(){
-        gameLoop.addUpdateables(playerController.getPlayers().get(0));
+        GameLoop.getInstance().addUpdateables(playerController.getPlayers().get(0));
         for (Enemy e : enemyController.getEnemies()){
-            gameLoop.addUpdateables(e);
+            GameLoop.getInstance().addUpdateables(e);
         }
     }
 }
