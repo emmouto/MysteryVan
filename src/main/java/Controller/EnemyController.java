@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Enemy;
+import Model.EnemyFactory;
 import Model.Map;
 import Model.Player;
 
@@ -26,6 +27,7 @@ public class EnemyController implements IUpdateable {
     private List<Creature> creatureList = new ArrayList<>();
     private Long lastPathUpdate;
     private Map map;
+    private EnemyFactory factory;
 
     /**
      * Creates a new instance of an <code>EnemyController</code>.
@@ -60,7 +62,10 @@ public class EnemyController implements IUpdateable {
      * Spawns an <code>Enemy<code> at the specified location, and sets all its properties.
      */
     private void spawnEnemy() {
-        enemies.add(new Enemy("enemy", 0, 0, 32, 50, map.getPlatforms(), this.getPlayers().get(0)));
+        Enemy e = EnemyFactory.spawnEnemy();
+        e.setTarget(this.getPlayers().get(0));
+        e.setPlatforms(map.getPlatforms());
+        this.getEnemies().add(e);
         Creature c = new Creature();
         creatureList.add(c);
         creatureList.get(creatureList.size() - 1).setSpritePrefix(enemies.get(enemies.size() - 1).getSprite());

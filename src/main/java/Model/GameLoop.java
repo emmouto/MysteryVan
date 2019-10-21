@@ -13,6 +13,9 @@ public class GameLoop extends Thread{
 
     List<IUpdateable> updateables = new ArrayList<IUpdateable>();
     private boolean interrupted = false;
+    private int delay;
+    private int currentDelay;
+    private boolean delayDone = false;
 
 
 
@@ -20,7 +23,7 @@ public class GameLoop extends Thread{
         while(!interrupted) {
             this.update();
             try {
-                this.sleep(18);
+                sleep(18);
             } catch (InterruptedException e) {
                 this.interrupt();
             }
@@ -35,6 +38,26 @@ public class GameLoop extends Thread{
     private void update(){
         for (IUpdateable u : updateables){
             u.update();
+        }
+        if (currentDelay != 0){
+            currentDelay--;
+        } else {
+            delayDone = true;
+        }
+    }
+
+    public void setDelayTimer(int ms){
+        this.delay = ms;
+        this.currentDelay = delay;
+    }
+
+    public boolean checkIfDelayDone(){
+        if (delayDone){
+            delayDone = false;
+            currentDelay = delay;
+            return true;
+        } else{
+            return false;
         }
     }
 }

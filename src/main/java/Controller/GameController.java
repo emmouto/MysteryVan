@@ -81,6 +81,7 @@ public class GameController {
         Game.start();
         addUpdateablesToGameLoop();
         gameLoop.run();
+        gameLoop.setDelayTimer(2000);
     }
 
     public void addUpdateablesToGameLoop(){

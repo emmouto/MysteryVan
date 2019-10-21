@@ -12,7 +12,7 @@ import java.util.Random;
  * @author Jonathan Carbol
  * @version 0.1
  */
-public class Enemy implements ICollidable, IMovable {
+public abstract class Enemy implements ICollidable, IMovable {
     private int HP;
   //  private Equipment equipment; //Enemy can have a weapon, armor etc that will make them harder to defeat.
     private Collider collider;
@@ -24,7 +24,7 @@ public class Enemy implements ICollidable, IMovable {
     private boolean isGrounded = false;
     private Random rand = new Random();
     private int speed;
-    private List<Platform> platforms = new ArrayList<>();
+    private List<Platform> platforms;
     private Player target;
     /**
      * Constructor for an enemy.
@@ -35,10 +35,8 @@ public class Enemy implements ICollidable, IMovable {
      * @param width the enemy's width.
      * @param height the enemy's height.
      */
-    public Enemy(String sprite, int posX, int posY, int width, int height, List<Platform> platforms, Player player){
+    public Enemy(String sprite, int posX, int posY, int width, int height){
         this.sprite = sprite;
-        this.platforms = platforms;
-        this.target = player;
         this.x = posX;
         this.y = posY;
         this.width = width;
@@ -113,10 +111,7 @@ public class Enemy implements ICollidable, IMovable {
     /**
      * Moves the enemy.
      */
-    public void move(){
-        setX(getX() + 1);
-        isGrounded = false;
-    }
+    public abstract void move();
 
     public int getHP() {
         return HP;
@@ -165,5 +160,21 @@ public class Enemy implements ICollidable, IMovable {
 
     public int getWidth() {
         return width;
+    }
+
+    public void setPlatforms(List<Platform> platforms){
+        this.platforms = platforms;
+    }
+
+    public void setTarget(Player p){
+        this.target = p;
+    }
+
+    public boolean isGrounded(){
+        return this.isGrounded;
+    }
+
+    public void setGrounded(boolean grounded){
+        this.isGrounded = grounded;
     }
 }
