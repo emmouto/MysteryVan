@@ -38,9 +38,10 @@ public class PlayerController implements IUpdateable {
     public PlayerController(Map map) {
         super();
         this.map=map;
-        spawnPlayer("player", 23, 100, 0, new Hat("ugly", new Boost(
+        spawnPlayer("ADAM", 23, 100, 0, new Hat("ugly", new Boost(
                 0, 0, 0)), new Weapon("xd", 0, 0));
         updatePlayerController();
+        screenController = new ScreenController(0, 0, 0, 0, "");
     }
 
     /**
@@ -128,7 +129,7 @@ public class PlayerController implements IUpdateable {
         if(GameManager.getState() == GameManager.GameState.INGAME) {
             for (int i = 0; i < playerList.size(); i++) {
                 creatureList.get(i).setLocation(playerList.get(i).getX(), playerList.get(i).getY());
-                creatureList.get(i).setSpritePrefix(getPlayers().get(i).getSprite());
+               // creatureList.get(i).setSpritePrefix(getPlayers().get(i).getSprite());
                 updateHealth(i);
                 updateScore(i);
                 whenDead(i);
