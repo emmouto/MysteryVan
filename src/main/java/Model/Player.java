@@ -281,10 +281,11 @@ public class Player implements IMovable, ICollidable{
     private void attack(){
         if(Key.attack.isDown && System.currentTimeMillis()-time > 1500){
             for(int i = 0; i < GameLoop.getInstance().getEnemies().size()-1; i++) {
-                if(this.getDirection() == Direction.LEFT && GameLoop.getInstance().getEnemies().get(i).getX() > this.getX()-this.getWeapon().getRange() && GameLoop.getInstance().getEnemies().get(i).getX() < this.getX()){
-                    dealDamage(GameLoop.getInstance().getEnemies().get(i));
-                }else if(this.getDirection() == Direction.RIGHT && GameLoop.getInstance().getEnemies().get(i).getX() < this.getX()+this.getWeapon().getRange() && GameLoop.getInstance().getEnemies().get(i).getX() > this.getX()){
-                    dealDamage(GameLoop.getInstance().getEnemies().get(i));
+                Enemy e = GameLoop.getInstance().getEnemies().get(i);
+                if(this.getDirection() == Direction.LEFT && e.getX() > this.getX()-this.getWeapon().getRange() && e.getX() < this.getX() && this.getY() + 20 > e.getY() && this.getY() - 20 < e.getY()){
+                    dealDamage(e);
+                }else if(this.getDirection() == Direction.RIGHT && e.getX() < this.getX()+this.getWeapon().getRange() && e.getX() > this.getX()&& e.getX() < this.getX() && this.getY() + 20 > e.getY() && this.getY() - 20 < e.getY()){
+                    dealDamage(e);
                 }
             }
             this.setSprite((this.getSprite().replaceAll("([a-z])","")).replace("_","")+"_walk");
@@ -302,7 +303,7 @@ public class Player implements IMovable, ICollidable{
      */
     private void dealDamage(Enemy e){
         e.setHP(e.getHP()-this.getWeapon().getDamage());
-        if(e.getHP()<0){
+        if(e.getHP() < 0){
             this.setScore(this.getScore()+10);
             GameLoop.getInstance().getEnemies().remove(e);
 
