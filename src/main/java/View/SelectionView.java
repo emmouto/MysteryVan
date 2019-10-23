@@ -127,7 +127,7 @@ public class SelectionView extends Screen implements IUpdateable {
             case GAME_START:
                 this.getComponents().clear();
                 this.suspend();
-                selectionController.state = SelectionController.SELECTION_STATE.GAME_STARTED;
+                selectionController.state = SelectionController.SelectionState.GAME_STARTED;
 
                 Game.audio().playSound(GameManager.SELECT_SOUND);
                 Game.window().getRenderComponent().fadeOut(1500);
@@ -236,7 +236,7 @@ public class SelectionView extends Screen implements IUpdateable {
         private void renderCharacterPortraits(final Graphics2D g) {
             int i  = 295;
 
-            for (CHARACTER character : CHARACTER.values()) {
+            for (GameManager.Character character : GameManager.Character.values()) {
                 if (selectionController.selectedChar == character) {
                     g.setColor(Color.WHITE);
                     g.fillRect(i - 5, 145, 100, 96);
@@ -248,7 +248,7 @@ public class SelectionView extends Screen implements IUpdateable {
         }
 
         private void renderChosenCharacter(final Graphics2D g) {
-            CHARACTER character = selectionController.selectedChar;
+            GameManager.Character character = selectionController.selectedChar;
 
             ImageRenderer.renderScaled(g, character.getSprite(),
                     GameManager.centerX - (character.getSprite().getWidth()) / 2.0, 300, 0.75);
@@ -313,7 +313,7 @@ public class SelectionView extends Screen implements IUpdateable {
             double[] placement = new double[] {200, 550, 950};
             int i  = 0;
 
-            for (GameManager.DIFFICULTY_LEVEL difficultyLevel : GameManager.DIFFICULTY_LEVEL.values()) {
+            for (GameManager.DifficultyLevel difficultyLevel : GameManager.DifficultyLevel.values()) {
                 g.setFont(GameManager.PIXELED_MEDIUM);
 
                 if (difficultyLevel == GameManager.getSelectedDifficulty()) {

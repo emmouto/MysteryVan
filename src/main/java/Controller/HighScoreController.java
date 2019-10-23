@@ -13,7 +13,6 @@ import java.util.List;
  * @version 0.1
  */
 public class HighScoreController {
-
     private List<HighScore> highScoreList;
     private String HighScoreDataPath;
     private String filename = "HighScoreData";
