@@ -117,8 +117,6 @@ public class SelectionView extends Screen implements IUpdateable {
                     Game.audio().playSound(GameManager.SELECT_SOUND);
                     selectionController.setPlayerCharacter();
 
-                    // TODO add code for when different difficulty levels have been chosen
-
                     this.getComponents().remove(this.chooseCharacterComponent);
                     this.getComponents().add(this.chooseLevelComponent);
                 }
@@ -142,8 +140,6 @@ public class SelectionView extends Screen implements IUpdateable {
 
                 break;
             case GAME_STARTED:
-                break;
-            default:
                 break;
         }
     }
@@ -172,7 +168,7 @@ public class SelectionView extends Screen implements IUpdateable {
         @Override
         public void render(Graphics2D g) {
             renderHeader(g);
-            renderTextField(g);
+            renderTextField();
 
             super.render(g);
         }
@@ -189,14 +185,12 @@ public class SelectionView extends Screen implements IUpdateable {
             TextRenderer.renderWithOutline(g, text, GameManager.centerX - (text.length() * g.getFont().getSize()) / 2.0, 135, Color.WHITE);
         }
 
-        private void renderTextField(Graphics2D g) {
+        private void renderTextField() {
             enterName.getAppearance().setBackgroundColor1(Color.WHITE);
             enterName.getAppearance().setTransparentBackground(false);
             enterName.setFont(GameManager.RAINY_MEDIUM);
             enterName.getAppearance().setForeColor(Color.BLACK);
-
-            // TODO make the text align work properly cuz it is currently very ugly
-            enterName.setTextAlign(Align.CENTER_RIGHT);
+            enterName.setTextAlign(Align.LEFT);
             enterName.setSelected(true);
         }
     }
@@ -309,7 +303,6 @@ public class SelectionView extends Screen implements IUpdateable {
 
         private void renderChoices(Graphics2D g) {
             // This array (and the iteration variable i) is needed to place the text in the proper places.
-            // TODO maybe find a better solution?
             double[] placement = new double[] {200, 550, 950};
             int i  = 0;
 

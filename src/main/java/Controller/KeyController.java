@@ -14,6 +14,7 @@ import java.util.HashMap;
  *
  * @author Jennifer Krogh
  * @author Jonathan Carbol
+ * @author Emma Pettersson
  * @version 0.1
  */
 public class KeyController implements KeyListener, IUpdateable {
@@ -23,7 +24,7 @@ public class KeyController implements KeyListener, IUpdateable {
     /**
      * Assigns the variable keys to actual letters
      *
-     * @param playerController the
+     * @param playerController
      */
     KeyController(PlayerController playerController) {
         initKeyController();
@@ -91,6 +92,8 @@ public class KeyController implements KeyListener, IUpdateable {
     public void keyTyped(KeyEvent e) { }
 
     /**
+     *
+     *
      * @param keyCode
      * @param key
      */
@@ -111,6 +114,5 @@ public class KeyController implements KeyListener, IUpdateable {
      *
      */
     @Override
-    public void update() {
-    }
+    public void update() { }
 }

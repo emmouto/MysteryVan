@@ -129,7 +129,6 @@ public class ScreenController extends Menu {
         });
     }
 
-    //TODO change name
     private void updateView() {
         if (GameManager.getState() == GameManager.GameState.TITLE_SCREEN) {
             this.onConfirm(c -> {
@@ -201,6 +200,7 @@ public class ScreenController extends Menu {
 
         incFocus();
     }
+
     /**
      * Pauses the game when P is pressed.
      */
@@ -208,7 +208,7 @@ public class ScreenController extends Menu {
         if (Key.pause.isDown && (GameManager.getState() == GameManager.GameState.INGAME)) {
             GameManager.setState(GameManager.GameState.INGAME_PAUSE);
             changeScreen("Pause", 500);
-        } else if(Key.pause.isDown && (GameManager.getState() == GameManager.GameState.INGAME_PAUSE)) {
+        } else if (Key.pause.isDown && (GameManager.getState() == GameManager.GameState.INGAME_PAUSE)) {
             GameManager.setState(GameManager.GameState.INGAME);
             changeScreen("Game", 500);
         }

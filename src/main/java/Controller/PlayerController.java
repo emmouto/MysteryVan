@@ -38,7 +38,7 @@ public class PlayerController implements IUpdateable {
      */
     public PlayerController(Map map) {
         super();
-        this.map=map;
+        this.map = map;
         spawnPlayer("player", 23, 100, 0, new Hat("ugly", new Boost(
                 0, 0, 0)), new Weapon("xd", 0, 0));
         updatePlayerController();

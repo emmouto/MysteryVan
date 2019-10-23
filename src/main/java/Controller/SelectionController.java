@@ -1,12 +1,11 @@
 package Controller;
 
+import Model.Key;
 import View.GameManager;
 
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.gui.GuiComponent;
 import de.gurkenlabs.litiengine.input.Input;
-
-import java.awt.event.KeyEvent;
 
 /**
  * Controls for the SelectionView.
@@ -37,7 +36,7 @@ public class SelectionController extends GuiComponent {
 
     private void initControls() {
         Input.keyboard().onKeyReleased(e -> {
-            if (e.getKeyCode() == KeyEvent.VK_ENTER ) {
+            if (Key.enter.isDown) {
                 if (this.inputIsLocked()) {
                     return;
                 }
@@ -49,7 +48,7 @@ public class SelectionController extends GuiComponent {
         });
 
         Input.keyboard().onKeyPressed(e -> {
-            if (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A) {
+            if (Key.left.isDown) {
                 if (this.inputIsLocked()) {
                     return;
                 }
@@ -95,7 +94,7 @@ public class SelectionController extends GuiComponent {
         });
 
         Input.keyboard().onKeyPressed(e -> {
-            if (e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_D) {
+            if (Key.right.isDown) {
                 if (this.inputIsLocked()) {
                     return;
                 }
