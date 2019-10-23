@@ -81,8 +81,9 @@ public class GameController {
         Game.start();
         addUpdateablesToGameLoop();
 
+        GameLoop.getInstance().setDelayTimer(100);
         GameLoop.getInstance().run();
-        GameLoop.getInstance().setDelayTimer(2000);
+
     }
 
     public void addUpdateablesToGameLoop(){
@@ -91,4 +92,6 @@ public class GameController {
             GameLoop.getInstance().addUpdateables(e);
         }
     }
+
+
 }

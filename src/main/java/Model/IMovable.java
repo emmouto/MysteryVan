@@ -8,7 +8,7 @@ package Model;
  * @version 0.1
  */
 public interface IMovable extends IUpdateable {
-    int getX();
+    double getX();
     int getY();
 
     /**

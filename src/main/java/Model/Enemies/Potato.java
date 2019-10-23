@@ -25,7 +25,7 @@ public class Potato extends Enemy {
      */
     @Override
     public void move() {
-        setX(getX() + 1);
+        setX(getX() + 0.1);
         setGrounded(false);
     }
 }

@@ -1,5 +1,6 @@
 package View;
 
+import Controller.GameController;
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.resources.Resources;
 import de.gurkenlabs.litiengine.sound.Sound;

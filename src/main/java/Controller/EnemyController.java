@@ -55,10 +55,6 @@ public class EnemyController implements IUpdateable {
         return this.players;
     }
 
-    public void setEnemies(List<Enemy> enemies) {
-        this.enemies = enemies;
-    }
-
     /**
      * Spawns an <code>Enemy<code> at the specified location, and sets all its properties.
      */
@@ -90,6 +86,9 @@ public class EnemyController implements IUpdateable {
                     enemies.remove(i);
                     creatureList.remove(i);
                 }
+            }
+            if (GameLoop.getInstance().checkIfDelayDone()){
+                spawnEnemy();
             }
         }
     }

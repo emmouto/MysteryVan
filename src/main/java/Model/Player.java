@@ -19,7 +19,7 @@ public class Player implements IMovable, ICollidable{
     private Hat hat;
     private Boost boost1;
     private Boost boost2;
-    private int posX;
+    private double posX;
     private int posY;
     private int dx;
     private int dy;
@@ -145,11 +145,11 @@ public class Player implements IMovable, ICollidable{
         this.boost2 = boost2;
     }
 
-    public int getPosX() {
+    public double getPosX() {
         return posX;
     }
 
-    public void setPosX(int posX) {
+    public void setPosX(double posX) {
         this.posX = posX;
     }
 
@@ -182,7 +182,7 @@ public class Player implements IMovable, ICollidable{
         return this.collider;
     }
 
-    public int getX() {
+    public double getX() {
         return posX;
     }
 

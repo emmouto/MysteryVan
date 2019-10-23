@@ -10,7 +10,7 @@ public class Collider {
     private int radius;
     private int width;
     private int height;
-    private int x;
+    private double x;
     private int y;
 
     private ICollidable body;
@@ -28,7 +28,7 @@ public class Collider {
      * @param x the objects x-coordinate.
      * @param y the objects y-coordinate.
      */
-    void updatePosition(int x, int y){
+    void updatePosition(double x, int y){
         this.x = x;
         this.y = y;
     }
@@ -76,7 +76,7 @@ public class Collider {
 
     }
 
-    private int getX(){
+    private double getX(){
         return this.x;
     }
 

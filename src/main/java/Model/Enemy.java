@@ -1,6 +1,5 @@
 package Model;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -18,7 +17,7 @@ public abstract class Enemy implements ICollidable, IMovable {
     private Collider collider;
     private int height;
     private int width;
-    private int x;
+    private double x;
     private int y;
     private String sprite;
     private boolean isGrounded = false;
@@ -57,7 +56,7 @@ public abstract class Enemy implements ICollidable, IMovable {
         updateCollider();
         checkPlayerCollision();
         checkGrounded();
-        move();
+        //move();
     }
 
     /**
@@ -134,7 +133,7 @@ public abstract class Enemy implements ICollidable, IMovable {
         return this.collider;
     }
 
-    public int getX(){
+    public double getX(){
         return this.x;
     }
 
@@ -142,7 +141,7 @@ public abstract class Enemy implements ICollidable, IMovable {
         return this.y;
     }
 
-    public void setX(int x){
+    public void setX(double x){
         this.x = x;
     }
 
