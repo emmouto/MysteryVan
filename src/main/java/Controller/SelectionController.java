@@ -24,7 +24,7 @@ public class SelectionController extends GuiComponent {
     /**
      * Constructor for a new SelectionController.
      * Sets the initial values for the selected character, difficulty, and the starting state.
-     * Also inintializes the controls for the Controller.
+     * Also initializes the controls for the controller.
      */
     public SelectionController() {
         super(0, 0, Game.window().getResolution().getWidth(), Game.window().getResolution().getHeight());
@@ -35,7 +35,6 @@ public class SelectionController extends GuiComponent {
         initControls();
     }
 
-    // TODO fix this ugly code
     private void initControls() {
         Input.keyboard().onKeyReleased(e -> {
             if (e.getKeyCode() == KeyEvent.VK_ENTER ) {
@@ -193,13 +192,5 @@ public class SelectionController extends GuiComponent {
         PlayerController.playerList.get(0).setDefence(selectedChar.getDef());
         PlayerController.playerList.get(0).setHat(selectedChar.getHat());
         PlayerController.playerList.get(0).setWeapon(selectedChar.getWpn());
-    }
-
-    /**
-     * Takes the players chosen difficulty level and loads the correct map.
-     */
-    public void setDifficultyLevel() {
-        // Easy, Medium, or Hard - Load the correct level
-        // TODO implement this (when different levels/maps exist)
     }
 }

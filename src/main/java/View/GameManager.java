@@ -11,7 +11,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
- * Holds data used in several places. Or something like that.
+ * Holds data used in several places.
  *
  * @author Emma Pettersson
  * @version 0.1
@@ -20,7 +20,7 @@ public final class GameManager {
     static final double centerX = Game.window().getResolution().getWidth() / 2.0;
     static final double centerY = Game.window().getResolution().getHeight() * 1 / 2;
 
-    // Fonts
+    /* --- Fonts --- */
     static final Font PIXELED_BIG = Resources.fonts().get("src/main/resources/fonts/Pixeled.ttf",64f);
     static final Font PIXELED_MEDIUM = Resources.fonts().get("src/main/resources/fonts/Pixeled.ttf",40f);
     public static final Font PIXELED_SMALL = Resources.fonts().get("src/main/resources/fonts/Pixeled.ttf",24f);
@@ -28,7 +28,7 @@ public final class GameManager {
     static final Font RAINY_MEDIUM = Resources.fonts().get("src/main/resources/fonts/RainyHearts.ttf",50f);
     public static final Font RAINY_SMALL = Resources.fonts().get("src/main/resources/fonts/RainyHearts.ttf",24f);
 
-    // Sounds
+    /* --- Sounds --- */
     public static final Sound MENU_SOUND = Resources.sounds().get("src/main/resources/audio/sfx/menu_sound.wav");
     public static final Sound SELECT_SOUND = Resources.sounds().get("src/main/resources/audio/sfx/menu_selection.wav");
     static final Sound TITLE_THEME = Resources.sounds().get("src/main/resources/audio/music/title_theme.mp3");
@@ -36,6 +36,7 @@ public final class GameManager {
     static final Sound STAGE_2 = Resources.sounds().get("src/main/resources/audio/music/stage2.ogg");
     static final Sound STAGE_3 = Resources.sounds().get("src/main/resources/audio/music/stage3.ogg");
 
+    /* --- Enum values -- */
     private static DifficultyLevel selectedDifficulty = DifficultyLevel.NORMAL;
     private static GameState state = GameState.TITLE_SCREEN;
 
@@ -143,13 +144,13 @@ public final class GameManager {
          * Constructor for a CHARACTER.
          *
          * @param description Short description of the character (flavour text).
-         * @param hp The CHARACTER's base health points.
-         * @param str The CHARACTER's base strength.
-         * @param def The CHARACTER's base defence.
-         * @param hat The CHARACTER's Hat.
-         * @param wpn The CHARACTER's Weapon.
-         * @param characterPortrait The CHARACTER's portrait, used when selecting character.
-         * @param sprite The CHARACTER's sprite.
+         * @param hp The Character's base health points.
+         * @param str The Character's base strength.
+         * @param def The Character's base defence.
+         * @param hat The Character's Hat.
+         * @param wpn The Character's Weapon.
+         * @param characterPortrait The Character's portrait, used when selecting character.
+         * @param sprite The Character's sprite.
          */
         Character(String description, int hp, int str, int def, Hat hat, Weapon wpn, BufferedImage characterPortrait, BufferedImage sprite) {
             this.description = description;

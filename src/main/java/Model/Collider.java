@@ -15,9 +15,6 @@ public class Collider {
 
     private ICollidable body;
 
-    /**
-     * ...
-     */
     Collider(){
 
     }

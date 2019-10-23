@@ -2,10 +2,6 @@ package Controller;
 
 import Model.Key;
 import View.GameManager;
-import View.DefeatView;
-import View.HelpView;
-import View.HighScoreView;
-import View.MenuView;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -115,7 +111,7 @@ public class ScreenController extends Menu {
     }
 
     private void confirm() {
-        changeView();
+        updateView();
 
         for (Consumer<Integer> cons : this.confirmConsumer) {
             cons.accept(this.currentFocus);
@@ -134,7 +130,7 @@ public class ScreenController extends Menu {
     }
 
     //TODO change name
-    private void changeView() {
+    private void updateView() {
         if (GameManager.getState() == GameManager.GameState.TITLE_SCREEN) {
             this.onConfirm(c -> {
                 switch (c) {
@@ -217,6 +213,7 @@ public class ScreenController extends Menu {
             changeScreen("Game", 500);
         }
     }
+
     /**
      * Exits the game.
      */

@@ -14,7 +14,7 @@ import java.util.Random;
  */
 public class Enemy implements ICollidable, IMovable {
     private int HP;
-  //  private Equipment equipment; //Enemy can have a weapon, armor etc that will make them harder to defeat.
+    //private Equipment equipment; //Enemy can have a weapon, armor etc that will make them harder to defeat.
     private Collider collider;
     private int height;
     private int width;

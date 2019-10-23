@@ -10,20 +10,20 @@ import java.awt.event.KeyListener;
 import java.util.HashMap;
 
 /**
- * ...
+ * Controller for key inputs.
  *
  * @author Jennifer Krogh
  * @author Jonathan Carbol
  * @version 0.1
  */
 public class KeyController implements KeyListener, IUpdateable {
-    private HashMap<Integer, Key> keyBindings = new HashMap<Integer, Key>();
-    private static boolean other[] = new boolean[256];
+    private HashMap<Integer, Key> keyBindings = new HashMap<>();
+    private static boolean[] other = new boolean[256];
 
     /**
-     * Assigning the variable keys to actual letters
+     * Assigns the variable keys to actual letters
      *
-     * @param playerController
+     * @param playerController the
      */
     KeyController(PlayerController playerController) {
         initKeyController();
@@ -44,7 +44,6 @@ public class KeyController implements KeyListener, IUpdateable {
 
         Input.keyboard().onKeyPressed(this::keyPressed);
         Input.keyboard().onKeyReleased(this::keyReleased);
-
     }
 
     /**
@@ -57,13 +56,13 @@ public class KeyController implements KeyListener, IUpdateable {
         try {
             other[e.getExtendedKeyCode()] = true;
             keyBindings.get(e.getKeyCode()).isDown = true;
-        } catch (Exception n) {
+        } catch (Exception ignored) {
 
         }
     }
 
     /**
-     * Checks if key is release
+     * Checks if key is released.
      *
      * @param e the key to be checked.
      */
@@ -72,14 +71,13 @@ public class KeyController implements KeyListener, IUpdateable {
         try {
             other[e.getExtendedKeyCode()] = false;
             keyBindings.get(e.getKeyCode()).isDown = false;
-        }catch (Exception n){
-
-        }
+        } catch (Exception ignored){ }
     }
 
     /**
+     * Checks if a key has been binded or not.
      *
-     * @param extendedKey
+     * @param extendedKey the key to check.
      * @return if the key is binded or not.
      */
     public boolean isKeyBinded(int extendedKey) {
@@ -87,24 +85,21 @@ public class KeyController implements KeyListener, IUpdateable {
     }
 
     /**
-     *
-     * @param e
+     * @param e the KeyEvent for the typed key.
      */
     @Override
-    public void keyTyped(KeyEvent e) {
-    }
+    public void keyTyped(KeyEvent e) { }
 
     /**
-     *
      * @param keyCode
      * @param key
      */
-    public void bind(Integer keyCode, Key key) {
+    private void bind(Integer keyCode, Key key) {
         keyBindings.put(keyCode, key);
     }
 
     /**
-     *
+     * Releases all the binded keys.
      */
     public void releaseAll() {
         for (Key key : keyBindings.values()) {

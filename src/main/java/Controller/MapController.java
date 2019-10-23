@@ -6,7 +6,7 @@ import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.graphics.Camera;
 
 /**
- * ...
+ * Controller for the game map.
  *
  * @author Adam Rohdell
  * @author Jonathan Carbol

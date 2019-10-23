@@ -106,7 +106,7 @@ public class PlayerController implements IUpdateable {
      * Updates the PlayerController, by setting the displayed creatures HP, hitbox and sprite among other things.
      */
     private void updatePlayerController(){
-        if(!playerList.isEmpty()) {
+        if (!playerList.isEmpty()) {
             for (int i = 0; i < playerList.size(); i++) {
                 Creature c = new Creature();
                 creatureList.add(c);
@@ -125,8 +125,7 @@ public class PlayerController implements IUpdateable {
      */
     @Override
     public void update() {
-
-        if(GameManager.getState() == GameManager.GameState.INGAME) {
+        if (GameManager.getState() == GameManager.GameState.INGAME) {
             for (int i = 0; i < playerList.size(); i++) {
                 creatureList.get(i).setLocation(playerList.get(i).getX(), playerList.get(i).getY());
                 creatureList.get(i).setSpritePrefix(getPlayers().get(i).getSprite());
@@ -145,7 +144,6 @@ public class PlayerController implements IUpdateable {
      * Checks if player is dead, if so, then this method handles what happens.
      */
     private void whenDead(int i) {
-
             if (playerList.get(i).getState() == Player.State.DEAD) {
                 HighScore newScore;
                 defeatView.scoreDefeat(playerList.get(i).getScore());
@@ -154,7 +152,6 @@ public class PlayerController implements IUpdateable {
                 screenController.changeScreen("Defeat", 500);
             }
     }
-
 
     /**
      * Updates the health of the players and sends the data to the view to be displayed.

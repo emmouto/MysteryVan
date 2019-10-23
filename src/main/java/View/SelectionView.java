@@ -17,7 +17,7 @@ import java.awt.image.BufferedImage;
 
 /**
  * Lets the player choose a name, a character and a difficulty level.
- * Renders different components depending on the current SELECTION_STATE.
+ * Renders different components depending on the current SelectionState.
  *
  * @author Emma Pettersson
  * @version 0.1
@@ -149,7 +149,7 @@ public class SelectionView extends Screen implements IUpdateable {
     }
 
     /**
-     * Embedded class for a EnterNameComponent.
+     * Embedded class for an EnterNameComponent.
      * Lets the player enter their name.
      *
      * @author Emma Pettersson
@@ -203,7 +203,7 @@ public class SelectionView extends Screen implements IUpdateable {
 
     /**
      * Embedded class for a ChooseCharacterComponent.
-     * Lets the player choose a character and displays the characters name and stats.
+     * Lets the player choose a Character and displays the Character's name and stats.
      *
      * @author Emma Pettersson
      * @version 0.1
@@ -275,7 +275,7 @@ public class SelectionView extends Screen implements IUpdateable {
 
     /**
      * Embedded class for a ChooseLevelComponent.
-     * Lets the player choose a difficulty and displayts its description.
+     * Lets the player choose a difficulty level and displays its description.
      *
      * @author Emma Pettersson
      * @version 0.1
