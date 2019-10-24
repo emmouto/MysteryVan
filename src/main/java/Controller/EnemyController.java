@@ -92,15 +92,4 @@ public class EnemyController implements IUpdateable {
             }
         }
     }
-
-    private void initiatePathfinding() {
-
-    }
-
-    private void initiateEnemies() {
-        for (Creature e : creatureList) {
-            e.addController(new MovementController<Creature>(e));
-        }
-    }
-
 }

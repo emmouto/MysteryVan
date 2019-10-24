@@ -49,7 +49,7 @@ public class GameLoop extends Thread{
                 e.printStackTrace();
             }
             try {
-                sleep(18);
+                sleep(100);
             } catch (InterruptedException e) {
                 this.interrupt();
             }

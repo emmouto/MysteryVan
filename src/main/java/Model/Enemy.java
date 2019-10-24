@@ -64,7 +64,7 @@ public abstract class Enemy implements ICollidable, IMovable {
      */
     private void doGravity(){
         if (!isGrounded){
-            setY(getY()+3);
+            setY(getY()+1);
         }
     }
 
