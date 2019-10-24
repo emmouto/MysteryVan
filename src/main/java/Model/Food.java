@@ -128,17 +128,19 @@ public class Food implements ICollidable, IUpdateable {
      **/
     public void update() {
 
+
             updateCollider();
-            if(checkPlayerCollision(player)) {
+            if (checkPlayerCollision(player)) {
 
                 collided = true;
                 // update the player's values and check that the new values don't exceed the highest possible value
-                getPlayer().setHP(getPlayer().getHP() + getHP());
-                getPlayer().setStrength(getPlayer().getStrength() + getArmour());
-                getPlayer().setDefence(getPlayer().getDefence() + getDefense());
+                player.setHP(getPlayer().getHP() + getHP());
+                player.setStrength(getPlayer().getStrength() + getArmour());
+                player.setDefence(getPlayer().getDefence() + getDefense());
 
                 collisionUpdateValues();
-            }
+
+        }
     }
 
 

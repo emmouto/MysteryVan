@@ -36,6 +36,9 @@ import java.util.Random;
     // Matrix array which contains the x and y coordinates of platforms
     private int[][] matrixCoord = fillMatrix(xCoords, yCoords);
 
+    private int timer = 3000;
+
+
 
     public FoodController(List<Player> players) {
         super();
@@ -59,9 +62,9 @@ import java.util.Random;
         propList.clear();
 
         int rnd = new Random().nextInt(size);
-        int rndX = new Random().nextInt(10);
+        int rndX = new Random().nextInt(20);
 
-        Food f = new Food(matrixCoord[rnd][0] + rndX, matrixCoord[rnd][1] - 45, getPlayers().get(0)); //matrixCoord[rnd][0] + rndX, matrixCoord[rnd][1] - 45
+        Food f = new Food(matrixCoord[rnd][0] + rndX, matrixCoord[rnd][1] - 35, getPlayers().get(0)); //matrixCoord[rnd][0] + rndX, matrixCoord[rnd][1] - 45
         foodList.add(f);
         determineFoodSprite(f);
         propList.get(0).setLocation(f.getPosX(), f.getPosY());
@@ -126,9 +129,10 @@ import java.util.Random;
     public void update() {
         if (GameManager.getState() == GameManager.GameState.INGAME) {
             for (int i = 0; i < this.getFood().size(); i++) {
-                
-                GameLoop.getInstance().setDelayTimer(6000);
-                if(GameLoop.getInstance().checkIfDelayDone()) {
+
+                timer--;
+
+                if(timer == 0) {  //GameLoop.getInstance().checkIfDelayDone()
 
                     // removes food from the list and subsequently removes it from the game after collision
                     getFood().remove(0);
@@ -138,10 +142,13 @@ import java.util.Random;
                     // Spawn a new food when the player has taken the previous one
                     spawnFood();
                     Game.world().environment().add(getPropList().get(0));
+                    GameLoop.getInstance().addUpdateables(getFood().get(0));
                 }
 
 
                 if (getFood().get(i).collided) {
+
+
                     // removes food from the list and subsequently removes it from the game after collision
                     getFood().remove(0);
                     Game.world().environment().remove(getPropList().get(0));
@@ -150,6 +157,7 @@ import java.util.Random;
                     // Spawn a new food when the player has taken the previous one
                     spawnFood();
                     Game.world().environment().add(getPropList().get(0));
+                    GameLoop.getInstance().addUpdateables(getFood().get(0));
                 }
             }
 
