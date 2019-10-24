@@ -17,16 +17,20 @@ public class Food implements ICollidable, IUpdateable {
     private int posX;
     private int posY;
     private Collider collider;
+    private Player player;
+    public boolean collided;
 
 
 
-    public Food(int posX, int posY) {
+    public Food(int posX, int posY, Player player) {
         this.HP = 0;
         this.defense = 0;
         this.armour = 0;
 
         this.posX = posX;
         this.posY = posY;
+
+        this.player = player;
 
         determineFood();
 
@@ -98,6 +102,26 @@ public class Food implements ICollidable, IUpdateable {
         return false;
     }
 
+    /**
+     * Method that makes sure that a player's characteristics' values do not exceed a specific maximum value
+     * after the collision between food and the player.
+     */
+    public void collisionUpdateValues(){
+
+        int maxHP = 40;
+        int maxStrength = 50;
+        int maxDefence = 50;
+
+        if(getPlayer().getHP() > maxHP) {
+            getPlayer().setHP(maxHP);
+        } else if(getPlayer().getStrength() > maxStrength) {
+            getPlayer().setStrength(maxStrength);
+        } else if(getPlayer().getDefence() > maxDefence) {
+            getPlayer().setDefence(maxDefence);
+        }
+
+    }
+
 
     /**
      * Updates the Collider
@@ -105,6 +129,16 @@ public class Food implements ICollidable, IUpdateable {
     public void update() {
 
             updateCollider();
+            if(checkPlayerCollision(player)) {
+
+                collided = true;
+                // update the player's values and check that the new values don't exceed the highest possible value
+                getPlayer().setHP(getPlayer().getHP() + getHP());
+                getPlayer().setStrength(getPlayer().getStrength() + getArmour());
+                getPlayer().setDefence(getPlayer().getDefence() + getDefense());
+
+                collisionUpdateValues();
+            }
     }
 
 
@@ -159,6 +193,10 @@ public class Food implements ICollidable, IUpdateable {
 
     public void setDefense(int defense) {
         this.defense = defense;
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 
 

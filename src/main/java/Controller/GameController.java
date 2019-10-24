@@ -72,6 +72,7 @@ public class GameController {
 
         Game.loop().attach(enemyController);
         Game.loop().attach(playerController);
+        Game.loop().attach(foodController);
 
         Game.world().loadEnvironment("new_map");
         Game.world().environment().add(enemyController.getCreatures().get(0));

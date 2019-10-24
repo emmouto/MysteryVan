@@ -59,9 +59,9 @@ import java.util.Random;
         propList.clear();
 
         int rnd = new Random().nextInt(size);
-        int rndX = new Random().nextInt(20);
+        int rndX = new Random().nextInt(10);
 
-        Food f = new Food(matrixCoord[rnd][0] + rndX, matrixCoord[rnd][1] - 45);
+        Food f = new Food(matrixCoord[rnd][0] + rndX, matrixCoord[rnd][1] - 45, getPlayers().get(0)); //matrixCoord[rnd][0] + rndX, matrixCoord[rnd][1] - 45
         foodList.add(f);
         determineFoodSprite(f);
         propList.get(0).setLocation(f.getPosX(), f.getPosY());
@@ -89,26 +89,6 @@ import java.util.Random;
 
     }
 
-
-    /**
-     * Method that makes sure that a player's characteristics' values do not exceed a specific maximum value
-     * after the collision between food and the player.
-     */
-    public void collisionUpdateValues(){
-
-        int maxHP = 40;
-        int maxStrength = 50;
-        int maxDefence = 50;
-
-        if(getPlayers().get(0).getHP() > maxHP) {
-            getPlayers().get(0).setHP(maxHP);
-        } else if(getPlayers().get(0).getStrength() > maxStrength) {
-            getPlayers().get(0).setStrength(maxStrength);
-        } else if(getPlayers().get(0).getDefence() > maxDefence) {
-            getPlayers().get(0).setDefence(maxDefence);
-        }
-
-    }
 
     /**
      * Method that fills a matrix with the x and y values of platforms in the game map.
@@ -146,18 +126,22 @@ import java.util.Random;
     public void update() {
         if (GameManager.getState() == GameManager.GameState.INGAME) {
             for (int i = 0; i < this.getFood().size(); i++) {
+                
+                GameLoop.getInstance().setDelayTimer(6000);
+                if(GameLoop.getInstance().checkIfDelayDone()) {
 
-                this.getFood().get(i).update(); //getPropList().get(0).getX(), getPropList().get(0).getY()
+                    // removes food from the list and subsequently removes it from the game after collision
+                    getFood().remove(0);
+                    Game.world().environment().remove(getPropList().get(0));
+                    getPropList().remove(0);
 
-                if (this.getFood().get(i).checkPlayerCollision(getPlayers().get(0))) {
+                    // Spawn a new food when the player has taken the previous one
+                    spawnFood();
+                    Game.world().environment().add(getPropList().get(0));
+                }
 
-                    // update the player's values and check that the new values don't exceed the highest possible value
-                    getPlayers().get(0).setHP(getPlayers().get(0).getHP() + getFood().get(0).getHP());
-                    getPlayers().get(0).setStrength(getPlayers().get(0).getStrength() + getFood().get(0).getArmour());
-                    getPlayers().get(0).setDefence(getPlayers().get(0).getDefence() + getFood().get(0).getDefense());
 
-                    collisionUpdateValues();
-
+                if (getFood().get(i).collided) {
                     // removes food from the list and subsequently removes it from the game after collision
                     getFood().remove(0);
                     Game.world().environment().remove(getPropList().get(0));
@@ -174,14 +158,6 @@ import java.util.Random;
 
     public List<Food> getFood() {
         return foodList;
-    }
-
-    /**
-     * Method which loads the map with the right components.
-     * @param map current Map which is defined in GameRunner
-     */
-    public void loadMap(Map map) {
-        this.map = map;
     }
 
     public List<Player> getPlayers() {

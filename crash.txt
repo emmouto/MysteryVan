@@ -1,8 +1,14 @@
-<<<<<<< HEAD
-main threw an exception:
-java.lang.NullPointerException
-	at Controller.GameController.addUpdateablesToGameLoop(GameController.java:108)
-	at Controller.GameController.init(GameController.java:91)
-	at GameRunner.main(GameRunner.java:17)
-=======
->>>>>>> e42be4777dfac28bb2dca9c13a7c532c9d9805cd
+Render Loop threw an exception:
+java.util.concurrent.RejectedExecutionException: Task java.util.concurrent.FutureTask@5f020aa5 rejected from java.util.concurrent.ThreadPoolExecutor@5203a0ab[Shutting down, pool size = 1, active threads = 1, queued tasks = 0, completed tasks = 10]
+	at java.util.concurrent.ThreadPoolExecutor$AbortPolicy.rejectedExecution(ThreadPoolExecutor.java:2063)
+	at java.util.concurrent.ThreadPoolExecutor.reject(ThreadPoolExecutor.java:830)
+	at java.util.concurrent.ThreadPoolExecutor.execute(ThreadPoolExecutor.java:1379)
+	at java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:112)
+	at de.gurkenlabs.litiengine.sound.SoundPlayback.start(SoundPlayback.java:80)
+	at de.gurkenlabs.litiengine.sound.SoundEngine.playMusic(SoundEngine.java:133)
+	at de.gurkenlabs.litiengine.sound.SoundEngine.playMusic(SoundEngine.java:93)
+	at de.gurkenlabs.litiengine.sound.SoundEngine.playMusic(SoundEngine.java:83)
+	at View.DefeatView.render(DefeatView.java:83)
+	at de.gurkenlabs.litiengine.graphics.RenderComponent.render(RenderComponent.java:157)
+	at de.gurkenlabs.litiengine.RenderLoop.process(RenderLoop.java:25)
+	at de.gurkenlabs.litiengine.UpdateLoop.run(UpdateLoop.java:46)
