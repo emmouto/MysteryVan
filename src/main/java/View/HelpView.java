@@ -19,7 +19,7 @@ import java.awt.image.BufferedImage;
  * @author Emma Pettersson
  * @version 0.1
  */
-public class HelpView extends Screen implements IUpdateable {
+public class HelpView extends Screen {
     private static final BufferedImage BRICK_BG = Resources.images().get("src/main/resources/HelpView/BrickBG.png");
     private static final BufferedImage CONTROL_PIC = Resources.images().get("src/main/resources/HelpView/controlPic.png");
     private static final BufferedImage GO_TO_GAME = Resources.images().get("src/main/resources/HelpView/GoToGame.png");
@@ -48,8 +48,6 @@ public class HelpView extends Screen implements IUpdateable {
         Game.audio().playMusic(Resources.sounds().get("src/main/resources/audio/music/stage_select.ogg"));
 
         super.prepare();
-
-        Game.loop().attach(this);
     }
 
     /**
@@ -93,11 +91,4 @@ public class HelpView extends Screen implements IUpdateable {
         super.render(g);
     }
 
-    /**
-     * This method is called by the game loop on all objects that need to update their attributes.
-     */
-    @Override
-    public void update() {
-
-    }
 }

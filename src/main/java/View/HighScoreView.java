@@ -6,8 +6,6 @@ import Model.HighScore;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.List;
 
 import de.gurkenlabs.litiengine.graphics.ImageRenderer;
 import de.gurkenlabs.litiengine.graphics.TextRenderer;
@@ -25,9 +23,7 @@ import de.gurkenlabs.litiengine.resources.Resources;
 public class HighScoreView extends Screen {
     private static final BufferedImage BRICK_BG = Resources.images().get("src/main/resources/HelpView/BrickBG.png");
 
-    private List<HighScore> highScoreList = new ArrayList<>();
-
-    private HighScoreController hc = new HighScoreController(highScoreList);
+    private HighScoreController hc = new HighScoreController();
 
     /**
      * Constructor. Sets the name of the screen.
@@ -72,7 +68,7 @@ public class HighScoreView extends Screen {
         g.setFont(GameManager.PIXELED_SMALL);
 
         int y = 190;
-        for (HighScore hs : highScoreList) {
+        for (HighScore hs : hc.highScoreList) {
             TextRenderer.render(g, hs.getPlayer(), 320, (y + 50));
             TextRenderer.render(g, Integer.toString(hs.getHighScore()), 720, (y + 50));
             y += 50;
