@@ -1,6 +1,5 @@
 package View;
 
-import Controller.GameController;
 import Controller.SelectionController;
 
 import de.gurkenlabs.litiengine.Align;
@@ -89,8 +88,10 @@ public class SelectionView extends Screen implements IUpdateable {
         final double waterSpeed = 0.1;
 
         for (int offset = 0; offset < 10000; offset += 1279) {
-            ImageRenderer.render(g, CLOUDS, Game.time().now() * cloudSpeed % (CLOUDS.getWidth() + Game.window().getResolution().getWidth()) - offset, 0);
-            ImageRenderer.render(g, WATER, Game.time().now() * waterSpeed % (CLOUDS.getWidth() + Game.window().getResolution().getWidth()) - offset, 0);
+            ImageRenderer.render(g, CLOUDS, Game.time().now() * cloudSpeed % (CLOUDS.getWidth() +
+                    Game.window().getResolution().getWidth()) - offset, 0);
+            ImageRenderer.render(g, WATER, Game.time().now() * waterSpeed % (CLOUDS.getWidth() +
+                    Game.window().getResolution().getWidth()) - offset, 0);
         }
     }
 
@@ -100,15 +101,25 @@ public class SelectionView extends Screen implements IUpdateable {
     @Override
     public void update() {
         switch (selectionController.state) {
+            case ENTER_NAME:
+                if (!this.getComponents().contains(this.enterNameComponent)) {
+                    EnterNameComponent.enterName.setSelected(true);
+                    EnterNameComponent.enterName.setEnabled(true);
+
+                    this.getComponents().remove(this.chooseCharacterComponent);
+                    this.getComponents().add(this.enterNameComponent);
+                }
+                break;
             case CHOOSE_CHARACTER:
                 if (!this.getComponents().contains(this.chooseCharacterComponent)) {
                     Game.audio().playSound(GameManager.SELECT_SOUND);
-                    selectionController.setPlayerName(enterNameComponent.enterName.getText());
-                    enterNameComponent.enterName.setSelected(false);
-                    enterNameComponent.enterName.setEnabled(false);
+                    selectionController.setPlayerName(EnterNameComponent.enterName.getText());
+                    EnterNameComponent.enterName.setSelected(false);
+                    EnterNameComponent.enterName.setEnabled(false);
 
                     this.getComponents().remove(this.enterNameComponent);
-                    this.getComponents().remove(this.enterNameComponent.enterName);
+                    this.getComponents().remove(this.chooseLevelComponent);
+                    this.getComponents().remove(EnterNameComponent.enterName);
                     this.getComponents().add(this.chooseCharacterComponent);
                 }
 
@@ -153,14 +164,14 @@ public class SelectionView extends Screen implements IUpdateable {
      * @version 0.1
      */
     public static class EnterNameComponent extends GuiComponent {
-        TextFieldComponent enterName;
+        public static TextFieldComponent enterName;
 
         EnterNameComponent() {
             super(0, 0, Game.window().getResolution().getWidth(), Game.window().getResolution().getHeight());
 
             enterName = new TextFieldComponent(GameManager.centerX - (500 / 2.0), 200, 500, 100,
                     null, "");
-            this.getComponents().add(this.enterName);
+            this.getComponents().add(enterName);
         }
 
         /**
@@ -178,12 +189,14 @@ public class SelectionView extends Screen implements IUpdateable {
             String text = "Enter Your Name";
             g.setFont(GameManager.PIXELED_MEDIUM);
             g.setColor(Color.WHITE);
-            TextRenderer.renderWithOutline(g, text, GameManager.centerX - (text.length() * g.getFont().getSize()) / 2.0, 100, Color.BLACK);
+            TextRenderer.renderWithOutline(g, text,
+                    GameManager.centerX - (text.length() * g.getFont().getSize()) / 2.0, 100, Color.BLACK);
 
             text = "Confirm by pressing enter";
             g.setFont(GameManager.PIXELED_XSMALL);
             g.setColor(Color.BLACK);
-            TextRenderer.renderWithOutline(g, text, GameManager.centerX - (text.length() * g.getFont().getSize()) / 2.0, 135, Color.WHITE);
+            TextRenderer.renderWithOutline(g, text,
+                    GameManager.centerX - (text.length() * g.getFont().getSize()) / 2.0, 135, Color.WHITE);
         }
 
         private void renderTextField() {
@@ -225,7 +238,8 @@ public class SelectionView extends Screen implements IUpdateable {
 
             g.setFont(GameManager.PIXELED_MEDIUM);
             g.setColor(Color.WHITE);
-            TextRenderer.renderWithOutline(g, text, GameManager.centerX - (text.length() * g.getFont().getSize()) / 2.0, 100, Color.BLACK);
+            TextRenderer.renderWithOutline(g, text,
+                    GameManager.centerX - (text.length() * g.getFont().getSize()) / 2.0, 100, Color.BLACK);
         }
 
         private void renderCharacterPortraits(final Graphics2D g) {

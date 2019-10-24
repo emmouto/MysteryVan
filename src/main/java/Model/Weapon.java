@@ -1,7 +1,7 @@
 package Model;
 
 /**
- * Class for creating the weapons that the players can use.
+ * Class for creating the Weapons that the players can use.
  *
  * @author Antonia Welzel
  * @author Jonathan Carbol
