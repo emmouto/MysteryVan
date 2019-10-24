@@ -80,10 +80,11 @@ public class HelpView extends Screen implements IUpdateable {
 
         g.setFont(GameManager.PIXELED_SMALL);
         g.setColor(Color.WHITE);
-        TextRenderer.render(g, "MOVEMENT", 720, 210);
+        TextRenderer.render(g, "CONTROLS", 720, 210);
         g.setFont(GameManager.PIXELED_XSMALL);
         TextRenderer.render(g, "The S-key picks up items.", 720, 250);
         TextRenderer.render(g, "Space is used to attack.", 720, 300);
+        TextRenderer.render(g, "Use P to pause the game.", 720, 350);
 
         g.setFont(GameManager.PIXELED_SMALL);
         TextRenderer.render(g, "PRESS ENTER TO", 720, 550);

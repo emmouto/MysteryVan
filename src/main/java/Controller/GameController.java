@@ -2,8 +2,8 @@ package Controller;
 
 import Model.Enemy;
 import Model.GameLoop;
-import Model.Key;
 import View.*;
+
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.environment.CreatureMapObjectLoader;
 import de.gurkenlabs.litiengine.gui.screens.GameScreen;
@@ -11,27 +11,32 @@ import de.gurkenlabs.litiengine.gui.screens.Resolution;
 import de.gurkenlabs.litiengine.input.Input;
 import de.gurkenlabs.litiengine.resources.Resources;
 /**
- * Initializes and controlls the game.
+ * Initializes and controls the game.
  *
  * @author Jonathan Carbol
  * @author Jennifer Krogh
+ * @author Emma Pettersson
+ * @author Adam Rohdell
+ * @author Antonia Welzel
  * @version 0.1
  */
 public class GameController {
-
-
     private GameLoop gameLoop;
     private PlayerController playerController;
     private EnemyController enemyController;
-    private KeyController keyController;
-    private MapController mapController;
 
-    public GameController(){
+    /**
+     *
+      */
+    public GameController() {
         GameLoop.getInstance();
     }
 
-    public void init(){
-        mapController = new MapController();
+    /**
+     * Initializes the game.
+     */
+    public void init() {
+        MapController mapController = new MapController();
 
         Game.config().graphics().setResolutionHeight(720);
         Game.config().graphics().setResolutionWidth(1280);
@@ -44,20 +49,12 @@ public class GameController {
         Game.window().setResolution(Resolution.custom(1280, 720, "720p"));
         Game.window().setIconImage(Resources.images().get("src/main/resources/icon.png"));
 
-        // Adds all the screens
-        Game.screens().add(new MenuView("Menu"));
-        Game.screens().add(new SelectionView("Selection"));
-        Game.screens().add(new HelpView("Help"));
-        Game.screens().add(new HighScoreView("HighScore"));
-        Game.screens().add(new DefeatView("Defeat"));
-        Game.screens().add(new PauseView("Pause"));
-        Game.screens().add(new GameView("Game"));
-        Game.screens().add(new GameScreen());
+        addScreens();
 
         Resources.load("game.litidata");
         playerController = new PlayerController(mapController.getMap());
         enemyController = new EnemyController(playerController.getPlayers(), mapController.getMap());
-        keyController = new KeyController(playerController);
+        KeyController keyController = new KeyController(playerController);
 
         mapController.initCamera();
         playerController.setGameView(Game.screens().get("Game"));
@@ -75,6 +72,7 @@ public class GameController {
 
         // Displays the title screen ("Menu")
         Game.screens().display("Menu");
+
         //Game.graphics().setBaseRenderScale(2.001f);
         Resources.spritesheets().get("AppleWorm", true);
 
@@ -93,5 +91,15 @@ public class GameController {
         }
     }
 
-
+    private void addScreens() {
+        // Adds all the screens
+        Game.screens().add(new MenuView("Menu"));
+        Game.screens().add(new SelectionView("Selection"));
+        Game.screens().add(new HelpView("Help"));
+        Game.screens().add(new HighScoreView("HighScore"));
+        Game.screens().add(new DefeatView("Defeat"));
+        Game.screens().add(new PauseView("Pause"));
+        Game.screens().add(new GameView("Game"));
+        Game.screens().add(new GameScreen());
+    }
 }

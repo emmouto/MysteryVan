@@ -3,8 +3,9 @@ package Model;
 import java.util.List;
 
 /**
- * The main Player class used to model the player, its movement and has other important attributes such hit points and weapon.
- * It implements IMovable and ICollidable interfaces used to check movement and collision.
+ * The main Player class used to model the Player,
+ * its movement and other important attributes such hit points and weapon.
+ * It implements the IMovable and ICollidable interfaces, to check movement and collision.
  *
  * @author Jonathan Carbol
  * @author Jennifer Krogh
@@ -43,7 +44,6 @@ public class Player implements IMovable, ICollidable{
         RIGHT
     }
 
-
     /**
      * The public constructor for the Player class.
      *
@@ -64,14 +64,13 @@ public class Player implements IMovable, ICollidable{
         this.collider.updatePosition(posX, posY);
         this.collider.updateSize(width, height);
         this.score = 0;
-        state = State.ALIVE;
+        this.state = State.ALIVE;
         this.maxHP = 10;
         this.setHP(maxHP);
         this.gravity=3;
         this.hasJumped = false;
         this.direction = Direction.RIGHT;
         this.time = System.currentTimeMillis();
-
     }
 
     /**
@@ -239,8 +238,9 @@ public class Player implements IMovable, ICollidable{
      * Updates the score of the Player.
      */
     private void updateScore(){
-        this.setScore(this.getScore()+1);
+        this.setScore(this.getScore() + 1);
     }
+
     /**
      * Moves the player depending on input from the user.
      */
@@ -274,7 +274,7 @@ public class Player implements IMovable, ICollidable{
     /**
      * Makes the player jump.
      */
-    private void jump(){
+    private void jump() {
         this.gravity = -7;
         hasJumped = true;
     }
@@ -294,8 +294,7 @@ public class Player implements IMovable, ICollidable{
             }
             this.setSprite((this.getSprite().replaceAll("([a-z])","")).replace("_","")+"_walk");
             time = System.currentTimeMillis();
-
-        }else if(System.currentTimeMillis()-time > 500){
+        } else if (System.currentTimeMillis() - time > 500){
             //this.setSprite((this.getSprite().replaceAll("([a-z])","")).replace("_",""));
         }
 
@@ -310,7 +309,6 @@ public class Player implements IMovable, ICollidable{
         if(e.getHP() < 0){
             this.setScore(this.getScore()+10);
             GameLoop.getInstance().getEnemies().remove(e);
-
         }
     }
 
@@ -324,7 +322,7 @@ public class Player implements IMovable, ICollidable{
     /**
      * Checks if the player is standing on a platform.
      */
-    public void checkGrounded(){
+    private void checkGrounded(){
         if (!isGrounded) {
             for (ICollidable platform : this.platforms) {
                 if (!isGrounded) {
@@ -341,9 +339,7 @@ public class Player implements IMovable, ICollidable{
         this.collider.updatePosition(getX(), getY());
     }
 
-    private void notifyListeners() {
-
-    }
+    private void notifyListeners() { }
 
     /**
      * Applies gravity to the player.

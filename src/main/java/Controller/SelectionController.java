@@ -1,13 +1,11 @@
 package Controller;
 
-import View.CHARACTER;
+import Model.Key;
 import View.GameManager;
 
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.gui.GuiComponent;
 import de.gurkenlabs.litiengine.input.Input;
-
-import java.awt.event.KeyEvent;
 
 /**
  * Controls for the SelectionView.
@@ -19,27 +17,26 @@ public class SelectionController extends GuiComponent {
     private static final int DELAY = 180;
     private static long lastInput;
 
-    public CHARACTER selectedChar;
-    public SELECTION_STATE state;
+    public GameManager.Character selectedChar;
+    public SelectionState state;
 
     /**
      * Constructor for a new SelectionController.
      * Sets the initial values for the selected character, difficulty, and the starting state.
-     * Also inintializes the controls for the Controller.
+     * Also initializes the controls for the controller.
      */
     public SelectionController() {
         super(0, 0, Game.window().getResolution().getWidth(), Game.window().getResolution().getHeight());
 
-        this.selectedChar = CHARACTER.EMMA;
-        this.state = SELECTION_STATE.ENTER_NAME;
+        this.selectedChar = GameManager.Character.EMMA;
+        this.state = SelectionState.ENTER_NAME;
 
         initControls();
     }
 
-    // TODO fix this ugly code
     private void initControls() {
         Input.keyboard().onKeyReleased(e -> {
-            if (e.getKeyCode() == KeyEvent.VK_ENTER ) {
+            if (Key.enter.isDown) {
                 if (this.inputIsLocked()) {
                     return;
                 }
@@ -51,45 +48,45 @@ public class SelectionController extends GuiComponent {
         });
 
         Input.keyboard().onKeyPressed(e -> {
-            if (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A) {
+            if (Key.left.isDown) {
                 if (this.inputIsLocked()) {
                     return;
                 }
 
                 lastInput = Game.time().now();
 
-                if (state == SELECTION_STATE.CHOOSE_CHARACTER) {
+                if (state == SelectionState.CHOOSE_CHARACTER) {
                     Game.audio().playSound(GameManager.MENU_SOUND);
 
                     switch (selectedChar) {
                         case ADAM:
-                            selectedChar = CHARACTER.JONATHAN;
+                            selectedChar = GameManager.Character.JONATHAN;
                             break;
                         case ANTONIA:
-                            selectedChar = CHARACTER.ADAM;
+                            selectedChar = GameManager.Character.ADAM;
                             break;
                         case EMMA:
-                            selectedChar = CHARACTER.ANTONIA;
+                            selectedChar = GameManager.Character.ANTONIA;
                             break;
                         case JENNIFER:
-                            selectedChar = CHARACTER.EMMA;
+                            selectedChar = GameManager.Character.EMMA;
                             break;
                         case JONATHAN:
-                            selectedChar = CHARACTER.JENNIFER;
+                            selectedChar = GameManager.Character.JENNIFER;
                             break;
                     }
-                } else if (state == SELECTION_STATE.CHOOSE_LEVEL) {
+                } else if (state == SelectionState.CHOOSE_LEVEL) {
                     Game.audio().playSound(GameManager.MENU_SOUND);
 
                     switch (GameManager.getSelectedDifficulty()) {
                         case EASY:
-                            GameManager.setSelectedDifficulty(GameManager.DIFFICULTY_LEVEL.HARD);
+                            GameManager.setSelectedDifficulty(GameManager.DifficultyLevel.HARD);
                             break;
                         case NORMAL:
-                            GameManager.setSelectedDifficulty(GameManager.DIFFICULTY_LEVEL.EASY);
+                            GameManager.setSelectedDifficulty(GameManager.DifficultyLevel.EASY);
                             break;
                         case HARD:
-                            GameManager.setSelectedDifficulty(GameManager.DIFFICULTY_LEVEL.NORMAL);
+                            GameManager.setSelectedDifficulty(GameManager.DifficultyLevel.NORMAL);
                             break;
                     }
                 }
@@ -97,44 +94,44 @@ public class SelectionController extends GuiComponent {
         });
 
         Input.keyboard().onKeyPressed(e -> {
-            if (e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_D) {
+            if (Key.right.isDown) {
                 if (this.inputIsLocked()) {
                     return;
                 }
 
                 lastInput = Game.time().now();
 
-                if (state == SELECTION_STATE.CHOOSE_CHARACTER) {
+                if (state == SelectionState.CHOOSE_CHARACTER) {
                     Game.audio().playSound(GameManager.MENU_SOUND);
 
                     switch (selectedChar) {
                         case ADAM:
-                            selectedChar = CHARACTER.ANTONIA;
+                            selectedChar = GameManager.Character.ANTONIA;
                             break;
                         case ANTONIA:
-                            selectedChar = CHARACTER.EMMA;
+                            selectedChar = GameManager.Character.EMMA;
                             break;
                         case EMMA:
-                            selectedChar = CHARACTER.JENNIFER;
+                            selectedChar = GameManager.Character.JENNIFER;
                             break;
                         case JENNIFER:
-                            selectedChar = CHARACTER.JONATHAN;
+                            selectedChar = GameManager.Character.JONATHAN;
                             break;
                         case JONATHAN:
-                            selectedChar = CHARACTER.ADAM;
+                            selectedChar = GameManager.Character.ADAM;
                     }
-                } else if (state == SELECTION_STATE.CHOOSE_LEVEL) {
+                } else if (state == SelectionState.CHOOSE_LEVEL) {
                     Game.audio().playSound(GameManager.MENU_SOUND);
 
                     switch (GameManager.getSelectedDifficulty()) {
                         case EASY:
-                            GameManager.setSelectedDifficulty(GameManager.DIFFICULTY_LEVEL.NORMAL);
+                            GameManager.setSelectedDifficulty(GameManager.DifficultyLevel.NORMAL);
                             break;
                         case NORMAL:
-                            GameManager.setSelectedDifficulty(GameManager.DIFFICULTY_LEVEL.HARD);
+                            GameManager.setSelectedDifficulty(GameManager.DifficultyLevel.HARD);
                             break;
                         case HARD:
-                            GameManager.setSelectedDifficulty(GameManager.DIFFICULTY_LEVEL.EASY);
+                            GameManager.setSelectedDifficulty(GameManager.DifficultyLevel.EASY);
                             break;
                     }
                 }
@@ -145,13 +142,13 @@ public class SelectionController extends GuiComponent {
     private void confirm() {
         switch (state) {
             case ENTER_NAME:
-                state = SELECTION_STATE.CHOOSE_CHARACTER;
+                state = SelectionState.CHOOSE_CHARACTER;
                 break;
             case CHOOSE_CHARACTER:
-                state = SELECTION_STATE.CHOOSE_LEVEL;
+                state = SelectionState.CHOOSE_LEVEL;
                 break;
             case CHOOSE_LEVEL:
-                state = SELECTION_STATE.GAME_START;
+                state = SelectionState.GAME_START;
                 break;
         }
     }
@@ -167,7 +164,7 @@ public class SelectionController extends GuiComponent {
     /**
      * Enum containing the different states for the Selection screen.
      */
-    public enum SELECTION_STATE {
+    public enum SelectionState {
         ENTER_NAME,
         CHOOSE_CHARACTER,
         CHOOSE_LEVEL,
@@ -194,13 +191,5 @@ public class SelectionController extends GuiComponent {
         PlayerController.playerList.get(0).setDefence(selectedChar.getDef());
         PlayerController.playerList.get(0).setHat(selectedChar.getHat());
         PlayerController.playerList.get(0).setWeapon(selectedChar.getWpn());
-    }
-
-    /**
-     * Takes the players chosen difficulty level and loads the correct map.
-     */
-    public void setDifficultyLevel() {
-        // Easy, Medium, or Hard - Load the correct level
-        // TODO implement this (when different levels/maps exist)
     }
 }
