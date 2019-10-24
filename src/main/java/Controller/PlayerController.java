@@ -93,7 +93,7 @@ public class PlayerController implements IUpdateable {
      * @param weapon the equipped weapon of the player.
      */
     private void spawnPlayer(String name, int hp, int defense, int strength, Hat hat, Weapon weapon){
-        Player p = new Player(name, 0, 0, 18, 35, this.map.getPlatforms());
+        Player p = new Player(name, 100, 100, 18, 35, this.map.getPlatforms());
         p.setHP(hp);
         p.setDefence(defense);
         p.setHat(hat);

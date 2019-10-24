@@ -8,6 +8,6 @@ public class EnemyFactory {
 
     public static Enemy spawnEnemy(){
         i+=10;
-        return new Potato("enemy", i, 0, 32, 50);
+        return new Potato("enemy", i, 0, 32, 50,3);
     }
 }

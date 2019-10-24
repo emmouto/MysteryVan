@@ -35,6 +35,7 @@ public class Player implements IMovable, ICollidable{
     private State state;
     private Direction direction;
     private long time;
+    private long timeSinceDamage;
     private List<Platform> platforms;
 
     enum Direction{
@@ -265,6 +266,9 @@ public class Player implements IMovable, ICollidable{
         } else {
             hasJumped = false;
         }
+        if(this.getX()< -10 || this.getX() > 720 || this.getY() > 470){
+            this.setState(State.DEAD);
+        }
     }
 
     /**
@@ -307,6 +311,13 @@ public class Player implements IMovable, ICollidable{
             this.setScore(this.getScore()+10);
             GameLoop.getInstance().getEnemies().remove(e);
 
+        }
+    }
+
+    public void takeDamage(int dmg){
+        if(System.currentTimeMillis()-timeSinceDamage > 1000) {
+            this.setHP(this.getHP() - dmg);
+            timeSinceDamage = System.currentTimeMillis();
         }
     }
 
