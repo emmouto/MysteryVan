@@ -6,6 +6,8 @@ import Model.Food;
 import View.*;
 
 import de.gurkenlabs.litiengine.Game;
+import de.gurkenlabs.litiengine.entities.Creature;
+import de.gurkenlabs.litiengine.entities.Prop;
 import de.gurkenlabs.litiengine.environment.CreatureMapObjectLoader;
 import de.gurkenlabs.litiengine.environment.PropMapObjectLoader;
 import de.gurkenlabs.litiengine.gui.screens.GameScreen;
@@ -66,15 +68,18 @@ public class GameController {
         mapController.initCamera();
         playerController.setGameView(Game.screens().get("Game"));
 
-        CreatureMapObjectLoader.registerCustomCreatureType(enemyController.getCreatures().get(0).getClass());
-        CreatureMapObjectLoader.registerCustomCreatureType(playerController.getCreatures().get(0).getClass());
-        PropMapObjectLoader.registerCustomPropType(foodController.getPropList().get(0).getClass());
+
+        CreatureMapObjectLoader.registerCustomCreatureType(Creature.class);
+        CreatureMapObjectLoader.registerCustomCreatureType(Creature.class);
+        PropMapObjectLoader.registerCustomPropType(Prop.class);
 
         Game.loop().attach(enemyController);
         Game.loop().attach(playerController);
 
         Game.world().loadEnvironment("new_map");
-        Game.world().environment().add(enemyController.getCreatures().get(0));
+
+        enemyController.spawnEnemy();
+
         playerController.getCreatures().get(0).setLocation(250,100);
         Game.world().environment().add(playerController.getCreatures().get(0));
         Game.world().environment().add(foodController.getPropList().get(0));

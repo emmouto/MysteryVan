@@ -1,8 +1,6 @@
-<<<<<<< HEAD
 main threw an exception:
-java.lang.NullPointerException
-	at Controller.GameController.addUpdateablesToGameLoop(GameController.java:108)
-	at Controller.GameController.init(GameController.java:91)
+java.lang.IndexOutOfBoundsException: Index: 0, Size: 0
+	at java.util.ArrayList.rangeCheck(ArrayList.java:657)
+	at java.util.ArrayList.get(ArrayList.java:433)
+	at Controller.GameController.init(GameController.java:76)
 	at GameRunner.main(GameRunner.java:17)
-=======
->>>>>>> e42be4777dfac28bb2dca9c13a7c532c9d9805cd

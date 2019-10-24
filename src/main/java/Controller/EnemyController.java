@@ -38,7 +38,7 @@ public class EnemyController implements IUpdateable {
     public EnemyController(List<Player> players, Map map) {
         this.players = players;
         this.map = map;
-        spawnEnemy();
+
         //initiatePathfinding();
         lastPathUpdate = Game.time().now();
     }
@@ -58,19 +58,19 @@ public class EnemyController implements IUpdateable {
     /**
      * Spawns an <code>Enemy<code> at the specified location, and sets all its properties.
      */
-    private void spawnEnemy() {
+    public void spawnEnemy() {
         Enemy e = EnemyFactory.spawnEnemy();
         e.setTarget(this.getPlayers().get(0));
         e.setPlatforms(map.getPlatforms());
         this.getEnemies().add(e);
         Creature c = new Creature();
+        c.setSpritePrefix(e.getSprite());
+        c.getHitPoints().setMaxValue(10);
+        c.getHitPoints().setToMaxValue();
+        c.getHitBox().getBounds().height = e.getHeight();
+        c.getHitBox().getBounds().width = e.getWidth();
         creatureList.add(c);
-        creatureList.get(creatureList.size() - 1).setSpritePrefix(enemies.get(enemies.size() - 1).getSprite());
-        creatureList.get(creatureList.size() - 1).getHitPoints().setMaxValue(10);
-        creatureList.get(creatureList.size() - 1).getHitPoints().setToMaxValue();
-        creatureList.get(creatureList.size() - 1).getHitBox().getBounds().height = enemies.get(enemies.size() - 1).getHeight();
-        creatureList.get(creatureList.size() - 1).getHitBox().getBounds().width = enemies.get(enemies.size() - 1).getWidth();
-        creatureList.get(creatureList.size() - 1).setAcceleration(50);
+        Game.world().environment().add(c);
         GameLoop.getInstance().setEnemies(enemies);
     }
 
