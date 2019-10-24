@@ -6,6 +6,12 @@ import Model.Platform;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A class for a hard map.
+ *
+ * @author Jonathan Carbol
+ * @version 0.1
+ */
 public class MapHard extends Map {
 
     /**
