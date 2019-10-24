@@ -20,7 +20,7 @@ public abstract class Enemy implements ICollidable, IMovable {
     private double x;
     private int y;
     private String sprite;
-    private boolean isGrounded = false;
+    private boolean isGrounded = true;
     private Random rand = new Random();
     private int speed;
     private List<Platform> platforms;
@@ -56,7 +56,7 @@ public abstract class Enemy implements ICollidable, IMovable {
         updateCollider();
         checkPlayerCollision();
         checkGrounded();
-        //move();
+        move();
     }
 
     /**
@@ -167,6 +167,10 @@ public abstract class Enemy implements ICollidable, IMovable {
 
     public void setTarget(Player p){
         this.target = p;
+    }
+
+    public Player getTarget(){
+        return this.target;
     }
 
     public boolean isGrounded(){

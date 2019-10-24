@@ -86,7 +86,7 @@ public class GameController {
 
     }
 
-    public void addUpdateablesToGameLoop(){
+    private void addUpdateablesToGameLoop(){
         GameLoop.getInstance().addUpdateables(playerController.getPlayers().get(0));
         for (Enemy e : enemyController.getEnemies()){
             GameLoop.getInstance().addUpdateables(e);
