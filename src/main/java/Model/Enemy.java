@@ -20,7 +20,7 @@ public abstract class Enemy implements ICollidable, IMovable {
     private double x;
     private int y;
     private String sprite;
-    private boolean isGrounded = true;
+    private boolean isGrounded = false;
     private Random rand = new Random();
     private int speed;
     private List<Platform> platforms;

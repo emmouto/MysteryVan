@@ -30,6 +30,6 @@ public class Potato extends Enemy {
         } else {
             setX(getX() + 0.1);
         }
-        setGrounded(false);
+        //setGrounded(false);
     }
 }
