@@ -104,7 +104,7 @@ public final class GameManager {
         // TODO fix the stats for the Hats and Weapons
         ADAM    ("Passive-aggressive and undead",15, 20, 10,
                 new Hat("Bunny Ears", new Boost(0, 0, 0)),
-                new Weapon("Laser Sword", 0, 1),
+                new Weapon("Laser Sword", 5, 2),
                 Resources.images().get("src/main/resources/SelectionView/Adam_portait.png"),
                 Resources.images().get("src/main/resources/SelectionView/Adam.png")),
 

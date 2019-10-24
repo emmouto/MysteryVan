@@ -1,8 +1,0 @@
-<<<<<<< HEAD
-main threw an exception:
-java.lang.NullPointerException
-	at Controller.GameController.addUpdateablesToGameLoop(GameController.java:108)
-	at Controller.GameController.init(GameController.java:91)
-	at GameRunner.main(GameRunner.java:17)
-=======
->>>>>>> e42be4777dfac28bb2dca9c13a7c532c9d9805cd

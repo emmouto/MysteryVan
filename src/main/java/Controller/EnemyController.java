@@ -80,6 +80,7 @@ public class EnemyController implements IUpdateable {
     @Override
     public void update() {
         if(GameManager.getState() == GameManager.GameState.INGAME) {
+            enemies=GameLoop.getInstance().getEnemies();
             for (int i = 0; i < this.getEnemies().size(); i++) {
                 creatureList.get(i).setLocation(enemies.get(i).getX(), enemies.get(i).getY());
                 enemies.get(i).setState(Enemy.State.INGAME);

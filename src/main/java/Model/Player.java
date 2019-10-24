@@ -38,6 +38,9 @@ public class Player implements IMovable, ICollidable{
     private long time;
     private long timeSinceDamage;
     private List<Platform> platforms;
+    private String walkingSprite;
+    private String idleSprite;
+    private String attackSprite;
 
     enum Direction{
         LEFT,
@@ -71,6 +74,9 @@ public class Player implements IMovable, ICollidable{
         this.hasJumped = false;
         this.direction = Direction.RIGHT;
         this.time = System.currentTimeMillis();
+        this.idleSprite = this.sprite;
+        this.attackSprite = this.sprite + "attack";
+        this.walkingSprite = this.sprite + "walk";
     }
 
     /**
@@ -246,8 +252,11 @@ public class Player implements IMovable, ICollidable{
         doGravity();
         updateCollider();
         updateScore();
-        move();
         attack();
+        move();
+        if(System.currentTimeMillis() - time > 1200){
+            this.setSprite(this.idleSprite);
+        }
     }
 
     /**
@@ -255,7 +264,7 @@ public class Player implements IMovable, ICollidable{
      */
 
     private void updateScore(){
-        this.setScore(this.getScore() + 1);
+        this.setScore(this.getScore());
     }
 
 
@@ -270,13 +279,17 @@ public class Player implements IMovable, ICollidable{
         if (Key.left.isDown && this.getX() > 0) {
                 this.setPosX(getX() - 2);
                 this.setDirection(Direction.LEFT);
-                this.setSprite((this.getSprite().replaceAll("([a-z])",""))+"walk");
+                if(!this.getSprite().equals(this.walkingSprite)) {
+                    this.setSprite(this.walkingSprite);
+                    time = System.currentTimeMillis()-1500;
+                }
         }else if (Key.right.isDown && this.getX() < 720) {
                 this.setPosX(getX() + 2);
                 this.setDirection(Direction.RIGHT);
-                this.setSprite((this.getSprite().replaceAll("([a-z])",""))+"walk");
-        }else{
-                this.setSprite(this.getSprite().replaceAll("([a-z])",""));
+                if(!this.getSprite().equals(this.walkingSprite)){
+                    this.setSprite(this.walkingSprite);
+                    time = System.currentTimeMillis()-1500;
+                }
         }
 
         isGrounded = false;
@@ -286,7 +299,7 @@ public class Player implements IMovable, ICollidable{
         } else {
             hasJumped = false;
         }
-        if(this.getX()< -10 || this.getX() > 720 || this.getY() > 470){
+        if(this.getX()< -10 || this.getX() > 720 || this.getY() > 450){
             this.setState(State.DEAD);
         }
     }
@@ -307,16 +320,17 @@ public class Player implements IMovable, ICollidable{
         if(Key.attack.isDown && System.currentTimeMillis()-time > 1500){
             for(int i = 0; i < GameLoop.getInstance().getEnemies().size()-1; i++) {
                 Enemy e = GameLoop.getInstance().getEnemies().get(i);
-                if(this.getDirection() == Direction.LEFT && e.getX() > this.getX()-this.getWeapon().getRange() && e.getX() < this.getX() && this.getY() + 20 > e.getY() && this.getY() - 20 < e.getY()){
+                System.out.println(e.getHP());
+                if(this.getDirection() == Direction.LEFT && e.getX() > this.getX()- 5 * this.getWeapon().getRange() && e.getX() < this.getX() + 50 && this.getY() + 50 > e.getY() && this.getY() - 50 < e.getY()){
                     dealDamage(e);
-                }else if(this.getDirection() == Direction.RIGHT && e.getX() < this.getX()+this.getWeapon().getRange() && e.getX() > this.getX()&& e.getX() < this.getX() && this.getY() + 20 > e.getY() && this.getY() - 20 < e.getY()){
+                }else if(this.getDirection() == Direction.RIGHT && e.getX() < this.getX()+ 5 * this.getWeapon().getRange() && e.getX() > this.getX() - 50 &&  this.getY() + 50 > e.getY() && this.getY() - 50 < e.getY()){
                     dealDamage(e);
                 }
             }
-            this.setSprite((this.getSprite().replaceAll("([a-z])",""))+"attack");
+            if(!this.getSprite().equals(this.attackSprite)) {
+                this.setSprite(this.attackSprite);
+            }
             time = System.currentTimeMillis();
-        } else if (System.currentTimeMillis() - time > 500){
-            this.setSprite((this.getSprite().replaceAll("([a-z])","")));
         }
 
     }
@@ -327,7 +341,7 @@ public class Player implements IMovable, ICollidable{
      */
     private void dealDamage(Enemy e){
         e.setHP(e.getHP()-this.getWeapon().getDamage());
-        if(e.getHP() < 0){
+        if(e.getHP() <= 0){
             this.setScore(this.getScore()+10);
             GameLoop.getInstance().getEnemies().remove(e);
         }
