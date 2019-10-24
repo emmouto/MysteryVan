@@ -8,15 +8,13 @@ import java.util.List;
 
 public class MapMedium extends Map {
 
-    private String name;
 
     /**
      * The public constructor for the Map class.
      *
-     * @param name the name of the map.
      */
-    public MapMedium(String name) {
-        super(name);
+    public MapMedium() {
+        super();
         initPlatforms();
     }
 

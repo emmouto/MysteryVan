@@ -8,15 +8,13 @@ import java.util.List;
 
 public class MapEasy extends Map {
 
-    private String name;
 
     /**
      * The public constructor for the Map class.
      *
-     * @param name the name of the map.
      */
-    public MapEasy(String name) {
-        super(name);
+    public MapEasy( ) {
+        super();
         initPlatforms();
     }
 
