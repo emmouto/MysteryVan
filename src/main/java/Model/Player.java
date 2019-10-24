@@ -266,6 +266,9 @@ public class Player implements IMovable, ICollidable{
         } else {
             hasJumped = false;
         }
+        if(this.getX()< -10 || this.getX() > 720 || this.getY() > 470){
+            this.setState(State.DEAD);
+        }
     }
 
     /**
