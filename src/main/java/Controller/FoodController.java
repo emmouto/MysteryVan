@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.*;
+import Model.Maps.MapHard;
 import View.GameManager;
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.IUpdateable;
@@ -24,8 +25,7 @@ import java.util.Random;
     private List<Prop> propList = new ArrayList<>();
 
     private MapController mc = new MapController();
-    private String mapName = mc.getMapName();
-    private Map map = new Map(mapName);
+    private Map map = new MapHard();
 
     private int size = map.getPlatforms().size();
 

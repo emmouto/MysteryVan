@@ -10,17 +10,13 @@ import java.util.List;
  * @version 0.1
  */
 public abstract class Map {
-    private String name;
     protected List<Platform> platforms= new ArrayList<>();
 
     /**
      * The public constructor for the Map class.
      *
-     * @param name the name of the map.
      */
-    public Map(String name) {
-        this.name = name;
-    }
+    public Map() {}
 
     /**
      * Initiates the list of platforms depending on which map is loaded.
@@ -30,9 +26,5 @@ public abstract class Map {
 
     public List<Platform> getPlatforms() {
         return this.platforms;
-    }
-
-    public String getName() {
-        return this.name;
     }
 }
