@@ -143,15 +143,6 @@ public class PlayerController implements IUpdateable {
     }
 
     /**
-     * If a player's HP is 0, the state changes to dead.
-     */
-    private void changeToDead (int i){
-        if (playerList.get(i).getHP() <= 0){
-            playerList.get(i).setState(Player.State.DEAD);
-        }
-    }
-
-    /**
      * Checks if player is dead, if so, then this method handles what happens.
      */
     private void whenDead(int i) {
