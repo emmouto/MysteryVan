@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Map;
 
+import Model.Maps.MapHard;
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.graphics.Camera;
 
@@ -14,7 +15,7 @@ import de.gurkenlabs.litiengine.graphics.Camera;
  */
 public class MapController {
     private Camera camera = new Camera();
-    private Map map = new Map("map1");
+    private Map map = new MapHard("map1");
 
     public Map getMap() {
         return this.map;
@@ -28,5 +29,9 @@ public class MapController {
                 Game.window().getResolution().getHeight() * 0.5 / camera.getRenderScale());
         camera.setClampToMap(true);
         Game.world().setCamera(camera);
+    }
+
+    public String getMapName() {
+        return this.map.getName();
     }
 }

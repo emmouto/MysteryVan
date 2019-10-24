@@ -26,7 +26,6 @@ public class GameLoop extends Thread{
     private boolean delayDone = false;
 
 
-
     public void run() {
         /*File file = new File("src/main/java/Model/game.json");
         try {
@@ -48,7 +47,7 @@ public class GameLoop extends Thread{
                 e.printStackTrace();
             }
             try {
-                sleep(20);
+                sleep(10);
             } catch (InterruptedException e) {
                 this.interrupt();
             }
@@ -71,6 +70,7 @@ public class GameLoop extends Thread{
         } else {
             delayDone = true;
         }
+
     }
 
     public void setDelayTimer(int ms){

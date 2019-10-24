@@ -15,9 +15,6 @@ public class Collider {
 
     private ICollidable body;
 
-    Collider(){
-
-    }
 
     /**
      * Updates the position in terms of x- and y-coordinates.
@@ -73,7 +70,7 @@ public class Collider {
 
     }
 
-    private double getX(){
+    public double getX(){
         return this.x;
     }
 

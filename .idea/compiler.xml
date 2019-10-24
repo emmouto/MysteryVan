@@ -6,10 +6,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Projekt" />
-        <module name="MysteryVan" />
         <module name="ChalmersForce" />
+        <module name="MysteryVan" />
         <module name="Programming" />
+        <module name="Projekt" />
       </profile>
     </annotationProcessing>
   </component>

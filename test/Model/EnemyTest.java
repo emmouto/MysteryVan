@@ -1,24 +1,49 @@
 package Model;
 
-import org.junit.Test;
+import Model.Enemies.Potato;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public class EnemyTest {
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+class EnemyTest {
+
+
+    List<Platform> ps = new ArrayList<>();
+    Player p = new Player("sprite", 1, 1, 1, 1, ps);
+    Enemy e = new Potato("sprite", 1, 1, 1, 1, 10);
+
 
     @Test
-    public void checkGrounded() {
+    void doesGravityApplyToCreature() {
+
+        e.setY(3);
+        e.doGravity();
+        assertEquals(6, e.getY());
+
+    }
+
+
+    @Test
+    void doesItCheckCollisionWithAPlayer() {
+
     }
 
     @Test
-    public void checkPlayerCollision() {
+    void doesItCheckIfCreatureIsGrounded() {
+
     }
 
-    @Test
-    public void update() {
-    }
 
     @Test
-    public void move() {
+    void isTheCreatureMoving() {
+
+        e.setX(2);
+        e.setTarget(new Player("player",5,0,0,0, new ArrayList<Platform>()));
+        e.move();
+        assertEquals(3, e.getX());
+
     }
 }

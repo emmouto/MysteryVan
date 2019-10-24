@@ -1,8 +1,8 @@
+<<<<<<< HEAD
 main threw an exception:
 java.lang.NullPointerException
-	at Controller.HighScoreController.loadHighScore(HighScoreController.java:57)
-	at Controller.HighScoreController.<init>(HighScoreController.java:30)
-	at View.HighScoreView.<init>(HighScoreView.java:26)
-	at Controller.GameController.addScreens(GameController.java:99)
-	at Controller.GameController.init(GameController.java:52)
+	at Controller.GameController.addUpdateablesToGameLoop(GameController.java:108)
+	at Controller.GameController.init(GameController.java:91)
 	at GameRunner.main(GameRunner.java:17)
+=======
+>>>>>>> e42be4777dfac28bb2dca9c13a7c532c9d9805cd

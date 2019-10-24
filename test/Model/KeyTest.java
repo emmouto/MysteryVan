@@ -1,12 +1,21 @@
 package Model;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class KeyTest {
+class KeyTest {
 
     @Test
-    public void toggle() {
+    void keyShouldToggleCurrentKeyState() {
+
+        Key k = new Key();
+        k.isDown = true;
+
+        k.toggle();
+
+        assertTrue(k.isDown == false);
+
+
     }
 }
