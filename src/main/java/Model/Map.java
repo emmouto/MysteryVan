@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The Map class for the project. It containes a list of platforms that are used to check player/enemy movements such as gravity.
+ * The Map class for the project. It contains a list of platforms that are used to check player/enemy movements such as gravity.
  *
  * @author Jonathan Carbol
  * @version 0.1

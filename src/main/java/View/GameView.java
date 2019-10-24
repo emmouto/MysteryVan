@@ -77,7 +77,7 @@ public class GameView extends GameScreen implements IUpdateable {
             case EASY:
                 Game.audio().playMusic(GameManager.STAGE_1);
                 break;
-            case NORMAL:
+            case MEDIUM:
                 Game.audio().playMusic(GameManager.STAGE_2);
                 break;
             case HARD:
