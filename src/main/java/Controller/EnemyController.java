@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class for controlling the <code>Enemy</code> entities in the game.
+ * Class for controlling the Enemy entities in the game.
  *
  * @author Adam Rohdell
  * @author Jonathan Carbol

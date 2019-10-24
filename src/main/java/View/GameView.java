@@ -20,17 +20,15 @@ import java.awt.image.BufferedImage;
  * @version 0.1
  */
 public class GameView extends GameScreen implements IUpdateable {
-    private Hud hud;
     private int HP;
     private int maxHP;
     private int score;
 
-    private static int PADDING = 10;
-    private final BufferedImage HEART = Imaging.scale(Resources.images().get("src/main/resources/heart.png"),0.05);
-    private final BufferedImage HEART_QUARTER = Imaging.scale(Resources.images().get("src/main/resources/heart1-4_2.png"),0.05);
-    private final BufferedImage HEART_HALF = Imaging.scale(Resources.images().get("src/main/resources/heart1-2_2.png"),0.05);
-    private final BufferedImage HEART_THREEQUARTER = Imaging.scale(Resources.images().get("src/main/resources/heart3-4_2.png"),0.05);
-    private final BufferedImage HEART_EMPTY = Imaging.scale(Resources.images().get("src/main/resources/heart0_2.png"), 0.05);
+    private final BufferedImage HEART = Imaging.scale(Resources.images().get("src/main/resources/GameView/heart.png"),0.05);
+    private final BufferedImage HEART_QUARTER = Imaging.scale(Resources.images().get("src/main/resources/GameView/heart1-4_2.png"),0.05);
+    private final BufferedImage HEART_HALF = Imaging.scale(Resources.images().get("src/main/resources/GameView/heart1-2_2.png"),0.05);
+    private final BufferedImage HEART_THREEQUARTER = Imaging.scale(Resources.images().get("src/main/resources/GameView/heart3-4_2.png"),0.05);
+    private final BufferedImage HEART_EMPTY = Imaging.scale(Resources.images().get("src/main/resources/GameView/heart0_2.png"), 0.05);
 
     /**
      * The public constructor for the GameView class.
@@ -39,8 +37,8 @@ public class GameView extends GameScreen implements IUpdateable {
      */
     public GameView(String screenName) {
         super(screenName);
-        this.hud = new Hud();
-        this.getComponents().add(this.hud);
+        Hud hud = new Hud();
+        this.getComponents().add(hud);
     }
 
     public int getHP() {
@@ -115,9 +113,6 @@ public class GameView extends GameScreen implements IUpdateable {
      * @version 0.1
      */
     public class Hud extends GuiComponent {
-        /**
-         * The package-protected constructor of the Hud class.
-         */
         Hud() {
             super(0, 0, Game.window().getResolution().getWidth(), Game.window().getResolution().getHeight());
         }
@@ -139,6 +134,7 @@ public class GameView extends GameScreen implements IUpdateable {
          * @param g the graphic to be rendered.
          */
         private void renderHP(Graphics2D g){
+            int PADDING = 10;
             double y = Game.window().getResolution().getHeight() - PADDING * 2 - HEART.getHeight();
             double x = Game.window().getResolution().getWidth() / 2.0 - ((Math.ceil(maxHP / 4.0)* (HEART.getWidth() + PADDING) * 0.5) - PADDING);
             boolean end = false;

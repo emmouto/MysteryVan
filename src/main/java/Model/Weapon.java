@@ -13,11 +13,11 @@ public class Weapon {
     private int range;
 
     /**
-     * Creates a new <code>Weapon</code> and sets its properties.
+     * Creates a new Weapon and sets its properties.
      *
-     * @param name the name of the <code>Weapon</code>.
-     * @param damage the damage that the <code>Weapon</code> does.
-     * @param range the range that the <code>Weapon</code> has.
+     * @param name the name of the Weapon.
+     * @param damage the damage that the Weapon does.
+     * @param range the range that the Weapon has.
      */
     public Weapon(String name, int damage, int range) {
         this.name = name;
@@ -33,7 +33,7 @@ public class Weapon {
         this.name = name;
     }
 
-    public int getDamage() {
+    int getDamage() {
         return damage;
     }
 
@@ -41,7 +41,7 @@ public class Weapon {
         this.damage = damage;
     }
 
-    public int getRange() {
+    int getRange() {
         return range;
     }
 

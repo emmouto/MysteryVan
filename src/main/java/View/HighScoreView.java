@@ -9,8 +9,6 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.gurkenlabs.litiengine.Game;
-import de.gurkenlabs.litiengine.IUpdateable;
 import de.gurkenlabs.litiengine.graphics.ImageRenderer;
 import de.gurkenlabs.litiengine.graphics.TextRenderer;
 import de.gurkenlabs.litiengine.gui.screens.Screen;
@@ -24,10 +22,10 @@ import de.gurkenlabs.litiengine.resources.Resources;
  * @author Jennifer Krogh
  * @version 0.1
  */
-public class HighScoreView extends Screen implements IUpdateable {
+public class HighScoreView extends Screen {
     private static final BufferedImage BRICK_BG = Resources.images().get("src/main/resources/HelpView/BrickBG.png");
 
-    private List<HighScore> highScoreList = new ArrayList<>(); //{h1, h2, h3, h4, h5, h6, h7, h8, h9, h10};
+    private List<HighScore> highScoreList = new ArrayList<>();
 
     private HighScoreController hc = new HighScoreController(highScoreList);
 
@@ -41,7 +39,7 @@ public class HighScoreView extends Screen implements IUpdateable {
     }
 
     protected void initializeComponents() {
-        ScreenController screenController = new ScreenController(0, 0, 0, 0, "HighScoreView");
+        ScreenController screenController = new ScreenController(0, 0, 0, 0, "");
         this.getComponents().add(screenController);
     }
 
@@ -81,13 +79,5 @@ public class HighScoreView extends Screen implements IUpdateable {
         }
 
         super.render(g);
-    }
-
-    /**
-     * This method is called by the game loop on all objects that need to update their attributes.
-     */
-    @Override
-    public void update() {
-
     }
 }

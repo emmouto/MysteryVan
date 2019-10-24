@@ -1,9 +1,7 @@
 package View;
 
-import Controller.PlayerController;
 import Controller.ScreenController;
-import de.gurkenlabs.litiengine.Game;
-import de.gurkenlabs.litiengine.IUpdateable;
+
 import de.gurkenlabs.litiengine.graphics.ImageRenderer;
 import de.gurkenlabs.litiengine.graphics.TextRenderer;
 import de.gurkenlabs.litiengine.gui.screens.Screen;
@@ -13,13 +11,12 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
- * ...
+ * Screen for when the Player pauses the game.
  *
  * @author Jennifer Krogh
  * @version 0.1
  */
-public class PauseView extends Screen implements IUpdateable {
-
+public class PauseView extends Screen {
     private static final BufferedImage BRICK_BG = Resources.images().get("src/main/resources/HelpView/BrickBG.png");
 
     /**
@@ -27,7 +24,6 @@ public class PauseView extends Screen implements IUpdateable {
      *
      * @param screenName name of the screen.
      */
-
     public PauseView(String screenName) {
         super(screenName);
     }
@@ -44,7 +40,6 @@ public class PauseView extends Screen implements IUpdateable {
      * @param g the graphics object to render on.
      */
     public void render(final Graphics2D g) {
-
         ImageRenderer.render(g, BRICK_BG, 0, 0);
 
         g.setColor(Color.BLACK);
@@ -58,17 +53,10 @@ public class PauseView extends Screen implements IUpdateable {
 
         g.setFont(GameManager.PIXELED_SMALL);
         g.setColor(Color.CYAN);
-        TextRenderer.render(g, "PRESS P TO RETURN TO GAME", GameManager.centerX - (29 * 24) / 2.0, GameManager.centerY * 0.90);
+        TextRenderer.render(g, "PRESS P TO RETURN TO GAME", GameManager.centerX - (29 * 24) / 2.0,
+                GameManager.centerY * 0.90);
         g.setColor(Color.MAGENTA);
-        TextRenderer.render(g, "PRESS ENTER TO RETURN TO MENU", GameManager.centerX - (29 * 24) / 2.0, GameManager.centerY * 1.25);
-    }
-
-
-    /**
-     * This method is called by the game loop on all objects that need to update their attributes.
-     */
-    @Override
-    public void update() {
-
+        TextRenderer.render(g, "PRESS ENTER TO RETURN TO MENU", GameManager.centerX - (29 * 24) / 2.0,
+                GameManager.centerY * 1.25);
     }
 }

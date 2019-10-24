@@ -27,9 +27,10 @@ public class PlayerController implements IUpdateable {
     private Map map;
     private GameView gameView;
 
-    private ScreenController screenController;
-    private DefeatView defeatView;
-    private HighScoreController highScoreController;
+    private ScreenController screenController = new ScreenController(0, 0, 0, 0, "");
+    private DefeatView defeatView = new DefeatView("Defeat");
+    private List<HighScore> highScoreList = new ArrayList<>();
+    private HighScoreController highScoreController = new HighScoreController(highScoreList);
     private KeyController keyController;
 
     /**
@@ -38,8 +39,7 @@ public class PlayerController implements IUpdateable {
     public PlayerController(Map map) {
         super();
         this.map=map;
-        spawnPlayer("ADAM", 23, 100, 0, new Hat("ugly", new Boost(
-                0, 0, 0)), new Weapon("xd", 0, 0));
+        spawnPlayer("ADAM", 23, 100, 0, new Hat("ugly", new Boost(0, 0, 0)), new Weapon("xd", 0, 0));
         updatePlayerController();
         screenController = new ScreenController(0, 0, 0, 0, "");
     }
@@ -106,7 +106,7 @@ public class PlayerController implements IUpdateable {
      * Updates the PlayerController, by setting the displayed creatures HP, hitbox and sprite among other things.
      */
     private void updatePlayerController(){
-        if(!playerList.isEmpty()) {
+        if (!playerList.isEmpty()) {
             for (int i = 0; i < playerList.size(); i++) {
                 Creature c = new Creature();
                 creatureList.add(c);
@@ -125,13 +125,14 @@ public class PlayerController implements IUpdateable {
      */
     @Override
     public void update() {
-
-        if(GameManager.getState() == GameManager.GameState.INGAME) {
+        if (GameManager.getState() == GameManager.GameState.INGAME) {
             for (int i = 0; i < playerList.size(); i++) {
+                playerList.get(i).setState(Player.State.ALIVE);
                 creatureList.get(i).setLocation(playerList.get(i).getX(), playerList.get(i).getY());
                // creatureList.get(i).setSpritePrefix(getPlayers().get(i).getSprite());
                 updateHealth(i);
                 updateScore(i);
+                //changeToDead(i);
                 whenDead(i);
                 screenController.changeToPause();
             }
@@ -142,19 +143,27 @@ public class PlayerController implements IUpdateable {
     }
 
     /**
+     * If a player's HP is 0, the state changes to dead.
+     */
+    private void changeToDead (int i){
+        if (playerList.get(i).getHP() <= 0){
+            playerList.get(i).setState(Player.State.DEAD);
+        }
+    }
+
+    /**
      * Checks if player is dead, if so, then this method handles what happens.
      */
     private void whenDead(int i) {
-
             if (playerList.get(i).getState() == Player.State.DEAD) {
                 HighScore newScore;
                 defeatView.scoreDefeat(playerList.get(i).getScore());
                 newScore = new HighScore(playerList.get(i).getScore(), playerList.get(i).getName());
                 highScoreController.addToScoreList(newScore);
                 screenController.changeScreen("Defeat", 500);
+                GameManager.setState(GameManager.GameState.DEFEAT_SCREEN);
             }
     }
-
 
     /**
      * Updates the health of the players and sends the data to the view to be displayed.
@@ -163,12 +172,12 @@ public class PlayerController implements IUpdateable {
     private void updateHealth(int i) {
         gameView.setHP(playerList.get(i).getHP());
         gameView.setMaxHP(playerList.get(i).getMaxHP());
-        creatureList.get(i).getHitPoints().setMaxValue(playerList.get(i).getHP());
-        creatureList.get(i).getHitPoints().setToMaxValue();
+        //creatureList.get(i).getHitPoints().setMaxValue(playerList.get(i).getHP());
+        //creatureList.get(i).getHitPoints().setToMaxValue();
 
        if (playerList.get(i).getHP() <= 0) {
-                playerList.get(i).setState(Player.State.DEAD);
-            }
+           playerList.get(i).setState(Player.State.DEAD);
+       }
     }
 
     /**

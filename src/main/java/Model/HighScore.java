@@ -15,10 +15,10 @@ public class HighScore {
 
     /**
      * At the end of the game, a new high score with the current score of the player
-     * and the player's name is created, which might will be added to the high score list.
+     * and the player's name is created, which might get added to the high score list.
      *
-     * @param highScore the score that the <code>Player</code> has at the end of the game.
-     * @param player the current <code>Player</code>.
+     * @param highScore the score that the Player has at the end of the game.
+     * @param player the current Player.
      */
     public HighScore(int highScore, String player) {
         this.highScore = highScore;

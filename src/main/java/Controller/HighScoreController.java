@@ -13,7 +13,6 @@ import java.util.List;
  * @version 0.1
  */
 public class HighScoreController {
-
     private List<HighScore> highScoreList;
     private String HighScoreDataPath;
     private String filename = "HighScoreData";
@@ -21,7 +20,7 @@ public class HighScoreController {
     /**
      * Class constructor.
      *
-     * @param highScoreList list containing HighScores.
+     * @param highScoreList list of highScores.
      */
     public HighScoreController(List<HighScore> highScoreList) {
         this.highScoreList = highScoreList;
@@ -29,9 +28,7 @@ public class HighScoreController {
 
         try {
             HighScoreDataPath = HighScoreController.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        } catch (Exception ignored) { }
 
         loadHighScore();
     }
@@ -47,9 +44,7 @@ public class HighScoreController {
 
             writer.write("No HighScore:0");
             writer.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        } catch (Exception ignored) { }
     }
 
     /**
@@ -86,9 +81,7 @@ public class HighScoreController {
             }
 
             reader.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        } catch (Exception ignored) { }
     }
 
     /**
@@ -107,9 +100,7 @@ public class HighScoreController {
             }
 
             writer.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        } catch (Exception ignored) { }
     }
 
     /**
