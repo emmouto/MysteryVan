@@ -270,11 +270,13 @@ public class Player implements IMovable, ICollidable{
         if (Key.left.isDown && this.getX() > 0) {
                 this.setPosX(getX() - 2);
                 this.setDirection(Direction.LEFT);
-        }
-
-        if (Key.right.isDown && this.getX() < 720) {
+                this.setSprite((this.getSprite().replaceAll("([a-z])",""))+"walk");
+        }else if (Key.right.isDown && this.getX() < 720) {
                 this.setPosX(getX() + 2);
                 this.setDirection(Direction.RIGHT);
+                this.setSprite((this.getSprite().replaceAll("([a-z])",""))+"walk");
+        }else{
+                this.setSprite(this.getSprite().replaceAll("([a-z])",""));
         }
 
         isGrounded = false;
@@ -311,10 +313,10 @@ public class Player implements IMovable, ICollidable{
                     dealDamage(e);
                 }
             }
-            this.setSprite((this.getSprite().replaceAll("([a-z])","")).replace("_","")+"_walk");
+            this.setSprite((this.getSprite().replaceAll("([a-z])",""))+"attack");
             time = System.currentTimeMillis();
         } else if (System.currentTimeMillis() - time > 500){
-            //this.setSprite((this.getSprite().replaceAll("([a-z])","")).replace("_",""));
+            this.setSprite((this.getSprite().replaceAll("([a-z])","")));
         }
 
     }

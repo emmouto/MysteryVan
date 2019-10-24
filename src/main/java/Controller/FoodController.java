@@ -25,7 +25,7 @@ import java.util.Random;
 
     private MapController mc = new MapController();
     private String mapName = mc.getMapName();
-    private Map map = new Map(mapName);
+    private Map map;
 
     private int size = map.getPlatforms().size();
 
