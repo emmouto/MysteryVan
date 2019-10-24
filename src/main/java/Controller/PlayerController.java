@@ -131,12 +131,22 @@ public class PlayerController implements IUpdateable {
                 creatureList.get(i).setSpritePrefix(getPlayers().get(i).getSprite());
                 updateHealth(i);
                 updateScore(i);
+                changeToDead(i);
                 whenDead(i);
                 screenController.changeToPause();
             }
         }
         else if(GameManager.getState() == GameManager.GameState.INGAME_PAUSE){
             screenController.changeToPause();
+        }
+    }
+
+    /**
+     * If a player's HP is 0, the state changes to dead.
+     */
+    private void changeToDead (int i){
+        if (playerList.get(i).getHP() >= 0){
+            playerList.get(i).setState(Player.State.DEAD);
         }
     }
 
