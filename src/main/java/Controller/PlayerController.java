@@ -29,8 +29,7 @@ public class PlayerController implements IUpdateable {
 
     private ScreenController screenController = new ScreenController(0, 0, 0, 0, "");
     private DefeatView defeatView = new DefeatView("Defeat");
-    private List<HighScore> highScoreList = new ArrayList<>();
-    private HighScoreController highScoreController = new HighScoreController(highScoreList);
+    private HighScoreController highScoreController = new HighScoreController();
     private KeyController keyController;
 
     /**

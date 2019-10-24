@@ -13,18 +13,15 @@ import java.util.List;
  * @version 0.1
  */
 public class HighScoreController {
-    private List<HighScore> highScoreList;
+    public List<HighScore> highScoreList;
     private String HighScoreDataPath;
     private String filename = "HighScoreData";
 
     /**
      * Class constructor.
      *
-     * @param highScoreList list of highScores.
      */
-    public HighScoreController(List<HighScore> highScoreList) {
-        this.highScoreList = highScoreList;
-        sortList(this.highScoreList);
+    public HighScoreController() {
 
         try {
             HighScoreDataPath = HighScoreController.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
@@ -115,6 +112,7 @@ public class HighScoreController {
             if (newScore.getHighScore() > highScoreList.get(9).getHighScore()) {
                 highScoreList.remove(9);
                 highScoreList.add(newScore);
+                sortList(highScoreList);
             }
         }
         setHighScoreData();
