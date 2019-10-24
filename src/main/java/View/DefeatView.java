@@ -32,7 +32,7 @@ public class DefeatView extends Screen {
     private int timer2 = 5;
     private int timer3 = 5;
 
-    private String score;
+    private int score;
 
     /**
      * Constructor. Sets the name of the screen.
@@ -98,7 +98,7 @@ public class DefeatView extends Screen {
      * @param score the score that the <code>Player</code> has at the end of the game.
      */
     public void scoreDefeat(int score) {
-        this.score = Integer.toString(score);
+        this.score = score;
     }
 
 }

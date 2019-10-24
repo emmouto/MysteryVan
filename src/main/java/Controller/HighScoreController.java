@@ -13,7 +13,7 @@ import java.util.List;
  * @version 0.1
  */
 public class HighScoreController {
-    public List<HighScore> highScoreList;
+    public List<HighScore> highScoreList = new ArrayList<>();
     private String HighScoreDataPath;
     private String filename = "HighScoreData";
 
@@ -54,7 +54,9 @@ public class HighScoreController {
         String playerName;
         HighScore newHigh;
 
-        highScoreList.clear();
+        if(highScoreList != null) {
+            highScoreList.clear();
+        }
 
         try {
             File file = new File(HighScoreDataPath, filename);

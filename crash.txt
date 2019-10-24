@@ -1,22 +1,8 @@
-Render Loop threw an exception:
+main threw an exception:
 java.lang.NullPointerException
-	at de.gurkenlabs.litiengine.graphics.RenderEngine.lambda$renderEntities$2(RenderEngine.java:217)
-	at java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:174)
-	at java.util.concurrent.ConcurrentHashMap$ValueSpliterator.forEachRemaining(ConcurrentHashMap.java:3566)
-	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:481)
-	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:471)
-	at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708)
-	at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
-	at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:499)
-	at de.gurkenlabs.litiengine.graphics.RenderEngine.renderEntities(RenderEngine.java:217)
-	at de.gurkenlabs.litiengine.environment.Environment.render(Environment.java:1233)
-	at de.gurkenlabs.litiengine.environment.Environment.render(Environment.java:1061)
-	at de.gurkenlabs.litiengine.gui.screens.GameScreen.render(GameScreen.java:19)
-<<<<<<< HEAD
-	at View.GameView.render(GameView.java:100)
-=======
-	at View.GameView.render(GameView.java:98)
->>>>>>> master
-	at de.gurkenlabs.litiengine.graphics.RenderComponent.render(RenderComponent.java:157)
-	at de.gurkenlabs.litiengine.RenderLoop.process(RenderLoop.java:25)
-	at de.gurkenlabs.litiengine.UpdateLoop.run(UpdateLoop.java:46)
+	at Controller.HighScoreController.loadHighScore(HighScoreController.java:57)
+	at Controller.HighScoreController.<init>(HighScoreController.java:30)
+	at View.HighScoreView.<init>(HighScoreView.java:26)
+	at Controller.GameController.addScreens(GameController.java:99)
+	at Controller.GameController.init(GameController.java:52)
+	at GameRunner.main(GameRunner.java:17)
