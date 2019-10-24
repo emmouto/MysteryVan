@@ -19,7 +19,6 @@ public class HighScoreController {
 
     /**
      * Class constructor.
-     *
      */
     public HighScoreController() {
 
@@ -76,7 +75,9 @@ public class HighScoreController {
                 playerScore = Integer.parseInt(storeSplit[1]);
                 playerName = storeSplit[0];
                 newHigh = new HighScore(playerScore, playerName);
-                highScoreList.add(newHigh);
+                if (!(newHigh.getPlayer().equals("No HighScore"))){
+                    highScoreList.add(newHigh);
+                }
             }
 
             reader.close();
@@ -118,6 +119,7 @@ public class HighScoreController {
         }
         sortList(highScoreList);
         setHighScoreData();
+        loadHighScore();
     }
 
     /**

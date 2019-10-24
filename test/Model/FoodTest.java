@@ -2,6 +2,9 @@ package Model;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class FoodTest {
@@ -9,7 +12,9 @@ class FoodTest {
     @Test
     void determineARandomFoodFromThreeOptions() {
 
-        Food f = new Food(1,1);
+        List<Platform> ps = new ArrayList<>();
+        Player p = new Player("sprite", 1, 1, 1, 1, ps);
+        Food f = new Food(1,1, p);
 
 
         while(!f.getName().equals("beer")) {

@@ -2,9 +2,7 @@ package Controller;
 
 import Model.Enemy;
 import Model.GameLoop;
-import Model.Food;
 import View.*;
-
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.environment.CreatureMapObjectLoader;
 import de.gurkenlabs.litiengine.environment.PropMapObjectLoader;
@@ -72,6 +70,7 @@ public class GameController {
 
         Game.loop().attach(enemyController);
         Game.loop().attach(playerController);
+        Game.loop().attach(foodController);
 
         Game.world().loadEnvironment("new_map");
         Game.world().environment().add(enemyController.getCreatures().get(0));
@@ -83,13 +82,12 @@ public class GameController {
         Game.screens().display("Menu");
 
         //Game.graphics().setBaseRenderScale(2.001f);
-        //Resources.spritesheets().get("AppleWorm", true);
 
 
         Game.start();
 
         addUpdateablesToGameLoop();
-        GameLoop.getInstance().setDelayTimer(100);
+        //GameLoop.getInstance().setDelayTimer(6000);
         GameLoop.getInstance().run();
 
 
@@ -101,14 +99,15 @@ public class GameController {
             GameLoop.getInstance().addUpdateables(e);
         }
 
-        //gameLoop.addUpdateables(foodController.getFood().get(0));
+        GameLoop.getInstance().addUpdateables(foodController.getFood().get(0));
 
 
+        /*
         for (Food f : foodController.getFood()) {
             GameLoop.getInstance().addUpdateables(f);
         }
 
-
+*/
 
     }
 
