@@ -129,10 +129,8 @@ public class PlayerController implements IUpdateable {
             for (int i = 0; i < playerList.size(); i++) {
                 playerList.get(i).setState(Player.State.ALIVE);
                 creatureList.get(i).setLocation(playerList.get(i).getX(), playerList.get(i).getY());
-               // creatureList.get(i).setSpritePrefix(getPlayers().get(i).getSprite());
                 updateHealth(i);
                 updateScore(i);
-                //changeToDead(i);
                 whenDead(i);
                 screenController.changeToPause();
             }

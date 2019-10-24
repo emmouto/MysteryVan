@@ -1,8 +1,0 @@
-main threw an exception:
-java.lang.NullPointerException
-	at Controller.HighScoreController.loadHighScore(HighScoreController.java:57)
-	at Controller.HighScoreController.<init>(HighScoreController.java:30)
-	at View.HighScoreView.<init>(HighScoreView.java:26)
-	at Controller.GameController.addScreens(GameController.java:99)
-	at Controller.GameController.init(GameController.java:52)
-	at GameRunner.main(GameRunner.java:17)
