@@ -6,8 +6,13 @@ import Model.Platform;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A class for a medium map.
+ *
+ * @author Jonathan Carbol
+ * @version 0.1
+ */
 public class MapMedium extends Map {
-
 
     /**
      * The public constructor for the Map class.

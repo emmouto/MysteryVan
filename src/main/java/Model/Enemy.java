@@ -53,6 +53,7 @@ public abstract class Enemy implements ICollidable, IMovable {
         this.collider.updateSize(width, height);
         this.state = State.PAUSE;
         this.dmg = dmg;
+        this.HP = 10;
         this.speed = rand.nextInt(5);
         if (speed == 0){
             speed = 1;

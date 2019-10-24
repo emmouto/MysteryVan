@@ -38,7 +38,7 @@ public final class GameManager {
     static final Sound STAGE_3 = Resources.sounds().get("src/main/resources/audio/music/stage3.ogg");
 
     /* --- Enum values -- */
-    private static DifficultyLevel selectedDifficulty = DifficultyLevel.NORMAL;
+    private static DifficultyLevel selectedDifficulty = DifficultyLevel.MEDIUM;
     private static GameState state = GameState.TITLE_SCREEN;
 
     public static DifficultyLevel getSelectedDifficulty() {
@@ -75,7 +75,7 @@ public final class GameManager {
      */
     public enum DifficultyLevel {
         EASY    ("The enemy spawn rate is slow."),
-        NORMAL  ("The enemy spawn rate is normal."),
+        MEDIUM  ("The enemy spawn rate is normal."),
         HARD    ("The enemy spawn rate is fast.");
 
         private String description;
@@ -104,7 +104,7 @@ public final class GameManager {
         // TODO fix the stats for the Hats and Weapons
         ADAM    ("Passive-aggressive and undead",15, 20, 10,
                 new Hat("Bunny Ears", new Boost(0, 0, 0)),
-                new Weapon("Laser Sword", 0, 1),
+                new Weapon("Laser Sword", 5, 2),
                 Resources.images().get("src/main/resources/SelectionView/Adam_portait.png"),
                 Resources.images().get("src/main/resources/SelectionView/Adam.png")),
 

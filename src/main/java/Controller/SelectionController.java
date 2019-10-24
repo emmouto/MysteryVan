@@ -143,11 +143,11 @@ public class SelectionController extends GuiComponent {
                 case EASY:
                     GameManager.setSelectedDifficulty(GameManager.DifficultyLevel.HARD);
                     break;
-                case NORMAL:
+                case MEDIUM:
                     GameManager.setSelectedDifficulty(GameManager.DifficultyLevel.EASY);
                     break;
                 case HARD:
-                    GameManager.setSelectedDifficulty(GameManager.DifficultyLevel.NORMAL);
+                    GameManager.setSelectedDifficulty(GameManager.DifficultyLevel.MEDIUM);
                     break;
             }
         }
@@ -178,9 +178,9 @@ public class SelectionController extends GuiComponent {
 
             switch (GameManager.getSelectedDifficulty()) {
                 case EASY:
-                    GameManager.setSelectedDifficulty(GameManager.DifficultyLevel.NORMAL);
+                    GameManager.setSelectedDifficulty(GameManager.DifficultyLevel.MEDIUM);
                     break;
-                case NORMAL:
+                case MEDIUM:
                     GameManager.setSelectedDifficulty(GameManager.DifficultyLevel.HARD);
                     break;
                 case HARD:
