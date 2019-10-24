@@ -7,15 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MapHard extends Map {
-    private String name;
 
     /**
      * The public constructor for the Map class.
      *
-     * @param name the name of the map.
      */
-    public MapHard(String name) {
-        super(name);
+    public MapHard() {
+        super();
         initPlatforms();
     }
 
