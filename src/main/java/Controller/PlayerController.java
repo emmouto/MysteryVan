@@ -5,6 +5,7 @@ import View.DefeatView;
 import View.GameManager;
 import View.GameView;
 
+import View.HighScoreView;
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.IUpdateable;
 import de.gurkenlabs.litiengine.entities.Creature;
@@ -30,7 +31,8 @@ public class PlayerController implements IUpdateable {
 
     private ScreenController screenController = new ScreenController(0, 0, 0, 0, "");
     private DefeatView defeatView;
-    private HighScoreController highScoreController = new HighScoreController();
+    private HighScoreView highScoreView;
+   // private HighScoreController highScoreController = new HighScoreController();
     private KeyController keyController;
 
     /**
@@ -150,8 +152,10 @@ public class PlayerController implements IUpdateable {
                 HighScore newScore;
                 defeatView = (DefeatView) Game.screens().get("Defeat");
                 defeatView.scoreDefeat(playerList.get(i).getScore());
+
                 newScore = new HighScore(playerList.get(i).getScore(), playerList.get(i).getName());
-                highScoreController.addToScoreList(newScore);
+                highScoreView = (HighScoreView) Game.screens().get("HighScore");
+                highScoreView.hc.addToScoreList(newScore);
                 screenController.changeScreen("Defeat", 500);
                 GameManager.setState(GameManager.GameState.DEFEAT_SCREEN);
             }

@@ -23,7 +23,7 @@ import de.gurkenlabs.litiengine.resources.Resources;
 public class HighScoreView extends Screen {
     private static final BufferedImage BRICK_BG = Resources.images().get("src/main/resources/HelpView/BrickBG.png");
 
-    private HighScoreController hc = new HighScoreController();
+    public HighScoreController hc = new HighScoreController();
 
     /**
      * Constructor. Sets the name of the screen.
