@@ -25,6 +25,14 @@ public abstract class Enemy implements ICollidable, IMovable {
     private int speed;
     private List<Platform> platforms;
     private Player target;
+    public State state;
+    private int dmg;
+
+
+    public enum State{
+        INGAME,
+        PAUSE
+    }
     /**
      * Constructor for an enemy.
      *
@@ -34,7 +42,7 @@ public abstract class Enemy implements ICollidable, IMovable {
      * @param width the enemy's width.
      * @param height the enemy's height.
      */
-    public Enemy(String sprite, int posX, int posY, int width, int height){
+    public Enemy(String sprite, int posX, int posY, int width, int height, int dmg){
         this.sprite = sprite;
         this.x = posX;
         this.y = posY;
@@ -43,6 +51,8 @@ public abstract class Enemy implements ICollidable, IMovable {
         this.collider = new Collider();
         this.collider.updatePosition(posX, posY);
         this.collider.updateSize(width, height);
+        this.state = State.PAUSE;
+        this.dmg = dmg;
         this.speed = rand.nextInt(5);
         if (speed == 0){
             speed = 1;
@@ -52,11 +62,15 @@ public abstract class Enemy implements ICollidable, IMovable {
      * Updates all aspects of an enemy.
      */
     public void update(){
-        doGravity();
-        updateCollider();
-        checkPlayerCollision();
-        checkGrounded();
-        //move();
+        if(this.state == State.INGAME) {
+            doGravity();
+            updateCollider();
+            if(checkPlayerCollision()){
+                target.takeDamage(this.dmg);
+            }
+            checkGrounded();
+            move();
+        }
     }
 
     /**
@@ -159,6 +173,14 @@ public abstract class Enemy implements ICollidable, IMovable {
 
     public int getWidth() {
         return width;
+    }
+
+    public State getState() {
+        return state;
+    }
+
+    public void setState(State state) {
+        this.state = state;
     }
 
     public void setPlatforms(List<Platform> platforms){

@@ -82,6 +82,7 @@ public class EnemyController implements IUpdateable {
         if(GameManager.getState() == GameManager.GameState.INGAME) {
             for (int i = 0; i < this.getEnemies().size(); i++) {
                 creatureList.get(i).setLocation(enemies.get(i).getX(), enemies.get(i).getY());
+                enemies.get(i).setState(Enemy.State.INGAME);
                 if(enemies.get(i).getHP()<0){
                     enemies.remove(i);
                     creatureList.remove(i);
@@ -89,6 +90,10 @@ public class EnemyController implements IUpdateable {
             }
             if (GameLoop.getInstance().checkIfDelayDone()){
                 spawnEnemy();
+            }
+        }else{
+            for(int i = 0; i < this.getEnemies().size();i++){
+                enemies.get(i).setState(Enemy.State.PAUSE);
             }
         }
     }

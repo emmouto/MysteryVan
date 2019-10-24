@@ -16,8 +16,8 @@ public class Potato extends Enemy {
      * @param width     the enemy's width.
      * @param height    the enemy's height.
      */
-    public Potato(String sprite, int posX, int posY, int width, int height) {
-        super(sprite, posX, posY, width, height);
+    public Potato(String sprite, int posX, int posY, int width, int height, int dmg) {
+        super(sprite, posX, posY, width, height, dmg);
     }
 
     /**
