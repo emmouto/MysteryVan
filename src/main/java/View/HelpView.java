@@ -45,7 +45,7 @@ public class HelpView extends Screen {
      * Sets the music.
      */
     public void prepare() {
-        Game.audio().playMusic(Resources.sounds().get("src/main/resources/audio/music/stage_select.ogg"));
+        Game.audio().playMusic(GameManager.STAGE_SELECT);
 
         super.prepare();
     }

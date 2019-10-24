@@ -42,6 +42,8 @@ public class KeyController implements KeyListener, IUpdateable {
         bind(KeyEvent.VK_SPACE, Key.attack);
         bind(KeyEvent.VK_P, Key.pause);
         bind(KeyEvent.VK_ENTER, Key.enter);
+        bind(KeyEvent.VK_ESCAPE, Key.back);
+        bind(KeyEvent.VK_BACK_SPACE, Key.back);
 
         Input.keyboard().onKeyPressed(this::keyPressed);
         Input.keyboard().onKeyReleased(this::keyReleased);
