@@ -70,7 +70,7 @@ public class Collider {
 
     }
 
-    private double getX(){
+    public double getX(){
         return this.x;
     }
 

@@ -105,7 +105,7 @@ public class GameController {
 
 
         for (Food f : foodController.getFood()) {
-            gameLoop.addUpdateables(f);
+            GameLoop.getInstance().addUpdateables(f);
         }
 
 

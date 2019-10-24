@@ -63,12 +63,12 @@ public abstract class Enemy implements ICollidable, IMovable {
      */
     public void update(){
         if(this.state == State.INGAME) {
+            checkGrounded();
             doGravity();
             updateCollider();
             if(checkPlayerCollision()){
                 target.takeDamage(this.dmg);
             }
-            checkGrounded();
             move();
         }
     }
@@ -78,7 +78,7 @@ public abstract class Enemy implements ICollidable, IMovable {
      */
     public void doGravity(){
         if (!isGrounded){
-            setY(getY()+1);
+            setY(getY()+3);
         }
     }
 
@@ -112,11 +112,9 @@ public abstract class Enemy implements ICollidable, IMovable {
      * Checks if the enemy is on the ground or a platform.
      */
     private void checkGrounded(){
-        if(!isGrounded){
-            for (ICollidable platform : platforms){
-                if (!isGrounded){
-                    isGrounded = collider.isColliding(platform, "DOWN");
-                }
+        for (ICollidable platform : platforms){
+            if (!isGrounded){
+                isGrounded = collider.isColliding(platform, "DOWN");
             }
         }
     }

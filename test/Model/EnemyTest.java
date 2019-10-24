@@ -1,5 +1,6 @@
 package Model;
 
+import Model.Enemies.Potato;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -12,19 +13,19 @@ class EnemyTest {
 
     List<Platform> ps = new ArrayList<>();
     Player p = new Player("sprite", 1, 1, 1, 1, ps);
-    Enemy e = new Enemy("sprite", 1, 1, 1, 1, ps, p);
+    Enemy e = new Potato("sprite", 1, 1, 1, 1, 10);
+
 
     @Test
     void doesGravityApplyToCreature() {
 
         e.setY(3);
         e.doGravity();
-
         assertEquals(6, e.getY());
 
     }
 
-/*
+
     @Test
     void doesItCheckCollisionWithAPlayer() {
 
@@ -35,14 +36,13 @@ class EnemyTest {
 
     }
 
- */
 
     @Test
     void isTheCreatureMoving() {
 
         e.setX(2);
+        e.setTarget(new Player("player",5,0,0,0, new ArrayList<Platform>()));
         e.move();
-
         assertEquals(3, e.getX());
 
     }

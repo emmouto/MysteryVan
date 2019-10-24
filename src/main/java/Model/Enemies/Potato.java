@@ -26,10 +26,12 @@ public class Potato extends Enemy {
     @Override
     public void move() {
         if (getTarget().getX() <= getX()){
-            setX(getX() - 0.1);
+            setX(getX() - 1);
         } else {
-            setX(getX() + 0.1);
+            setX(getX() + 1);
         }
-        //setGrounded(false);
+
+        setGrounded(false);
+
     }
 }
