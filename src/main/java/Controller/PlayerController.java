@@ -30,9 +30,6 @@ public class PlayerController implements IUpdateable {
     private GameView gameView;
 
     private ScreenController screenController = new ScreenController(0, 0, 0, 0, "");
-    private DefeatView defeatView;
-    private HighScoreView highScoreView;
-   // private HighScoreController highScoreController = new HighScoreController();
     private KeyController keyController;
 
     /**
@@ -147,6 +144,9 @@ public class PlayerController implements IUpdateable {
      */
     private void whenDead(int i) {
             if (playerList.get(i).getState() == Player.State.DEAD) {
+                DefeatView defeatView;
+                HighScoreView highScoreView;
+
                 HighScore newScore;
                 defeatView = (DefeatView) Game.screens().get("Defeat");
                 defeatView.scoreDefeat(playerList.get(i).getScore());
@@ -154,6 +154,7 @@ public class PlayerController implements IUpdateable {
                 newScore = new HighScore(playerList.get(i).getScore(), playerList.get(i).getName());
                 highScoreView = (HighScoreView) Game.screens().get("HighScore");
                 highScoreView.hc.addToScoreList(newScore);
+
                 screenController.changeScreen("Defeat", 500);
                 GameManager.setState(GameManager.GameState.DEFEAT_SCREEN);
             }
