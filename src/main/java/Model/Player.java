@@ -30,7 +30,7 @@ public class Player implements IMovable, ICollidable{
     private int score;
     private String sprite;
     private Collider collider;
-    private boolean isGrounded = false;
+    public boolean isGrounded = false;
     private boolean hasJumped = false;
     private double gravity;
     private State state;
@@ -186,8 +186,16 @@ public class Player implements IMovable, ICollidable{
         return posX;
     }
 
+    public void setX(int posX) {
+        this.posX = posX;
+    }
+
     public int getY() {
         return posY;
+    }
+
+    public void setY(int posY) {
+        this.posY = posY;
     }
 
     public int getMaxHP(){
@@ -196,6 +204,14 @@ public class Player implements IMovable, ICollidable{
 
     public void setMaxHP(int maxHP){
         this.maxHP = maxHP;
+    }
+
+    public double getGravity() {
+        return gravity;
+    }
+
+    public void setGravity(double gravity) {
+        this.gravity = gravity;
     }
 
     public int getScore() {
@@ -237,9 +253,11 @@ public class Player implements IMovable, ICollidable{
     /**
      * Updates the score of the Player.
      */
+
     private void updateScore(){
         this.setScore(this.getScore() + 1);
     }
+
 
     /**
      * Moves the player depending on input from the user.
@@ -274,7 +292,8 @@ public class Player implements IMovable, ICollidable{
     /**
      * Makes the player jump.
      */
-    private void jump() {
+
+    public void jump(){
         this.gravity = -7;
         hasJumped = true;
     }
@@ -344,7 +363,7 @@ public class Player implements IMovable, ICollidable{
     /**
      * Applies gravity to the player.
      */
-    private void doGravity() {
+    public void doGravity() {
         if (!isGrounded || hasJumped) {
             setPosY(((int)(getY() + this.gravity)));
         }

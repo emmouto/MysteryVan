@@ -1,4 +1,5 @@
 main threw an exception:
+<<<<<<< HEAD
 java.lang.NullPointerException
 	at Controller.HighScoreController.loadHighScore(HighScoreController.java:57)
 	at Controller.HighScoreController.<init>(HighScoreController.java:30)
@@ -6,3 +7,9 @@ java.lang.NullPointerException
 	at Controller.GameController.addScreens(GameController.java:99)
 	at Controller.GameController.init(GameController.java:52)
 	at GameRunner.main(GameRunner.java:17)
+=======
+java.lang.ClassCastException: Model.Food cannot be cast to Model.IUpdateable
+	at Controller.GameController.addUpdateablesToGameLoop(GameController.java:95)
+	at Controller.GameController.init(GameController.java:85)
+	at GameRunner.main(GameRunner.java:25)
+>>>>>>> itemBranch

@@ -76,7 +76,7 @@ public abstract class Enemy implements ICollidable, IMovable {
     /**
      * If an enemy is not on the ground, this method makes them affected by gravity.
      */
-    private void doGravity(){
+    public void doGravity(){
         if (!isGrounded){
             setY(getY()+1);
         }

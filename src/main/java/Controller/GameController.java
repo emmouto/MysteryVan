@@ -2,10 +2,12 @@ package Controller;
 
 import Model.Enemy;
 import Model.GameLoop;
+import Model.Food;
 import View.*;
 
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.environment.CreatureMapObjectLoader;
+import de.gurkenlabs.litiengine.environment.PropMapObjectLoader;
 import de.gurkenlabs.litiengine.gui.screens.GameScreen;
 import de.gurkenlabs.litiengine.gui.screens.Resolution;
 import de.gurkenlabs.litiengine.input.Input;
@@ -24,6 +26,9 @@ public class GameController {
     private GameLoop gameLoop;
     private PlayerController playerController;
     private EnemyController enemyController;
+    private KeyController keyController;
+    private MapController mapController;
+    private FoodController foodController;
 
     /**
      *
@@ -54,13 +59,16 @@ public class GameController {
         Resources.load("game.litidata");
         playerController = new PlayerController(mapController.getMap());
         enemyController = new EnemyController(playerController.getPlayers(), mapController.getMap());
-        KeyController keyController = new KeyController(playerController);
+
+        keyController = new KeyController(playerController);
+        foodController = new FoodController(playerController.getPlayers());
 
         mapController.initCamera();
         playerController.setGameView(Game.screens().get("Game"));
 
         CreatureMapObjectLoader.registerCustomCreatureType(enemyController.getCreatures().get(0).getClass());
         CreatureMapObjectLoader.registerCustomCreatureType(playerController.getCreatures().get(0).getClass());
+        PropMapObjectLoader.registerCustomPropType(foodController.getPropList().get(0).getClass());
 
         Game.loop().attach(enemyController);
         Game.loop().attach(playerController);
@@ -69,18 +77,21 @@ public class GameController {
         Game.world().environment().add(enemyController.getCreatures().get(0));
         playerController.getCreatures().get(0).setLocation(250,100);
         Game.world().environment().add(playerController.getCreatures().get(0));
+        Game.world().environment().add(foodController.getPropList().get(0));
 
         // Displays the title screen ("Menu")
         Game.screens().display("Menu");
 
         //Game.graphics().setBaseRenderScale(2.001f);
-        Resources.spritesheets().get("AppleWorm", true);
+        //Resources.spritesheets().get("AppleWorm", true);
+
 
         Game.start();
-        addUpdateablesToGameLoop();
 
+        addUpdateablesToGameLoop();
         GameLoop.getInstance().setDelayTimer(100);
         GameLoop.getInstance().run();
+
 
     }
 
@@ -89,6 +100,16 @@ public class GameController {
         for (Enemy e : enemyController.getEnemies()){
             GameLoop.getInstance().addUpdateables(e);
         }
+
+        //gameLoop.addUpdateables(foodController.getFood().get(0));
+
+
+        for (Food f : foodController.getFood()) {
+            gameLoop.addUpdateables(f);
+        }
+
+
+
     }
 
     private void addScreens() {

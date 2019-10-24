@@ -1,4 +1,4 @@
-import Controller.*;
+import Controller.GameController;
 
 /**
  * Sets up all the screens and runs the game.
@@ -15,5 +15,7 @@ public class GameRunner {
     public static void main(String[] args) {
         GameController gc = new GameController();
         gc.init();
+
+
     }
 }

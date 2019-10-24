@@ -24,5 +24,6 @@ public class Key {
      */
     public void toggle() {
         isDown =  !isDown;
+
     }
 }
