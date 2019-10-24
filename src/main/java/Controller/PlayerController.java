@@ -5,6 +5,7 @@ import View.DefeatView;
 import View.GameManager;
 import View.GameView;
 
+import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.IUpdateable;
 import de.gurkenlabs.litiengine.entities.Creature;
 import de.gurkenlabs.litiengine.gui.screens.Screen;
@@ -28,7 +29,7 @@ public class PlayerController implements IUpdateable {
     private GameView gameView;
 
     private ScreenController screenController = new ScreenController(0, 0, 0, 0, "");
-    private DefeatView defeatView = new DefeatView("Defeat");
+    private DefeatView defeatView;
     private HighScoreController highScoreController = new HighScoreController();
     private KeyController keyController;
 
@@ -128,10 +129,8 @@ public class PlayerController implements IUpdateable {
             for (int i = 0; i < playerList.size(); i++) {
                 playerList.get(i).setState(Player.State.ALIVE);
                 creatureList.get(i).setLocation(playerList.get(i).getX(), playerList.get(i).getY());
-               // creatureList.get(i).setSpritePrefix(getPlayers().get(i).getSprite());
                 updateHealth(i);
                 updateScore(i);
-                //changeToDead(i);
                 whenDead(i);
                 screenController.changeToPause();
             }
@@ -142,20 +141,12 @@ public class PlayerController implements IUpdateable {
     }
 
     /**
-     * If a player's HP is 0, the state changes to dead.
-     */
-    private void changeToDead (int i){
-        if (playerList.get(i).getHP() <= 0){
-            playerList.get(i).setState(Player.State.DEAD);
-        }
-    }
-
-    /**
      * Checks if player is dead, if so, then this method handles what happens.
      */
     private void whenDead(int i) {
             if (playerList.get(i).getState() == Player.State.DEAD) {
                 HighScore newScore;
+                defeatView = (DefeatView) Game.screens().get("Defeat");
                 defeatView.scoreDefeat(playerList.get(i).getScore());
                 newScore = new HighScore(playerList.get(i).getScore(), playerList.get(i).getName());
                 highScoreController.addToScoreList(newScore);
