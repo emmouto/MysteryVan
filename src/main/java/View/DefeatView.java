@@ -32,7 +32,7 @@ public class DefeatView extends Screen {
     private int timer2 = 5;
     private int timer3 = 5;
 
-    private int score = 0;
+    private String score;
 
     /**
      * Constructor. Sets the name of the screen.
@@ -75,7 +75,7 @@ public class DefeatView extends Screen {
 
         g.setFont(GameManager.RAINY_MEDIUM);
         g.setColor(Color.WHITE);
-        TextRenderer.render(g, "Your score: " + score, 430, 300);
+        TextRenderer.render(g, "Your score: " + this.score, 430, 300);
 
         g.setFont(GameManager.PIXELED_SMALL);
         TextRenderer.render(g, "PRESS ENTER TO SEE HIGH SCORES", GameManager.centerX - (29 * 24) / 2.0, GameManager.centerY * 1.3);
@@ -98,7 +98,7 @@ public class DefeatView extends Screen {
      * @param score the score that the <code>Player</code> has at the end of the game.
      */
     public void scoreDefeat(int score) {
-        this.score = score;
+        this.score = Integer.toString(score);
     }
 
 }
