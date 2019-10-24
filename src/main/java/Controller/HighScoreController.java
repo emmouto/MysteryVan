@@ -112,9 +112,9 @@ public class HighScoreController {
             if (newScore.getHighScore() > highScoreList.get(9).getHighScore()) {
                 highScoreList.remove(9);
                 highScoreList.add(newScore);
-                sortList(highScoreList);
             }
         }
+        sortList(highScoreList);
         setHighScoreData();
     }
 
