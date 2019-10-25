@@ -101,34 +101,33 @@ public final class GameManager {
      * @version 0.1
      */
     public enum Character {
-        // TODO fix the stats for the Hats and Weapons
         ADAM    ("Passive-aggressive and undead",15, 20, 10,
-                new Hat("Bunny Ears", new Boost(0, 0, 0)),
+                new Hat("Bunny Ears", new Boost(0, 0, 10)),
                 new Weapon("Laser Sword", 5, 2),
                 Resources.images().get("src/main/resources/SelectionView/Adam_portait.png"),
                 Resources.images().get("src/main/resources/SelectionView/Adam.png")),
 
         ANTONIA ("Strong and hungry",20, 25, 20,
-                new Hat("Sunglasses", new Boost(0, 0, 0)),
-                new Weapon("Fists", 0, 1),
+                new Hat("Sunglasses", new Boost(0, 5, 0)),
+                new Weapon("Fists", 10, 1),
                 Resources.images().get("src/main/resources/SelectionView/Antonia_portait.png"),
                 Resources.images().get("src/main/resources/SelectionView/Antonia.png")),
 
         EMMA    ("Brave and stylish", 20, 15, 10,
-                new Hat("Sunhat", new Boost(0, 0, 0)),
-                new Weapon("Claws", 0, 1),
+                new Hat("Sunhat", new Boost(5, 0, 0)),
+                new Weapon("Claws", 10, 1),
                 Resources.images().get("src/main/resources/SelectionView/Emma_portait.png"),
                 Resources.images().get("src/main/resources/SelectionView/Emma.png")),
 
         JENNIFER("Kind and sporty", 30, 15, 15,
-                new Hat("Horse Mask", new Boost(0, 0, 0)),
-                new Weapon("Baseball Bat", 5, 1),
+                new Hat("Horse Mask", new Boost(0, 5, 0)),
+                new Weapon("Baseball Bat", 10, 1),
                 Resources.images().get("src/main/resources/SelectionView/Jennifer_portait.png"),
                 Resources.images().get("src/main/resources/SelectionView/Jennifer.png")),
 
         JONATHAN("Cute and beardy", 10, 10, 20,
                 new Hat("Big Beard", new Boost(0, 0, 10)),
-                new Weapon("Moustache Sword", 0, 1),
+                new Weapon("Moustache Sword", 5, 1),
                 Resources.images().get("src/main/resources/SelectionView/Jonathan_portait.png"),
                 Resources.images().get("src/main/resources/SelectionView/Jonathan.png"));
 
@@ -139,7 +138,7 @@ public final class GameManager {
         private Hat hat;
         private Weapon wpn;
         private BufferedImage characterPortrait;
-        private BufferedImage sprite; // Temporary - should be changed to String later.
+        private BufferedImage sprite;
 
         /**
          * Constructor for a CHARACTER.
