@@ -92,9 +92,9 @@ public class EnemyController implements IUpdateable {
                 }
             }
             enemies=GameLoop.getInstance().getEnemies();
-            if (GameLoop.getInstance().checkIfDelayDone() && this.getEnemies().size() < 2){
+            /*if (GameLoop.getInstance().checkIfDelayDone() && this.getEnemies().size() < 2){
                 spawnEnemy();
-            }
+            }*/
         }else{
             for(int i = 0; i < this.getEnemies().size();i++){
                 enemies.get(i).setState(Enemy.State.PAUSE);
