@@ -340,16 +340,19 @@ public class Player implements IMovable, ICollidable{
      * @param e the enemy that is being dealt damage to.
      */
     private void dealDamage(Enemy e){
-        e.setHP(e.getHP()-this.getWeapon().getDamage());
+        e.setHP(e.getHP()-this.getWeapon().getDamage()*this.getStrength()/10);
         if(e.getHP() <= 0){
             this.setScore(this.getScore()+10);
-            GameLoop.getInstance().getEnemies().remove(e);
         }
     }
 
+    /**
+     * Deals damage to the player.
+     * @param dmg the amount of damage an enemy deals.
+     */
     public void takeDamage(int dmg){
         if(System.currentTimeMillis()-timeSinceDamage > 1000) {
-            this.setHP(this.getHP() - dmg);
+            this.setHP(this.getHP()+this.getDefence()/20 - dmg);
             timeSinceDamage = System.currentTimeMillis();
         }
     }
@@ -373,8 +376,6 @@ public class Player implements IMovable, ICollidable{
     private void updateCollider() {
         this.collider.updatePosition(getX(), getY());
     }
-
-    private void notifyListeners() { }
 
     /**
      * Applies gravity to the player.
