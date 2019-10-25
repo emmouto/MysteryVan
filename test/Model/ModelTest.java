@@ -8,7 +8,7 @@ class ModelTest {
 
     @Test
     void shouldInitiateHat(){
-        Hat h = new Hat("Test", new Boost(10,10,10));
+        Hat h = new Hat("Test", 10,10,10);
         assertTrue(h != null);
     }
 
