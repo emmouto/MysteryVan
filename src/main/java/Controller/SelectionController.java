@@ -113,9 +113,11 @@ public class SelectionController extends GuiComponent {
     private void back() {
         switch (state) {
             case CHOOSE_CHARACTER:
+                Game.audio().playSound(GameManager.BACK_SOUND);
                 state = SelectionState.ENTER_NAME;
                 break;
             case CHOOSE_LEVEL:
+                Game.audio().playSound(GameManager.BACK_SOUND);
                 state = SelectionState.CHOOSE_CHARACTER;
                 break;
         }

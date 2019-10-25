@@ -3,6 +3,7 @@ package View;
 import Model.Boost;
 import Model.Hat;
 import Model.Weapon;
+
 import de.gurkenlabs.litiengine.Game;
 import de.gurkenlabs.litiengine.resources.Resources;
 import de.gurkenlabs.litiengine.sound.Sound;
@@ -31,6 +32,7 @@ public final class GameManager {
     /* --- Sounds --- */
     public static final Sound MENU_SOUND = Resources.sounds().get("src/main/resources/audio/sfx/menu_sound.wav");
     public static final Sound SELECT_SOUND = Resources.sounds().get("src/main/resources/audio/sfx/menu_selection.wav");
+    public static final Sound BACK_SOUND = Resources.sounds().get("src/main/resources/audio/sfx/menu_back.wav");
     static final Sound TITLE_THEME = Resources.sounds().get("src/main/resources/audio/music/title_theme.mp3");
     static final Sound STAGE_SELECT =Resources.sounds().get("src/main/resources/audio/music/stage_select.ogg");
     static final Sound STAGE_1 = Resources.sounds().get("src/main/resources/audio/music/stage1.ogg");
