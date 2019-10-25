@@ -277,8 +277,6 @@ public class SelectionView extends Screen implements IUpdateable {
             TextRenderer.render(g, Integer.toString(character.getHp()), 780, 350);
             TextRenderer.render(g, Integer.toString(character.getDef()), 780, 380);
             TextRenderer.render(g, Integer.toString(character.getStr()), 780, 410);
-
-            // TODO render weapon (and hat?)
         }
     }
 
