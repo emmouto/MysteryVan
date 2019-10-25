@@ -47,7 +47,7 @@ class FoodTest {
         food.update();
         assertTrue(food.collided);
         assertEquals(food.getDefense() , player.getDefence());
-        assertEquals(food.getArmour(), player.getStrength());
+        assertEquals(food.getStrength(), player.getStrength());
         assertEquals(food.getHP(), player.getHP());
 
     }
