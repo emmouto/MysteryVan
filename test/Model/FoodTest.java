@@ -33,4 +33,22 @@ class FoodTest {
 
         assertEquals(food.getName(), "rottenfruit");
     }
+
+    @Test
+    void shouldCollideWtihPlayer(){
+        List<Platform> platformList = new ArrayList<>();
+        Player player = new Player("sprite", 1, 1, 20, 20, platformList);
+        player.setStrength(0);
+        player.setHP(0);
+        player.setDefence(0);
+
+        Food food = new Food(1,1,player);
+
+        food.update();
+        assertTrue(food.collided);
+        assertEquals(food.getDefense() , player.getDefence());
+        assertEquals(food.getArmour(), player.getStrength());
+        assertEquals(food.getHP(), player.getHP());
+
+    }
 }

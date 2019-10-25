@@ -50,9 +50,10 @@ class ColliderTest {
     void returnsWhetherPlayerAndObjectAreColliding() {
         Collider c = new Collider();
         c.updatePosition(1,1);
+        c.updateSize(1,1);
         List<Platform> px = new ArrayList<Platform>();
 
-        Player p = new Player("sprite", 1, 1, 2, 2, px);
+        Player p = new Player("sprite", 1, 1, 1, 1, px);
 
         assertTrue(c.isColliding(p, "UP"));
         assertTrue(c.isColliding(p, "DOWN"));

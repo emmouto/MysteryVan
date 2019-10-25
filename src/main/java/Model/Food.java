@@ -83,7 +83,7 @@ public class Food implements ICollidable, IUpdateable {
      * @param player The player involved in the collision
      * @return returns a boolean value for whether or not a collision has taken place
      */
-    public boolean checkPlayerCollision(ICollidable player) {
+    private boolean checkPlayerCollision(ICollidable player) {
         if (collider.isColliding(player, "UP")){
             return true;
         } else if (collider.isColliding(player, "RIGHT")){

@@ -51,19 +51,19 @@ public class Collider {
             case "DOWN":
                 if ((c.getCollider().getX() - this.getWidth() <= this.getX()) && (c.getCollider().getX() + c.getCollider().getWidth() >= this.getX()) && (this.getY() + this.getHeight() >= c.getCollider().getY()) && (this.getY() + this.getHeight() <= c.getCollider().getY() + c.getCollider().getHeight())){
                     return true;
-                }
+                } break;
             case "UP":
-                if ((c.getCollider().getX() - this.getWidth() <= this.getX()) && (c.getCollider().getX() + c.getCollider().getWidth() >= this.getX()) && (this.getY() == c.getCollider().getY() + c.getCollider().getHeight())){
+                if ((c.getCollider().getX() - this.getWidth() <= this.getX()) && (c.getCollider().getX() + c.getCollider().getWidth() >= this.getX()) && (this.getY() <= c.getCollider().getY() + c.getCollider().getHeight())){
                     return true;
-                }
+                } break;
             case "LEFT":
-                if ((this.getX() <= c.getCollider().getX() + c.getCollider().getWidth() && this.getX() >= c.getCollider().getX()) && (c.getCollider().getY() - this.getHeight() >= this.getY()) && (c.getCollider().getY() <= this.getY())){
+                if ((this.getX() <= c.getCollider().getX() + c.getCollider().getWidth() && this.getX() >= c.getCollider().getX()) && (c.getCollider().getY() - this.getHeight() <= this.getY()) && (c.getCollider().getY() >= this.getY())){
                     return true;
-                }
+                } break;
             case "RIGHT":
-                if ((this.getX() + this.getWidth()>= c.getCollider().getX()) && (this.getX()+this.getWidth() <= c.getCollider().getX() + c.getCollider().getWidth()) && (c.getCollider().getY() - this.getHeight() >= this.getY()) && (c.getCollider().getY() <= this.getY())){
+                if ((this.getX() + this.getWidth()>= c.getCollider().getX()) && (this.getX()+this.getWidth() <= c.getCollider().getX() + c.getCollider().getWidth()) && (c.getCollider().getY() - this.getHeight() <= this.getY()) && (c.getCollider().getY() >= this.getY())){
                     return true;
-                }
+                } break;
         }
 
         return false;

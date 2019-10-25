@@ -24,7 +24,6 @@ public class HighScore {
         this.highScore = highScore;
         this.player = player;
     }
-
     public int getHighScore() {
         return highScore;
     }
@@ -42,3 +41,4 @@ public class HighScore {
     }
 
 }
+
