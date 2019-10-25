@@ -43,38 +43,12 @@ public class PlayerController implements IUpdateable {
         screenController = new ScreenController(0, 0, 0, 0, "");
     }
 
-    /**
-     * ...
-     */
-    public void walkLeft() {
-        while (true) {
-            playerList.get(0).setPosX(playerList.get(0).getPosX() - 1);
-        }
-    }
-
-    /**
-     * ...
-     */
-    public void walkRight() {
-        while (true) {
-            playerList.get(0).setPosX(playerList.get(0).getPosX() + 1);
-        }
-    }
-
     public List<Player> getPlayers() {
         return playerList;
     }
 
     public List<Creature> getCreatures() {
         return creatureList;
-    }
-
-    public Creature getPlayer1(){
-        return creatureList.get(0);
-    }
-
-    public GameView getGameView() {
-        return gameView;
     }
 
     public void setGameView(Screen gameView) {
@@ -170,8 +144,6 @@ public class PlayerController implements IUpdateable {
     private void updateHealth(int i) {
         gameView.setHP(playerList.get(i).getHP());
         gameView.setMaxHP(playerList.get(i).getMaxHP());
-        //creatureList.get(i).getHitPoints().setMaxValue(playerList.get(i).getHP());
-        //creatureList.get(i).getHitPoints().setToMaxValue();
 
        if (playerList.get(i).getHP() <= 0) {
            playerList.get(i).setState(Player.State.DEAD);

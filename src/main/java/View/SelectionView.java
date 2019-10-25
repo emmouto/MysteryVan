@@ -38,6 +38,9 @@ public class SelectionView extends Screen implements IUpdateable {
         super(screenName);
     }
 
+    /**
+     * Initializes all components used.
+     */
     @Override
     protected void initializeComponents() {
         selectionController = new SelectionController();
@@ -81,6 +84,10 @@ public class SelectionView extends Screen implements IUpdateable {
         }
     }
 
+    /**
+     * Renders the moving background.
+     * @param g the graphics that should be rendered.
+     */
     private void renderMovingBG(Graphics2D g) {
         final BufferedImage CLOUDS = Resources.images().get("src/main/resources/SelectionView/bg_clouds.png");
         final BufferedImage WATER = Resources.images().get("src/main/resources/SelectionView/bg_water.png");
@@ -166,6 +173,9 @@ public class SelectionView extends Screen implements IUpdateable {
     public static class EnterNameComponent extends GuiComponent {
         public static TextFieldComponent enterName;
 
+        /**
+         * Constructor for the static EnterNameComponent class.
+         */
         EnterNameComponent() {
             super(0, 0, Game.window().getResolution().getWidth(), Game.window().getResolution().getHeight());
 
@@ -185,6 +195,10 @@ public class SelectionView extends Screen implements IUpdateable {
             super.render(g);
         }
 
+        /**
+         * Renders the header.
+         * @param g the graphics that should be rendered.
+         */
         private void renderHeader(Graphics2D g) {
             String text = "Enter Your Name";
             g.setFont(GameManager.PIXELED_MEDIUM);
@@ -199,6 +213,9 @@ public class SelectionView extends Screen implements IUpdateable {
                     GameManager.centerX - (text.length() * g.getFont().getSize()) / 2.0, 135, Color.WHITE);
         }
 
+        /**
+         * Renders the text field.
+         */
         private void renderTextField() {
             enterName.getAppearance().setBackgroundColor1(Color.WHITE);
             enterName.getAppearance().setTransparentBackground(false);
@@ -217,6 +234,9 @@ public class SelectionView extends Screen implements IUpdateable {
      * @version 0.1
      */
     public static class ChooseCharacterComponent extends GuiComponent {
+        /**
+         * The constructor for the ChooseCharacterComponent.
+         */
         ChooseCharacterComponent() {
             super(0, 0, Game.window().getResolution().getWidth(), Game.window().getResolution().getHeight());
         }
@@ -233,6 +253,10 @@ public class SelectionView extends Screen implements IUpdateable {
             super.render(g);
         }
 
+        /**
+         * Renders the header used in the character selection screen.
+         * @param g the graphics that should be rendered.
+         */
         private void renderHeader(Graphics2D g) {
             String text = "Choose Your Character";
 
@@ -242,6 +266,10 @@ public class SelectionView extends Screen implements IUpdateable {
                     GameManager.centerX - (text.length() * g.getFont().getSize()) / 2.0, 100, Color.BLACK);
         }
 
+        /**
+         * Renders the characters portraits.
+         * @param g the graphics that should be rendered.
+         */
         private void renderCharacterPortraits(final Graphics2D g) {
             int i  = 295;
 
@@ -256,6 +284,10 @@ public class SelectionView extends Screen implements IUpdateable {
             }
         }
 
+        /**
+         * Renders the chosen character.
+         * @param g the graphics that should be rendered.
+         */
         private void renderChosenCharacter(final Graphics2D g) {
             GameManager.Character character = selectionController.selectedChar;
 
@@ -290,6 +322,9 @@ public class SelectionView extends Screen implements IUpdateable {
      * @version 0.1
      */
     public static class ChooseLevelComponent extends GuiComponent {
+        /**
+         * The constructor for the ChooseLevelComponent class.
+         */
         ChooseLevelComponent() {
             super(0, 0, Game.window().getResolution().getWidth(), Game.window().getResolution().getHeight());
         }
@@ -307,6 +342,10 @@ public class SelectionView extends Screen implements IUpdateable {
             super.render(g);
         }
 
+        /**
+         * Renders the header used in the difficulty selection screen.
+         * @param g the graphics that should be rendered.
+         */
         private void renderHeader(Graphics2D g) {
             String text = "Choose Your Difficulty Level";
 
@@ -316,6 +355,10 @@ public class SelectionView extends Screen implements IUpdateable {
                     GameManager.centerX - (text.length() * g.getFont().getSize()) / 2.0 + 100, 100, Color.BLACK);
         }
 
+        /**
+         * Renders the choices used in the difficulty selection screen.
+         * @param g the graphics that should be rendered.
+         */
         private void renderChoices(Graphics2D g) {
             // This array (and the iteration variable i) is needed to place the text in the proper places.
             double[] placement = new double[] {200, 550, 950};

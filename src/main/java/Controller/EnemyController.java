@@ -75,7 +75,7 @@ public class EnemyController implements IUpdateable {
     }
 
     /**
-     * ...
+     * Updates the sprite locations of the enemies and spawns new enemies, when the game is running.
      */
     @Override
     public void update() {
@@ -91,7 +91,7 @@ public class EnemyController implements IUpdateable {
                 }
             }
             enemies=GameLoop.getInstance().getEnemies();
-            if (GameLoop.getInstance().checkIfDelayDone() && this.getEnemies().size() <= 5){
+            if (GameLoop.getInstance().checkIfDelayDone() && this.getEnemies().size() < 1){
                 spawnEnemy();
             }
         }else{

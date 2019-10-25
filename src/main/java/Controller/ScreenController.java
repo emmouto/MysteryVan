@@ -1,7 +1,7 @@
 package Controller;
 
 import Model.Key;
-import View.GameManager;
+import View.*;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -72,6 +72,10 @@ public class ScreenController extends Menu {
         });
     }
 
+    /**
+     * Checks if the input is locked.
+     * @return true if input is locked else false.
+     */
     private boolean inputIsLocked() {
         if (this.isSuspended() || !this.isVisible() || !this.isEnabled()) {
             return true;
@@ -105,10 +109,17 @@ public class ScreenController extends Menu {
         });
     }
 
+    /**
+     * Adds a consumer when its confirmed.
+     * @param consumer the consumer to be added when its been confirmed.
+     */
     private void onConfirm(Consumer<Integer> consumer) {
         this.confirmConsumer.add(consumer);
     }
 
+    /**
+     * Confirms a choice.
+     */
     private void confirm() {
         updateView();
 
@@ -143,10 +154,14 @@ public class ScreenController extends Menu {
                 switch (c) {
                     case 0:
                         GameManager.setState(GameManager.GameState.HIGH_SCORE_SCREEN);
+                        Game.screens().remove(Game.screens().get("Highscore"));
+                        Game.screens().add(new HighScoreView("Highscore"));
                         changeScreen("HighScore", 500);
                         break;
                     case 1:
                         GameManager.setState(GameManager.GameState.HELP_SCREEN);
+                        Game.screens().remove(Game.screens().get("Help"));
+                        Game.screens().add(new HelpView("Help"));
                         changeScreen("Help", 1500);
                         break;
                     case 2:
@@ -158,12 +173,18 @@ public class ScreenController extends Menu {
             });
         } else if (GameManager.getState() == GameManager.GameState.DEFEAT_SCREEN) {
             GameManager.setState(GameManager.GameState.HIGH_SCORE_SCREEN);
+            Game.screens().remove(Game.screens().get("Highscore"));
+            Game.screens().add(new HighScoreView("Highscore"));
             changeScreen("HighScore", 500);
         } else if (GameManager.getState() == GameManager.GameState.INGAME_PAUSE) {
             GameManager.setState(GameManager.GameState.TITLE_SCREEN);
+            Game.screens().remove(Game.screens().get("Menu"));
+            Game.screens().add(new MenuView("Menu"));
             changeScreen("Menu", 500);
         } else if (GameManager.getState() == GameManager.GameState.HIGH_SCORE_SCREEN) {
             GameManager.setState(GameManager.GameState.TITLE_SCREEN);
+            Game.screens().remove(Game.screens().get("Menu"));
+            Game.screens().add(new MenuView("Menu"));
             changeScreen("Menu", 500);
         } else if (GameManager.getState() == GameManager.GameState.HELP_SCREEN) {
             GameManager.setState(GameManager.GameState.SELECTION_SCREEN);
@@ -171,16 +192,25 @@ public class ScreenController extends Menu {
         }
     }
 
+    /**
+     * Changes the focus down in a focus list.
+     */
     private void decFocus() {
         this.currentFocus = Math.floorMod(--this.currentFocus, this.getCellComponents().size());
         this.updateFocus();
     }
 
+    /**
+     * Changes the focus up in a focus list.
+     */
     private void incFocus() {
         this.currentFocus = ++this.currentFocus % this.getCellComponents().size();
         this.updateFocus();
     }
 
+    /**
+     * Updates the focus.
+     */
     private void updateFocus() {
         this.setCurrentSelection(this.currentFocus);
 
