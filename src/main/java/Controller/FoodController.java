@@ -24,7 +24,6 @@ import java.util.Random;
     private List<Player> players;
     private List<Prop> propList = new ArrayList<>();
 
-    private MapController mapController = new MapController();
     private Map map = new MapHard();
 
     private int size = map.getPlatforms().size();
@@ -58,7 +57,7 @@ import java.util.Random;
         int rndX = new Random().nextInt(20);
 
         Food f = new Food(matrixCoord[rnd][0] + rndX, matrixCoord[rnd][1] - 35, getPlayers().get(0));
-        //matrixCoord[rnd][0] + rndX, matrixCoord[rnd][1] - 45
+        
         foodList.add(f);
         determineFoodSprite(f);
         propList.get(0).setLocation(f.getPosX(), f.getPosY());
@@ -116,7 +115,7 @@ import java.util.Random;
             for (int i = 0; i < this.getFood().size(); i++) {
                 timer--;
 
-                if (timer == 0) {  //GameLoop.getInstance().checkIfDelayDone()
+                if (timer == 0) {
                     // Removes food from the list and subsequently removes it from the game after collision
                     getFood().remove(0);
                     Game.world().environment().remove(getPropList().get(0));
