@@ -318,7 +318,7 @@ public class Player implements IMovable, ICollidable{
      */
     private void attack(){
         if(Key.attack.isDown && System.currentTimeMillis()-time > 1500){
-            for(int i = 0; i < GameLoop.getInstance().getEnemies().size()-1; i++) {
+            for(int i = 0; i < GameLoop.getInstance().getEnemies().size(); i++) {
                 Enemy e = GameLoop.getInstance().getEnemies().get(i);
                 System.out.println(e.getHP());
                 if(this.getDirection() == Direction.LEFT && e.getX() > this.getX()- 5 * this.getWeapon().getRange() && e.getX() < this.getX() + 50 && this.getY() + 50 > e.getY() && this.getY() - 50 < e.getY()){
@@ -332,7 +332,6 @@ public class Player implements IMovable, ICollidable{
             }
             time = System.currentTimeMillis();
         }
-
     }
 
     /**

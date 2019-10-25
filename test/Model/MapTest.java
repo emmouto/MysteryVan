@@ -13,15 +13,15 @@ class MapTest {
         Map map;
 
         map = new MapEasy();
-        assertEquals(5, map.getPlatforms().size());
-        assertEquals(0, map.getPlatforms().get(2).getX());
-
-        map = new MapMedium();
         assertEquals(4, map.getPlatforms().size());
         assertEquals(192, map.getPlatforms().get(2).getX());
 
-        map = new MapHard();
+        map = new MapMedium();
         assertEquals(6, map.getPlatforms().size());
+        assertEquals(0, map.getPlatforms().get(2).getX());
+
+        map = new MapHard();
+        assertEquals(5, map.getPlatforms().size());
         assertEquals(0, map.getPlatforms().get(2).getX());
     }
 }
