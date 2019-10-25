@@ -3,9 +3,6 @@ package Model.Maps;
 import Model.Map;
 import Model.Platform;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * A class for a medium map.
  *
@@ -13,10 +10,8 @@ import java.util.List;
  * @version 0.1
  */
 public class MapMedium extends Map {
-
     /**
-     * The public constructor for the Map class.
-     *
+     * Constructor for a map with medium difficulty.
      */
     public MapMedium() {
         super();

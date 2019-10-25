@@ -8,14 +8,11 @@ class KeyTest {
 
     @Test
     void keyShouldToggleCurrentKeyState() {
-
         Key k = new Key();
         k.isDown = true;
 
         k.toggle();
 
-        assertTrue(k.isDown == false);
-
-
+        assertFalse(k.isDown);
     }
 }

@@ -35,6 +35,9 @@ public class SelectionController extends GuiComponent {
         initControls();
     }
 
+    /**
+     * Initializes the control for the SelectionController.
+     */
     private void initControls() {
         Input.keyboard().onKeyReleased(e -> {
             if (Key.enter.isDown) {
@@ -85,6 +88,9 @@ public class SelectionController extends GuiComponent {
         });
     }
 
+    /**
+     * Called when the "confirm" button is pressed (ENTER).
+     */
     private void confirm() {
         switch (state) {
             case ENTER_NAME:
@@ -101,20 +107,25 @@ public class SelectionController extends GuiComponent {
         }
     }
 
+    /**
+     * Called when one of the "back" buttons are pressed (ESC or BACKSPACE).
+     */
     private void back() {
         switch (state) {
-            case ENTER_NAME:
-
-                break;
             case CHOOSE_CHARACTER:
+                Game.audio().playSound(GameManager.BACK_SOUND);
                 state = SelectionState.ENTER_NAME;
                 break;
             case CHOOSE_LEVEL:
+                Game.audio().playSound(GameManager.BACK_SOUND);
                 state = SelectionState.CHOOSE_CHARACTER;
-
+                break;
         }
     }
 
+    /**
+     * Called when one of the "left" buttons are pressed (A or LEFT ARROW)
+     */
     private void left() {
         if (state == SelectionState.CHOOSE_CHARACTER) {
             Game.audio().playSound(GameManager.MENU_SOUND);
@@ -153,6 +164,9 @@ public class SelectionController extends GuiComponent {
         }
     }
 
+    /**
+     * Called when one of the "right" buttons are pressed (D or RIGHT ARROW)
+     */
     private void right() {
         if (state == SelectionState.CHOOSE_CHARACTER) {
             Game.audio().playSound(GameManager.MENU_SOUND);

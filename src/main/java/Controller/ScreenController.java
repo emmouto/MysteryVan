@@ -22,11 +22,10 @@ import de.gurkenlabs.litiengine.input.Input;
  */
 public class ScreenController extends Menu {
     private static final int DELAY = 180;
+    private static long lastInput;
 
     private final List<Consumer<Integer>> confirmConsumer;
     private int currentFocus = -1;
-
-    private static long lastInput;
 
     /**
      * Constructor for the ScreenController (based on Menu).
@@ -118,6 +117,12 @@ public class ScreenController extends Menu {
         }
     }
 
+    /**
+     * Changes the currently visible Screen.
+     *
+     * @param screenName the name of the Screen.
+     * @param fadeTime the time for the previous Screen to fade out, and the new one to fade in.
+     */
     void changeScreen(String screenName, int fadeTime) {
         Game.audio().playSound(GameManager.SELECT_SOUND);
         Game.window().getRenderComponent().fadeOut(fadeTime);
@@ -129,6 +134,9 @@ public class ScreenController extends Menu {
         });
     }
 
+    /**
+     * Changes the View depending on the current GameState.
+     */
     private void updateView() {
         if (GameManager.getState() == GameManager.GameState.TITLE_SCREEN) {
             this.onConfirm(c -> {

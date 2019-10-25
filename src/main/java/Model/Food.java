@@ -6,10 +6,10 @@ import java.util.Random;
  * Class that represents food in the game, which is a source for the player
  * to recharge one of its three features - HP, defence and strength/armour.
  *
- * @author Antonia
+ * @author Antonia Welzel
+ * @version 0.1
  */
 public class Food implements ICollidable, IUpdateable {
-
     private String name;
     private int HP;
     private int defense;
@@ -19,8 +19,6 @@ public class Food implements ICollidable, IUpdateable {
     private Collider collider;
     private Player player;
     public boolean collided;
-
-
 
     public Food(int posX, int posY, Player player) {
         this.HP = 0;
@@ -42,59 +40,56 @@ public class Food implements ICollidable, IUpdateable {
     /**
      * Method that chooses a food at random and sets the assigned features.
      */
-    public void determineFood(){
+    void determineFood() {
         Random rand = new Random();
         int x =  rand.nextInt(3)+1;
 
-
-        switch (x){
-            case 1 :    this.HP = 2;
+        switch (x) {
+            case 1:
+                this.HP = 2;
                 this.name = "beer";
                 break;
-            case 2 :    this.defense = 2;
+            case 2:
+                this.defense = 2;
                 this.name = "bread";
                 break;
-            case 3 :    this.HP = -1;
+            case 3:
+                this.HP = -1;
                 this.defense = -1;
                 this.armour = -1;
                 this.name = "rottenfruit";
                 break;
-
-                /*case 4 :    this.armour = 2;
+            /*case 4:
+                this.armour = 2;
                 this.name = "cheese";
                 this.HP = 2;
                 this.defense = 2;
                 this.armour = 2;
-                this.name = "starfruit";*/
+                this.name = "starfruit";
+                break;*/
         }
-
     }
-
 
     /**
      * Updates the Collider postion
      **/
-    public void updateCollider() {
-
+    private void updateCollider() {
         this.collider.updatePosition(getPosX(), getPosY());
     }
 
     /**
      * Method which checks if there is a collision with a player.
+     *
      * @param player The player involved in the collision
      * @return returns a boolean value for whether or not a collision has taken place
      */
-        public boolean checkPlayerCollision(ICollidable player) {
-
-            if (collider.isColliding(player, "UP")){
+    public boolean checkPlayerCollision(ICollidable player) {
+        if (collider.isColliding(player, "UP")){
             return true;
-
         } else if (collider.isColliding(player, "RIGHT")){
             return true;
-
         } else if(collider.isColliding(player, "DOWN")){
             return true;
-
         } else if (collider.isColliding(player, "LEFT")){
             return true;
         }
@@ -106,20 +101,18 @@ public class Food implements ICollidable, IUpdateable {
      * Method that makes sure that a player's characteristics' values do not exceed a specific maximum value
      * after the collision between food and the player.
      */
-    public void collisionUpdateValues(){
-
+    private void collisionUpdateValues(){
         int maxHP = 40;
         int maxStrength = 50;
         int maxDefence = 50;
 
-        if(getPlayer().getHP() > maxHP) {
+        if (getPlayer().getHP() > maxHP) {
             getPlayer().setHP(maxHP);
-        } else if(getPlayer().getStrength() > maxStrength) {
+        } else if (getPlayer().getStrength() > maxStrength) {
             getPlayer().setStrength(maxStrength);
-        } else if(getPlayer().getDefence() > maxDefence) {
+        } else if (getPlayer().getDefence() > maxDefence) {
             getPlayer().setDefence(maxDefence);
         }
-
     }
 
 
@@ -127,19 +120,16 @@ public class Food implements ICollidable, IUpdateable {
      * Updates the Collider
      **/
     public void update() {
+        updateCollider();
+        if (checkPlayerCollision(player)) {
+            collided = true;
 
+            // Update the player's values and check that the new values don't exceed the highest possible value
+            player.setHP(getPlayer().getHP() + getHP());
+            player.setStrength(getPlayer().getStrength() + getArmour());
+            player.setDefence(getPlayer().getDefence() + getDefense());
 
-            updateCollider();
-            if (checkPlayerCollision(player)) {
-
-                collided = true;
-                // update the player's values and check that the new values don't exceed the highest possible value
-                player.setHP(getPlayer().getHP() + getHP());
-                player.setStrength(getPlayer().getStrength() + getArmour());
-                player.setDefence(getPlayer().getDefence() + getDefense());
-
-                collisionUpdateValues();
-
+            collisionUpdateValues();
         }
     }
 
@@ -200,7 +190,4 @@ public class Food implements ICollidable, IUpdateable {
     public Player getPlayer() {
         return player;
     }
-
-
-
 }
