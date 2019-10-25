@@ -8,8 +8,6 @@ package Model;
  * @version 0.1
  */
 public class Boost {
-    //TODO change class to interface or similar? -----#####------
-
     private int HP;
     private int strength;
     private int defence;
