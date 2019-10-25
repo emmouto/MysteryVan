@@ -8,54 +8,45 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PlayerTest {
-
-    List<Platform> ps = new ArrayList<>();
-    Player p = new Player("s", 1, 1, 1, 1, ps);
+    private List<Platform> platformList = new ArrayList<>();
+    private Player player = new Player("s", 1, 1, 1, 1, platformList);
 
     @Test
     void playerShouldBeAbleToJump() {
-
         double g = -7;
 
-        p.jump();
+        player.jump();
 
-        assertEquals(g, p.getGravity());
-
+        assertEquals(g, player.getGravity());
     }
 
     @Test
     void isCreatureMoving() {
-
         Key k = new Key();
-        p.setX(2);
-        p.setGravity(3);
+        player.setX(2);
+        player.setGravity(3);
 
-        k.up.isDown = true;
-        p.isGrounded = true;
-        p.move();
-        assertEquals(2, p.getX());
-        assertEquals(-6.8, p.getGravity());
+        Key.up.isDown = true;
+        player.isGrounded = true;
+        player.move();
+        assertEquals(2, player.getX());
+        assertEquals(-6.8, player.getGravity());
 
+        Key.left.isDown = true;
+        player.move();
+        assertEquals(0, player.getX());
 
-        k.left.isDown = true;
-        p.move();
-        assertEquals(0, p.getX());
-
-
-        k.right.isDown = true;
-        p.move();
-        assertEquals(2, p.getX());
-
-
+        Key.right.isDown = true;
+        player.move();
+        assertEquals(2, player.getX());
     }
 
     @Test
     void doesGravityApplyToTheCreature() {
+        player.setY(3);
+        player.doGravity();
 
-        p.setY(3);
-        p.doGravity();
-
-        assertEquals(6, p.getY());
+        assertEquals(6, player.getY());
 
     }
 }

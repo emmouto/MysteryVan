@@ -11,31 +11,26 @@ class FoodTest {
 
     @Test
     void determineARandomFoodFromThreeOptions() {
+        List<Platform> platformList = new ArrayList<>();
+        Player player = new Player("sprite", 1, 1, 1, 1, platformList);
+        Food food = new Food(1,1, player);
 
-        List<Platform> ps = new ArrayList<>();
-        Player p = new Player("sprite", 1, 1, 1, 1, ps);
-        Food f = new Food(1,1, p);
-
-
-        while(!f.getName().equals("beer")) {
-            f.determineFood();
+        while (!food.getName().equals("beer")) {
+            food.determineFood();
         }
 
-        assertEquals(f.getName(), "beer");
+        assertEquals(food.getName(), "beer");
 
-        while(!f.getName().equals("bread")) {
-            f.determineFood();
+        while (!food.getName().equals("bread")) {
+            food.determineFood();
         }
 
-        assertEquals(f.getName(), "bread");
+        assertEquals(food.getName(), "bread");
 
-        while(!f.getName().equals("rottenfruit")) {
-            f.determineFood();
+        while (!food.getName().equals("rottenfruit")) {
+            food.determineFood();
         }
 
-        assertEquals(f.getName(), "rottenfruit");
-
-
-
+        assertEquals(food.getName(), "rottenfruit");
     }
 }

@@ -8,25 +8,20 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class MapTest {
-
     @Test
     void shouldInitializeTheCorrectMap() {
+        Map map;
 
+        map = new MapEasy();
+        assertEquals(5, map.getPlatforms().size());
+        assertEquals(0, map.getPlatforms().get(2).getX());
 
+        map = new MapMedium();
+        assertEquals(4, map.getPlatforms().size());
+        assertEquals(192, map.getPlatforms().get(2).getX());
 
-
-        Map m;
-        m = new MapEasy();
-        assertEquals(5, m.getPlatforms().size());
-        assertEquals(0, m.getPlatforms().get(2).getX());
-
-        m = new MapMedium();
-        assertEquals(4, m.getPlatforms().size());
-        assertEquals(192, m.getPlatforms().get(2).getX());
-
-        m = new MapHard();
-        assertEquals(6, m.getPlatforms().size());
-        assertEquals(0, m.getPlatforms().get(2).getX());
-
+        map = new MapHard();
+        assertEquals(6, map.getPlatforms().size());
+        assertEquals(0, map.getPlatforms().get(2).getX());
     }
 }

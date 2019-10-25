@@ -9,10 +9,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ColliderTest {
-
     @Test
     void returnUpdatedPositionsOfCollider() {
-
         int x = 0;
         int y = 0;
 
@@ -28,12 +26,10 @@ class ColliderTest {
 
         assertEquals(c.getX(), secPosX);
         assertEquals(c.getY(), secPosY);
-
     }
 
     @Test
     void shouldUpdateTheSizeOfTheCollider() {
-
         int width = 0;
         int height = 0;
 
@@ -46,26 +42,21 @@ class ColliderTest {
         Collider c = new Collider();
         c.updateSize(width,height);
 
-        assertTrue(c.getWidth() == updWidth);
-        assertTrue(c.getHeight() == updHeight);
-
+        assertEquals(c.getWidth(), updWidth);
+        assertEquals(c.getHeight(), updHeight);
     }
 
     @Test
     void returnsWhetherPlayerAndObjectAreColliding() {
-
-
         Collider c = new Collider();
         c.updatePosition(1,1);
         List<Platform> px = new ArrayList<Platform>();
 
         Player p = new Player("sprite", 1, 1, 2, 2, px);
 
-
-        assertTrue(c.isColliding(p, "UP") == true);
-        assertTrue(c.isColliding(p, "DOWN") == true);
-        assertTrue(c.isColliding(p, "LEFT") == true);
-        assertTrue(c.isColliding(p, "RIGHT") == true);
-
+        assertTrue(c.isColliding(p, "UP"));
+        assertTrue(c.isColliding(p, "DOWN"));
+        assertTrue(c.isColliding(p, "LEFT"));
+        assertTrue(c.isColliding(p, "RIGHT"));
     }
 }
