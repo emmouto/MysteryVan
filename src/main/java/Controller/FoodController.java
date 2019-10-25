@@ -35,7 +35,6 @@ import java.util.Random;
 
     // Matrix array which contains the x and y coordinates of platforms
     private int[][] matrixCoord = fillMatrix(xCoords, yCoords);
-
     private int timer = 3000;
 
     FoodController(List<Player> players) {

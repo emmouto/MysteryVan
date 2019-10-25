@@ -31,8 +31,8 @@ public class GameController {
     private FoodController foodController;
 
     /**
-     *
-      */
+     * Public constructor for the GameController
+     */
     public GameController() {
         GameLoop.getInstance();
     }
@@ -86,18 +86,15 @@ public class GameController {
         // Displays the title screen ("Menu")
         Game.screens().display("Menu");
 
-        //Game.graphics().setBaseRenderScale(2.001f);
-
-
         Game.start();
 
         addUpdateablesToGameLoop();
-        //GameLoop.getInstance().setDelayTimer(6000);
         GameLoop.getInstance().run();
-
-
     }
 
+    /**
+     * Adds all updatable classes to the game loop.
+     */
     private void addUpdateablesToGameLoop(){
         GameLoop.getInstance().addUpdateables(playerController.getPlayers().get(0));
         for (Enemy e : enemyController.getEnemies()){
@@ -105,17 +102,11 @@ public class GameController {
         }
 
         GameLoop.getInstance().addUpdateables(foodController.getFood().get(0));
-
-
-        /*
-        for (Food f : foodController.getFood()) {
-            GameLoop.getInstance().addUpdateables(f);
-        }
-
-*/
-
     }
 
+    /**
+     * Adds all screens to the LITIengine screen manager.
+     */
     private void addScreens() {
         // Adds all the screens
         Game.screens().add(new MenuView("Menu"));

@@ -9,7 +9,7 @@ package Model;
  */
 public interface IMovable extends IUpdateable {
     double getX();
-    int getY();
+    double getY();
 
     /**
      * Function defining how the object moves.

@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * A loop for the game.
  *
- * @author who?
+ * @author Adam Rohdell
  * @version 0.1
  */
 public class GameLoop extends Thread{
@@ -26,6 +26,9 @@ public class GameLoop extends Thread{
     private boolean delayDone = false;
 
 
+    /**
+     * Runs the game loop of the program updating objects.
+     */
     public void run() {
         /*File file = new File("src/main/java/Model/game.json");
         try {
@@ -55,10 +58,18 @@ public class GameLoop extends Thread{
 
     }
 
+    /**
+     * Adds an object to the updatables list.
+     * @param u the object to be added.
+     */
     public void addUpdateables(IUpdateable u){
         updateables.add(u);
     }
 
+    /**
+     * Updates all objects in the updatables list.
+     * @throws IOException
+     */
     private void update() throws IOException {
 
         for (IUpdateable u : updateables){
@@ -73,11 +84,19 @@ public class GameLoop extends Thread{
 
     }
 
+    /**
+     * Sets a delay timer.
+     * @param ms the milliseconds the timer should have.
+     */
     public void setDelayTimer(int ms){
         this.delay = ms;
         this.currentDelay = delay;
     }
 
+    /**
+     * Checks if the delay is done.
+     * @return true if done else false.
+     */
     public boolean checkIfDelayDone(){
         if (delayDone){
             delayDone = false;
@@ -89,6 +108,10 @@ public class GameLoop extends Thread{
 
     }
 
+    /**
+     * Gets the GameLoop instance.
+     * @return the Gameloop instance.
+     */
     public static GameLoop getInstance()
     {
         if (gameLoop == null)
@@ -105,6 +128,11 @@ public class GameLoop extends Thread{
         this.enemies = enemies;
     }
 
+    /**
+     * Writes to the JSON file. NOT FUNCTIONING!
+     * @param iUpdateable the updatable which should be written to the JSON file.
+     * @throws IOException if there is a problem with the file.
+     */
     private void writeJSON(IUpdateable iUpdateable) throws IOException {
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
@@ -114,6 +142,11 @@ public class GameLoop extends Thread{
     }
 
 
+    /**
+     * Reads from the JSON file. NOT FUNCTIONING!
+     * @return the updatable that is read.
+     * @throws FileNotFoundException if no file is found.
+     */
     private IUpdateable readJSON() throws FileNotFoundException {
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();

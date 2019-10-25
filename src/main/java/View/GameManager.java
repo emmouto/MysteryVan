@@ -1,6 +1,5 @@
 package View;
 
-import Model.Boost;
 import Model.Hat;
 import Model.Weapon;
 
@@ -104,31 +103,31 @@ public final class GameManager {
      */
     public enum Character {
         ADAM    ("Passive-aggressive and undead",15, 20, 10,
-                new Hat("Bunny Ears", new Boost(0, 0, 10)),
+                new Hat("Bunny Ears", 0, 0, 10),
                 new Weapon("Laser Sword", 5, 2),
                 Resources.images().get("src/main/resources/SelectionView/Adam_portait.png"),
                 Resources.images().get("src/main/resources/SelectionView/Adam.png")),
 
         ANTONIA ("Strong and hungry",20, 25, 20,
-                new Hat("Sunglasses", new Boost(0, 5, 0)),
+                new Hat("Sunglasses", 0, 5, 0),
                 new Weapon("Fists", 10, 1),
                 Resources.images().get("src/main/resources/SelectionView/Antonia_portait.png"),
                 Resources.images().get("src/main/resources/SelectionView/Antonia.png")),
 
         EMMA    ("Brave and stylish", 20, 15, 10,
-                new Hat("Sunhat", new Boost(5, 0, 0)),
+                new Hat("Sunhat",5, 0, 0),
                 new Weapon("Claws", 10, 1),
                 Resources.images().get("src/main/resources/SelectionView/Emma_portait.png"),
                 Resources.images().get("src/main/resources/SelectionView/Emma.png")),
 
         JENNIFER("Kind and sporty", 30, 15, 15,
-                new Hat("Horse Mask", new Boost(0, 5, 0)),
+                new Hat("Horse Mask", 0, 5, 0),
                 new Weapon("Baseball Bat", 10, 1),
                 Resources.images().get("src/main/resources/SelectionView/Jennifer_portait.png"),
                 Resources.images().get("src/main/resources/SelectionView/Jennifer.png")),
 
         JONATHAN("Cute and beardy", 10, 10, 20,
-                new Hat("Big Beard", new Boost(0, 0, 10)),
+                new Hat("Big Beard",0, 0, 10),
                 new Weapon("Moustache Sword", 5, 1),
                 Resources.images().get("src/main/resources/SelectionView/Jonathan_portait.png"),
                 Resources.images().get("src/main/resources/SelectionView/Jonathan.png"));

@@ -18,7 +18,7 @@ public abstract class Enemy implements ICollidable, IMovable {
     private int height;
     private int width;
     private double x;
-    private int y;
+    private double y;
     private String sprite;
     private boolean isGrounded = false;
     private Random rand = new Random();
@@ -87,7 +87,7 @@ public abstract class Enemy implements ICollidable, IMovable {
      * Updates the collider.
      */
     private void updateCollider(){
-        this.collider.updatePosition(getX(), getY());
+        this.collider.updatePosition(getX(), (int) getY());
     }
 
     /**
@@ -150,7 +150,7 @@ public abstract class Enemy implements ICollidable, IMovable {
         return this.x;
     }
 
-    public int getY(){
+    public double getY(){
         return this.y;
     }
 
@@ -158,7 +158,7 @@ public abstract class Enemy implements ICollidable, IMovable {
         this.x = x;
     }
 
-    public void setY(int y){
+    public void setY(double y){
         this.y = y;
     }
 

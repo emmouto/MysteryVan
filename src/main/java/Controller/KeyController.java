@@ -95,9 +95,9 @@ public class KeyController implements KeyListener, IUpdateable {
 
     /**
      *
-     *
-     * @param keyCode
-     * @param key
+     * Binds a key to a keycode.
+     * @param keyCode the keycode that the key should be bound to.
+     * @param key the key that should be bind.
      */
     private void bind(Integer keyCode, Key key) {
         keyBindings.put(keyCode, key);
@@ -113,7 +113,7 @@ public class KeyController implements KeyListener, IUpdateable {
     }
 
     /**
-     *
+     * Empty update function.
      */
     @Override
     public void update() { }

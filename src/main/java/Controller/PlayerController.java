@@ -38,27 +38,9 @@ public class PlayerController implements IUpdateable {
     public PlayerController(Map map) {
         super();
         this.map=map;
-        spawnPlayer("ADAM", 23, 100, 0, new Hat("ugly", new Boost(0, 0, 0)), new Weapon("xd", 5, 10));
+        spawnPlayer("ADAM", 23, 100, 0, new Hat("ugly", 0, 0, 0), new Weapon("xd", 5, 10));
         updatePlayerController();
         screenController = new ScreenController(0, 0, 0, 0, "");
-    }
-
-    /**
-     * ...
-     */
-    public void walkLeft() {
-        while (true) {
-            playerList.get(0).setPosX(playerList.get(0).getPosX() - 1);
-        }
-    }
-
-    /**
-     * ...
-     */
-    public void walkRight() {
-        while (true) {
-            playerList.get(0).setPosX(playerList.get(0).getPosX() + 1);
-        }
     }
 
     public List<Player> getPlayers() {
@@ -67,14 +49,6 @@ public class PlayerController implements IUpdateable {
 
     public List<Creature> getCreatures() {
         return creatureList;
-    }
-
-    public Creature getPlayer1(){
-        return creatureList.get(0);
-    }
-
-    public GameView getGameView() {
-        return gameView;
     }
 
     public void setGameView(Screen gameView) {
@@ -93,10 +67,10 @@ public class PlayerController implements IUpdateable {
      */
     private void spawnPlayer(String name, int hp, int defense, int strength, Hat hat, Weapon weapon){
         Player p = new Player(name, 100, 100, 18, 35, this.map.getPlatforms());
-        p.setHP(hp);
-        p.setDefence(defense);
+        p.setHP(hp+hat.getHP());
+        p.setDefence(defense+hat.getDefence());
         p.setHat(hat);
-        p.setStrength(strength);
+        p.setStrength(strength+hat.getStrength());
         p.setWeapon(weapon);
         playerList.add(p);
     }
@@ -170,8 +144,6 @@ public class PlayerController implements IUpdateable {
     private void updateHealth(int i) {
         gameView.setHP(playerList.get(i).getHP());
         gameView.setMaxHP(playerList.get(i).getMaxHP());
-        //creatureList.get(i).getHitPoints().setMaxValue(playerList.get(i).getHP());
-        //creatureList.get(i).getHitPoints().setToMaxValue();
 
        if (playerList.get(i).getHP() <= 0) {
            playerList.get(i).setState(Player.State.DEAD);
