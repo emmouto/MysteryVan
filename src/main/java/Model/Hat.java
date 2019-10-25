@@ -9,17 +9,21 @@ package Model;
  */
 public class Hat {
     private String name;
-    private Boost boost;
+    private int HP;
+    private int strength;
+    private int defence;
 
     /**
      * Creates a new hat and sets the name and <code>Boost</code>.
      *
      * @param name name of the <code>Hat</code>.
-     * @param boost the boost that the <code>Hat</code> gives.
+     * @param HP the boost the hat gives.
      */
-    public Hat(String name, Boost boost) {
+    public Hat(String name, int HP, int strength, int defence) {
         this.name = name;
-        this.boost = boost;
+        this.HP = HP;
+        this.strength = strength;
+        this.defence = defence;
     }
 
     public String getName() {
@@ -30,11 +34,27 @@ public class Hat {
         this.name = name;
     }
 
-    public Boost getBoost() {
-        return boost;
+    public int getHP() {
+        return HP;
     }
 
-    public void setBoost(Boost boost) {
-        this.boost = boost;
+    public void setHP(int HP) {
+        this.HP = HP;
+    }
+
+    public int getStrength() {
+        return strength;
+    }
+
+    public void setStrength(int strength) {
+        this.strength = strength;
+    }
+
+    public int getDefence() {
+        return defence;
+    }
+
+    public void setDefence(int defence) {
+        this.defence = defence;
     }
 }

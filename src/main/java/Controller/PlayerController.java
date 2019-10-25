@@ -38,7 +38,7 @@ public class PlayerController implements IUpdateable {
     public PlayerController(Map map) {
         super();
         this.map=map;
-        spawnPlayer("ADAM", 23, 100, 0, new Hat("ugly", new Boost(0, 0, 0)), new Weapon("xd", 5, 10));
+        spawnPlayer("ADAM", 23, 100, 0, new Hat("ugly", 0, 0, 0), new Weapon("xd", 5, 10));
         updatePlayerController();
         screenController = new ScreenController(0, 0, 0, 0, "");
     }
@@ -67,10 +67,10 @@ public class PlayerController implements IUpdateable {
      */
     private void spawnPlayer(String name, int hp, int defense, int strength, Hat hat, Weapon weapon){
         Player p = new Player(name, 100, 100, 18, 35, this.map.getPlatforms());
-        p.setHP(hp);
-        p.setDefence(defense);
+        p.setHP(hp+hat.getHP());
+        p.setDefence(defense+hat.getDefence());
         p.setHat(hat);
-        p.setStrength(strength);
+        p.setStrength(strength+hat.getStrength());
         p.setWeapon(weapon);
         playerList.add(p);
     }

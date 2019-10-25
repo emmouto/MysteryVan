@@ -18,12 +18,8 @@ public class Player implements IMovable, ICollidable{
     private int defence;
     private Weapon weapon;
     private Hat hat;
-    private Boost boost1;
-    private Boost boost2;
     private double posX;
-    private int posY;
-    private int dx;
-    private int dy;
+    private double posY;
     private int height;
     private int width;
     private int maxHP;
@@ -115,14 +111,6 @@ public class Player implements IMovable, ICollidable{
         return hat;
     }
 
-    public Boost getBoost1() {
-        return boost1;
-    }
-
-    public Boost getBoost2() {
-        return boost2;
-    }
-
     public void setHP(int HP) {
         this.HP = HP;
     }
@@ -141,30 +129,6 @@ public class Player implements IMovable, ICollidable{
 
     public void setHat(Hat hat) {
         this.hat = hat;
-    }
-
-    public void setBoost1(Boost boost1) {
-        this.boost1 = boost1;
-    }
-
-    public void setBoost2(Boost boost2) {
-        this.boost2 = boost2;
-    }
-
-    public double getPosX() {
-        return posX;
-    }
-
-    public void setPosX(double posX) {
-        this.posX = posX;
-    }
-
-    public int getPosY() {
-        return posY;
-    }
-
-    private void setPosY(int posY) {
-        this.posY = posY;
     }
 
     public int getHeight() {
@@ -192,15 +156,15 @@ public class Player implements IMovable, ICollidable{
         return posX;
     }
 
-    public void setX(int posX) {
+    public void setX(double posX) {
         this.posX = posX;
     }
 
-    public int getY() {
+    public double getY() {
         return posY;
     }
 
-    public void setY(int posY) {
+    public void setY(double posY) {
         this.posY = posY;
     }
 
@@ -277,14 +241,14 @@ public class Player implements IMovable, ICollidable{
         }
 
         if (Key.left.isDown && this.getX() > 0) {
-                this.setPosX(getX() - 2);
+                this.setX(getX() - 2);
                 this.setDirection(Direction.LEFT);
                 if(!this.getSprite().equals(this.walkingSprite)) {
                     this.setSprite(this.walkingSprite);
                     time = System.currentTimeMillis()-1500;
                 }
         }else if (Key.right.isDown && this.getX() < 720) {
-                this.setPosX(getX() + 2);
+                this.setX(getX() + 2);
                 this.setDirection(Direction.RIGHT);
                 if(!this.getSprite().equals(this.walkingSprite)){
                     this.setSprite(this.walkingSprite);
@@ -374,7 +338,7 @@ public class Player implements IMovable, ICollidable{
      * Updates the collider position in order to check for collisions.
      */
     private void updateCollider() {
-        this.collider.updatePosition(getX(), getY());
+        this.collider.updatePosition(getX(), (int) getY());
     }
 
     /**
@@ -382,7 +346,7 @@ public class Player implements IMovable, ICollidable{
      */
     public void doGravity() {
         if (!isGrounded || hasJumped) {
-            setPosY(((int)(getY() + this.gravity)));
+            setY(((int)(getY() + this.gravity)));
         }
     }
 }

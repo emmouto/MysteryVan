@@ -54,7 +54,7 @@ public class Food implements ICollidable, IUpdateable {
                 this.name = "bread";
                 break;
             case 3:
-                this.HP = -1;
+                this.HP = -20;
                 this.defense = -1;
                 this.armour = -1;
                 this.name = "rottenfruit";
