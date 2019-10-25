@@ -80,16 +80,18 @@ public class EnemyController implements IUpdateable {
     @Override
     public void update() {
         if(GameManager.getState() == GameManager.GameState.INGAME) {
-            enemies=GameLoop.getInstance().getEnemies();
+
             for (int i = 0; i < this.getEnemies().size(); i++) {
                 creatureList.get(i).setLocation(enemies.get(i).getX(), enemies.get(i).getY());
                 enemies.get(i).setState(Enemy.State.INGAME);
                 if(enemies.get(i).getHP()<0){
                     enemies.remove(i);
                     creatureList.remove(i);
+                    i--;
                 }
             }
-            if (GameLoop.getInstance().checkIfDelayDone()){
+            enemies=GameLoop.getInstance().getEnemies();
+            if (GameLoop.getInstance().checkIfDelayDone() && this.getEnemies().size() <= 5){
                 spawnEnemy();
             }
         }else{
