@@ -13,7 +13,7 @@ public class Food implements ICollidable, IUpdateable {
     private String name;
     private int HP;
     private int defense;
-    private int armour;
+    private int strength;
     private int posX;
     private int posY;
     private Collider collider;
@@ -23,7 +23,7 @@ public class Food implements ICollidable, IUpdateable {
     public Food(int posX, int posY, Player player) {
         this.HP = 0;
         this.defense = 0;
-        this.armour = 0;
+        this.strength = 0;
 
         this.posX = posX;
         this.posY = posY;
@@ -56,7 +56,7 @@ public class Food implements ICollidable, IUpdateable {
             case 3:
                 this.HP = -20;
                 this.defense = -1;
-                this.armour = -1;
+                this.strength = -1;
                 this.name = "rottenfruit";
                 break;
             /*case 4:
@@ -126,7 +126,7 @@ public class Food implements ICollidable, IUpdateable {
 
             // Update the player's values and check that the new values don't exceed the highest possible value
             player.setHP(getPlayer().getHP() + getHP());
-            player.setStrength(getPlayer().getStrength() + getArmour());
+            player.setStrength(getPlayer().getStrength() + getStrength());
             player.setDefence(getPlayer().getDefence() + getDefense());
 
             collisionUpdateValues();
@@ -171,16 +171,16 @@ public class Food implements ICollidable, IUpdateable {
         this.HP = HP;
     }
 
-    public int getArmour() {
-        return armour;
+    public int getStrength() {
+        return strength;
     }
 
     public int getDefense() {
         return defense;
     }
 
-    public void setArmour(int armour) {
-        this.armour = armour;
+    public void setStrength(int strength) {
+        this.strength = strength;
     }
 
     public void setDefense(int defense) {
